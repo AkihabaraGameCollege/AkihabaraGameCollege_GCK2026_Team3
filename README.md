@@ -1,0 +1,2 @@
+# AkihabaraGameCollege_GCK2026_Team3
+ゲームクリエイター甲子園 2026 チーム3
