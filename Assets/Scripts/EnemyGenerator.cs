@@ -26,6 +26,12 @@ public class EnemyGenerator : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        isSpawning = true;              //生成開始フラグを入れる、生成中は再接触してもSpawnされない
+        StartCoroutine(SpawnEnemies()); // コルーチンを開始
+    }
+
     private IEnumerator SpawnEnemies()
     {
 
@@ -36,7 +42,7 @@ public class EnemyGenerator : MonoBehaviour
                 Random.Range(-spawnOffsetRange, spawnOffsetRange),
                 0f, // 高さのオフセットは0に設定（必要に応じて変更可能）
                 Random.Range(-spawnOffsetRange, spawnOffsetRange)
-            );
+            ) + enemyPrefab.transform.position;
 
             // 敵をスポーンポイントにスポーンさせる
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
