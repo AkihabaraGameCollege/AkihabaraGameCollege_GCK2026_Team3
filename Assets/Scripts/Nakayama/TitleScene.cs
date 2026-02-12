@@ -11,23 +11,37 @@ namespace CardDefenseGame
         /// アニメーターコンポーネントの変数
         /// </summary>
         [SerializeField]
-        Animator animator = null;
+        private Animator animator = null;
+
+        /// <summary>
+        /// AudioSettingコンポーネントの変数
+        /// </summary>
+        [SerializeField]
+        private AudioSetting audioSetting = null;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
         /// </summary>
-        static readonly int StartTrigger = Animator.StringToHash("Start");
+        private static readonly int startTrigger = Animator.StringToHash("Start");
         /// <summary>
         /// 設定ボタンが押されたときに呼ばれるIDの変数
         /// </summary>
-        static readonly int SettingTrigger = Animator.StringToHash("Setting");
+        private static readonly int settingTrigger = Animator.StringToHash("Setting");
+
+        /// <summary>
+        /// 初期設定の関数
+        /// </summary>
+        void Start()
+        {
+            audioSetting.PlayBGM(0);// タイトルBGMを再生
+        }
 
         /// <summary>
         /// ステージセレクト画面を表示する関数
         /// </summary>
         public void DisplayStageSelect()
         {
-            animator.SetTrigger(StartTrigger);// ステージセレクトを表示させるトリガーをセット
+            animator.SetTrigger(startTrigger);// ステージセレクトを表示させるトリガーをセット
         }
 
         /// <summary>
@@ -43,7 +57,7 @@ namespace CardDefenseGame
         /// </summary>
         public void DisplaySetting()
         {
-            animator.SetTrigger(SettingTrigger);// 設定画面を表示させるトリガーをセット
+            animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
         }
 
         /// <summary>
