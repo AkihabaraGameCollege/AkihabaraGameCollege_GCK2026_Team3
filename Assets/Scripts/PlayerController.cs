@@ -11,8 +11,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int startLife = 8;
     int currentLife;
 
+    int currentShield = 0;
+
     // ライフ変更通知（UI購読用）: 引数 (currentLife, maxLife)
     public event Action<int, int> OnLifeChanged;
+    // シールド変更通知: 引数 (currentShield)
+    public event Action<int> OnShieldChanged;
 
     [Header("Card system")]
     [Tooltip("自動でカードを1枚引く間隔（秒）")]
@@ -25,6 +29,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] List<Card> deck = new List<Card>();
     List<Card> hand = new List<Card>();
     List<Card> discard = new List<Card>();
+
+    // --- 支援／バフ関連 ---
+    // 次に使う攻撃カードに乗る倍率（1.0 がデフォルト）
+    float nextAttackMultiplier = 1.0f;
+
+    // コスト回復に対する一時倍率（エネルギー実装があれば利用）
+    float costRecoveryMultiplier = 1.0f;
+    Coroutine costRecoveryCoroutine = null;
 
     // デバッグ用にInspectorで簡易カードを作るためのフラグ
     [Header("Debug / Test")]
@@ -55,6 +67,14 @@ public class PlayerController : MonoBehaviour
     {
         if (currentLife <= 0) return;
 
+        // まずシールドがあれば吸収
+        if (currentShield > 0)
+        {
+            currentShield = Mathf.Max(0, currentShield - 1);
+            OnShieldChanged?.Invoke(currentShield);
+            return;
+        }
+
         currentLife = Mathf.Max(0, currentLife - 1);
         OnLifeChanged?.Invoke(currentLife, maxLife);
 
@@ -64,6 +84,82 @@ public class PlayerController : MonoBehaviour
             if (GameManager.Instance != null) GameManager.Instance.GameOver();
         }
     }
+
+    // 追加: プレイヤーのライフを指定分消費する（カード効果等で使用）
+    // 戻り値: true = 消費成功、false = ライフ不足で失敗（消費なし）
+    public bool ConsumeLife(int amount)
+    {
+        if (amount <= 0) return true;
+        if (currentLife - amount < 0) return false;
+
+        currentLife = Mathf.Max(0, currentLife - amount);
+        OnLifeChanged?.Invoke(currentLife, maxLife);
+
+        if (currentLife <= 0)
+        {
+            if (GameManager.Instance != null) GameManager.Instance.GameOver();
+        }
+
+        return true;
+    }
+
+    // 追加: 現在ライフを公開
+    public int CurrentLife => currentLife;
+
+    // --- 支援関連 API ---
+
+    // 次の攻撃に乗る倍率を追加（乗算）
+    public void ApplyNextAttackMultiplier(float multiplier)
+    {
+        if (multiplier <= 0f) return;
+        nextAttackMultiplier *= multiplier;
+    }
+
+    // AttackCard 側が呼んで倍率を取得しリセットする
+    public float GetAndConsumeNextAttackMultiplier()
+    {
+        float m = nextAttackMultiplier;
+        nextAttackMultiplier = 1.0f;
+        return m;
+    }
+
+    // シールド追加
+    public void AddShield(int amount)
+    {
+        if (amount <= 0) return;
+        currentShield += amount;
+        OnShieldChanged?.Invoke(currentShield);
+    }
+
+    // ライフ回復（ヒール）
+    public void HealLife(int amount)
+    {
+        if (amount <= 0) return;
+        currentLife = Mathf.Min(maxLife, currentLife + amount);
+        OnLifeChanged?.Invoke(currentLife, maxLife);
+    }
+
+    // コスト回復力バフ（duration 秒だけ multiplier を掛ける）
+    public void ApplyCostRecoveryBuff(float multiplier, float duration)
+    {
+        if (multiplier <= 0f || duration <= 0f) return;
+        if (costRecoveryCoroutine != null) StopCoroutine(costRecoveryCoroutine);
+        costRecoveryCoroutine = StartCoroutine(CostRecoveryBuffRoutine(multiplier, duration));
+    }
+
+    IEnumerator CostRecoveryBuffRoutine(float multiplier, float duration)
+    {
+        float prev = costRecoveryMultiplier;
+        costRecoveryMultiplier *= multiplier;
+        // TODO: イベントで UI 更新が必要なら通知
+        yield return new WaitForSeconds(duration);
+        costRecoveryMultiplier = prev;
+        costRecoveryCoroutine = null;
+        // TODO: イベントで UI 更新が必要なら通知
+    }
+
+    // 外部から現在のコスト回復倍率を取得する API（エネルギー実装があれば利用）
+    public float CurrentCostRecoveryMultiplier => costRecoveryMultiplier;
 
     // --- カード管理 ---
 
@@ -106,6 +202,17 @@ public class PlayerController : MonoBehaviour
         AddCardToBottomOfDeck(card);
 
         // TODO: UI更新イベントをここで呼ぶ（OnHandChanged など）
+        return true;
+    }
+
+    // 新規: 手札へ直接カードを追加（重複コピーや支援効果からの追加に使用）
+    // 戻り値: true = 追加成功、false = 手札が満杯
+    public bool AddCardToHand(Card card)
+    {
+        if (card == null) return false;
+        if (hand.Count >= maxHandSize) return false;
+        hand.Add(card);
+        // TODO: UI更新
         return true;
     }
 
