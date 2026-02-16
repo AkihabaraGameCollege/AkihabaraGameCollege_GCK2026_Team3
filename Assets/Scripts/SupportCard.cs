@@ -6,29 +6,53 @@ using UnityEngine;
 // 現在「コスト支払い」はプレイヤーのライフを消費する形で実装しています。
 public class SupportCard : MonoBehaviour
 {
-    [Header("General cost (ライフで支払うための量)")]
-    [SerializeField] int defaultLifeCost = 1;
+    [Header("基本コスト（ライフで支払う量）")]
+    [SerializeField]
+    [Tooltip("支援カード使用時のデフォルトのライフ消費量")]
+    int defaultLifeCost = 1;
 
-    [Header("Boost Next Attack")]
-    [SerializeField] float boostDamageMultiplier = 1.5f;
-    [SerializeField] int boostCost = 1;
+    [Header("次の攻撃を強化")]
+    [SerializeField]
+    [Tooltip("次の攻撃に掛けるダメージ倍率")]
+    float boostDamageMultiplier = 1.5f;
+    [SerializeField]
+    [Tooltip("次の攻撃強化を使用する際のライフコスト")]
+    int boostCost = 1;
 
-    [Header("Draw From Deck")]
-    [SerializeField] int drawCost = 1;
+    [Header("デッキからドロー")]
+    [SerializeField]
+    [Tooltip("デッキから1枚引く際のライフコスト")]
+    int drawCost = 1;
 
-    [Header("Duplicate Card into Hand")]
-    [SerializeField] int duplicateCost = 1;
+    [Header("カード複製（手札に追加）")]
+    [SerializeField]
+    [Tooltip("指定カードを複製して手札に加える際のライフコスト")]
+    int duplicateCost = 1;
 
-    [Header("Cost Recovery Buff")]
-    [SerializeField] float costRecoveryMultiplier = 1.5f;
-    [SerializeField] float costRecoveryDuration = 5.0f;
-    [SerializeField] int costRecoveryCost = 1;
+    [Header("コスト回復バフ")]
+    [SerializeField]
+    [Tooltip("コスト回復力に掛ける倍率（例: 1.5 = 50%増加）")]
+    float costRecoveryMultiplier = 1.5f;
+    [SerializeField]
+    [Tooltip("コスト回復バフの持続時間（秒）")]
+    float costRecoveryDuration = 5.0f;
+    [SerializeField]
+    [Tooltip("コスト回復バフ使用時のライフコスト")]
+    int costRecoveryCost = 1;
 
-    [Header("Heal / Shield")]
-    [SerializeField] int healAmount = 2;
-    [SerializeField] int healCost = 1;
-    [SerializeField] int shieldAmount = 2;
-    [SerializeField] int shieldCost = 1;
+    [Header("回復 / シールド")]
+    [SerializeField]
+    [Tooltip("ライフ回復量")]
+    int healAmount = 2;
+    [SerializeField]
+    [Tooltip("ライフ回復を使用する際のライフコスト")]
+    int healCost = 1;
+    [SerializeField]
+    [Tooltip("付与するシールド量")]
+    int shieldAmount = 2;
+    [SerializeField]
+    [Tooltip("シールド付与を使用する際のライフコスト")]
+    int shieldCost = 1;
 
     // 1) 次の攻撃のダメージを増やす（支払いに失敗したら false）
     public bool BoostNextAttack(PlayerController owner, int lifeCost = -1, float multiplier = -1f)
