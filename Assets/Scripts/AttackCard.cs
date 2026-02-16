@@ -7,32 +7,53 @@ using UnityEngine;
 // card.Execute(ownerTransform, singleTargetTransform, playerController, charge: true, lifeSacrifice: 2, lifeSacrificeMultiplier: 1.5f);
 public class AttackCard : MonoBehaviour
 {
-    [Header("基本")]
+    [Header("基本 (カードの基礎パラメータ)")]
+    [InspectorName("基本ダメージ")]
+    [Tooltip("敵に与える基礎ダメージ（数値）。倍率系で変化します。")]
     [SerializeField] int baseDamage = 5;
+
+    [InspectorName("使用コスト")]
+    [Tooltip("カードを使用する際のコスト（消費するポイント等）。")]
     [SerializeField] int cost = 1;
+
+    [InspectorName("チャージ可能")]
+    [Tooltip("オンにするとチャージ可能になります。チャージ時は以下の倍率が適用されます。")]
     [SerializeField] bool chargeable = true;
-    [Tooltip("チャージ時のダメージ倍率")]
+
+    [InspectorName("チャージ時の倍率")]
+    [Tooltip("チャージしたときにダメージにかかる倍率。1.0が変化なし、2.0なら2倍です。")]
     [SerializeField] float chargeMultiplier = 2.0f;
 
     [Header("ターゲティング")]
-    [Tooltip("true: 単体攻撃（指定ターゲット） / false: 範囲攻撃（線形 + 任意で円形追加）")]
+    [InspectorName("単体攻撃モード")]
+    [Tooltip("オン: 指定した1体を攻撃します。オフ: 前方の複数に対して範囲攻撃を行います。")]
     [SerializeField] bool singleTargetMode = true;
 
-    [Header("線形攻撃(直線範囲)")]
-    [Tooltip("直線の長さ")]
+    [Header("線形攻撃（前方への直線）")]
+    [InspectorName("直線の届く距離")]
+    [Tooltip("前方に届く距離（メートル相当）。この範囲内の敵が直線攻撃の対象になります。")]
     [SerializeField] float linearRange = 8.0f;
-    [Tooltip("直線の太さ（SphereCastの半径として使用）")]
+
+    [InspectorName("直線の幅")]
+    [Tooltip("直線攻撃の幅（太さ）。前方判定の太さです。")]
     [SerializeField] float linearRadius = 0.5f;
 
-    [Header("追加円形AoE")]
-    [Tooltip("直線攻撃に加えて中心点の前方に円形範囲攻撃を行う")]
+    [Header("追加: 前方に円形の範囲攻撃")]
+    [InspectorName("円形AoEを追加する")]
+    [Tooltip("オンにすると直線攻撃に加えて前方に円形の範囲攻撃を行います。")]
     [SerializeField] bool addCircularAoE = false;
+
+    [InspectorName("円形AoEの半径")]
+    [Tooltip("追加される円形範囲の半径（大きさ）。")]
     [SerializeField] float circularRadius = 3.0f;
-    [Tooltip("円形AoEの中心は発射位置の前方にある距離")]
+
+    [InspectorName("円形AoEの中心までの距離")]
+    [Tooltip("発射位置から前方にどれだけ進んだ位置を円形AoEの中心とするか（距離）。")]
     [SerializeField] float circularOffsetForward = 4.0f;
 
-    [Header("フィルター")]
-    [Tooltip("敵レイヤーなどを限定したい場合にセット（未設定ならすべて）")]
+    [Header("対象フィルター")]
+    [InspectorName("対象レイヤー")]
+    [Tooltip("攻撃が当たる対象をレイヤーで絞れます。未設定だとすべてが対象になります。")]
     [SerializeField] LayerMask targetLayerMask = ~0;
 
     // 主な攻撃実行メソッド

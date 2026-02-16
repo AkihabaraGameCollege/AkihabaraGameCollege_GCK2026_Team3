@@ -6,9 +6,9 @@ using UnityEngine;
 // プレイヤーのカード操作・ライフ管理を行うコントローラ
 public class PlayerController : MonoBehaviour
 {
-    [Header("Life")]
-    [SerializeField] int maxLife = 8; // ライフ最大値（要件: 8）
-    [SerializeField] int startLife = 8;
+    [Header("ライフ設定")]
+    [SerializeField, InspectorName("最大ライフ")] int maxLife = 8; // ライフ最大値（要件: 8）
+    [SerializeField, InspectorName("開始ライフ")] int startLife = 8;
     int currentLife;
 
     int currentShield = 0;
@@ -18,15 +18,15 @@ public class PlayerController : MonoBehaviour
     // シールド変更通知: 引数 (currentShield)
     public event Action<int> OnShieldChanged;
 
-    [Header("Card system")]
+    [Header("カード設定")]
     [Tooltip("自動でカードを1枚引く間隔（秒）")]
-    [SerializeField] float autoDrawInterval = 3.0f;
+    [SerializeField, InspectorName("自動ドロー間隔（秒）")] float autoDrawInterval = 3.0f;
 
     [Tooltip("手札の最大枚数（要件: 8）")]
-    [SerializeField] int maxHandSize = 8;
+    [SerializeField, InspectorName("手札の最大枚数")] int maxHandSize = 8;
 
     // デッキ / 手札 / 捨て山（シンプル実装）
-    [SerializeField] List<Card> deck = new List<Card>();
+    [SerializeField, InspectorName("デッキ（カード一覧）")] List<Card> deck = new List<Card>();
     List<Card> hand = new List<Card>();
     List<Card> discard = new List<Card>();
 
@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
     Coroutine costRecoveryCoroutine = null;
 
     // デバッグ用にInspectorで簡易カードを作るためのフラグ
-    [Header("Debug / Test")]
-    [SerializeField] bool createTestDeck = false;
-    [SerializeField] int testDeckSize = 10;
+    [Header("デバッグ / テスト設定")]
+    [SerializeField, InspectorName("テスト用デッキを自動作成")] bool createTestDeck = false;
+    [SerializeField, InspectorName("テストデッキ枚数")] int testDeckSize = 10;
 
     void Start()
     {
