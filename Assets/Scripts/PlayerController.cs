@@ -43,6 +43,76 @@ public class PlayerController : MonoBehaviour
     [SerializeField, InspectorName("テスト用デッキを自動作成")] bool createTestDeck = false;
     [SerializeField, InspectorName("テストデッキ枚数")] int testDeckSize = 10;
 
+    // -----------------------
+    // ターゲット管理
+    // -----------------------
+    // 現在プレイヤーがロックしているターゲット（EnemyのTransform）
+    private Transform currentTarget;
+    public Transform CurrentTarget => currentTarget;
+
+    // ターゲット変更通知（UIやエフェクト向け）
+    public event Action<Transform> OnTargetChanged;
+
+    // 明示的にターゲットをセットする（敵以外は無視）
+    public bool SetTarget(Transform t)
+    {
+        if (t == null)
+        {
+            ClearTarget();
+            return false;
+        }
+
+        // 敵であることを簡易判定（StatusManager がついているか、タグが Enemy）
+        if (t.GetComponent<StatusManager>() == null && !t.CompareTag("Enemy"))
+        {
+            return false;
+        }
+
+        currentTarget = t;
+        OnTargetChanged?.Invoke(currentTarget);
+        return true;
+    }
+
+    // ターゲット解除
+    public void ClearTarget()
+    {
+        currentTarget = null;
+        OnTargetChanged?.Invoke(null);
+    }
+
+    // 指定距離内の最寄りの Enemy を探して返す（見つからなければ null）
+    public Transform FindNearestEnemy(float maxDistance = 50f)
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Transform best = null;
+        float bestDist = maxDistance;
+
+        Vector3 myPos = transform.position;
+        foreach (var go in enemies)
+        {
+            if (go == null) continue;
+            float d = Vector3.Distance(myPos, go.transform.position);
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = go.transform;
+            }
+        }
+
+        return best;
+    }
+
+    // 最寄りのエネミーを選択してターゲットにセット（成功可否を返す）
+    public bool SelectNearestEnemy(float maxDistance = 50f)
+    {
+        var t = FindNearestEnemy(maxDistance);
+        if (t != null)
+        {
+            return SetTarget(t);
+        }
+        return false;
+    }
+
     void Start()
     {
         // ライフ初期化
