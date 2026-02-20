@@ -150,11 +150,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1476839648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &86411527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5281571148353191389, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-  m_PrefabInstance: {fileID: 274189493}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138725055
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,14 +235,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5281571148353191389, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1476839648}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
 --- !u!224 &278081951 stripped
@@ -413,6 +405,7 @@ Transform:
   - {fileID: 1697769391}
   - {fileID: 1079281326}
   - {fileID: 2065283036}
+  - {fileID: 1476839648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &461601635
@@ -1000,7 +993,7 @@ Transform:
   - {fileID: 1916343613}
   - {fileID: 624782778}
   - {fileID: 138725056}
-  m_Father: {fileID: 86411527}
+  m_Father: {fileID: 461601634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1697769390
 PrefabInstance:
@@ -1601,6 +1594,10 @@ PrefabInstance:
     - target: {fileID: 640547916176321020, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: m_Name
       value: EnemyGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
+      propertyPath: spawnInterval
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[0]'
