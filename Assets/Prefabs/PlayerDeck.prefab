@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5377119379883119275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3079532288147727576}
+  - component: {fileID: 9018356066591567370}
+  m_Layer: 0
+  m_Name: PlayerDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3079532288147727576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377119379883119275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9018356066591567370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377119379883119275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46548f798659c7499b5e111a86219c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  maxLife: 8
+  startLife: 8
+  autoDrawInterval: 3
+  maxHandSize: 8
+  deck:
+  - id: atk_slash_01
+    displayName: "\u30B9\u30E9\u30C3\u30B7\u30E5"
+    type: 0
+    cost: 1
+    power: 3
+  - id: atk_strike_01
+    displayName: "\u5F37\u6253"
+    type: 0
+    cost: 2
+    power: 7
+  - id: atk_blast_01
+    displayName: "\u7206\u88C2\u30B7\u30E7\u30C3\u30C8"
+    type: 0
+    cost: 3
+    power: 12
+  - id: rec_small_01
+    displayName: "\u5C0F\u56DE\u5FA9\u30DD\u30FC\u30B7\u30E7\u30F3"
+    type: 1
+    cost: 0
+    power: 2
+  - id: rec_med_01
+    displayName: "\u56DE\u5FA9\u30CF\u30FC\u30D6"
+    type: 1
+    cost: 1
+    power: 4
+  - id: rec_med_01
+    displayName: "\u56DE\u5FA9\u30CF\u30FC\u30D6"
+    type: 1
+    cost: 1
+    power: 4
+  - id: buff_amp_01
+    displayName: "\u6B21\u653B\u6483\u5F37\u5316"
+    type: 2
+    cost: 1
+    power: 150
+  - id: buff_shield_01
+    displayName: "\u6B21\u653B\u6483\u5F37\u5316"
+    type: 2
+    cost: 1
+    power: 150
+  - id: buff_shield_01
+    displayName: "\u6B21\u653B\u6483\u5F37\u5316"
+    type: 1
+    cost: 1
+    power: 150
+  createTestDeck: 0
+  testDeckSize: 10
