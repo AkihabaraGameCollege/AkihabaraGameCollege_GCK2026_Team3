@@ -27,6 +27,10 @@ namespace CardDefenseGame
         /// 設定ボタンが押されたときに呼ばれるIDの変数
         /// </summary>
         private static readonly int settingTrigger = Animator.StringToHash("Setting");
+        /// <summary>
+        /// 設定画面から戻るときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int returnSettingTrigger = Animator.StringToHash("ReturnSetting");
 
         /// <summary>
         /// 初期設定の関数
@@ -58,6 +62,14 @@ namespace CardDefenseGame
         public void DisplaySetting()
         {
             animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
+        }
+
+        /// <summary>
+        /// 設定画面から戻る関数
+        /// </summary>
+        public void ReturnSetting()
+        {
+            animator.SetTrigger(returnSettingTrigger);// 設定画面を表示させるトリガーをセット
         }
 
         /// <summary>
