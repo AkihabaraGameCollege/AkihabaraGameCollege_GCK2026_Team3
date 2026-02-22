@@ -156,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.TitleScene
   animator: {fileID: 171094788}
   audioSetting: {fileID: 397443050}
+  exitTime: 3
+  fadeTime: 0.05
 --- !u!4 &171094787
 Transform:
   m_ObjectHideFlags: 0

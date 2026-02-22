@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace CardDefenseGame
@@ -20,6 +21,17 @@ namespace CardDefenseGame
         private AudioSetting audioSetting = null;
 
         /// <summary>
+        /// ゲーム終了までの待機時間
+        /// </summary>
+        [SerializeField]
+        private float exitTime = 1.0f;
+        /// <summary>
+        /// フェードアウトの時間
+        /// </summary>
+        [SerializeField]
+        private float fadeTime = 1.0f;
+
+        /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
         /// </summary>
         private static readonly int startTrigger = Animator.StringToHash("Start");
@@ -31,13 +43,18 @@ namespace CardDefenseGame
         /// 設定画面から戻るときに呼ばれるIDの変数
         /// </summary>
         private static readonly int returnSettingTrigger = Animator.StringToHash("ReturnSetting");
+        /// <summary>
+        /// ゲーム終了するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int exitTrigger = Animator.StringToHash("Exit");
 
         /// <summary>
         /// 初期設定の関数
         /// </summary>
         void Start()
         {
-            audioSetting.PlayBGM(0);// タイトルBGMを再生
+            audioSetting.PlayBGM(0);
+            audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
         }
 
         /// <summary>
@@ -77,6 +94,18 @@ namespace CardDefenseGame
         /// </summary>
         public void ExitGame()
         {
+            StartCoroutine(ExitGameCoroutine());
+        }
+
+        /// <summary>
+        /// ゲームを終了するコルーチン
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator ExitGameCoroutine()
+        {
+            animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
+            audioSetting.StopFadeOut(fadeTime);// BGMをフェードアウトさせるコルーチンを開始
+            yield return new WaitForSeconds(exitTime);
             Debug.Log("ゲームを終了します。");
             Application.Quit();
         }
