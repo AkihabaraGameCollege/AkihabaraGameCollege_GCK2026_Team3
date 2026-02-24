@@ -391,6 +391,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSetting
+--- !u!1 &478572861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478572862}
+  m_Layer: 0
+  m_Name: RightFeatherRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &478572862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478572861}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1263881287}
+  m_Father: {fileID: 481247453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &481247452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481247453}
+  - component: {fileID: 481247454}
+  m_Layer: 0
+  m_Name: FeathersRoots
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &481247453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481247452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 478572862}
+  - {fileID: 1775153414}
+  m_Father: {fileID: 845490763}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &481247454
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481247452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: abc61aabb63535c429b26fcc0215f6a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &486510912
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +490,7 @@ GameObject:
   - component: {fileID: 486510913}
   - component: {fileID: 486510914}
   m_Layer: 0
-  m_Name: LeftFeather
+  m_Name: LeftFeatherModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,12 +504,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486510912}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9521294, z: 0, w: 0.3056954}
-  m_LocalPosition: {x: 0.4, y: 0.1, z: -0.2}
+  m_LocalRotation: {x: 0.000000011175871, y: -0.95212936, z: -0.0000000037252903, w: 0.30569544}
+  m_LocalPosition: {x: 0.40000027, y: 0.10000006, z: -0.20000017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 845490763}
+  m_Father: {fileID: 1775153414}
   m_LocalEulerAnglesHint: {x: 0, y: -144.4, z: 0}
 --- !u!212 &486510914
 SpriteRenderer:
@@ -839,10 +927,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8228aa59bad198e49a05405c6319ec66, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1263881287}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8228aa59bad198e49a05405c6319ec66, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 486510913}
+      addedObject: {fileID: 481247453}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8228aa59bad198e49a05405c6319ec66, type: 3}
 --- !u!1 &1021557151
@@ -931,7 +1016,7 @@ GameObject:
   - component: {fileID: 1263881287}
   - component: {fileID: 1263881288}
   m_Layer: 0
-  m_Name: RightFeather
+  m_Name: RightFeatherModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -945,12 +1030,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263881286}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.92977655, z: 0, w: -0.36812437}
-  m_LocalPosition: {x: -0.3, y: 0.1, z: -0.3}
+  m_LocalRotation: {x: -0, y: -0.92977655, z: 5.8207655e-10, w: -0.36812446}
+  m_LocalPosition: {x: -0.3000002, y: 0.10000015, z: -0.30000016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 845490763}
+  m_Father: {fileID: 478572862}
   m_LocalEulerAnglesHint: {x: 0, y: -223.2, z: 0}
 --- !u!212 &1263881288
 SpriteRenderer:
@@ -1474,6 +1559,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7146174026768480237, guid: 3a7051d2dbd9a0949b8c269126f9e246, type: 3}
   m_PrefabInstance: {fileID: 749960404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1775153413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775153414}
+  m_Layer: 0
+  m_Name: LeftFeatherRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1775153414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775153413}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 486510913}
+  m_Father: {fileID: 481247453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1802240906
 PrefabInstance:
   m_ObjectHideFlags: 0
