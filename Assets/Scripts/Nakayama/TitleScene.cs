@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 
@@ -30,6 +31,18 @@ namespace CardDefenseGame
         /// </summary>
         [SerializeField]
         private float fadeTime = 1.0f;
+
+        /// <summary>
+        /// ステージシーンへ遷移するときのシーン名のリスト変数
+        /// </summary>
+        [SerializeField]
+        private string[] stageSceneNames = null;
+
+        /// <summary>
+        /// インデックスの変数
+        /// </summary>
+        [SerializeField]
+        private int stageSceneIndex = 0;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -68,9 +81,10 @@ namespace CardDefenseGame
         /// <summary>
         /// ステージシーンへ遷移する関数
         /// </summary>
-        public void InStageScene()
+        public void InStageScene(int number)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Stage");
+            stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
+            UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
         }
 
         /// <summary>
