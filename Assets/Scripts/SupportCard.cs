@@ -6,7 +6,7 @@ using UnityEngine;
 // 現在「コスト支払い」はプレイヤーのライフを消費する形で実装しています。
 public class SupportCard : MonoBehaviour
 {
-    [Header("基本コスト（ライフで支払う量）")]
+    [Header("基本コスト（ライフで支払う量)")]
     [SerializeField]
     [Tooltip("支援カード使用時のデフォルトのライフ消費量")]
     int defaultLifeCost = 1;
@@ -68,6 +68,24 @@ public class SupportCard : MonoBehaviour
         return true;
     }
 
+    // 1b) 次の攻撃の基礎ダメージを上げる（支払いに失敗したら false）
+    public bool BoostNextAttackBase(PlayerController owner, int lifeCost, int additionalBase)
+    {
+        if (owner == null) return false;
+        if (lifeCost < 0) return false;
+        if (additionalBase <= 0) return false;
+
+        if (!owner.ConsumeLife(lifeCost)) return false;
+
+        // 取得して既存上書きを組み合わせる: 既存上書きがあれば加算、なければ設定
+        int existing = owner.GetAndConsumeNextAttackBaseOverride();
+        int newBase = (existing >= 0) ? existing + additionalBase : additionalBase;
+        owner.ApplyNextAttackBaseOverride(newBase);
+
+        Debug.Log($"SupportCard: 次の攻撃基礎ダメージ +{additionalBase} を付与 (cost:{lifeCost})");
+        return true;
+    }
+
     // 2) 山札から1枚引く
     public PlayerController.Card DrawFromDeck(PlayerController owner, int lifeCost = -1)
     {
@@ -76,7 +94,7 @@ public class SupportCard : MonoBehaviour
         if (!owner.ConsumeLife(lifeCost)) return null;
 
         var card = owner.DrawCard();
-        Debug.Log($"SupportCard: デッキからドロー (cost:{lifeCost}) -> {(card != null ? card.displayName : "なし")}");
+        Debug.Log($"SupportCard: デッキからドロー (cost:{lifeCost}) -> {(card != null ? card.displayName : "なし")}" );
         return card;
     }
 

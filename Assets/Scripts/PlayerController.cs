@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     // シールド変更通知: 引数 (currentShield)
     public event Action<int> OnShieldChanged;
 
+    // 手札変更通知（UI購読用）
+    public event Action OnHandChanged;
+
     [Header("カード設定")]
     [Tooltip("自動でカードを1枚引く間隔（秒）")]
     [SerializeField, InspectorName("自動ドロー間隔（秒）")] float autoDrawInterval = 3.0f;
@@ -33,6 +36,9 @@ public class PlayerController : MonoBehaviour
     // --- 支援／バフ関連 ---
     // 次に使う攻撃カードに乗る倍率（1.0 がデフォルト）
     float nextAttackMultiplier = 1.0f;
+
+    // 次に使う攻撃の基礎ダメージ上書き（-1 = なし）
+    int nextAttackBaseOverride = -1;
 
     // コスト回復に対する一時倍率（エネルギー実装があれば利用）
     float costRecoveryMultiplier = 1.0f;
@@ -193,6 +199,20 @@ public class PlayerController : MonoBehaviour
         return m;
     }
 
+    // 次の攻撃の基礎ダメージを上書きする（SupportCard 等から呼ぶ）
+    public void ApplyNextAttackBaseOverride(int baseDamage)
+    {
+        nextAttackBaseOverride = baseDamage;
+    }
+
+    // AttackCard が呼ぶ: 上書き値を取得してリセット
+    public int GetAndConsumeNextAttackBaseOverride()
+    {
+        int v = nextAttackBaseOverride;
+        nextAttackBaseOverride = -1;
+        return v;
+    }
+
     // シールド追加
     public void AddShield(int amount)
     {
@@ -240,38 +260,106 @@ public class PlayerController : MonoBehaviour
         if (card == null) return false;
         if (!hand.Contains(card)) return false;
 
-        // カード効果の適用（簡易）
-        switch (card.type)
+        // コスト検査: カードにコストが設定されていれば先に支払う（ライフで支払う設計）
+        if (card.cost > 0)
         {
-            case CardType.Damage:
-                if (target != null)
+            if (!ConsumeLife(card.cost))
+            {
+                // UIフィードバックとしてイベントやログで通知。ここではログ出力。
+                Debug.Log($"PlayCard: コスト不足のためカード使用キャンセル (cost:{card.cost}, currentLife:{currentLife})");
+                return false;
+            }
+        }
+
+        bool applied = false;
+
+        // カードにプレハブ参照があり、AttackCard コンポーネントを持つならそれを実行
+        if (card.prefab != null)
+        {
+            var go = Instantiate(card.prefab);
+            var attackComp = go.GetComponent<AttackCard>();
+            var supportComp = go.GetComponent<SupportCard>();
+
+            if (attackComp != null && card.type == CardType.Damage)
+            {
+                // overrideBaseDamage にカードの power を渡すことでカードデータと挙動を結びつける
+                attackComp.Execute(this.transform, target, this, charge: false, lifeSacrifice: 0, lifeSacrificeMultiplier: 1.0f, overrideBaseDamage: card.power);
+                applied = true;
+            }
+            else if (supportComp != null)
+            {
+                // プレハブに SupportCard があっても、どの効果を使うかはカードの type に依存する。
+                // ここでは簡易に type に応じた代表的な効果を呼ぶ（ライフは既に支払われているため lifeCost=0 を渡す）
+                switch (card.type)
                 {
-                    var tm = target.GetComponent<StatusManager>();
-                    if (tm != null)
-                    {
-                        // StatusManager.Damage(int damage, Vector3 hitPos, CriticalType type, Transform attacker)
-                        tm.Damage(card.power, transform.position, CriticalType.Normal, this.transform);
-                    }
+                    case CardType.RecoverCost:
+                        supportComp.ApplyCostRecoveryBuff(this, lifeCost: 0, multiplier: 1.0f + (card.power * 0.1f), duration: 5.0f);
+                        applied = true;
+                        break;
+                    case CardType.Buff:
+                        supportComp.BoostNextAttack(this, lifeCost: 0, multiplier: 1.0f + (card.power * 0.1f));
+                        applied = true;
+                        break;
+                    default:
+                        Debug.Log("PlayCard: SupportCard prefab だが対応する type がないため効果を適用できませんでした。");
+                        applied = false;
+                        break;
                 }
-                break;
+            }
 
-            case CardType.RecoverCost:
-                // コスト回復などの処理。ゲーム内のエナジー管理と接続してください。
-                // （このサンプルではログ出力）
-                Debug.Log($"カード効果: コスト回復 {card.power}");
-                break;
+            // 使い捨てプレハブはシーン上に残さない
+            Destroy(go);
+        }
+        else
+        {
+            // 既存のシンプルな効果適用（プレハブ未設定）
+            switch (card.type)
+            {
+                case CardType.Damage:
+                    if (target != null)
+                    {
+                        var tm = target.GetComponent<StatusManager>();
+                        if (tm != null)
+                        {
+                            // StatusManager.Damage(int damage, Vector3 hitPos, CriticalType type, Transform attacker)
+                            tm.Damage(card.power, transform.position, CriticalType.Normal, this.transform);
+                            applied = true;
+                        }
+                    }
+                    break;
 
-            case CardType.Buff:
-                // 一時バフなど。プロジェクトのステータス管理と接続してください。
-                Debug.Log($"カード効果: バフ {card.power}");
-                break;
+                case CardType.RecoverCost:
+                    Debug.Log($"カード効果: コスト回復 {card.power} (プレハブ未設定)");
+                    applied = true;
+                    break;
+
+                case CardType.Buff:
+                    Debug.Log($"カード効果: バフ {card.power} (プレハブ未設定)");
+                    applied = true;
+                    break;
+            }
+        }
+
+        if (!applied)
+        {
+            // 効果未適用の場合はコストを払い戻す（消費前に支払い済みなら戻す）
+            if (card.cost > 0)
+            {
+                // 返却処理: ライフに戻す
+                currentLife = Mathf.Min(maxLife, currentLife + card.cost);
+                OnLifeChanged?.Invoke(currentLife, maxLife);
+            }
+            Debug.Log("PlayCard: カード効果の適用に失敗しました。");
+            return false;
         }
 
         // カード使用後は手札から外し、捨てずに「デッキに戻す」要件に合わせてデッキの底に返却
         hand.Remove(card);
         AddCardToBottomOfDeck(card);
 
-        // TODO: UI更新イベントをここで呼ぶ（OnHandChanged など）
+        // UI更新イベント
+        OnHandChanged?.Invoke();
+
         return true;
     }
 
@@ -282,7 +370,8 @@ public class PlayerController : MonoBehaviour
         if (card == null) return false;
         if (hand.Count >= maxHandSize) return false;
         hand.Add(card);
-        // TODO: UI更新
+        // UI 更新
+        OnHandChanged?.Invoke();
         return true;
     }
 
@@ -311,7 +400,8 @@ public class PlayerController : MonoBehaviour
         deck.RemoveAt(0);
         hand.Add(c);
 
-        // TODO: UI更新（手札表示）をここで通知
+        // UI更新（手札表示）をここで通知
+        OnHandChanged?.Invoke();
         return c;
     }
 
@@ -363,7 +453,8 @@ public class PlayerController : MonoBehaviour
                 displayName = $"Damage {i % 3 + 1}",
                 type = CardType.Damage,
                 cost = 1,
-                power = (i % 3) + 1
+                power = (i % 3) + 1,
+                prefab = null
             };
             deck.Add(c);
         }
@@ -380,7 +471,8 @@ public class PlayerController : MonoBehaviour
         if (!hand.Contains(card)) return;
         hand.Remove(card);
         discard.Add(card);
-        // TODO: UI更新
+        // UI更新
+        OnHandChanged?.Invoke();
     }
 
     // カードデータ定義（簡易）
@@ -392,6 +484,8 @@ public class PlayerController : MonoBehaviour
         public CardType type;
         public int cost;
         public int power;
+        // 追加: プレハブ参照を持たせてカードデータと振る舞いを結び付けられるようにする
+        public GameObject prefab;
     }
 
     public enum CardType

@@ -4,7 +4,7 @@ using UnityEngine;
 // 攻撃カード（MonoBehaviourとしてInspectorでパラメータ調整可能）
 // 使い方例:
 // var card = someAttackCardComponent;
-// card.Execute(ownerTransform, singleTargetTransform, playerController, charge: true, lifeSacrifice: 2, lifeSacrificeMultiplier: 1.5f);
+// card.Execute(ownerTransform, singleTargetTransform, playerController, charge: true, lifeSacrifice: 2, lifeSacrificeMultiplier: 1.5f, overrideBaseDamage: 10);
 public class AttackCard : MonoBehaviour
 {
     [Header("基本 (カードの基礎パラメータ)")]
@@ -29,7 +29,7 @@ public class AttackCard : MonoBehaviour
     [Tooltip("オン: 指定した1体を攻撃します。オフ: 前方の複数に対して範囲攻撃を行います。")]
     [SerializeField] bool singleTargetMode = true;
 
-    [Header("線形攻撃（前方への直線）")]
+    [Header("線形攻撃（前方への直線)")]
     [InspectorName("直線の届く距離")]
     [Tooltip("前方に届く距離（メートル相当）。この範囲内の敵が直線攻撃の対象になります。")]
     [SerializeField] float linearRange = 8.0f;
@@ -63,7 +63,8 @@ public class AttackCard : MonoBehaviour
     // charge: チャージしているかどうか（チャージ可能なカードは倍率が乗る）
     // lifeSacrifice: ライフ消費量（0なら使用しない）
     // lifeSacrificeMultiplier: ライフ消費が成功した場合に乗るダメージ倍率
-    public void Execute(Transform origin, Transform singleTarget, PlayerController owner, bool charge = false, int lifeSacrifice = 0, float lifeSacrificeMultiplier = 1.0f)
+    // overrideBaseDamage: 呼び出し側から基本ダメージを上書きしたい場合に指定（負値なら無視）
+    public void Execute(Transform origin, Transform singleTarget, PlayerController owner, bool charge = false, int lifeSacrifice = 0, float lifeSacrificeMultiplier = 1.0f, int overrideBaseDamage = -1)
     {
         if (origin == null || owner == null)
         {
@@ -97,7 +98,24 @@ public class AttackCard : MonoBehaviour
         float ownerMultiplier = owner.GetAndConsumeNextAttackMultiplier();
         finalMultiplier *= ownerMultiplier;
 
-        int appliedDamage = Mathf.Max(0, Mathf.RoundToInt(baseDamage * finalMultiplier));
+        // 追加: プレイヤーが SupportCard 等で設定した次回の基礎ダメージ上書きを取得
+        int ownerBaseOverride = owner.GetAndConsumeNextAttackBaseOverride();
+
+        int baseToUse;
+        if (ownerBaseOverride >= 0)
+        {
+            baseToUse = ownerBaseOverride;
+        }
+        else if (overrideBaseDamage >= 0)
+        {
+            baseToUse = overrideBaseDamage;
+        }
+        else
+        {
+            baseToUse = baseDamage;
+        }
+
+        int appliedDamage = Mathf.Max(0, Mathf.RoundToInt(baseToUse * finalMultiplier));
 
         // 3) ターゲット取得とダメージ適用
         if (singleTargetMode)
