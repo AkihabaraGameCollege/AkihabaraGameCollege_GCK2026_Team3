@@ -38,5 +38,5 @@ public abstract class EnemyAttackBase : MonoBehaviour
         canAttack = true;
     }
 
-    protected abstract void PerformAttack(); // © UŒ‚“à—e‚Íq‚É”C‚¹‚é
+    protected abstract void PerformAttack();
 }

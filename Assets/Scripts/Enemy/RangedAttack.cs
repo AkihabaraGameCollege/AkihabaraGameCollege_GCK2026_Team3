@@ -9,8 +9,6 @@ public class RangedAttack : EnemyAttackBase
     {
         if (target == null) return;
 
-        Debug.Log("Ranged Attack!");
-
         GameObject bullet = Instantiate(
             bulletPrefab,
             firePoint.position,
