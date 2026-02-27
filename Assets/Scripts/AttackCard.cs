@@ -56,6 +56,16 @@ public class AttackCard : MonoBehaviour
     [Tooltip("攻撃が当たる対象をレイヤーで絞れます。未設定だとすべてが対象になります。")]
     [SerializeField] LayerMask targetLayerMask = ~0;
 
+    [Header("パーティクル（各攻撃種別）")]
+    [SerializeField, Tooltip("ヒット時に再生するパーティクル（単体/当たり判定毎）")]
+    ParticleSystem hitParticle;
+    [SerializeField, Tooltip("範囲攻撃時に中心で再生するパーティクル（オプション）")]
+    ParticleSystem areaParticle;
+    [SerializeField, Tooltip("チャージ時に発生させたいパーティクル（オプション）")]
+    ParticleSystem chargeParticle;
+    [SerializeField, Tooltip("ライフ犠牲による強化が成功したときに再生するパーティクル（オプション）")]
+    ParticleSystem lifeSacrificeParticle;
+
     // 主な攻撃実行メソッド
     // origin: 発動元のTransform（プレイヤーのTransform等）
     // singleTarget: 単体攻撃時のターゲット（nullなら近傍の最優先を自動選択）
@@ -77,6 +87,7 @@ public class AttackCard : MonoBehaviour
         if (charge && chargeable)
         {
             finalMultiplier *= chargeMultiplier;
+            PlayParticle(chargeParticle, origin.position);
         }
 
         // 2) ライフ消費があれば試みる（失敗したらライフ倍率は適用しない）
@@ -86,6 +97,7 @@ public class AttackCard : MonoBehaviour
             if (consumed)
             {
                 finalMultiplier *= lifeSacrificeMultiplier;
+                PlayParticle(lifeSacrificeParticle, origin.position);
             }
             else
             {
@@ -125,6 +137,8 @@ public class AttackCard : MonoBehaviour
         else
         {
             ApplyAreaDamage(origin, appliedDamage, owner);
+            // 範囲中心エフェクト（オプション）
+            PlayParticle(areaParticle, origin.position + origin.forward * (circularOffsetForward * 0.5f));
         }
     }
 
@@ -157,6 +171,7 @@ public class AttackCard : MonoBehaviour
         if (targetStatus != null)
         {
             targetStatus.Damage(damage, origin.position, CriticalType.Normal, owner.transform);
+            PlayParticle(hitParticle, targetStatus.transform.position);
         }
     }
 
@@ -192,6 +207,16 @@ public class AttackCard : MonoBehaviour
         {
             if (sm == null) continue;
             sm.Damage(damage, origin.position, CriticalType.Normal, owner.transform);
+            PlayParticle(hitParticle, sm.transform.position);
         }
+    }
+
+    // ヘルパー: パーティクル再生（null チェック含む）
+    void PlayParticle(ParticleSystem prefab, Vector3 position)
+    {
+        if (prefab == null) return;
+        var ps = Instantiate(prefab, position, Quaternion.identity);
+        try { ps.Play(); } catch { }
+        Destroy(ps.gameObject, 5f);
     }
 }
