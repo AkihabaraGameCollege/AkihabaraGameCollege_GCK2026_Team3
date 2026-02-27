@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 1079281325}
   - component: {fileID: 1079281324}
   - component: {fileID: 1079281323}
+  - component: {fileID: 1079281327}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -927,6 +928,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 461601634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079281327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079281322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46548f798659c7499b5e111a86219c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  maxLife: 8
+  startLife: 8
+  autoDrawInterval: 3
+  maxHandSize: 8
+  deck: []
+  createTestDeck: 0
+  testDeckSize: 10
 --- !u!1 &1323741301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,6 +1500,30 @@ PrefabInstance:
     - target: {fileID: 5377119379883119275, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
       propertyPath: m_Name
       value: PlayerDeck
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.data[9].id
+      value: buff_shield_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.data[9].cost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.data[9].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.data[9].power
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018356066591567370, guid: 2de830d244e7907428c8a38083a2ddcd, type: 3}
+      propertyPath: deck.Array.data[9].displayName
+      value: "\u6B21\u653B\u6483\u5F37\u5316"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
