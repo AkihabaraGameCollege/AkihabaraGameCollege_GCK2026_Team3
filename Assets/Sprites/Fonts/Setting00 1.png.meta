@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 556cf8d134f001b4287fce4e62527312
+guid: 17f5979fdafb1464b9f492eba55c6ed3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Start00_0
+      name: Setting00 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 201
-        height: 72
+        width: 296
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e48e526844adf77408ce1fe81b63f1ff
-      internalID: -635212109
+      spriteID: 4a1bb7c19a0b42f428fec8bd8afde8cc
+      internalID: 1163031607
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 73403545e48cff74185120058175b90d
+    spriteID: e50c3204d703ed04f8691730d80bce47
     internalID: 0
     vertices: []
     indices: 
@@ -145,9 +145,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":201.0,"y":72.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":296.0,"y":96.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Start00_0: -635212109
+      Setting00 1_0: 1163031607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

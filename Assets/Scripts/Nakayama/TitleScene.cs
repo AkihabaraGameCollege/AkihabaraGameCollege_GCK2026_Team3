@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CardDefenseGame
 {
@@ -45,6 +47,15 @@ namespace CardDefenseGame
         private int stageSceneIndex = 0;
 
         /// <summary>
+        /// デッキ表示のボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button deckButton = null;
+
+        [SerializeField]
+        private Button deckReturnButton = null;
+
+        /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
         /// </summary>
         private static readonly int startTrigger = Animator.StringToHash("Start");
@@ -55,11 +66,19 @@ namespace CardDefenseGame
         /// <summary>
         /// 設定画面から戻るときに呼ばれるIDの変数
         /// </summary>
-        private static readonly int returnSettingTrigger = Animator.StringToHash("ReturnSetting");
+        private static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
         /// <summary>
         /// ゲーム終了するときに呼ばれるIDの変数
         /// </summary>
         private static readonly int exitTrigger = Animator.StringToHash("Exit");
+        /// <summary>
+        /// デッキ表示するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int deckTrigger = Animator.StringToHash("Deck");
+        /// <summary>
+        /// デッキから戻るときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int deckReturnTrigger = Animator.StringToHash("DeckReturn");
 
         /// <summary>
         /// 初期設定の関数
@@ -68,6 +87,10 @@ namespace CardDefenseGame
         {
             audioSetting.PlayBGM(0);
             audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
+
+            // ボタンに関数を登録
+            deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
+            deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
         }
 
         /// <summary>
@@ -98,9 +121,9 @@ namespace CardDefenseGame
         /// <summary>
         /// 設定画面から戻る関数
         /// </summary>
-        public void ReturnSetting()
+        public void SettingReturn()
         {
-            animator.SetTrigger(returnSettingTrigger);// 設定画面を表示させるトリガーをセット
+            animator.SetTrigger(settingReturnTrigger);// 設定画面から戻るトリガーをセット
         }
 
         /// <summary>
@@ -122,6 +145,22 @@ namespace CardDefenseGame
             yield return new WaitForSeconds(exitTime);
             Debug.Log("ゲームを終了します。");
             Application.Quit();
+        }
+
+        /// <summary>
+        /// デッキ画面を表示する関数
+        /// </summary>
+        public void DisplayDeck()
+        {
+            animator.SetTrigger(deckTrigger);// デッキ画面を表示させるトリガーをセット
+        }
+
+        /// <summary>
+        /// デッキ画面から戻る関数
+        /// </summary>
+        public void DeckReturn()
+        {
+            animator.SetTrigger(deckReturnTrigger);// デッキ画面から戻るトリガーをセット
         }
     }
 }
