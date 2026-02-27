@@ -51,7 +51,9 @@ namespace CardDefenseGame
         /// </summary>
         [SerializeField]
         private Button deckButton = null;
-
+        /// <summary>
+        /// デッキ表示から戻るボタンの変数
+        /// </summary>
         [SerializeField]
         private Button deckReturnButton = null;
 
