@@ -54,6 +54,29 @@ public class SupportCard : MonoBehaviour
     [Tooltip("シールド付与を使用する際のライフコスト")]
     int shieldCost = 1;
 
+    [Header("パーティクル（各効果ごとに設定）")]
+    [SerializeField, Tooltip("次の攻撃強化を付与したときに再生するパーティクル")]
+    ParticleSystem boostParticle;
+    [SerializeField, Tooltip("デッキからドローしたときに再生するパーティクル")]
+    ParticleSystem drawParticle;
+    [SerializeField, Tooltip("カードを複製して手札に追加したときに再生するパーティクル")]
+    ParticleSystem duplicateParticle;
+    [SerializeField, Tooltip("コスト回復バフを付与したときに再生するパーティクル")]
+    ParticleSystem costRecoveryParticle;
+    [SerializeField, Tooltip("ライフ回復時に再生するパーティクル")]
+    ParticleSystem healParticle;
+    [SerializeField, Tooltip("シールド付与時に再生するパーティクル")]
+    ParticleSystem shieldParticle;
+
+    // ヘルパー: パーティクルを再生（プレハブが null でない場合）
+    void PlayParticle(ParticleSystem prefab, Vector3 position)
+    {
+        if (prefab == null) return;
+        var ps = Instantiate(prefab, position, Quaternion.identity);
+        try { ps.Play(); } catch { }
+        Destroy(ps.gameObject, 5f);
+    }
+
     // 1) 次の攻撃のダメージを増やす（支払いに失敗したら false）
     public bool BoostNextAttack(PlayerController owner, int lifeCost = -1, float multiplier = -1f)
     {
@@ -65,6 +88,8 @@ public class SupportCard : MonoBehaviour
 
         owner.ApplyNextAttackMultiplier(multiplier);
         Debug.Log($"SupportCard: 次の攻撃倍率 x{multiplier} を付与 (cost:{lifeCost})");
+
+        PlayParticle(boostParticle, owner.transform.position);
         return true;
     }
 
@@ -83,6 +108,8 @@ public class SupportCard : MonoBehaviour
         owner.ApplyNextAttackBaseOverride(newBase);
 
         Debug.Log($"SupportCard: 次の攻撃基礎ダメージ +{additionalBase} を付与 (cost:{lifeCost})");
+
+        PlayParticle(boostParticle, owner.transform.position);
         return true;
     }
 
@@ -94,7 +121,9 @@ public class SupportCard : MonoBehaviour
         if (!owner.ConsumeLife(lifeCost)) return null;
 
         var card = owner.DrawCard();
-        Debug.Log($"SupportCard: デッキからドロー (cost:{lifeCost}) -> {(card != null ? card.displayName : "なし")}" );
+        Debug.Log($"SupportCard: デッキからドロー (cost:{lifeCost}) -> {(card != null ? card.displayName : "なし")}");
+
+        PlayParticle(drawParticle, owner.transform.position);
         return card;
     }
 
@@ -116,6 +145,8 @@ public class SupportCard : MonoBehaviour
 
         bool added = owner.AddCardToHand(copy);
         Debug.Log($"SupportCard: カード複製 {(added ? "成功" : "失敗(手札満杯)")} (cost:{lifeCost})");
+
+        if (added) PlayParticle(duplicateParticle, owner.transform.position);
         return added;
     }
 
@@ -131,6 +162,8 @@ public class SupportCard : MonoBehaviour
 
         owner.ApplyCostRecoveryBuff(multiplier, duration);
         Debug.Log($"SupportCard: コスト回復力 x{multiplier} を {duration}s 付与 (cost:{lifeCost})");
+
+        PlayParticle(costRecoveryParticle, owner.transform.position);
         return true;
     }
 
@@ -145,6 +178,8 @@ public class SupportCard : MonoBehaviour
 
         owner.HealLife(amount);
         Debug.Log($"SupportCard: ライフ回復 {amount} (cost:{lifeCost})");
+
+        PlayParticle(healParticle, owner.transform.position);
         return true;
     }
 
@@ -159,6 +194,8 @@ public class SupportCard : MonoBehaviour
 
         owner.AddShield(amount);
         Debug.Log($"SupportCard: シールド +{amount} (cost:{lifeCost})");
+
+        PlayParticle(shieldParticle, owner.transform.position);
         return true;
     }
 }
