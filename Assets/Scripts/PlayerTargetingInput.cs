@@ -6,10 +6,8 @@ using UnityEngine.InputSystem;
 // - カーソル位置アクション (Vector2) : クリック時のスクリーン座標（未設定なら Mouse.current を使用）
 // - cycleAction (Button) : 最寄りの Enemy をターゲット（見つからなければ解除）
 // - cancelAction (Button) : ターゲット解除
-[RequireComponent(typeof(PlayerController))]
 public class PlayerTargetingInput : MonoBehaviour
 {
-    PlayerController player;
     Camera mainCam;
 
     [SerializeField, Tooltip("Tabで検索する最大距離")] float searchRadius = 30f;
@@ -27,7 +25,6 @@ public class PlayerTargetingInput : MonoBehaviour
 
     void Start()
     {
-        player = GetComponent<PlayerController>();
         mainCam = Camera.main;
     }
 
@@ -80,7 +77,6 @@ public class PlayerTargetingInput : MonoBehaviour
     // クリック処理（Input System のコールバック）
     void OnClick(InputAction.CallbackContext ctx)
     {
-        if (mainCam == null || player == null) return;
 
         Vector2 screenPos;
         if (aimPositionAction != null && aimPositionAction.action != null)
@@ -103,7 +99,6 @@ public class PlayerTargetingInput : MonoBehaviour
             if (hitTransform == null) return;
             if (hitTransform.CompareTag("Enemy") || hitTransform.GetComponent<StatusManager>() != null)
             {
-                player.SetTarget(hitTransform);
             }
         }
     }
@@ -111,15 +106,10 @@ public class PlayerTargetingInput : MonoBehaviour
     // ターゲット切替（最寄り選択）
     void OnCycle(InputAction.CallbackContext ctx)
     {
-        if (player == null) return;
-        bool found = player.SelectNearestEnemy(searchRadius);
-        if (!found) player.ClearTarget();
     }
 
     // キャンセル（ターゲット解除）
     void OnCancel(InputAction.CallbackContext ctx)
     {
-        if (player == null) return;
-        player.ClearTarget();
     }
 }

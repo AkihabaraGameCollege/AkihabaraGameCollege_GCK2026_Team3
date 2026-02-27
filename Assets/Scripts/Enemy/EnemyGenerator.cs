@@ -9,6 +9,7 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private float spawnOffsetRange = 5f;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] waypoints;
+    [SerializeField] private GameObject player;
 
     private void Start()
     {
@@ -36,8 +37,9 @@ public class EnemyGenerator : MonoBehaviour
 
             GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
-            EnemyMove move = enemy.GetComponent<EnemyMove>();
-            move.SetPath(waypoints);
+            enemy.GetComponent<EnemyMove>()?.SetPath(waypoints);
+
+            enemy.GetComponent<EnemyAttackBase>()?.SetTarget(player);
         }
     }
 
