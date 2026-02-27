@@ -1,10 +1,12 @@
 using UnityEngine;
+using System;
 
 public class EnemyMove : MonoBehaviour
 {
     private Transform[] waypoints;
     private int currentIndex = 0;
     [SerializeField] private float moveSpeed = 3f;
+    public Action OnReachGoal;
 
     public void SetPath(Transform[] newWaypoints)
     {
@@ -33,6 +35,11 @@ public class EnemyMove : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPos) < 1f)
         {
             currentIndex++;
+            // ÅŒã‚Ü‚Ås‚Á‚½‚ç’Ê’m
+            if (currentIndex >= waypoints.Length)
+            {
+                OnReachGoal?.Invoke();
+            }
         }
     }
 }
