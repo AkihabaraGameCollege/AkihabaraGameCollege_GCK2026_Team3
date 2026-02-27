@@ -5,7 +5,6 @@ public class GameOverManager : MonoBehaviour
 {
     // ★1：プレイヤーのHPスクリプトをここに入れる（見張る対象）
     // 「PlayerHP」のところは、君が作ったスクリプトの名前に書き換えてな！
-    public PlayerController playerScript;
 
     // ★2：出したいゲームオーバーUI（パネルとか画像）をここに入れる
     public GameObject GameoverUI;
