@@ -198,6 +198,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1079281322}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
+      propertyPath: enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 27c0d308542e67a4696d4245edf2053a, type: 2}
+    - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 1717454675415249708, guid: fe16fa62bca004e46848d2e49c422913, type: 3}
@@ -1053,21 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46548f798659c7499b5e111a86219c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  maxLife: 8
-  startLife: 8
-  currentLife: 0
-  currentShield: 0
-  autoDrawInterval: 3
-  maxHandSize: 8
-  deck: []
-  hand: []
-  discard: []
-  nextAttackMultiplier: 1
-  nextAttackBaseOverride: -1
-  costRecoveryMultiplier: 1
-  createTestDeck: 0
-  testDeckSize: 10
-  currentTarget: {fileID: 0}
 --- !u!114 &1079281328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,6 +1249,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 461601634}
     m_Modifications:
+    - target: {fileID: 3052280834286235185, guid: 62940bd9f26439743b901a54d67a4be3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3832131404973821668, guid: 62940bd9f26439743b901a54d67a4be3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1914,6 +1907,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1079281322}
+    - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
+      propertyPath: enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: d4772ad5ec9b6914d85049a2d7fb9ded, type: 2}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: enemyPrefab
       value: 

@@ -276,9 +276,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7956543656525100715}
   - component: {fileID: 4350786320906249091}
-  - component: {fileID: 5887290105627295044}
   - component: {fileID: 7328213135423656593}
   - component: {fileID: 7262282029456006610}
+  - component: {fileID: 622027743610890372}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -326,19 +326,6 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5887290105627295044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6148917566553992855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddf1bdc2fdc8824d82037e9683af0ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPathFollower
-  moveSpeed: 3
 --- !u!114 &7328213135423656593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +355,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttack
   attackInterval: 1.5
   attackDamage: 30
+--- !u!114 &622027743610890372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148917566553992855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8453a8a01becc4943a953c3d20158ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewEnemyMove
+  moveSpeed: 3
+  waypointRadius: 3
 --- !u!1001 &6456843314994991879
 PrefabInstance:
   m_ObjectHideFlags: 0
