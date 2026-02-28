@@ -6,9 +6,7 @@ public class MeleeAttack : EnemyAttackBase
     {
         if (target == null) return;
 
-        Debug.Log("Melee Attack!");
-
-        //target.GetComponent<PlayerHealth>()
-        //      ?.TakeDamage(attackDamage);
+        target.GetComponent<KariPlayerHealth>()
+              ?.TakeDamage(attackDamage);
     }
 }

@@ -28,8 +28,9 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
-            //Destroy(gameObject);
+            Debug.Log(damage);
+            other.GetComponent<KariPlayerHealth>()?.TakeDamage(damage);
+            Destroy(gameObject);
         }
     }
 }
