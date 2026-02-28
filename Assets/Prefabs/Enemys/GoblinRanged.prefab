@@ -85,9 +85,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6191531271228671957}
   - component: {fileID: 3377445074175242818}
-  - component: {fileID: 3900132491506422952}
   - component: {fileID: 250277710141293007}
   - component: {fileID: 7949831502371010199}
+  - component: {fileID: 2044133792775035203}
   m_Layer: 0
   m_Name: GoblinRanged
   m_TagString: Untagged
@@ -136,19 +136,6 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3900132491506422952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717454675415249708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dddf1bdc2fdc8824d82037e9683af0ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPathFollower
-  moveSpeed: 3
 --- !u!114 &250277710141293007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +167,21 @@ MonoBehaviour:
   attackDamage: 10
   bulletPrefab: {fileID: 107395912125315757, guid: 77adf8db1a2a8f44bb22aed962ee3700, type: 3}
   firePoint: {fileID: 2603091871739029172}
+  speed: 10
+--- !u!114 &2044133792775035203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717454675415249708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8453a8a01becc4943a953c3d20158ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewEnemyMove
+  moveSpeed: 3
+  waypointRadius: 3
 --- !u!1 &2094746500540093174
 GameObject:
   m_ObjectHideFlags: 0
