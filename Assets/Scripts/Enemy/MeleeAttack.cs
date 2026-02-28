@@ -5,22 +5,25 @@ using UnityEngine;
 /// EnemyAttackBaseを継承し、
 /// 一定間隔で直接ダメージを与える
 /// </summary>
-public class MeleeAttack : EnemyAttackBase
+namespace ForestDraw.Enemy.Attack
 {
-    // =========================
-    // 攻撃実行処理
-    // =========================
-    /// <summary>
-    /// 攻撃処理（EnemyAttackBaseから呼ばれる）
-    /// 直接ターゲットにダメージを与える
-    /// </summary>
-    protected override void PerformAttack()
+    public class MeleeAttack : EnemyAttackBase
     {
-        // ターゲットが存在しない場合は何もしない
-        if (target == null) return;
+        // =========================
+        // 攻撃実行処理
+        // =========================
+        /// <summary>
+        /// 攻撃処理（EnemyAttackBaseから呼ばれる）
+        /// 直接ターゲットにダメージを与える
+        /// </summary>
+        protected override void PerformAttack()
+        {
+            // ターゲットが存在しない場合は何もしない
+            if (target == null) return;
 
-        // ターゲットのHPコンポーネントを取得してダメージを与える
-        target.GetComponent<KariPlayerHealth>()
-              ?.TakeDamage(attackDamage);
+            // ターゲットのHPコンポーネントを取得してダメージを与える
+            target.GetComponent<KariPlayerHealth>()
+                  ?.TakeDamage(attackDamage);
+        }
     }
 }
