@@ -1,10 +1,8 @@
-using NUnit.Framework;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardDefenseGame
+namespace ForestDraw
 {
     /// <summary>
     /// タイトルシーンの管理クラス
@@ -56,6 +54,11 @@ namespace CardDefenseGame
         /// </summary>
         [SerializeField]
         private Button deckReturnButton = null;
+        /// <summary>
+        /// 設定画面から戻るボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button settingReturnButton = null;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -93,6 +96,7 @@ namespace CardDefenseGame
             // ボタンに関数を登録
             deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
+            settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンに設定画面から戻る関数を登録
         }
 
         /// <summary>

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace CardDefenseGame
+namespace ForestDraw
 {
     /// <summary>
     /// オーディオ設定管理クラス
