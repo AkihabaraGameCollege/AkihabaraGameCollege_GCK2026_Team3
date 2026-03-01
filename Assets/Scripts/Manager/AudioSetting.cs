@@ -11,23 +11,34 @@ namespace ForestDraw
     public class AudioSetting : MonoBehaviour
     {
         /// <summary>
-        /// ソースオブジェクトの変数
+        /// BGM用のオーディオソースの変数
         /// </summary>
         [SerializeField]
-        public AudioSource bgmAudioSource;
-        [SerializeField]
-        public AudioSource seAudioSource;
-
+        public AudioSource bgmAudioSource = null;
         /// <summary>
-        /// スライダーコンポーネントの変数
+        /// SE用のオーディオソースの変数
         /// </summary>
-        private Slider bgmVolumeSlider;
-        private Slider seVolumeSlider;
+        [SerializeField]
+        public AudioSource seAudioSource = null;
 
         /// <summary>
-        /// リストオブジェクトの変数
+        /// BGM音量のスライダーの変数
+        /// </summary>
+        [SerializeField]
+        private Slider bgmVolumeSlider = null;
+        /// <summary>
+        /// SE音量のスライダーの変数
+        /// </summary>
+        [SerializeField]
+        private Slider seVolumeSlider = null;
+
+        /// <summary>
+        /// BGMのオーディオクリップのリスト変数
         /// </summary>
         public List<AudioClip> bgms;
+        /// <summary>
+        /// SEのオーディオクリップのリスト変数
+        /// </summary>
         public List<AudioClip> ses;
 
         /// <summary>
@@ -44,10 +55,6 @@ namespace ForestDraw
         /// </summary>
         void Awake()
         {
-            // シーン内からSliderを探して取得
-            bgmVolumeSlider = GameObject.Find("BgmVolumeSlider").GetComponent<Slider>();
-            seVolumeSlider = GameObject.Find("SeVolumeSlider").GetComponent<Slider>();
-
             // 保存された音量を反映
             bgmVolumeSlider.value = UpdateVolume.bgmSliderValue;
             seVolumeSlider.value = UpdateVolume.seSliderValue;
@@ -66,9 +73,9 @@ namespace ForestDraw
                 bgmAudioSource.volume = UpdateVolume.bgmSliderValue;
                 seAudioSource.volume = UpdateVolume.seSliderValue;
 
-                // スライダーの値が変更された時の処理を登録
-                bgmVolumeSlider.onValueChanged.AddListener(ChangeVolumeBGM);
-                seVolumeSlider.onValueChanged.AddListener(ChangeVolumeSE);
+            // スライダーの値が変更されたときに呼び出される関数を登録
+            bgmVolumeSlider.onValueChanged.AddListener(ChangeVolumeBGM);// BGM音量スライダーの値が変更されたときに呼び出される関数を登録
+            seVolumeSlider.onValueChanged.AddListener(ChangeVolumeSE);// SE音量スライダーの値が変更されたときに呼び出される関数を登録
         }
 
         /// <summary>
@@ -77,7 +84,6 @@ namespace ForestDraw
         /// <param name="newVolume"></param>
         void ChangeVolumeBGM(float newVolume)
         {
-            // スライダーの値によって音量を変更
             bgmAudioSource.volume = newVolume;
         }
 
@@ -87,7 +93,6 @@ namespace ForestDraw
         /// <param name="newVolume"></param>
         void ChangeVolumeSE(float newVolume)
         {
-            // スライダーの値によって音量を変更
             seAudioSource.volume = newVolume;
         }
 
@@ -95,9 +100,9 @@ namespace ForestDraw
         /// SEを鳴らすための関数
         /// </summary>
         /// <param name="seIndex"></param>
-        void PlaySE(int seIndex)
+        public void PlaySE(int seIndex)
         {
-            seAudioSource.clip = ses[seIndex];
+            seAudioSource.clip = ses[seIndex];// SEのオーディオクリップを設定
             seAudioSource.Play();
         }
 
@@ -107,7 +112,7 @@ namespace ForestDraw
         /// <param name="bgmIndex"></param>
         public void PlayBGM(int bgmIndex)
         {
-            bgmAudioSource.clip = bgms[bgmIndex];
+            bgmAudioSource.clip = bgms[bgmIndex];// BGMのオーディオクリップを設定
             bgmAudioSource.Play();
         }
 
