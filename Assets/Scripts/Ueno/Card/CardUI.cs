@@ -1,86 +1,122 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 
+// ã‚«ãƒ¼ãƒ‰ã®è¦‹ãŸç›®ï¼ˆUIï¼‰ã¨æ“ä½œï¼ˆã‚¯ãƒªãƒƒã‚¯ãƒ»ãƒ‰ãƒ©ãƒƒã‚°ï¼‰ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 public class CardUI : MonoBehaviour
 {
+    // ã“ã®UIãŒæŒã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿
     public CardData cardData;
+
+    // ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã‹ã©ã†ã‹
     bool dragging = false;
+
+    // å…ƒã®ä½ç½®ï¼ˆãƒ‰ãƒ©ãƒƒã‚°å¾Œã«æˆ»ã™ãŸã‚ï¼‰
     Vector3 startPos;
 
-    // ’Ç‰Á: ‘I‘ğ•\¦—p
+    // è¿½åŠ : é¸æŠè¡¨ç¤ºç”¨ãƒ•ãƒ©ã‚°
     bool selected = false;
+
+    // å…ƒã®ã‚¹ã‚±ãƒ¼ãƒ«ï¼ˆæ‹¡å¤§è¡¨ç¤ºã‹ã‚‰æˆ»ã™ãŸã‚ï¼‰
     Vector3 originalScale;
 
     void Start()
     {
+        // åˆæœŸä½ç½®ã¨åˆæœŸã‚¹ã‚±ãƒ¼ãƒ«ã‚’ä¿å­˜
         startPos = transform.position;
         originalScale = transform.localScale;
     }
 
     void Update()
     {
+        // ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã®å‡¦ç†
         if (dragging)
         {
+            // ãƒã‚¦ã‚¹ä½ç½®ã‚’å–å¾—
             Vector3 mouse = Input.mousePosition;
+
+            // ã‚«ãƒ¡ãƒ©ã‹ã‚‰ã®è·é›¢ï¼ˆScreenToWorldPointç”¨ï¼‰
             mouse.z = 10f;
+
+            // ãƒã‚¦ã‚¹ä½ç½®ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã¦ã‚«ãƒ¼ãƒ‰ã‚’ç§»å‹•
             transform.position = Camera.main.ScreenToWorldPoint(mouse);
+
+            // å·¦ã‚¯ãƒªãƒƒã‚¯ã‚’é›¢ã—ãŸã‚‰
             if (Input.GetMouseButtonUp(0))
             {
                 dragging = false;
+
+                // ã‚«ãƒ¼ãƒ‰ã‚’ä½¿ç”¨ã§ãã‚‹ã‹è©¦ã™
                 TryPlay();
+
+                // ä½ç½®ã‚’å…ƒã«æˆ»ã™
                 transform.position = startPos;
             }
         }
     }
 
-    // Šù‘¶: ƒ}ƒEƒXƒNƒŠƒbƒNiƒŒƒKƒV[j
+    // ãƒã‚¦ã‚¹ã§ã‚«ãƒ¼ãƒ‰ã‚’æŠ¼ã—ãŸã¨ãï¼ˆãƒ¬ã‚¬ã‚·ãƒ¼Inputï¼‰
     void OnMouseDown()
     {
         dragging = true;
     }
 
-    // public ƒƒ\ƒbƒh: TextMeshPro ƒ{ƒ^ƒ“‚Ì onClick ‚ÉŠ„‚è“–‚Ä‚é
-    // ƒ{ƒ^ƒ“‚ğu‰Ÿ‚·v‚²‚Æ‚É‘I‘ğ‚ÌƒgƒOƒ‹‚ğs‚¤i‘I‘ğ¨ƒNƒŠƒbƒN‚Å PlayFromButton ‚ğŒÄ‚ÔA“™‚Ì‰^—p‚ª‰Â”\j
+    // TextMeshProã®ãƒœã‚¿ãƒ³ã‹ã‚‰å‘¼ã³å‡ºã™ç”¨
+    // æŠ¼ã™ãŸã³ã«ã€Œé¸æŠçŠ¶æ…‹ã€ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
     public void OnTMPButtonToggleSelect()
     {
         if (!selected) Select();
         else Deselect();
     }
 
-    // public ƒƒ\ƒbƒh: ƒ{ƒ^ƒ“‚©‚ç’¼ÚƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚¢ê‡‚ÉŠ„‚è“–‚Ä‚é
+    // ãƒœã‚¿ãƒ³ã‹ã‚‰ç›´æ¥ã‚«ãƒ¼ãƒ‰ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã«å‘¼ã¶
     public void PlayFromButton()
     {
-        // ‘I‘ğó‘Ô‚ğ‰ğœ‚µ‚ÄˆÊ’u‚ğ–ß‚·i•K—v‚È‚ç‹““®‚Í’²®j
+        // é¸æŠçŠ¶æ…‹ã‚’è§£é™¤
         Deselect();
+
+        // ã‚«ãƒ¼ãƒ‰ä½¿ç”¨å‡¦ç†
         TryPlay();
+
+        // ä½ç½®ã‚’å…ƒã«æˆ»ã™
         transform.position = startPos;
     }
 
-    // ‘I‘ğ•\¦i•K—v‚È‚çƒGƒtƒFƒNƒg‚ğŠg’£j
+    // ã‚«ãƒ¼ãƒ‰ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹ï¼ˆæ‹¡å¤§è¡¨ç¤ºï¼‰
     public void Select()
     {
         selected = true;
+
+        // å°‘ã—æ‹¡å¤§ã—ã¦è¦–è¦šçš„ã«å¼·èª¿
         transform.localScale = originalScale * 1.08f;
-        // TODO: F•ÏX‚â˜g•\¦‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‹Šo‰»‚ğ‹­‰»‰Â”\
+
+        // TODO:
+        // è‰²å¤‰æ›´ã‚„æ ã®è¡¨ç¤ºãªã©ã‚’è¿½åŠ ã™ã‚‹ã¨
+        // ã‚ˆã‚Šåˆ†ã‹ã‚Šã‚„ã™ã„é¸æŠè¡¨ç¾ãŒå¯èƒ½
     }
 
+    // é¸æŠè§£é™¤ï¼ˆå…ƒã®ã‚µã‚¤ã‚ºã«æˆ»ã™ï¼‰
     public void Deselect()
     {
         selected = false;
         transform.localScale = originalScale;
     }
 
+    // ã‚«ãƒ¼ãƒ‰ã‚’å®Ÿéš›ã«ä½¿ç”¨ã™ã‚‹å‡¦ç†
     void TryPlay()
     {
         if (cardData == null) return;
+
+        // CardManagerã«ä½¿ç”¨å¯èƒ½ã‹å•ã„åˆã‚ã›ã‚‹
         bool ok = CardManager.Instance.PlayCard(cardData);
+
         if (!ok)
         {
+            // ä½¿ç”¨ã§ããªã‹ã£ãŸå ´åˆï¼ˆã‚³ã‚¹ãƒˆä¸è¶³ãªã©ï¼‰
             Debug.Log("Cannot play card: " + cardData.cardName);
         }
         else
         {
-            // ƒvƒŒƒC¬Œ÷‚Í‘I‘ğ‰ğœ^‹ŠoƒŠƒZƒbƒg
+            // ä½¿ç”¨æˆåŠŸæ™‚ã¯é¸æŠçŠ¶æ…‹ã‚’è§£é™¤
             Deselect();
         }
     }
