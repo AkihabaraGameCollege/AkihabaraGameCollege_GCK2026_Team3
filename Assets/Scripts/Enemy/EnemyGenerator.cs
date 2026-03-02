@@ -31,7 +31,7 @@ namespace ForestDraw.Enemy.Spawner
         [SerializeField] private GameObject enemyPrefab;        // 生成する敵Prefab
         [SerializeField] private Transform[] waypoints;         // 敵の移動ルート
         [SerializeField] private GameObject player;             // 攻撃対象（例：Player）
-        [SerializeField] private EnemyData enemyData;
+        [SerializeField] private EnemyData enemyData;           // 生成する敵データ
         // =========================
         // 初期処理
         // =========================
