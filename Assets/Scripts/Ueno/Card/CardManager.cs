@@ -10,6 +10,10 @@ public class CardManager : MonoBehaviour
     public List<CardData> hand = new List<CardData>();
     public int handSize = 9;
 
+    [Header("Effects")]
+    public ParticleSystem attackEffectPrefab;
+    public ParticleSystem supportEffectPrefab;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -63,6 +67,10 @@ public class CardManager : MonoBehaviour
         ApplyCardEffect(card);
 
         hand.Remove(card);
+
+        // カードの種類に応じてパーティクルを再生
+        SpawnEffectForCard(card);
+
         return true;
     }
 
@@ -116,5 +124,62 @@ public class CardManager : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    void SpawnEffectForCard(CardData card)
+    {
+        if (card == null) return;
+
+        // 攻撃カードはターゲット（一番近い敵）位置で再生
+        if (card.cardType == CardType.Attack)
+        {
+            var enemy = FindClosestEnemyOnScreen();
+            if (enemy != null && attackEffectPrefab != null)
+            {
+                SpawnParticleAt(attackEffectPrefab, enemy.transform.position);
+                return;
+            }
+
+            // 敵がいない or プレハブ未設定なら画面中心で再生（フォールバック）
+            if (attackEffectPrefab != null)
+            {
+                var cam = Camera.main;
+                Vector3 pos = cam != null ? cam.transform.position + cam.transform.forward * 5f : Vector3.zero;
+                SpawnParticleAt(attackEffectPrefab, pos);
+            }
+        }
+
+        // サポートカードはプレイヤー位置で再生（未設定時はカメラ前方で再生）
+        if (card.cardType == CardType.Support)
+        {
+            if (supportEffectPrefab != null)
+            {
+                Vector3 pos;
+                if (PlayerManager.Instance != null)
+                {
+                    pos = PlayerManager.Instance.transform.position;
+                }
+                else
+                {
+                    var cam = Camera.main;
+                    pos = cam != null ? cam.transform.position + cam.transform.forward * 3f : Vector3.zero;
+                }
+                SpawnParticleAt(supportEffectPrefab, pos);
+            }
+        }
+    }
+
+    void SpawnParticleAt(ParticleSystem prefab, Vector3 position)
+    {
+        if (prefab == null) return;
+        var instance = Instantiate(prefab, position, Quaternion.identity);
+        // duration を取得して自動破棄（ループ設定のあるエフェクトは手動管理推奨）
+        var main = instance.main;
+        float dur = main.duration;
+        // safety: もしループしている場合は自動破棄しない
+        if (!main.loop)
+        {
+            Destroy(instance.gameObject, dur + 0.5f);
+        }
     }
 }
