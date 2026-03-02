@@ -1,5 +1,9 @@
-﻿public enum CardType
+using UnityEngine;
+
+public enum CardType
 {
     Attack,
-    Support
+    Support,
+    Recovery,
+    Utility
 }

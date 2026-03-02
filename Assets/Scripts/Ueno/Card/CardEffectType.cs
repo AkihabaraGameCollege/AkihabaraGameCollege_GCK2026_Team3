@@ -1,15 +1,14 @@
-﻿public enum CardEffectType
+using UnityEngine;
+
+public enum CardEffectType
 {
-    SingleAttack,
-    LineAttack,
-    AreaAttack,
-    ScreenAttack,
-    SelfDamageAttack,
-    DamageBoost,
+    DamageSingle,
+    DamageLine,
+    DamageArea,
+    DamageAllOnScreen,
+    CostRecover,
     Draw,
-    CopyHighestCost,
-    CostRegenBoost,
+    BuffNext,
     Heal,
-    DamageReduction,
-    AddCost
+    Shield
 }

@@ -1,20 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHP = 3000;
-    private int currentHP;
+    public int maxHp = 1000;
+    public int hp = 1000;
 
     void Start()
     {
-        currentHP = maxHP;
+        hp = maxHp;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int amount)
     {
-        currentHP -= damage;
-
-        if (currentHP <= 0)
+        hp -= amount;
+        if (hp <= 0)
         {
             Die();
         }

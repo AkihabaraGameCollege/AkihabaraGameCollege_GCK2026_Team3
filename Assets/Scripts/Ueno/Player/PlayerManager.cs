@@ -1,99 +1,75 @@
+using System;
 using UnityEngine;
-using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance { get; private set; }
+
     public int maxLife = 4000;
-    public int currentLife;
+    public int life = 4000;
 
     public int maxCost = 8;
-    public int currentCost;
+    public int cost = 0;
+    public float costRegenPerSecond = 1f;
 
-    private float damageMultiplier = 1f;
-    private float damageReduction = 0f;
-    private int costRegenAmount = 1;
+    public event Action<int> OnCostChanged;
+    public event Action<int> OnLifeChanged;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     void Start()
     {
-        currentLife = maxLife;
-        currentCost = maxCost;
-        StartCoroutine(CostRecovery());
+        cost = maxCost; // start full
     }
 
-    IEnumerator CostRecovery()
+    void Update()
     {
-        while (true)
+        RegenerateCost();
+    }
+
+    void RegenerateCost()
+    {
+        if (cost >= maxCost) return;
+        float toAdd = costRegenPerSecond * Time.deltaTime;
+        // accumulate fractional but only apply integer when it changes
+        int newCost = Mathf.Min(maxCost, cost + Mathf.FloorToInt(toAdd + 0.0001f));
+        if (newCost != cost)
         {
-            yield return new WaitForSeconds(1f);
-            AddCost(costRegenAmount);
+            cost = newCost;
+            OnCostChanged?.Invoke(cost);
         }
     }
 
-    public bool UseCost(int value)
+    public bool TryUseCost(int amount)
     {
-        if (currentCost < value) return false;
-        currentCost -= value;
-        return true;
-    }
-
-    public void AddCost(int value)
-    {
-        currentCost += value;
-        if (currentCost > maxCost)
-            currentCost = maxCost;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        int finalDamage = Mathf.RoundToInt(damage * (1f - damageReduction));
-        currentLife -= finalDamage;
-        if (currentLife <= 0)
+        if (amount <= 0) return true;
+        if (cost >= amount)
         {
-            Debug.Log("Game Over");
+            cost -= amount;
+            OnCostChanged?.Invoke(cost);
+            return true;
         }
+        return false;
     }
 
-    public void Heal(int amount)
+    public void RecoverCost(int amount)
     {
-        currentLife += amount;
-        if (currentLife > maxLife)
-            currentLife = maxLife;
+        if (amount <= 0) return;
+        cost = Mathf.Min(maxCost, cost + amount);
+        OnCostChanged?.Invoke(cost);
     }
 
-    public int CalculateDamage(int min, int max)
+    public void ChangeLife(int delta)
     {
-        int baseDamage = Random.Range(min, max + 1);
-        int finalDamage = Mathf.RoundToInt(baseDamage * damageMultiplier);
-        damageMultiplier = 1f; // UŒ‚ŒãƒŠƒZƒbƒg
-        return finalDamage;
-    }
-
-    public void ApplyDamageBoost(float value)
-    {
-        damageMultiplier = value;
-    }
-
-    public void ApplyDamageReduction(float value, float duration)
-    {
-        StartCoroutine(DamageReductionRoutine(value, duration));
-    }
-
-    IEnumerator DamageReductionRoutine(float value, float duration)
-    {
-        damageReduction = value;
-        yield return new WaitForSeconds(duration);
-        damageReduction = 0f;
-    }
-
-    public void ApplyCostRegenBoost(int value, float duration)
-    {
-        StartCoroutine(CostRegenRoutine(value, duration));
-    }
-
-    IEnumerator CostRegenRoutine(int value, float duration)
-    {
-        costRegenAmount = value;
-        yield return new WaitForSeconds(duration);
-        costRegenAmount = 1;
+        life = Mathf.Clamp(life + delta, 0, maxLife);
+        OnLifeChanged?.Invoke(life);
     }
 }
