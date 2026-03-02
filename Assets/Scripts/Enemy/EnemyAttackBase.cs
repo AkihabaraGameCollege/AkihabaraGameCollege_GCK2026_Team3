@@ -11,14 +11,14 @@ namespace ForestDraw.Enemy.Attack
     public abstract class EnemyAttackBase : MonoBehaviour
     {
         // =========================
-        // 設定値
+        // ▼ 設定値
         // =========================
 
         protected float attackInterval = 1.5f; // 攻撃間隔（秒）
         protected int attackDamage = 10;       // 攻撃ダメージ量
 
         // =========================
-        // 内部状態管理用
+        // ▼ 内部状態管理用
         // =========================
 
         protected float attackTimer;   // 次の攻撃までの経過時間

@@ -11,7 +11,7 @@ namespace ForestDraw.Enemy.Attack
     public class EnemyBullet : MonoBehaviour
     {
         // =========================
-        // ▼ 内部パラメータ
+        // ▼ 設定値
         // =========================
         private float speed = 10f;     // 弾の移動速度
         private int damage;            // 与えるダメージ量

@@ -12,7 +12,7 @@ namespace ForestDraw.Enemy.Components
     public class EnemyHealth : MonoBehaviour
     {
         // =========================
-        // 設定値
+        // ▼ 設定値
         // =========================
 
         private int health; // 現在HP（初期値）
@@ -23,7 +23,7 @@ namespace ForestDraw.Enemy.Components
         private Image hpFillImage; // HPバーのFill部分（UI）
 
         // =========================
-        // 内部状態管理
+        // ▼ 内部状態管理
         // =========================
 
         private bool isTakingDamage = true; // ダメージを受けられる状態かどうか
