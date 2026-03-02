@@ -571,6 +571,7 @@ MonoBehaviour:
   deckButton: {fileID: 6246747943090762593}
   deckReturnButton: {fileID: 926423366}
   settingReturnButton: {fileID: 17713793}
+  stageSelectReturnButton: {fileID: 8959410258282276057}
 --- !u!4 &171094787
 Transform:
   m_ObjectHideFlags: 0
@@ -15950,7 +15951,7 @@ GameObject:
   - component: {fileID: 7854411030637829488}
   - component: {fileID: 8959410258282276057}
   m_Layer: 5
-  m_Name: ReturnButton
+  m_Name: StageSelectReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

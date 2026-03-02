@@ -59,6 +59,26 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private Button settingReturnButton = null;
+        /// <summary>
+        /// ステージセレクトから戻るボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button stageSelectReturnButton = null;
+        /// <summary>
+        /// 第一ステージへのボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button stageButton1 = null;
+        /// <summary>
+        /// 第二ステージへのボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button stageButton2 = null;
+        /// <summary>
+        /// 第三ステージへのボタンの変数
+        /// </summary>
+        [SerializeField]
+        private Button stageButton3 = null;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -84,6 +104,12 @@ namespace ForestDraw
         /// デッキから戻るときに呼ばれるIDの変数
         /// </summary>
         private static readonly int deckReturnTrigger = Animator.StringToHash("DeckReturn");
+        /// <summary>
+        /// ステージセレクトから戻るときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int stageSelectReturnTrigger = Animator.StringToHash("StageSelectReturn");
+
+        private static readonly int goStageTrigger = Animator.StringToHash("GoStage");
 
         /// <summary>
         /// 初期設定の関数
@@ -97,6 +123,10 @@ namespace ForestDraw
             deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
             settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンに設定画面から戻る関数を登録
+            stageSelectReturnButton.onClick.AddListener(StageSelectReturn);// ステージセレクトから戻るボタンにステージセレクトから戻る関数を登録
+            stageButton1.onClick.AddListener(() => InStageScene(0));// 第一ステージへのボタンに第一ステージへの関数を登録
+            stageButton2.onClick.AddListener(() => InStageScene(1));// 第二ステージへのボタンに第二ステージへの関数を登録
+            stageButton3.onClick.AddListener(() => InStageScene(2));// 第三ステージへのボタンに第三ステージへの関数を登録
         }
 
         /// <summary>
@@ -113,6 +143,7 @@ namespace ForestDraw
         public void InStageScene(int number)
         {
             stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
+            animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
             UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
         }
 
@@ -167,6 +198,14 @@ namespace ForestDraw
         public void DeckReturn()
         {
             animator.SetTrigger(deckReturnTrigger);// デッキ画面から戻るトリガーをセット
+        }
+
+        /// <summary>
+        /// ステージセレクト画面から戻る関数
+        /// </summary>
+        public void StageSelectReturn()
+        {
+            animator.SetTrigger(stageSelectReturnTrigger);// ステージセレクト画面から戻るトリガーをセット
         }
     }
 }
