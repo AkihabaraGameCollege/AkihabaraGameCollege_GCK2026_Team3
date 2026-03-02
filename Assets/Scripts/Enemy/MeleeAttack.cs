@@ -1,14 +1,29 @@
 using UnityEngine;
 
-public class MeleeAttack : EnemyAttackBase
+/// <summary>
+/// 近接攻撃クラス
+/// EnemyAttackBaseを継承し、
+/// 一定間隔で直接ダメージを与える
+/// </summary>
+namespace ForestDraw.Enemy.Attack
 {
-    protected override void PerformAttack()
+    public class MeleeAttack : EnemyAttackBase
     {
-        if (target == null) return;
+        // =========================
+        // 攻撃実行処理
+        // =========================
+        /// <summary>
+        /// 攻撃処理（EnemyAttackBaseから呼ばれる）
+        /// 直接ターゲットにダメージを与える
+        /// </summary>
+        protected override void PerformAttack()
+        {
+            // ターゲットが存在しない場合は何もしない
+            if (target == null) return;
 
-        Debug.Log("Melee Attack!");
-
-        //target.GetComponent<PlayerHealth>()
-        //      ?.TakeDamage(attackDamage);
+            // ターゲットのHPコンポーネントを取得してダメージを与える
+            target.GetComponent<KariPlayerHealth>()
+                  ?.TakeDamage(attackDamage);
+        }
     }
 }

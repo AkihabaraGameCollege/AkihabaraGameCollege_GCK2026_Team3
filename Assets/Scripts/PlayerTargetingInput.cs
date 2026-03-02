@@ -1,58 +1,115 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
-// プレイヤーのターゲット管理コンポーネント。
-// - 他スクリプトから SetTarget / ClearTarget / SelectNearestEnemy を呼べるようにする。
-// - シンプルに GameObject.FindGameObjectsWithTag("Enemy") を使って最寄り検索を行う。
-public class PlayerTargeting : MonoBehaviour
+// プレイヤー入力でターゲット操作を行う補助スクリプト。
+// - クリックアクション (Button) : マウス直下の Enemy をターゲット
+// - カーソル位置アクション (Vector2) : クリック時のスクリーン座標（未設定なら Mouse.current を使用）
+// - cycleAction (Button) : 最寄りの Enemy をターゲット（見つからなければ解除）
+// - cancelAction (Button) : ターゲット解除
+public class PlayerTargetingInput : MonoBehaviour
 {
-    [SerializeField, Tooltip("現在のターゲット")]
-    Transform currentTarget;
+    Camera mainCam;
 
-    // 現在のターゲットを外から参照できる（読み取り専用）
-    public Transform CurrentTarget => currentTarget;
+    [SerializeField, Tooltip("Tabで検索する最大距離")] float searchRadius = 30f;
+    [SerializeField, Tooltip("クリック判定の最大距離")] float clickRayDistance = 100f;
 
-    // ターゲットを設定する
-    public void SetTarget(Transform target)
+    // Input System 用アクション参照（Inspectorで Input Actions のアクションを割り当てる）
+    [SerializeField, Tooltip("クリックボタンの InputAction (Button)")]
+    InputActionReference clickAction;
+    [SerializeField, Tooltip("カーソル位置の InputAction (Vector2)。未割当時は Mouse.current.position を使用")]
+    InputActionReference aimPositionAction;
+    [SerializeField, Tooltip("ターゲット切替の InputAction (Button)")]
+    InputActionReference cycleAction;
+    [SerializeField, Tooltip("キャンセル（ターゲット解除）の InputAction (Button)")]
+    InputActionReference cancelAction;
+
+    void Start()
     {
-        currentTarget = target;
+        mainCam = Camera.main;
     }
 
-    // ターゲットを解除する
-    public void ClearTarget()
+    void OnEnable()
     {
-        currentTarget = null;
-    }
-
-    // 指定半径内で最も近い Enemy を選択してターゲットに設定する
-    // 見つかれば true、見つからなければ false を返す
-    public bool SelectNearestEnemy(float radius)
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies == null || enemies.Length == 0) return false;
-
-        Transform nearest = null;
-        float bestDistSq = radius * radius;
-        Vector3 myPos = transform.position;
-
-        foreach (var go in enemies)
+        if (clickAction != null && clickAction.action != null)
         {
-            if (go == null) continue;
-            float distSq = (go.transform.position - myPos).sqrMagnitude;
-            if (distSq <= bestDistSq)
+            clickAction.action.performed += OnClick;
+            if (!clickAction.action.enabled) clickAction.action.Enable();
+        }
+        if (aimPositionAction != null && aimPositionAction.action != null)
+        {
+            if (!aimPositionAction.action.enabled) aimPositionAction.action.Enable();
+        }
+        if (cycleAction != null && cycleAction.action != null)
+        {
+            cycleAction.action.performed += OnCycle;
+            if (!cycleAction.action.enabled) cycleAction.action.Enable();
+        }
+        if (cancelAction != null && cancelAction.action != null)
+        {
+            cancelAction.action.performed += OnCancel;
+            if (!cancelAction.action.enabled) cancelAction.action.Enable();
+        }
+    }
+
+    void OnDisable()
+    {
+        if (clickAction != null && clickAction.action != null)
+        {
+            clickAction.action.performed -= OnClick;
+            if (clickAction.action.enabled) clickAction.action.Disable();
+        }
+        if (aimPositionAction != null && aimPositionAction.action != null)
+        {
+            if (aimPositionAction.action.enabled) aimPositionAction.action.Disable();
+        }
+        if (cycleAction != null && cycleAction.action != null)
+        {
+            cycleAction.action.performed -= OnCycle;
+            if (cycleAction.action.enabled) cycleAction.action.Disable();
+        }
+        if (cancelAction != null && cancelAction.action != null)
+        {
+            cancelAction.action.performed -= OnCancel;
+            if (cancelAction.action.enabled) cancelAction.action.Disable();
+        }
+    }
+
+    // クリック処理（Input System のコールバック）
+    void OnClick(InputAction.CallbackContext ctx)
+    {
+
+        Vector2 screenPos;
+        if (aimPositionAction != null && aimPositionAction.action != null)
+        {
+            screenPos = aimPositionAction.action.ReadValue<Vector2>();
+        }
+        else if (Mouse.current != null)
+        {
+            screenPos = Mouse.current.position.ReadValue();
+        }
+        else
+        {
+            return;
+        }
+
+        Ray ray = mainCam.ScreenPointToRay(screenPos);
+        if (Physics.Raycast(ray, out var hit, clickRayDistance))
+        {
+            var hitTransform = hit.collider.transform;
+            if (hitTransform == null) return;
+            if (hitTransform.CompareTag("Enemy") || hitTransform.GetComponent<StatusManager>() != null)
             {
-                if (nearest == null || distSq < (nearest.position - myPos).sqrMagnitude)
-                {
-                    nearest = go.transform;
-                }
             }
         }
+    }
 
-        if (nearest != null)
-        {
-            currentTarget = nearest;
-            return true;
-        }
+    // ターゲット切替（最寄り選択）
+    void OnCycle(InputAction.CallbackContext ctx)
+    {
+    }
 
-        return false;
+    // キャンセル（ターゲット解除）
+    void OnCancel(InputAction.CallbackContext ctx)
+    {
     }
 }

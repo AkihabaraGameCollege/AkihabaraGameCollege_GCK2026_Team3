@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CardDefenseGame
+namespace ForestDraw
 {
     /// <summary>
     /// クリアシーンの管理クラス

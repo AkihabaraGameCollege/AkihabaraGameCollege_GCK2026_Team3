@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CardDefenseGame
+namespace ForestDraw
 {
     /// <summary>
     /// 音量を更新するクラス
