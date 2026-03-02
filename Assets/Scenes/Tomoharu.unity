@@ -246,6 +246,91 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1001 &715621823
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2235562672008828149, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929110016685077893, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: WindStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929110016685077893, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: GrassWindStrength
+      value: 2.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929110016685077893, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: GrassWindRotationMapInfluence
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722715177083764979, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_Name
+      value: TriForge Wind Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1005.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 613.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 380.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365466540731803971, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b69f8301e72b3234bb08e8411fd73c53, type: 3}
 --- !u!1001 &757855990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,3 +584,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1481872092}
+  - {fileID: 715621823}
