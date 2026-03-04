@@ -23,7 +23,7 @@ namespace ForestDraw.Enemy.Spawner
         // ===== 参照設定 =====
         [Header("参照設定")]
         [SerializeField] private GameObject enemyPrefab;      // 敵Prefab
-        [SerializeField] private Transform[] waypoints;       // 移動ルート
+        [SerializeField] private Transform waypointRoot;      // 移動ルート
         [SerializeField] private GameObject player;           // 攻撃対象
         [SerializeField] private EnemyData enemyData;         // 敵のステータスデータ
 
@@ -82,6 +82,13 @@ namespace ForestDraw.Enemy.Spawner
             if (move == null) return;
 
             move.Initialize(enemyData);
+
+            Transform[] waypoints = new Transform[waypointRoot.childCount];
+            for (int i = 0; i < waypointRoot.childCount; i++)
+            {
+                waypoints[i] = waypointRoot.GetChild(i);
+            }
+
             move.SetPath(waypoints);
         }
 
