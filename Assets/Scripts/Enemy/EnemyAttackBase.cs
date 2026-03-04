@@ -14,16 +14,18 @@ namespace ForestDraw.Enemy.Attack
         // ▼ 設定値
         // =========================
 
-        protected float attackInterval = 1.5f; // 攻撃間隔（秒）
-        protected int attackDamage = 10;       // 攻撃ダメージ量
+        protected float attackInterval;   // 攻撃間隔（秒）
+        protected int attackDamage;       // 攻撃ダメージ量
 
         // =========================
         // ▼ 内部状態管理用
         // =========================
 
-        protected float attackTimer;   // 次の攻撃までの経過時間
+        protected float attackTimer = 0;  // 次の攻撃までの経過時間
         protected bool canAttack = false; // 攻撃可能状態かどうか
-        protected GameObject target;   // 攻撃対象
+        protected GameObject target;      // 攻撃対象
+        private EnemyMove move;
+        private EnemyHealth health;
 
         // =========================
         // 外部から攻撃対象を設定
@@ -33,7 +35,7 @@ namespace ForestDraw.Enemy.Attack
             target = t;
         }
         // =========================
-        // 外部から移動パラメータを設定
+        // 外部からパラメータを設定
         // =========================
         public void Initialize(EnemyData data)
         {
@@ -44,12 +46,20 @@ namespace ForestDraw.Enemy.Attack
         // =========================
         // 初期処理
         // =========================
+        protected virtual void Awake()
+        {
+            move = GetComponent<EnemyMove>();
+            health = GetComponent<EnemyHealth>();
+        }
         protected virtual void Start()
         {
             // EnemyMoveのゴール到達イベントを購読
             // ゴール到達時に攻撃を開始する
-            EnemyMove move = GetComponent<EnemyMove>();
-            move.OnReachGoal += StartAttack;
+            if (move != null)
+                move.OnReachGoal += StartAttack;
+
+            if (health != null)
+                health.OnDeath += StopAttack;
         }
 
         // =========================
@@ -58,7 +68,7 @@ namespace ForestDraw.Enemy.Attack
         protected virtual void Update()
         {
             // 攻撃可能状態でなければ何もしない
-            if (!canAttack) return;
+            if (!canAttack || target == null) return;
 
             // 経過時間を加算
             attackTimer += Time.deltaTime;
@@ -76,8 +86,29 @@ namespace ForestDraw.Enemy.Attack
         // =========================
         protected void StartAttack()
         {
-            // 攻撃可能状態にする
+            if (target == null) return;
             canAttack = true;
+        }
+
+        // =========================
+        // 攻撃停止処理
+        // =========================
+        protected void StopAttack()
+        {
+            canAttack = false;
+            attackTimer = 0f;
+        }
+
+        // =========================
+        // オブジェクト削除時処理
+        // =========================
+        protected virtual void OnDestroy()
+        {
+            if (move != null)
+                move.OnReachGoal -= StartAttack;
+
+            if (health != null)
+                health.OnDeath -= StopAttack;
         }
 
         // =========================

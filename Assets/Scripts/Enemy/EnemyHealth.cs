@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using ForestDraw.Enemy.Data;
+using System;
 
 /// <summary>
 /// 敵のHP管理クラス。
@@ -29,6 +30,11 @@ namespace ForestDraw.Enemy.Components
         private bool isTakingDamage = true; // ダメージを受けられる状態かどうか
 
         // =========================
+        // ▼ イベント
+        // =========================
+        public event Action OnDeath;  // ゴール到達時に発火
+
+        // =========================
         // 外部から移動パラメータを設定
         // =========================
         public void Initialize(EnemyData data)
@@ -54,7 +60,7 @@ namespace ForestDraw.Enemy.Components
                 // HPが0以下になったら死亡処理
                 health = 0;
                 UpdateHPBar();
-                Destroy(gameObject); // 敵を削除
+                Die();
             }
             else
             {
@@ -65,6 +71,12 @@ namespace ForestDraw.Enemy.Components
                 isTakingDamage = false;
                 StartCoroutine(DamageInterval());
             }
+        }
+
+        private void Die()
+        {
+            OnDeath?.Invoke();
+            Destroy(gameObject);
         }
 
         // =========================
