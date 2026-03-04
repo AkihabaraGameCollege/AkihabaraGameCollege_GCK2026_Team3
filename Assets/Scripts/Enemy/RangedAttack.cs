@@ -1,39 +1,30 @@
 using UnityEngine;
 
-/// <summary>
-/// 遠距離攻撃クラス
-/// EnemyAttackBaseを継承し、
-/// 一定間隔で弾を発射する
-/// </summary>
 namespace ForestDraw.Enemy.Attack
 {
+    /// <summary>
+    /// 遠距離攻撃を行うクラス。
+    /// 一定間隔で弾を生成し、ターゲットへ発射する。
+    /// </summary>
     public class RangedAttack : EnemyAttackBase
     {
-        // =========================
-        // ▼ 弾設定
-        // =========================
-        [SerializeField] private GameObject bulletPrefab; // 発射する弾Prefab
-        [SerializeField] private Transform firePoint;     // 発射位置
-        [SerializeField] private float speed = 10f;       // 弾の移動速度
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private float speed = 10f;
 
-        // =========================
-        // 攻撃実行処理
-        // =========================
         /// <summary>
-        /// 攻撃処理（EnemyAttackBaseから呼ばれる）
+        /// 攻撃処理を実行する
         /// </summary>
         protected override void PerformAttack()
         {
             if (target == null || bulletPrefab == null || firePoint == null) return;
 
-            // 弾を生成
             GameObject bullet = Instantiate(
                 bulletPrefab,
                 firePoint.position,
                 firePoint.rotation
             );
 
-            // 弾にターゲット・ダメージ・速度を設定
             bullet.GetComponent<EnemyBullet>()
                   ?.Initialize(target.transform, attackDamage, speed);
         }

@@ -7,7 +7,7 @@ namespace ForestDraw.Enemy.Data
     {
         [Header("ステータス")]
         public int maxHealth;
-        public int takeDamageInterval;
+        public float takeDamageInterval;
 
         [Header("移動設定")]
         public float moveSpeed;

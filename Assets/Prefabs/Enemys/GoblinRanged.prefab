@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 1717454675415249708}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -132,10 +132,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.23
   m_Height: 0.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!114 &250277710141293007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,8 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b844da4c1074cb41a80106f794a0c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  health: 1000
-  damageInterval: 1
   hpFillImage: {fileID: 2084179322641239573}
 --- !u!114 &7949831502371010199
 MonoBehaviour:
@@ -163,8 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ce97a1777b85248a6394d259395349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedAttack
-  attackInterval: 1.5
-  attackDamage: 10
   bulletPrefab: {fileID: 107395912125315757, guid: 77adf8db1a2a8f44bb22aed962ee3700, type: 3}
   firePoint: {fileID: 2603091871739029172}
   speed: 10
@@ -180,8 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8453a8a01becc4943a953c3d20158ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewEnemyMove
-  moveSpeed: 3
-  waypointRadius: 3
 --- !u!1 &2094746500540093174
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188949776075457174
@@ -418,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b02c816f83f6ac54e916c194360e0871, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b02c816f83f6ac54e916c194360e0871, type: 3}
       propertyPath: m_LocalPosition.z

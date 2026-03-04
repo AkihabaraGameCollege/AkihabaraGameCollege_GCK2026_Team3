@@ -1,27 +1,23 @@
 using UnityEngine;
 using ForestDraw.Combat;
-/// <summary>
-/// 弾クラス
-/// ・ターゲットに向かって直進
-/// ・衝突時にダメージを与える
-/// ・ターゲットが消えたら自動破棄
-/// </summary>
+
 namespace ForestDraw.Enemy.Attack
 {
+    /// <summary>
+    /// 敵の追尾弾クラス。
+    /// ・ターゲットに向かって移動する
+    /// ・衝突時にダメージを与える
+    /// ・ターゲット消滅時は自動で破棄する
+    /// </summary>
     public class EnemyBullet : MonoBehaviour
     {
-        // =========================
-        // ▼ 設定値
-        // =========================
-        private float speed = 10f;     // 弾の移動速度
-        private int damage;            // 与えるダメージ量
-        private Transform target;     // 追尾対象
+        // ===== 設定値 =====
+        private float speed = 10f;   // 弾の移動速度
+        private int damage;          // 与えるダメージ
+        private Transform target;    // 追尾対象
 
-        // =========================
-        // 外部から初期化
-        // =========================
         /// <summary>
-        /// 弾のステータスを設定する
+        /// 弾の初期設定を行う
         /// </summary>
         /// <param name="t">ターゲット</param>
         /// <param name="attackdamage">ダメージ量</param>
@@ -33,37 +29,27 @@ namespace ForestDraw.Enemy.Attack
             speed = s;
         }
 
-        // =========================
-        // 毎フレーム処理
-        // =========================
         private void Update()
         {
-            // ターゲットが消えていたら弾も削除
+            // ターゲットが存在しない場合は自身を削除
             if (target == null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            // ターゲット方向を計算
-            Vector3 dir = (target.transform.position - transform.position).normalized;
-
-            // ターゲットに向かって移動
+            // ターゲット方向へ移動
+            Vector3 dir = (target.position - transform.position).normalized;
             transform.position += dir * speed * Time.deltaTime;
         }
 
-        // =========================
-        // 衝突判定
-        // =========================
         private void OnTriggerEnter(Collider other)
         {
-            // Playerタグを持つオブジェクトにヒットした場合
+            // Playerタグを持つオブジェクトに命中した場合
             if (other.CompareTag("Player"))
             {
-                // プレイヤーHPにダメージを与える
+                // ダメージを与えて弾を削除
                 other.GetComponent<IDamageable>()?.TakeDamage(damage);
-
-                // 弾を削除
                 Destroy(gameObject);
             }
         }
