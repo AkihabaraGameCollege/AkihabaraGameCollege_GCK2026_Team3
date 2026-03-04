@@ -1,5 +1,6 @@
+using ForestDraw.Combat;
 using UnityEngine;
-
+ 
 /// <summary>
 /// 近接攻撃クラス
 /// EnemyAttackBaseを継承し、
@@ -22,7 +23,7 @@ namespace ForestDraw.Enemy.Attack
             if (target == null) return;
 
             // ターゲットのHPコンポーネントを取得してダメージを与える
-            target.GetComponent<KariPlayerHealth>()
+            target.GetComponent<IDamageable>()
                   ?.TakeDamage(attackDamage);
         }
     }

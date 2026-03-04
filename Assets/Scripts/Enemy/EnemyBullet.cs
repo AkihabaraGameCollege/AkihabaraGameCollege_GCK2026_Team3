@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using ForestDraw.Combat;
 /// <summary>
 /// 弾クラス
 /// ・ターゲットに向かって直進
@@ -15,7 +15,7 @@ namespace ForestDraw.Enemy.Attack
         // =========================
         private float speed = 10f;     // 弾の移動速度
         private int damage;            // 与えるダメージ量
-        private GameObject target;     // 追尾対象
+        private Transform target;     // 追尾対象
 
         // =========================
         // 外部から初期化
@@ -26,7 +26,7 @@ namespace ForestDraw.Enemy.Attack
         /// <param name="t">ターゲット</param>
         /// <param name="attackdamage">ダメージ量</param>
         /// <param name="s">移動速度</param>
-        public void Initialize(GameObject t, int attackdamage, float s)
+        public void Initialize(Transform t, int attackdamage, float s)
         {
             target = t;
             damage = attackdamage;
@@ -61,7 +61,7 @@ namespace ForestDraw.Enemy.Attack
             if (other.CompareTag("Player"))
             {
                 // プレイヤーHPにダメージを与える
-                other.GetComponent<KariPlayerHealth>()?.TakeDamage(damage);
+                other.GetComponent<IDamageable>()?.TakeDamage(damage);
 
                 // 弾を削除
                 Destroy(gameObject);

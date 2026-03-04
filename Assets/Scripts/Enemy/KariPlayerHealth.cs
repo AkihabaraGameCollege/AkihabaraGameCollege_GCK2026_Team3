@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using ForestDraw.Combat;
 
-public class KariPlayerHealth : MonoBehaviour
+public class KariPlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private int health = 1000;

@@ -24,8 +24,7 @@ namespace ForestDraw.Enemy.Attack
         /// </summary>
         protected override void PerformAttack()
         {
-            // ターゲットが存在しなければ攻撃しない
-            if (target == null) return;
+            if (target == null || bulletPrefab == null || firePoint == null) return;
 
             // 弾を生成
             GameObject bullet = Instantiate(
@@ -36,7 +35,7 @@ namespace ForestDraw.Enemy.Attack
 
             // 弾にターゲット・ダメージ・速度を設定
             bullet.GetComponent<EnemyBullet>()
-                  ?.Initialize(target, attackDamage, speed);
+                  ?.Initialize(target.transform, attackDamage, speed);
         }
     }
 }

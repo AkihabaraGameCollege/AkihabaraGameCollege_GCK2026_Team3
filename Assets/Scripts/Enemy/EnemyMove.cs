@@ -27,7 +27,7 @@ namespace ForestDraw.Enemy.Components
         // =========================
         // ▼ イベント
         // =========================
-        public event Action OnReachGoal;  // ゴール到達時に発火
+        public event Action ReachedGoal;  // ゴール到達時に発火
 
         // =========================
         // ▼ 内部状態
@@ -35,6 +35,7 @@ namespace ForestDraw.Enemy.Components
         private Vector3 currentTargetPos; // 現在の目標地点
         private bool hasTarget = false;   // 目標地点生成済みフラグ
         private Transform target;         // ゴール到達時に向く対象（例：MainCamera）
+        private bool hasReachedGoal = false; //移動終了フラグ
 
         // =========================
         // 外部から移動パラメータを設定
@@ -88,7 +89,9 @@ namespace ForestDraw.Enemy.Components
         // =========================
         private bool CanMove()
         {
-            return waypoints != null && currentIndex < waypoints.Length;
+            return !hasReachedGoal
+                   && waypoints != null
+                   && currentIndex < waypoints.Length;
         }
 
         // =========================
@@ -138,6 +141,11 @@ namespace ForestDraw.Enemy.Components
         // =========================
         private void GenerateRandomTarget()
         {
+            if (waypoints[currentIndex] == null)
+            {
+                Debug.LogError("Waypoint is null");
+                return;
+            }
             Transform waypoint = waypoints[currentIndex];
 
             Vector2 offset = GenerateRandomOffset();
@@ -181,8 +189,9 @@ namespace ForestDraw.Enemy.Components
         // =========================
         private void HandleGoalReached()
         {
+            hasReachedGoal = true;
             LookAtTarget();
-            OnReachGoal?.Invoke();
+            ReachedGoal?.Invoke();
         }
 
         // =========================

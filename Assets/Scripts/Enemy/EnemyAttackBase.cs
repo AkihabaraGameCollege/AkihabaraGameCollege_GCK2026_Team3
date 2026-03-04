@@ -56,10 +56,10 @@ namespace ForestDraw.Enemy.Attack
             // EnemyMoveのゴール到達イベントを購読
             // ゴール到達時に攻撃を開始する
             if (move != null)
-                move.OnReachGoal += StartAttack;
+                move.ReachedGoal += EnableAttack;
 
             if (health != null)
-                health.OnDeath += StopAttack;
+                health.Died += StopAttack;
         }
 
         // =========================
@@ -84,7 +84,7 @@ namespace ForestDraw.Enemy.Attack
         // =========================
         // 攻撃開始処理
         // =========================
-        protected void StartAttack()
+        protected void EnableAttack()
         {
             if (target == null) return;
             canAttack = true;
@@ -105,10 +105,10 @@ namespace ForestDraw.Enemy.Attack
         protected virtual void OnDestroy()
         {
             if (move != null)
-                move.OnReachGoal -= StartAttack;
+                move.ReachedGoal -= EnableAttack;
 
             if (health != null)
-                health.OnDeath -= StopAttack;
+                health.Died -= StopAttack;
         }
 
         // =========================
