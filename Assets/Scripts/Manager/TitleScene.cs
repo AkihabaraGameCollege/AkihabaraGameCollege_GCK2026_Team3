@@ -31,6 +31,11 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private float fadeTime = 1.0f;
+        /// <summary>
+        /// ステージへ遷移するまでの待機時間
+        /// </summary>
+        [SerializeField]
+        private float GoStageTime = 2.0f;
 
         /// <summary>
         /// ステージシーンへ遷移するときのシーン名のリスト変数
@@ -43,6 +48,11 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private int stageSceneIndex = 0;
+        /// <summary>
+        /// パネルスプライトのインデックスの変数
+        /// </summary>
+        [SerializeField]
+        private int panel_SpriteIndex = 0;
 
         /// <summary>
         /// デッキ表示のボタンの変数
@@ -81,6 +91,19 @@ namespace ForestDraw
         private Button stageButton3 = null;
 
         /// <summary>
+        /// パネルのイメージの変数
+        /// </summary>
+        [SerializeField]
+        private Image Panel_Image = null;
+
+        /// <summary>
+        /// パネルのスプライトのリスト変数
+        /// </summary>
+        [SerializeField]
+        private Sprite[] Panel_Sprite = null;
+
+
+        /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
         /// </summary>
         private static readonly int startTrigger = Animator.StringToHash("Start");
@@ -108,7 +131,9 @@ namespace ForestDraw
         /// ステージセレクトから戻るときに呼ばれるIDの変数
         /// </summary>
         private static readonly int stageSelectReturnTrigger = Animator.StringToHash("StageSelectReturn");
-
+        /// <summary>
+        /// ステージへ遷移するときに呼ばれるIDの変数
+        /// </summary>
         private static readonly int goStageTrigger = Animator.StringToHash("GoStage");
 
         /// <summary>
@@ -116,6 +141,7 @@ namespace ForestDraw
         /// </summary>
         void Start()
         {
+            // タイトルBGMを再生
             audioSetting.PlayBGM(0);
             audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
 
@@ -124,9 +150,9 @@ namespace ForestDraw
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
             settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンに設定画面から戻る関数を登録
             stageSelectReturnButton.onClick.AddListener(StageSelectReturn);// ステージセレクトから戻るボタンにステージセレクトから戻る関数を登録
-            stageButton1.onClick.AddListener(() => InStageScene(0));// 第一ステージへのボタンに第一ステージへの関数を登録
-            stageButton2.onClick.AddListener(() => InStageScene(1));// 第二ステージへのボタンに第二ステージへの関数を登録
-            stageButton3.onClick.AddListener(() => InStageScene(2));// 第三ステージへのボタンに第三ステージへの関数を登録
+            stageButton1.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(0)));// 第一ステージへのボタンに第一ステージへの関数を登録
+            stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
+            stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
         }
 
         /// <summary>
@@ -135,16 +161,6 @@ namespace ForestDraw
         public void DisplayStageSelect()
         {
             animator.SetTrigger(startTrigger);// ステージセレクトを表示させるトリガーをセット
-        }
-
-        /// <summary>
-        /// ステージシーンへ遷移する関数
-        /// </summary>
-        public void InStageScene(int number)
-        {
-            stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
-            animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
-            UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
         }
 
         /// <summary>
@@ -206,6 +222,24 @@ namespace ForestDraw
         public void StageSelectReturn()
         {
             animator.SetTrigger(stageSelectReturnTrigger);// ステージセレクト画面から戻るトリガーをセット
+        }
+
+        /// <summary>
+        /// ステージシーンへ遷移するコルーチン
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        private IEnumerator GoStageCoroutine(int number)
+        {
+            panel_SpriteIndex = number;// パネルスプライトのインデックスにステージの番号を代入
+
+            // 左右のパネルのスプライトをステージに合わせて変更
+            Panel_Image.sprite = Panel_Sprite[panel_SpriteIndex];// 左パネルのスプライトを変更
+
+            stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
+            animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
+            yield return new WaitForSeconds(GoStageTime);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
         }
     }
 }
