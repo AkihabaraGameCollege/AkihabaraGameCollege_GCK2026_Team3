@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,6 +46,21 @@ namespace ForestDraw
             }
 
             clickButton.onClick.AddListener(OnClickCard);// カードがクリックされたときの処理を登録
+
+            deckManager.OnDeckChanged += UpdateVisibility;// デッキが変更されたときにカードの表示を更新する関数を登録
+
+            UpdateVisibility();// 最初の表示更新
+        }
+
+        /// <summary>
+        /// カードの表示を更新する関数
+        /// </summary>
+        private void OnDestroy()
+        {
+            if (deckManager != null)
+            {
+                deckManager.OnDeckChanged -= UpdateVisibility;// 登録を解除する（メモリリーク防止）
+            }
         }
 
         /// <summary>
@@ -55,6 +69,22 @@ namespace ForestDraw
         private void OnClickCard()
         {
             deckManager.AddToDeck(myCardData);// デッキマネージャーの関数を呼び出して、カードをデッキに追加
+        }
+
+        /// <summary>
+        /// カードの表示を更新する関数
+        /// </summary>
+        private void UpdateVisibility()
+        {
+            // もしカードのデータやデッキマネージャーが存在しない場合
+            if (myCardData == null || deckManager == null)
+            {
+                return;
+            }
+
+            bool isAlreadyInDeck = deckManager.currentDeck.Contains(myCardData);// カードがすでにデッキに含まれているかどうかをチェック
+
+            gameObject.SetActive(!isAlreadyInDeck);// もしカードがデッキに含まれている場合は非表示にする
         }
     }
 }
