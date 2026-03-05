@@ -14255,7 +14255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b42e2ec6b00e54ea75ebcca51da8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckManager
-  currentDeck:
+  currentDeck: []
+  allCardMasterList:
   - {fileID: 11400000, guid: 61f9c73fe8ac10e45950ee0b95b3dd90, type: 2}
   - {fileID: 11400000, guid: 7ff77bfd3e9fee340a28db192c23dee1, type: 2}
   - {fileID: 11400000, guid: d0db0f20e570029439f6ba1c96a7c4f9, type: 2}

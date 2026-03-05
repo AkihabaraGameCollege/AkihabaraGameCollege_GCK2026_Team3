@@ -11,6 +11,11 @@ namespace ForestDraw
         /// <summary>
         /// カードのIDを管理する変数
         /// </summary>
+        public string cardId;
+
+        /// <summary>
+        /// カードの名前を管理する変数
+        /// </summary>
         public string cardName;
 
         /// <summary>

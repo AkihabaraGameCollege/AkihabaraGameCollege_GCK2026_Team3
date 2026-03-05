@@ -54,8 +54,6 @@ namespace ForestDraw
         /// </summary>
         private void UpdateDeckUI()
         {
-            Debug.Log("UIを更新します！現在の枚数: " + deckManager.currentDeck.Count);// デバッグ用のログに現在のデッキ枚数を表示する
-
             // 9つのスロットの切り替えをループ
             for (int i = 0; i < deckSlots.Count; i++)
             {

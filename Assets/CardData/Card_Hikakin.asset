@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac311f86906c7c44b12b4f1d8048f17, type: 3}
   m_Name: Card_Hikakin
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
+  cardId: card_02
   cardName: "\u958B\u793A\u8ACB\u6C42"
   cardImage: {fileID: -1314177887, guid: 42b24f87e1259094fb60b92c67cdbb1f, type: 3}

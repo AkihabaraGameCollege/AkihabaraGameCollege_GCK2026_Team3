@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ namespace ForestDraw
         /// <summary>
         /// カードのデータを管理するための変数
         /// </summary>
-        private CardData myCardData;
+        public CardData myCardData;
         /// <summary>
         /// デッキの管理クラスを参照するための変数
         /// </summary>
@@ -53,7 +54,6 @@ namespace ForestDraw
         /// </summary>
         private void OnClickCard()
         {
-            Debug.Log(myCardData.cardName + " が選択されました！");
             deckManager.AddToDeck(myCardData);// デッキマネージャーの関数を呼び出して、カードをデッキに追加
         }
     }

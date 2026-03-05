@@ -54,5 +54,34 @@ namespace ForestDraw
                 cardUI.Setup(cardData, deckManager);// カードUIの初期設定を行う
             }
         }
+
+        /// <summary>
+        /// カードデータを元に、カードのUIを生成する関数（外部から呼び出すための関数）
+        /// </summary>
+        /// <param name="cardData"></param>
+        public void AddList(CardData cardData)
+        {
+            GameObject obj = Instantiate(cardPrefab, contentTransform);// カードのPrefabをContentの子オブジェクトとして生成
+
+            // 生成するためのカードの設定
+            CardUI cardUI = obj.GetComponent<CardUI>();// 生成したカードのUIスクリプトを取得
+            cardUI.Setup(cardData, deckManager);// カードUIの初期設定を行う
+        }
+
+        // 特定のカードUIのみを削除する関数
+        public void RemoveList(CardData cardData)
+        {
+            // Contentの子オブジェクトをループ
+            foreach (Transform child in contentTransform)
+            {
+                CardUI cardUI = child.GetComponent<CardUI>();// 子オブジェクトのCardUIスクリプトを取得
+                // もしカードデータが一致する場合
+                if (cardUI.myCardData == cardData)
+                {
+                    Destroy(child.gameObject);// 子オブジェクトを削除
+                    break;// ループを抜ける
+                }
+            }
+        }
     }
 }

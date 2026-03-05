@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac311f86906c7c44b12b4f1d8048f17, type: 3}
   m_Name: Card_Rush
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
+  cardId: card_04
   cardName: "\u30EC\u30A4\u30B8\u30F3\u30B0\u30D6\u30EB"
   cardImage: {fileID: 1894793334, guid: 974d23b0d3b9e034bad48a723de639b0, type: 3}
