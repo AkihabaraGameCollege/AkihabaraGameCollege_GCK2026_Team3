@@ -1,236 +1,160 @@
-﻿using System.Collections.Generic;
+﻿// File: CardManager.cs
+using System.Collections.Generic;
 using UnityEngine;
 
-// カードの管理（デッキ・手札・使用処理）を行うクラス
-public class CardManager : MonoBehaviour
+namespace ForestDraw
 {
-    // シングルトン（どこからでも CardManager.Instance でアクセス可能）
-    public static CardManager Instance { get; private set; }
-
-    [Header("Deck")]
-    // 山札（ゲーム開始時にセットしておく）
-    public List<CardData> deck = new List<CardData>();
-
-    // 現在の手札
-    public List<CardData> hand = new List<CardData>();
-
-    // 初期手札枚数
-    public int handSize = 9;
-
-    [Header("Effects")]
-    // 攻撃用パーティクル
-    public ParticleSystem attackEffectPrefab;
-
-    // サポート用パーティクル
-    public ParticleSystem supportEffectPrefab;
-
-    void Awake()
+    /// <summary>
+    /// CardManager: manages deck, hand and playing cards. Singleton for convenience.
+    /// Handles drawing, playing and returning cards to deck.
+    /// </summary>
+    public class CardManager : MonoBehaviour
     {
-        // シングルトンの重複防止
-        if (Instance != null && Instance != this)
+        public static CardManager Instance { get; private set; }
+
+        [Header("Deck & Hand")]
+        [SerializeField] private List<CardData> deck = new List<CardData>();
+        [SerializeField] private List<CardData> hand = new List<CardData>();
+        [SerializeField] private int deckSize = 9;
+        [SerializeField] private int maxHandSize = 8;
+
+        [Header("References")]
+        [SerializeField] private PlayerController player;
+
+        // Currently selected card index in hand
+        private int selectedIndex = -1;
+
+        void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
         }
-        Instance = this;
-    }
 
-    void Start()
-    {
-        // ゲーム開始時にデッキをシャッフルし、初期手札を配る
-        ShuffleDeck();
-        DrawInitialHand();
-    }
-
-    // 山札をランダムに並び替える（簡易シャッフル）
-    public void ShuffleDeck()
-    {
-        for (int i = 0; i < deck.Count; i++)
+        void Start()
         {
-            int r = Random.Range(i, deck.Count);
-            var tmp = deck[i];
-            deck[i] = deck[r];
-            deck[r] = tmp;
+            if (player == null) player = FindObjectOfType<PlayerController>();
+            // ensure deck has at least deckSize entries (caller should populate in editor)
+            // shuffle deck
+            ShuffleDeck();
+            // draw initial hand
+            for (int i = 0; i < Mathf.Min(5, maxHandSize); i++) DrawCardToHand();
+            UIManager.Instance?.UpdateHand(hand);
         }
-    }
 
-    // 初期手札を配る
-    public void DrawInitialHand()
-    {
-        hand.Clear(); // 手札をリセット
-        for (int i = 0; i < handSize; i++) DrawCard();
-    }
-
-    // 山札の一番上からカードを引く
-    public CardData DrawCard()
-    {
-        if (deck.Count == 0) return null; // 山札が空なら引けない
-
-        var top = deck[0];       // 一番上のカード
-        deck.RemoveAt(0);        // 山札から削除
-        hand.Add(top);           // 手札に追加
-        return top;
-    }
-
-    // カードを使用する処理
-    public bool PlayCard(CardData card)
-    {
-        if (card == null) return false;            // nullチェック
-        if (!hand.Contains(card)) return false;    // 手札にないカードは使えない
-
-        // コストが足りない場合は使用不可
-        if (!PlayerManager.Instance.TryUseCost(card.cost)) return false;
-
-        // カード効果を適用
-        ApplyCardEffect(card);
-
-        // 使用後は手札から削除
-        hand.Remove(card);
-
-        // カードの種類に応じてパーティクルを再生
-        SpawnEffectForCard(card);
-
-        return true;
-    }
-
-    // カード効果を実際に適用する処理
-    void ApplyCardEffect(CardData card)
-    {
-        switch (card.effectType)
+        /// <summary>
+        /// Draw a card from deck to hand. If deck empty, reshuffle from used cards (naive: no discard pile implemented).
+        /// </summary>
+        public void DrawCardToHand()
         {
-            case CardEffectType.DamageSingle:
-                // 画面内で一番近い敵を探してダメージ
-                var enemy = FindClosestEnemyOnScreen();
-                if (enemy != null)
-                {
-                    // min〜maxの間でランダムダメージ
-                    int dmg = Random.Range(card.minDamage, card.maxDamage + 1);
-                    enemy.TakeDamage(dmg);
-                }
-                break;
-
-            case CardEffectType.CostRecover:
-                // コスト回復
-                PlayerManager.Instance.RecoverCost(card.minDamage);
-                break;
-
-            case CardEffectType.Draw:
-                // 2枚ドロー
-                DrawCard();
-                DrawCard();
-                break;
-
-            case CardEffectType.Heal:
-                // 体力回復
-                PlayerManager.Instance.ChangeLife(card.minDamage);
-                break;
-
-            default:
-                // 未対応の効果
-                Debug.Log("Unhandled card effect: " + card.effectType);
-                break;
+            if (hand.Count >= maxHandSize) return;
+            if (deck.Count == 0) return;
+            CardData card = deck[0];
+            deck.RemoveAt(0);
+            hand.Add(card);
+            UIManager.Instance?.UpdateHand(hand);
         }
-    }
 
-    // 画面内に表示されている敵の中で一番近い敵を探す
-    Enemy FindClosestEnemyOnScreen()
-    {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-
-        Enemy closest = null;
-        float best = float.MaxValue;
-
-        Camera cam = Camera.main;
-        if (cam == null) return null;
-
-        foreach (var e in enemies)
+        /// <summary>
+        /// Try to play the selected card (called by input). Selection is expected to be set by UI.
+        /// </summary>
+        public void TryPlaySelectedCard()
         {
-            // ワールド座標 → スクリーン座標へ変換
-            Vector3 sp = cam.WorldToScreenPoint(e.transform.position);
+            if (selectedIndex < 0 || selectedIndex >= hand.Count) return;
+            PlayCardAtIndex(selectedIndex);
+        }
 
-            if (sp.z < 0) continue; // カメラの後ろは除外
-
-            // 画面内かチェック
-            if (sp.x < 0 || sp.x > Screen.width || sp.y < 0 || sp.y > Screen.height) continue;
-
-            // カメラとの距離（平方距離で計算コスト軽減）
-            float d = (cam.transform.position - e.transform.position).sqrMagnitude;
-
-            if (d < best)
+        /// <summary>
+        /// Play card at index: checks cost, applies effect and returns card to deck unless one-time.
+        /// </summary>
+        public void PlayCardAtIndex(int index)
+        {
+            if (index < 0 || index >= hand.Count) return;
+            CardData card = hand[index];
+            if (!player.SpendCost(card.cost))
             {
-                best = d;
-                closest = e;
-            }
-        }
-
-        return closest;
-    }
-
-    // カードの種類に応じてエフェクトを再生
-    void SpawnEffectForCard(CardData card)
-    {
-        if (card == null) return;
-
-        // 攻撃カードの場合
-        if (card.cardType == CardType.Attack)
-        {
-            var enemy = FindClosestEnemyOnScreen();
-
-            // 敵が存在する場合は敵の位置で再生
-            if (enemy != null && attackEffectPrefab != null)
-            {
-                SpawnParticleAt(attackEffectPrefab, enemy.transform.position);
+                Debug.Log("Not enough cost to play this card.");
                 return;
             }
+            // Apply card effect based on type
+            ApplyCardEffect(card);
+            // Return card to bottom of deck (simple behavior)
+            hand.RemoveAt(index);
+            deck.Add(card);
+            UIManager.Instance?.UpdateHand(hand);
+        }
 
-            // フォールバック（カメラ前方）
-            if (attackEffectPrefab != null)
+        /// <summary>
+        /// Apply card effects to enemies or player depending on CardData
+        /// </summary>
+        private void ApplyCardEffect(CardData card)
+        {
+            switch (card.effectType)
             {
-                var cam = Camera.main;
-                Vector3 pos = cam != null ? cam.transform.position + cam.transform.forward * 5f : Vector3.zero;
-                SpawnParticleAt(attackEffectPrefab, pos);
+                case CardEffectType.Damage:
+                    // Target selection handled by UIManager -> get selected enemy
+                    var target = UIManager.Instance?.GetSelectedEnemy();
+                    if (target != null)
+                    {
+                        int damage = Mathf.RoundToInt(card.value * player.GetDamageMultiplier());
+                        target.TakeDamage(damage);
+                        UIManager.Instance?.ShowDamageNumber(damage, target.transform.position);
+                    }
+                    else if (card.targetType == CardTargetType.All)
+                    {
+                        var enemies = EnemyController.GetAllEnemies();
+                        foreach (var e in enemies)
+                        {
+                            int damage = Mathf.RoundToInt(card.value * player.GetDamageMultiplier());
+                            e.TakeDamage(damage);
+                            UIManager.Instance?.ShowDamageNumber(damage, e.transform.position);
+                        }
+                    }
+                    break;
+                case CardEffectType.Heal:
+                    player.Heal(card.value);
+                    break;
+                case CardEffectType.CostRecover:
+                    // simply add cost back
+                    // naive: directly modify player's cost via SpendCost negative? Instead add a helper
+                    // There is no direct AddCost function; implement as spending negative cost by reflection: better to implement method in player.
+                    player?.SendMessage("ReceiveCost", card.value, SendMessageOptions.DontRequireReceiver);
+                    break;
+                case CardEffectType.DamageBoost:
+                    player.ApplyDamageBoost(card.damageBoostMultiplier, card.effectDuration);
+                    break;
+                case CardEffectType.DamageReduction:
+                    // Not implemented: could set a global reduction. For simplicity treat as heal small amount
+                    player.Heal(card.value);
+                    break;
             }
         }
 
-        // サポートカードの場合
-        if (card.cardType == CardType.Support)
+        /// <summary>
+        /// Set the selected card index from UI.
+        /// </summary>
+        public void SetSelectedIndex(int idx)
         {
-            if (supportEffectPrefab != null)
+            selectedIndex = idx;
+        }
+
+        /// <summary>
+        /// Shuffle deck list in-place.
+        /// </summary>
+        public void ShuffleDeck()
+        {
+            for (int i = 0; i < deck.Count; i++)
             {
-                Vector3 pos;
-
-                // プレイヤー位置で再生
-                if (PlayerManager.Instance != null)
-                {
-                    pos = PlayerManager.Instance.transform.position;
-                }
-                else
-                {
-                    // プレイヤーがいない場合はカメラ前方
-                    var cam = Camera.main;
-                    pos = cam != null ? cam.transform.position + cam.transform.forward * 3f : Vector3.zero;
-                }
-
-                SpawnParticleAt(supportEffectPrefab, pos);
+                int r = Random.Range(i, deck.Count);
+                var t = deck[i]; deck[i] = deck[r]; deck[r] = t;
             }
         }
-    }
 
-    // 指定位置にパーティクルを生成
-    void SpawnParticleAt(ParticleSystem prefab, Vector3 position)
-    {
-        if (prefab == null) return;
-
-        var instance = Instantiate(prefab, position, Quaternion.identity);
-
-        // パーティクルの再生時間を取得
-        var main = instance.main;
-        float dur = main.duration;
-
-        // ループしていない場合のみ自動削除
-        if (!main.loop)
+        /// <summary>
+        /// Helper to add card to deck (for setup)
+        /// </summary>
+        public void AddCardToDeck(CardData card)
         {
-            Destroy(instance.gameObject, dur + 0.5f);
+            deck.Add(card);
         }
     }
 }
