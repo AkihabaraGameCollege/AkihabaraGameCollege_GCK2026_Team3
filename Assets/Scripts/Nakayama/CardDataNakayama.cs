@@ -6,7 +6,7 @@ namespace ForestDraw
     /// カードのデータを管理するクラス
     /// </summary>
     [CreateAssetMenu(fileName = "NewCardData", menuName = "CardData")]
-    public class CardData : ScriptableObject
+    public class CardDataNakayama : ScriptableObject
     {
         /// <summary>
         /// カードのIDを管理する変数

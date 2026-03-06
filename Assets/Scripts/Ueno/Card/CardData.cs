@@ -1,32 +1,43 @@
-﻿using UnityEngine;
+﻿// File: CardData.cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-// ScriptableObjectとしてカードデータを作成できるようにする属性
-// Unityの「Create > Ueno > CardData」からアセット作成可能
-[CreateAssetMenu(menuName = "Ueno/CardData", fileName = "CardData")]
-public class CardData : ScriptableObject
+namespace ForestDraw
 {
-    // カードの名前（ゲーム内表示用）
-    public string cardName;
+    /// <summary>
+    /// Card data ScriptableObject describing a card.
+    /// </summary>
+    [CreateAssetMenu(fileName = "NewCard", menuName = "Game/CardData")]
+    public class CardData : ScriptableObject
+    {
+        public enum EffectType { Attack, Support }
+        public enum TargetType { Single, Area, All }
+        public enum SupportType { Heal, Cost, CostRegen, Buff, DamageReduction, Duplicate }
 
-    // カードの種類（攻撃・防御など）
-    public CardType cardType;
+        [Header("Basic")]
+        public string cardName = "Card";
+        public Sprite artwork;
+        public int cost = 1;
+        public bool oneTimeUse = false; // if true, consumed permanently
 
-    // カードの効果タイプ（ダメージ系・回復系など）
-    public CardEffectType effectType;
+        [Header("Attack")]
+        public EffectType effectType = EffectType.Attack;
+        public TargetType targetType = TargetType.Single;
+        public int damage = 10;
+        public float areaRadius = 3f;
 
-    // カードの説明文（Inspector上で複数行入力できる）
-    [TextArea]
-    public string description;
+        [Header("Support")]
+        public SupportType supportSubtype = SupportType.Heal;
+        public int supportValue = 10; // heal amount or cost amount
+        // support specifics
+        [Tooltip("Duration in seconds for temporary buffs (0 = instant)")]
+        public float supportDuration = 0f;
+        [Tooltip("Multiplier applied to next attack when using Buff support (e.g. 1.5)")]
+        public float attackMultiplier = 1f;
 
-    // カードを使用するためのコスト
-    public int cost;
+        [TextArea]
+        public string description;
+    }
 
-    // 最小ダメージ値（ランダム計算用）
-    public int minDamage;
-
-    // 最大ダメージ値（ランダム計算用）
-    public int maxDamage;
-
-    // カードのイラスト画像
-    public Sprite artwork;
 }
