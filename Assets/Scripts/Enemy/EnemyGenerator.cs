@@ -54,6 +54,7 @@ namespace ForestDraw.Enemy.Spawner
             {
                 Vector3 spawnPosition = GetSpawnPosition();
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                EnemyManager.Instance.AddEnemy(enemy);
 
                 SetupMove(enemy);
                 SetupHealth(enemy);

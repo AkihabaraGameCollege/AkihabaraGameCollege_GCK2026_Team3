@@ -73,6 +73,7 @@ namespace ForestDraw.Enemy.Components
 
         private void Die()
         {
+            EnemyManager.Instance.RemoveEnemy(gameObject);
             Died?.Invoke();
             Destroy(gameObject);
         }
