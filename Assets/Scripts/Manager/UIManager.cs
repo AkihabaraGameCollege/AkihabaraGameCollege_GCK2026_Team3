@@ -1,129 +1,123 @@
 // File: UIManager.cs
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace ForestDraw
 {
     /// <summary>
-    /// Handles UI elements for life, cost, hand display and target marker.
-    /// Also spawns floating damage popups.
+    /// UIManager: update life/cost, hand UI, damage popups and target selection marker.
+    /// Singleton used by other systems.
     /// </summary>
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
 
-        [Header("Fade Settings")]
-        [SerializeField] private float fadeDuration = 0.25f;
-
-        [Header("Player UI")]
-        [SerializeField] private Text lifeText;
-        [SerializeField] private Text costText;
+        [Header("HUD")]
+        public TextMeshProUGUI lifeText;
+        public TextMeshProUGUI costText;
 
         [Header("Hand UI")]
-        [SerializeField] private Transform handContainer;
-        [SerializeField] private GameObject cardSlotPrefab;
+        public Transform handContainer;
+        public GameObject cardSlotPrefab;
 
         [Header("Targeting")]
-        [SerializeField] private GameObject targetMarkerPrefab;
-        private GameObject targetMarkerInstance;
+        public GameObject targetMarkerPrefab;
+        private GameObject currentMarker;
+        private EnemyController selectedEnemy;
 
-        [Header("Popups")]
-        [SerializeField] private DamagePopup damagePopupPrefab;
+        [Header("Damage Popup")]
+        public GameObject damagePopupPrefab;
+
+        [Header("Game Over / Victory")]
+        public GameObject gameOverUI;
+        public GameObject victoryUI;
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
         }
 
+        /// <summary>
+        /// Update life display
+        /// </summary>
         public void UpdateLife(int current, int max)
         {
-            if (lifeText != null) lifeText.text = $"HP: {current}/{max}";
+            if (lifeText != null) lifeText.text = $"Life: {current}/{max}";
         }
 
+        /// <summary>
+        /// Update cost display
+        /// </summary>
         public void UpdateCost(int current, int max)
         {
             if (costText != null) costText.text = $"Cost: {current}/{max}";
         }
 
-        public void UpdateHandUI(List<CardData> hand, CardManager manager)
+        /// <summary>
+        /// Update hand UI using simple prefab slots.
+        /// </summary>
+        public void UpdateHand(List<CardData> hand)
         {
             if (handContainer == null || cardSlotPrefab == null) return;
-            // clear old
-            foreach (Transform t in handContainer) Destroy(t.gameObject);
-
-            // instantiate slots
-            foreach (var card in hand)
+            for (int i = handContainer.childCount - 1; i >= 0; i--) Destroy(handContainer.GetChild(i).gameObject);
+            for (int i = 0; i < hand.Count; i++)
             {
                 var go = Instantiate(cardSlotPrefab, handContainer);
                 var slot = go.GetComponent<CardSlotUI>();
-                if (slot != null) slot.Setup(card, manager);
+                if (slot != null) slot.Setup(hand[i], i);
             }
-        }
-
-        public void HighlightSelectedCard(CardData card)
-        {
-            // simple: could add outline or scale; omitted for simplicity
-        }
-
-        public void SetTargetMarker(Transform target)
-        {
-            if (target == null)
-            {
-                if (targetMarkerInstance != null) Destroy(targetMarkerInstance);
-                targetMarkerInstance = null;
-                return;
-            }
-            if (targetMarkerInstance == null && targetMarkerPrefab != null)
-            {
-                targetMarkerInstance = Instantiate(targetMarkerPrefab);
-            }
-            if (targetMarkerInstance != null)
-            {
-                targetMarkerInstance.transform.position = target.position + Vector3.up * 2f;
-            }
-        }
-
-        public void SpawnDamagePopup(int amount, Vector3 worldPos, CriticalType type)
-        {
-            if (damagePopupPrefab == null) return;
-            var p = Instantiate(damagePopupPrefab, worldPos, Quaternion.identity);
-            p.Setup(amount, type);
         }
 
         /// <summary>
-        /// Fade in a UI GameObject that has or will get a CanvasGroup.
-        /// If no CanvasGroup exists, one will be added.
+        /// Show floating damage number above world position.
         /// </summary>
-        public void FadeInUI(GameObject ui, float duration = -1f)
+        public void ShowDamageNumber(int amount, Vector3 worldPos)
         {
-            if (ui == null) return;
-            if (duration <= 0f) duration = fadeDuration;
-            var cg = ui.GetComponent<CanvasGroup>();
-            if (cg == null) cg = ui.AddComponent<CanvasGroup>();
-            ui.SetActive(true);
-            StartCoroutine(FadeCanvasGroup(cg, 0f, 1f, duration));
+            if (damagePopupPrefab == null) return;
+            var go = Instantiate(damagePopupPrefab, worldPos + Vector3.up * 1.5f, Quaternion.identity);
+            var popup = go.GetComponent<DamagePopup>();
+            popup?.Setup(amount);
         }
 
-        private System.Collections.IEnumerator FadeCanvasGroup(CanvasGroup cg, float from, float to, float duration)
+        /// <summary>
+        /// Handle click from PlayerController: raycast to select enemy.
+        /// </summary>
+        public void HandleClick()
         {
-            cg.alpha = from;
-            float t = 0f;
-            while (t < duration)
+            if (Camera.main == null) return;
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current != null ? Mouse.current.position.ReadValue() : new Vector2(Screen.width / 2, Screen.height / 2));
+            if (Physics.Raycast(ray, out var hit, 100f))
             {
-                t += Time.deltaTime;
-                cg.alpha = Mathf.Lerp(from, to, t / duration);
-                yield return null;
+                var ec = hit.collider.GetComponent<EnemyController>();
+                if (ec != null)
+                {
+                    SelectEnemy(ec);
+                }
             }
-            cg.alpha = to;
         }
 
-        public void ShowFeedback(string message)
+        public void SelectEnemy(EnemyController enemy)
         {
-            Debug.Log("UI Feedback: " + message);
+            selectedEnemy = enemy;
+            if (currentMarker == null && targetMarkerPrefab != null) currentMarker = Instantiate(targetMarkerPrefab);
+            if (currentMarker != null && selectedEnemy != null) currentMarker.transform.position = selectedEnemy.transform.position + Vector3.up * 1.5f;
+        }
+
+        public EnemyController GetSelectedEnemy() => selectedEnemy;
+
+        public void HideTargetMarker() { if (currentMarker != null) Destroy(currentMarker); selectedEnemy = null; }
+
+        public void ShowGameOverUI()
+        {
+            if (gameOverUI != null) gameOverUI.SetActive(true);
+        }
+
+        public void ShowVictoryUI()
+        {
+            if (victoryUI != null) victoryUI.SetActive(true);
         }
     }
-
 }

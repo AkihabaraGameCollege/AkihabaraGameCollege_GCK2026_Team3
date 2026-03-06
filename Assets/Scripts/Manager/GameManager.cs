@@ -1,69 +1,58 @@
 ﻿// File: GameManager.cs
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ForestDraw
 {
     /// <summary>
-    /// Overall game flow manager: handles victory / gameover states and tracks enemies.
+    /// GameManager: controls game flow, victory and game over conditions.
     /// </summary>
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
 
-        [Header("UI")]
-        [SerializeField] private GameObject victoryUI;
-        [SerializeField] private GameObject gameOverUI;
+        [Header("Settings")]
+        [SerializeField] private float endDelay = 1f;
 
-        private int enemyCount = 0;
-        private bool gameEnded = false;
+        private int enemiesAlive = 0;
 
-        void Awake()
+        private void Awake()
         {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
         }
 
         void Start()
         {
-            enemyCount = FindObjectsOfType<EnemyController>().Length;
+            enemiesAlive = EnemyController.GetAllEnemies().Count;
         }
 
-        public void NotifyEnemyDefeated(EnemyController enemy)
+        public void OnEnemyKilled()
         {
-            enemyCount--;
-            if (enemyCount <= 0) StartCoroutine(VictorySequence());
+            enemiesAlive = EnemyController.GetAllEnemies().Count;
+            if (enemiesAlive == 0)
+            {
+                StartCoroutine(VictoryRoutine());
+            }
         }
 
         public void GameOver()
         {
-            if (gameEnded) return;
-            gameEnded = true;
-            if (gameOverUI != null)
-            {
-                UIManager.Instance?.FadeInUI(gameOverUI, 0.25f);
-            }
-            StartCoroutine(EndAndReturn());
+            StartCoroutine(GameOverRoutine());
         }
 
-        private IEnumerator VictorySequence()
+        private IEnumerator VictoryRoutine()
         {
-            if (gameEnded) yield break;
-            gameEnded = true;
-            if (victoryUI != null)
-            {
-                UIManager.Instance?.FadeInUI(victoryUI, 0.25f);
-            }
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("StageSelect");
+            UIManager.Instance?.ShowVictoryUI();
+            yield return new WaitForSeconds(endDelay);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelect");
         }
 
-        private IEnumerator EndAndReturn()
+        private IEnumerator GameOverRoutine()
         {
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("StageSelect");
+            UIManager.Instance?.ShowGameOverUI();
+            yield return new WaitForSeconds(endDelay);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelect");
         }
     }
 }

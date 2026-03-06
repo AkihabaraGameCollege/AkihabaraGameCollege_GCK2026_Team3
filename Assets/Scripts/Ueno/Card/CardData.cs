@@ -1,43 +1,35 @@
 ﻿// File: CardData.cs
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ForestDraw
 {
     /// <summary>
-    /// Card data ScriptableObject describing a card.
+    /// CardData ScriptableObject defines card properties and behavior categories.
+    /// Create new cards via Create->ActionCard->Card Data
     /// </summary>
-    [CreateAssetMenu(fileName = "NewCard", menuName = "Game/CardData")]
+    public enum CardEffectType { None, Damage, Heal, CostRecover, DamageBoost, DamageReduction }
+    public enum CardTargetType { Single, Multiple, All }
+
+    [CreateAssetMenu(fileName = "CardData", menuName = "ActionCard/Card Data")]
     public class CardData : ScriptableObject
     {
-        public enum EffectType { Attack, Support }
-        public enum TargetType { Single, Area, All }
-        public enum SupportType { Heal, Cost, CostRegen, Buff, DamageReduction, Duplicate }
-
         [Header("Basic")]
-        public string cardName = "Card";
-        public Sprite artwork;
-        public int cost = 1;
-        public bool oneTimeUse = false; // if true, consumed permanently
+        public string cardName = "New Card";
+        [Range(0, 8)] public int cost = 1;
 
-        [Header("Attack")]
-        public EffectType effectType = EffectType.Attack;
-        public TargetType targetType = TargetType.Single;
-        public int damage = 10;
-        public float areaRadius = 3f;
+        [Header("Effect")]
+        public CardEffectType effectType = CardEffectType.Damage;
+        [Tooltip("Base damage (or heal amount) applied by the card")]
+        public int value = 10;
+        public CardTargetType targetType = CardTargetType.Single;
 
         [Header("Support")]
-        public SupportType supportSubtype = SupportType.Heal;
-        public int supportValue = 10; // heal amount or cost amount
-        // support specifics
-        [Tooltip("Duration in seconds for temporary buffs (0 = instant)")]
-        public float supportDuration = 0f;
-        [Tooltip("Multiplier applied to next attack when using Buff support (e.g. 1.5)")]
-        public float attackMultiplier = 1f;
+        [Tooltip("Damage boost multiplier when effectType is DamageBoost")]
+        public float damageBoostMultiplier = 1.5f;
+        [Tooltip("Duration in seconds for temporary effects")]
+        public float effectDuration = 5f;
 
         [TextArea]
         public string description;
     }
-
 }
