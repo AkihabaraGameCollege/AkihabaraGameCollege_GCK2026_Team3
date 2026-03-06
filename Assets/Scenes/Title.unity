@@ -1941,7 +1941,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1370306358}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999954
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2139,7 +2139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00030821122, y: 0.001989481}
+  m_AnchoredPosition: {x: -0.00030821122, y: 0.000109146466}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &948843378
@@ -3030,10 +3030,14 @@ MonoBehaviour:
   contentTransform: {fileID: 948843377}
   deckManager: {fileID: 2106563267}
   allOwnedCards:
-  - {fileID: 11400000, guid: 61f9c73fe8ac10e45950ee0b95b3dd90, type: 2}
-  - {fileID: 11400000, guid: 7ff77bfd3e9fee340a28db192c23dee1, type: 2}
-  - {fileID: 11400000, guid: d0db0f20e570029439f6ba1c96a7c4f9, type: 2}
-  - {fileID: 11400000, guid: b102cc663265dab4594e969888654866, type: 2}
+  - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
+  - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
+  - {fileID: 11400000, guid: d6d3ea507cd5f394b9bce2231d5101f8, type: 2}
+  - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
+  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
+  - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
 --- !u!1 &1575960411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4115,10 +4119,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckManager
   currentDeck: []
   allCardMasterList:
-  - {fileID: 11400000, guid: 61f9c73fe8ac10e45950ee0b95b3dd90, type: 2}
-  - {fileID: 11400000, guid: 7ff77bfd3e9fee340a28db192c23dee1, type: 2}
-  - {fileID: 11400000, guid: d0db0f20e570029439f6ba1c96a7c4f9, type: 2}
-  - {fileID: 11400000, guid: b102cc663265dab4594e969888654866, type: 2}
+  - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
+  - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
+  - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
+  - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
+  - {fileID: 11400000, guid: d6d3ea507cd5f394b9bce2231d5101f8, type: 2}
+  - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
 --- !u!224 &2106563268
 RectTransform:
   m_ObjectHideFlags: 0

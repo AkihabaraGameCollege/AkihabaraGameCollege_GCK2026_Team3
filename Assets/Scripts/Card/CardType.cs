@@ -7,11 +7,11 @@ public enum CardType
     // 攻撃系カード（敵にダメージを与える）
     Attack,
 
-    // 支援系カード（強化・補助効果など）
-    Support,
-
     // 回復系カード（HPやリソース回復など）
     Recovery,
+
+    // 支援系カード（強化・補助効果など）
+    Support,
 
     // 特殊・補助機能カード（ドロー、特殊効果など）
     Utility

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using ForestDraw.Combat;
@@ -10,18 +10,23 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
     private int health;
 
     [SerializeField] private Image hpFillImage;
+    private float damageReduction = 0f;
+    private float previousReduction;
     private void Start()
     {
-        health = maxHealth;   // Å‘åhealth‚ğ‰Šú’l‚É•Û‘¶
+        health = maxHealth;   // æœ€å¤§healthã‚’åˆæœŸå€¤ã«ä¿å­˜
         UpdateHPBar();
+        previousReduction = damageReduction;
     }
 
     public void TakeDamage(int amount)
     {
         if (health <= 0) return;
 
-        // ƒ_ƒ[ƒW‚ğó‚¯‚é
-        health = Mathf.Max(health - amount, 0);
+        float reductionFactor = damageReduction / 100f;
+        int reducedDamage = Mathf.RoundToInt(amount * (1f - reductionFactor));
+
+        health = Mathf.Max(health - reducedDamage, 0);
         UpdateHPBar();
 
         if (health > 0)
@@ -34,13 +39,26 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
     {
         if (health <= 0) return;
 
-        // ‰ñ•œ‚ğó‚¯‚é
+        // å›å¾©ã‚’å—ã‘ã‚‹
         health = Mathf.Min(health += amount, maxHealth);
         UpdateHPBar();
     }
     private void UpdateHPBar()
     {
         hpFillImage.fillAmount = (float)health / maxHealth;
+    }
+    public void ApplyDamageReduction(float reductionPercent, float duration)
+    {
+        StartCoroutine(DamageReductionCoroutine(reductionPercent, duration));
+    }
+
+    private IEnumerator DamageReductionCoroutine(float reductionPercent, float duration)
+    {
+        damageReduction = Mathf.Clamp(reductionPercent, 0f, 100f); // 0ã€œ100ã«åˆ¶é™
+
+        yield return new WaitForSeconds(duration);
+
+        damageReduction = previousReduction;
     }
 }
 

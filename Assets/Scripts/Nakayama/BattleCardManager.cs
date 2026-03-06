@@ -38,6 +38,9 @@ namespace ForestDraw
         /// </summary>
         private const string SAVE_KEY = "UserDeckSaveData";
 
+        [SerializeField]
+        private GameObject player;
+
         /// <summary>
         /// 初期設定の関数
         /// </summary>
@@ -111,7 +114,7 @@ namespace ForestDraw
 
                 GameObject cardObj = Instantiate(handCardPrefab, handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
                 HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
-                handCardUI.Setup(drawnCard);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
+                handCardUI.Setup(drawnCard,player);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
             }
         }
     }

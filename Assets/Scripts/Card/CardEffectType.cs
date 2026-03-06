@@ -19,15 +19,21 @@ public enum CardEffectType
     // コスト（エネルギーなど）を回復する
     CostRecover,
 
+    // 回復速度アップ（間隔短縮）
+    CostRegen,
+
+    // プレイヤーの体力を回復する
+    Heal,
+
     // カードを追加で引く
     Draw,
 
     // 次に使用するカードを強化する
     BuffNext,
 
-    // プレイヤーの体力を回復する
-    Heal,
-
     // 一定量のダメージを防ぐシールドを付与する
-    Shield
+    Shield,
+
+    // ダメージ軽減
+    DamageReduction
 }

@@ -1,18 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI;
 using ForestDraw.Player.Combat;
 
 public class CostUI : MonoBehaviour
 {
     [SerializeField] private PlayerCost playerCost;
-    [SerializeField] private Transform costParent; // コストUIの親
+    [SerializeField] private Transform costParent;
 
-    private Image[] costImages;
+    private GameObject[] costObjects;
 
     private void Awake()
     {
-        // 親の子オブジェクトからImageを取得
-        costImages = costParent.GetComponentsInChildren<Image>();
+        int count = costParent.childCount;
+        costObjects = new GameObject[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            costObjects[i] = costParent.GetChild(i).gameObject;
+        }
     }
 
     private void Start()
@@ -22,20 +26,10 @@ public class CostUI : MonoBehaviour
 
     private void UpdateUI(int currentCost, float progress)
     {
-        for (int i = 0; i < costImages.Length; i++)
+        for (int i = 0; i < costObjects.Length; i++)
         {
-            if (i < currentCost)
-            {
-                costImages[i].fillAmount = 1f;
-            }
-            else if (i == currentCost)
-            {
-                costImages[i].fillAmount = progress;
-            }
-            else
-            {
-                costImages[i].fillAmount = 0f;
-            }
+            // コストが溜まっている分だけON
+            costObjects[i].SetActive(i < currentCost);
         }
     }
 }

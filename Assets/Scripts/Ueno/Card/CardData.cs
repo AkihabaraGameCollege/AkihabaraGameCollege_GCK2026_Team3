@@ -1,32 +1,32 @@
-﻿using UnityEngine;
+﻿//using unityengine;
 
-// ScriptableObjectとしてカードデータを作成できるようにする属性
-// Unityの「Create > Ueno > CardData」からアセット作成可能
-[CreateAssetMenu(menuName = "Ueno/CardData", fileName = "CardData")]
-public class CardData : ScriptableObject
-{
-    // カードの名前（ゲーム内表示用）
-    public string cardName;
+//// scriptableobjectとしてカードデータを作成できるようにする属性
+//// unityの「create > ueno > carddata」からアセット作成可能
+//[createassetmenu(menuname = "ueno/carddata", filename = "carddata")]
+//public class carddata : scriptableobject
+//{
+//    // カードの名前（ゲーム内表示用）
+//    public string cardname;
 
-    // カードの種類（攻撃・防御など）
-    public CardType cardType;
+//    // カードの種類（攻撃・防御など）
+//    public cardtype cardtype;
 
-    // カードの効果タイプ（ダメージ系・回復系など）
-    public CardEffectType effectType;
+//    // カードの効果タイプ（ダメージ系・回復系など）
+//    public cardeffecttype effecttype;
 
-    // カードの説明文（Inspector上で複数行入力できる）
-    [TextArea]
-    public string description;
+//    // カードの説明文（inspector上で複数行入力できる）
+//    [textarea]
+//    public string description;
 
-    // カードを使用するためのコスト
-    public int cost;
+//    // カードを使用するためのコスト
+//    public int cost;
 
-    // 最小ダメージ値（ランダム計算用）
-    public int minDamage;
+//    // 最小ダメージ値（ランダム計算用）
+//    public int mindamage;
 
-    // 最大ダメージ値（ランダム計算用）
-    public int maxDamage;
+//    // 最大ダメージ値（ランダム計算用）
+//    public int maxdamage;
 
-    // カードのイラスト画像
-    public Sprite artwork;
-}
+//    // カードのイラスト画像
+//    public sprite artwork;
+//}

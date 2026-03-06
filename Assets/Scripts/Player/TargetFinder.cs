@@ -139,7 +139,7 @@ namespace ForestDraw.Player.Combat
                 var d = enemy.GetComponent<IDamageable>();
                 if (d != null) targets.Add(d);
             }
-
+            Debug.Log(targets+ "allTarget");
             return targets;
         }
     }
