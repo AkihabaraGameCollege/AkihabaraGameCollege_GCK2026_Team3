@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using ForestDraw.Combat;
 using ForestDraw.Enemy;
-using UnityEngine.UIElements;
 
 namespace ForestDraw.Player.Combat
 {
