@@ -28,6 +28,10 @@ namespace ForestDraw
         /// リストにロードしたデッキの中身を入れておく変数
         /// </summary>
         private List<CardData> playerDeck = new List<CardData>();
+        /// <summary>
+        /// ドローするための山札のリスト変数
+        /// </summary>
+        private List<CardData> drawPile = new List<CardData>();
 
         /// <summary>
         /// セーブ機能で使うキーの定数の変数
@@ -40,7 +44,8 @@ namespace ForestDraw
         private void Start()
         {
             LoadDeckData();
-            DrawRandomCards(4);// ランダムに4枚引いて並べる
+            InitializeDrawPile();// デッキをシャッフルして、カードを引く準備をする
+            DrawCards(4);// 4枚引く
         }
 
         /// <summary>
@@ -69,29 +74,44 @@ namespace ForestDraw
         }
 
         /// <summary>
-        /// ランダムにカードを引いて手札エリアに表示する関数
+        /// ドローするための山札をシャッフルして準備する関数
+        /// </summary>
+        private void InitializeDrawPile()
+        {
+            drawPile = new List<CardData>(playerDeck);// デッキの内容を山札にコピーする
+
+            // ドローのたびに山札の順番が変わるように、シャッフルするループ
+            for (int i = drawPile.Count - 1; i > 0; i--)
+            {
+                int j = Random.Range(0, i + 1);// 0からiの範囲でランダムなインデックスを選ぶ
+                CardData temp = drawPile[i];// i番目のカードを一時的に保存する
+                drawPile[i] = drawPile[j];// j番目のカードをi番目に移動する
+                drawPile[j] = temp;// 一時的に保存しておいたカードをj番目に移動する
+            }
+        }
+
+        /// <summary>
+        /// ドローする関数
         /// </summary>
         /// <param name="drawCount"></param>
-        private void DrawRandomCards(int drawCount)
+        private void DrawCards(int drawCount)
         {
-            // もしデッキが空の場合
-            if (playerDeck.Count == 0)
-            {
-                return;
-            }
-
-            // ドローする枚数分繰り返す
+            // 指定された枚数だけ引くループ
             for (int i = 0; i < drawCount; i++)
             {
-                // もしデッキが空になった場合は終了する
-                int randomIndex = Random.Range(0, playerDeck.Count);// ランダムに選んだ番号のカードをデッキから取り出す
-                CardData selectedCard = playerDeck[randomIndex];// デッキから取り出したカードをリストから削除する
+                // もし山札が空の場合
+                if (drawPile.Count == 0)
+                {
+                    break;
+                }
 
-                GameObject cardObj = Instantiate(handCardPrefab, handArea);// カードのPrefabを手札エリアに生成する
+                CardData drawnCard = drawPile[0];// 山札の一番上のカードを引く
 
-                // 生成したカードのUIクラスに、選んだカードのデータをセットアップする
-                HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードのUIクラスを取得
-                handCardUI.Setup(selectedCard);// カードのUIクラスにカードのデータをセットアップする
+                drawPile.RemoveAt(0);// 山札から引いたカードを削除する
+
+                GameObject cardObj = Instantiate(handCardPrefab, handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
+                HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
+                handCardUI.Setup(drawnCard);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
             }
         }
     }
