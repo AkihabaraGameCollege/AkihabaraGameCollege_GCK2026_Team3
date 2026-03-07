@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5029885519ec2b04aaeeb09177866177
+guid: 82438a458e6bb7843a15ac699dfa24cd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Drops of Mercy00_0
+      name: Thunder Zetsu00_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2883b22d69e92034cb563ed6c57149a6
-      internalID: 1583499004
+      spriteID: 9a34b485d051bc248b008bb119ba7f25
+      internalID: -2080476143
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 52315a0cf4dc33747aaeed4dbc5c05de
+    spriteID: 71783e6765128804e8710fc2f700933c
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Drops of Mercy00_0: 1583499004
+      Thunder Zetsu00_0: -2080476143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

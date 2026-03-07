@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5029885519ec2b04aaeeb09177866177
+guid: e0c27cb2bd4ab7d4fbcd06936d002313
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Drops of Mercy00_0
+      name: Magical Amplification00_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2883b22d69e92034cb563ed6c57149a6
-      internalID: 1583499004
+      spriteID: 05d40efe4cc028c45a10ee19e4cb8c72
+      internalID: -158646749
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 52315a0cf4dc33747aaeed4dbc5c05de
+    spriteID: ea8ae8e93739d294c995139592f05301
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Drops of Mercy00_0: 1583499004
+      Magical Amplification00_0: -158646749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

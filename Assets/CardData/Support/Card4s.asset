@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
+  m_Name: Card4s
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
+  cardId: card_04s
+  cardName: "\u7121\u6211"
+  cardType: 1
+  effectType: 5
+  description: "\u25CE\u30B3\u30B9\u30C8\u652F\u6255\u3063\u3066\u300110\u79D2\u9593\u30B3\u30B9\u30C8\u56DE\u5FA9\u529B\u3092\u6BCE\u79D21\u56DE\u5FA9\u306B\u3059\u308B"
+  cost: 5
+  cardImage: {fileID: 2064010294, guid: 0ccaeba1cd2d94f4ebfa3c76944eaa89, type: 3}
+  buffDuration: 10
+  attackParams:
+    damage: 0
+    lineLength: 0
+    lineWidth: 0
+    areaRadius: 0
+  recoverParams:
+    healAmount: 500
+    costRecoverAmount: 0
+    intervalReduction: 1
+  supportParams:
+    damageReduction: 0
