@@ -1,58 +1,42 @@
 using UnityEngine;
 using ForestDraw.Player.Combat;
+using ForestDraw;
 
-using UnityEngine.UI;
 public class TestAttack : MonoBehaviour
 {
     [SerializeField]
-    private float radius;
+    private CardData data1;
     [SerializeField]
-    private int damage;
+    private CardData data2;
     [SerializeField]
-    private float width;
+    private CardData data3;
     [SerializeField]
-    private float length;
+    private CardData data4;
     [SerializeField]
-    private GameObject target;
-    [SerializeField]
-    private Vector3 origin;
-    [SerializeField]
-    private int useCost = 2;
-    [SerializeField]
-    private int recoverCost = 5;
-    [SerializeField]
-    private int timeCost = 2;
-    [SerializeField]
-    private float recoverCostInterval = 10;
-    [SerializeField]
-    private PlayerCost playerCost;
-    public void SingleAttack()
-    {
-       if (!playerCost.UseCost(useCost)) return;
-        PlayerAttack.AttackNearest(target.transform.position,damage);
-    }
-    public void LineAttack()
-    {
-        if (!playerCost.UseCost(useCost)) return;
-        PlayerAttack.AttackLine(target.transform.position,width,damage ,length);
-    }
-    public void CircleAttack()
-    {
-        if (!playerCost.UseCost(useCost)) return;
-        PlayerAttack.AttackCircle(target.transform.position + origin, radius, damage);
-    }
-    public void AllAttack()
-    {
-        if (!playerCost.UseCost(useCost)) return;
-        PlayerAttack.AttackAll(damage);
-    }
-    public void CostRecover()
-    {
-        playerCost.RecoverCost(recoverCost);
-    }
+    private CardData data5;
 
-    public void CostRecovertime() 
+    [SerializeField]
+    private Transform player;
+    
+    public void UseCard1()
     {
-        playerCost.ReduceRecoverInterval(timeCost,recoverCostInterval);
+        CardUseExecutor.Execute(data1, player);
     }
+    public void UseCard2()
+    {
+        CardUseExecutor.Execute(data2, player);
+    }
+    public void UseCard3()
+    {
+        CardUseExecutor.Execute(data3, player);
+    }
+    public void UseCard4()
+    {
+        CardUseExecutor.Execute(data4, player);
+    }
+    public void UseCard5()
+    {
+        CardUseExecutor.Execute(data5, player);
+    }
+    
 }

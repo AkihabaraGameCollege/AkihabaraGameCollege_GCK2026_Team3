@@ -31,3 +31,4 @@ MonoBehaviour:
     intervalReduction: 1
   supportParams:
     damageReduction: 0
+    attackMultiplier: 1.5

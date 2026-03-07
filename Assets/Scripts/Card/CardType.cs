@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 
-// カードの大まかな種類を定義する列挙型（enum）
-// カードを役割ごとに分類するために使用する
+/// <summary>
+/// カードの大まかな種類を定義する列挙型
+/// カードを役割ごとに分類するために使用する
+/// </summary>
 public enum CardType
 {
-    // 攻撃系カード（敵にダメージを与える）
+    /// <summary>攻撃系カード（敵にダメージを与える）</summary>
     Attack,
 
-    // 回復系カード（HPやリソース回復など）
+    /// <summary>回復系カード（HPやリソースを回復する）</summary>
     Recovery,
 
-    // 支援系カード（強化・補助効果など）
+    /// <summary>支援系カード（強化・防御などの補助効果）</summary>
     Support,
 
-    // 特殊・補助機能カード（ドロー、特殊効果など）
+    /// <summary>特殊カード（ドローなどの特殊効果）</summary>
     Utility
 }

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using ForestDraw.Combat;
 
 namespace ForestDraw.Player.Combat
 {
@@ -11,25 +9,33 @@ namespace ForestDraw.Player.Combat
     public static class PlayerAttack
     {
         /// <summary>
+        /// 次の攻撃に適用するダメージ倍率（初期値は1倍）
+        /// </summary>
+        private static float nextAttackMultiplier = 1f;
+        /// <summary>
         /// 一番近い敵1体にダメージを与える（単体攻撃）
         /// </summary>
         public static void AttackNearest(Vector3 origin, int damage)
         {
             var target = TargetFinder.FindNearest(origin);
 
-            target?.TakeDamage(damage);
+            Debug.Log("単体攻撃");
+            int finalDamage = ApplyMultiplier(damage);
+            target?.TakeDamage(finalDamage);
         }
 
         /// <summary>
         /// プレイヤー前方の直線範囲にいる敵にダメージ（直線攻撃）
         /// </summary>
-        public static void AttackLine(Vector3 origin, float width, int damage,float length)
+        public static void AttackLine(Vector3 origin, int damage, float width, float length)
         {
             var targets = TargetFinder.FindLine(origin, width, length);
+            int finalDamage = ApplyMultiplier(damage);
 
             foreach (var target in targets)
             {
-                target.TakeDamage(damage);
+                Debug.Log("直線攻撃");
+                target.TakeDamage(finalDamage);
             }
         }
 
@@ -39,10 +45,12 @@ namespace ForestDraw.Player.Combat
         public static void AttackCircle(Vector3 origin, float radius, int damage)
         {
             var targets = TargetFinder.FindCircle(origin, radius);
+            int finalDamage = ApplyMultiplier(damage);
 
             foreach (var target in targets)
             {
-                target.TakeDamage(damage);
+                Debug.Log("円形範囲攻撃");
+                target.TakeDamage(finalDamage);
             }
         }
 
@@ -52,11 +60,32 @@ namespace ForestDraw.Player.Combat
         public static void AttackAll(int damage)
         {
             var targets = TargetFinder.FindAll();
+            int finalDamage = ApplyMultiplier(damage);
 
             foreach (var target in targets)
             {
-                target.TakeDamage(damage);
+                Debug.Log("全体攻撃");
+                target.TakeDamage(finalDamage);
             }
+        }
+
+        /// <summary>
+        /// 次の攻撃のダメージ倍率を設定する
+        /// </summary>
+        public static void SetNextAttackMultiplier(float multiplier)
+        {
+            nextAttackMultiplier = multiplier;
+        }
+
+        /// <summary>
+        /// ダメージに倍率を適用し、適用後は倍率をリセットする
+        /// </summary>
+        private static int ApplyMultiplier(int damage)
+        {
+            Debug.Log("攻撃が" + nextAttackMultiplier + "倍");
+            int result = Mathf.RoundToInt(damage * nextAttackMultiplier);
+            nextAttackMultiplier = 1f;
+            return result;
         }
     }
 }

@@ -76,64 +76,69 @@ public class CardDataEditor : Editor
 
         EditorGUILayout.Space();
 
+
         // カードタイプに応じて表示
         switch (card.cardType)
         {
             case CardType.Attack:
                 EditorGUILayout.LabelField("Attack Parameters", EditorStyles.boldLabel);
-
-                // 基本ダメージ
-                card.attackParams.damage = EditorGUILayout.IntField("ダメージ", card.attackParams.damage);
+                var attack = card.attackParams;
+                attack.damage = EditorGUILayout.IntField("ダメージ", attack.damage);
 
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
                 {
                     case CardEffectType.DamageLine:
-                        card.attackParams.lineLength = EditorGUILayout.FloatField("長さ", card.attackParams.lineLength);
-                        card.attackParams.lineWidth = EditorGUILayout.FloatField("横幅", card.attackParams.lineWidth);
+                        attack.lineLength = EditorGUILayout.FloatField("長さ", attack.lineLength);
+                        attack.lineWidth = EditorGUILayout.FloatField("横幅", attack.lineWidth);
                         break;
 
                     case CardEffectType.DamageArea:
-                        card.attackParams.areaRadius = EditorGUILayout.FloatField("半径", card.attackParams.areaRadius);
+                        attack.areaRadius = EditorGUILayout.FloatField("半径", attack.areaRadius);
                         break;
 
                     case CardEffectType.DamageSingle:
                     case CardEffectType.DamageAllOnScreen:
-                        // 特別なパラメータなし
                         break;
                 }
                 break;
 
             case CardType.Recovery:
                 EditorGUILayout.LabelField("recovery Parameters", EditorStyles.boldLabel);
+                var recover = card.recoverParams;
+
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
                 {
                     case CardEffectType.CostRecover:
-                        card.recoverParams.costRecoverAmount = EditorGUILayout.IntField("コストの回復量", card.recoverParams.costRecoverAmount);
+                        recover.costRecoverAmount = EditorGUILayout.IntField("コストの回復量", recover.costRecoverAmount);
                         break;
 
                     case CardEffectType.CostRegen:
-                        card.recoverParams.intervalReduction = EditorGUILayout.IntField("コストの回復速度", card.recoverParams.intervalReduction);
+                        recover.intervalReduction = EditorGUILayout.IntField("コストの回復速度", recover.intervalReduction);
                         card.buffDuration = EditorGUILayout.IntField("効果時間", card.buffDuration);
                         break;
 
                     case CardEffectType.Heal:
-                        card.recoverParams.healAmount = EditorGUILayout.IntField("HPの回復量", card.recoverParams.healAmount);
+                        recover.healAmount = EditorGUILayout.IntField("HPの回復量", recover.healAmount);
                         break;
                 }
                 break;
 
             case CardType.Support:
                 EditorGUILayout.LabelField("Support Parameters", EditorStyles.boldLabel);
+                var support = card.supportParams;
+
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
                 {
                     case CardEffectType.DamageReduction:
-                        card.supportParams.damageReduction = EditorGUILayout.FloatField("ダメージ軽減率", card.supportParams.damageReduction);
+                        support.damageReduction = EditorGUILayout.FloatField("ダメージ軽減率", support.damageReduction);
                         card.buffDuration = EditorGUILayout.IntField("効果時間", card.buffDuration);
                         break;
-
+                    case CardEffectType.BuffNext:
+                        support.attackMultiplier = EditorGUILayout.FloatField("ダメージ倍率", support.attackMultiplier);
+                        break;
                 }
                 break;
         }

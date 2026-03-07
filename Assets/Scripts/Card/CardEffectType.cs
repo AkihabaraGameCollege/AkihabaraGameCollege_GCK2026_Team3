@@ -1,39 +1,41 @@
 ﻿using UnityEngine;
 
-// カードの効果タイプを定義する列挙型（enum）
-// どんな効果を持つカードかを分類するために使用する
+/// <summary>
+/// カードの効果タイプを定義する列挙型
+/// カードがどのような効果を持つかを分類するために使用する
+/// </summary>
 public enum CardEffectType
 {
-    // 単体の敵にダメージを与える
+    /// <summary>単体の敵にダメージを与える</summary>
     DamageSingle,
 
-    // 一直線上の敵にダメージを与える
+    /// <summary>一直線上の敵にダメージを与える</summary>
     DamageLine,
 
-    // 範囲内の敵にダメージを与える
+    /// <summary>範囲内の敵にダメージを与える</summary>
     DamageArea,
 
-    // 画面内すべての敵にダメージを与える
+    /// <summary>画面内すべての敵にダメージを与える</summary>
     DamageAllOnScreen,
 
-    // コスト（エネルギーなど）を回復する
+    /// <summary>コストを回復する</summary>
     CostRecover,
 
-    // 回復速度アップ（間隔短縮）
+    /// <summary>コスト回復速度を上げる（回復間隔短縮）</summary>
     CostRegen,
 
-    // プレイヤーの体力を回復する
+    /// <summary>プレイヤーの体力を回復する</summary>
     Heal,
 
-    // カードを追加で引く
+    /// <summary>カードを追加で引く</summary>
     Draw,
 
-    // 次に使用するカードを強化する
+    /// <summary>次に使用する攻撃を強化する</summary>
     BuffNext,
 
-    // 一定量のダメージを防ぐシールドを付与する
+    /// <summary>ダメージを防ぐシールドを付与する</summary>
     Shield,
 
-    // ダメージ軽減
+    /// <summary>受けるダメージを軽減する</summary>
     DamageReduction
 }
