@@ -1,150 +1,101 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using ForestDraw.Player.Combat;
-using ForestDraw.Combat;
 
 namespace ForestDraw
 {
     /// <summary>
-    /// デッキに登録したカードを表示するUIクラス
+    /// 手持ちのカードのUIを管理するクラス
     /// </summary>
-    public class HandCardUI : MonoBehaviour
+    public class HandCardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         /// <summary>
-        /// カードのイラストを表示する画像の変数
+        /// カードの画像を表示するためのImageコンポーネントの変数
         /// </summary>
         [SerializeField]
-        private Image cardImage;
-
-        /// <summary>
-        /// ボタンコンポーネントの変数
-        /// </summary>
-        [SerializeField]
-        private Button clickButton;
+        private Image cardImage = null;
 
         /// <summary>
         /// カードのデータを保持する変数
         /// </summary>
         private CardData myCardData;
 
-        private PlayerCost playerCost;
-
-        private GameObject target;
-        private AttackParams attack;
-        private RecoverParams recover;
-        private SupportParams support;
+        /// <summary>
+        /// カードの使用判定や、使用後の処理を行うためのマネージャーへの参照変数
+        /// </summary>
+        private BattleCardManager battleManager;
 
         /// <summary>
-        /// セットアップの関数
+        /// 元にの親（HandArea）を記憶しておくための変数
+        /// </summary>
+        private Transform originalParent;
+
+        /// <summary>
+        /// 元の並び順を記憶しておくための変数
+        /// </summary>
+        private int originalSiblingIndex;
+
+        /// <summary>
+        /// セットアップ用の関数
         /// </summary>
         /// <param name="data"></param>
-        public void Setup(CardData data, GameObject gameObject)
+        /// <param name="manager"></param>
+        public void Setup(CardData data, BattleCardManager manager)
         {
             myCardData = data;
-            target = gameObject;
-            playerCost = target.GetComponent<PlayerCost>();
+            battleManager = manager;
 
-            attack = myCardData.attackParams;
-            recover = myCardData.recoverParams;
-            support = myCardData.supportParams;
-
-            // もしカードのイラストが存在する場合
+            // もしカード画像がセットされいる場合
             if (cardImage != null && data.cardImage != null)
             {
-                cardImage.sprite = data.cardImage;// カードのイラストをUIにセット
+                cardImage.sprite = data.cardImage;
             }
-
-            // クリックした時の処理を登録
-            clickButton.onClick.RemoveAllListeners();// 念のためリセット
-            clickButton.onClick.AddListener(OnUseCard);// カードを使用する関数を登録
         }
 
         /// <summary>
-        /// 使うカードをクリックしたときの処理
+        /// ドラッグ開始の瞬間に呼ばれる関数
         /// </summary>
-        private void OnUseCard()
+        /// <param name="eventData"></param>
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log(myCardData.cardName + " を使用しました！");
-            // カードタイプに応じて表示
-            switch (myCardData.cardType)
-            {
-                case CardType.Attack:
-                    Attack();
-                    break;
+            // 元の親（HandArea）と、並び順を記憶しておく
+            originalParent = transform.parent;// ドラッグ開始の瞬間の親（HandArea）を記憶しておく
+            originalSiblingIndex = transform.GetSiblingIndex();// ドラッグ開始の瞬間の並び順を記憶しておく
 
-                case CardType.Recovery:
-                    Recovery();
-                    break;
+            // HorizontalLayoutGroup の影響を一時的に外すため、親を一番上のCanvasに変更する
+            transform.SetParent(transform.root);// ドラッグ中はCanvas直下に移動させることで、レイアウトの影響を受けずに自由に動かせるようにする
+            transform.SetAsLastSibling(); // ドラッグ中のカードが他のUIの下に隠れないように最前面へ
 
-                case CardType.Support:
-                    Support();
-                    break;
-            }
+            GetComponent<CanvasGroup>().blocksRaycasts = false;// ドラッグ中はカードがレイキャストをブロックしないようにする
         }
-        private void Attack()
+
+        /// <summary>
+        /// ドラッグ中（指を動かしている間）に毎フレーム呼ばれる関数
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnDrag(PointerEventData eventData)
         {
-            switch (myCardData.effectType)
-            {
-                case CardEffectType.DamageSingle:
-
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(attack.damage + "単体攻撃");
-                    PlayerAttack.AttackNearest(target.transform.position, attack.damage);
-                    break;
-
-                case CardEffectType.DamageLine:
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(attack.damage + "直線攻撃");
-                    PlayerAttack.AttackLine(target.transform.position, attack.lineWidth, attack.damage, attack.lineLength);
-                    break;
-
-                case CardEffectType.DamageArea:
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(attack.damage + "円形攻撃");
-                    PlayerAttack.AttackCircle(target.transform.position + new Vector3(0, 0, 30), attack.areaRadius, attack.damage);
-                    break;
-
-                case CardEffectType.DamageAllOnScreen:
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(attack.damage + "全体攻撃");
-                    PlayerAttack.AttackAll(attack.damage);
-                    break;
-            }
+            transform.position = eventData.position;// ドラッグ中はカードの位置を常に指の位置に合わせる
         }
-        private void Recovery()
+
+        /// <summary>
+        /// ドラッグ終了の瞬間に呼ばれる関数
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnEndDrag(PointerEventData eventData)
         {
-            switch (myCardData.effectType)
+            GetComponent<CanvasGroup>().blocksRaycasts = true;// ドラッグが終わったらカードがレイキャストをブロックするように戻す
+
+            // もしカードの高さが画面の40%より高い位置にある場合
+            if (transform.position.y > Screen.height * 0.4f)
             {
-                case CardEffectType.Heal:
-
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(recover.healAmount + "HP回復");
-                    target.GetComponent<IHealable>()?.Heal(recover.healAmount);
-                    break;
-
-                case CardEffectType.CostRecover:
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(recover.costRecoverAmount + "コスト回復");
-                    playerCost.RecoverCost(recover.costRecoverAmount);
-                    break;
-
-                case CardEffectType.CostRegen:
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(recover.intervalReduction + "ごとにコスト回復");
-                    playerCost.ReduceRecoverInterval(recover.intervalReduction, myCardData.buffDuration);
-                    break;
+                battleManager.UseCard(myCardData, gameObject);
             }
-        }
-        private void Support()
-        {
-            switch (myCardData.effectType)
+            else
             {
-                case CardEffectType.DamageReduction:
-
-                    if (!playerCost.UseCost(myCardData.cost)) return;
-                    Debug.Log(support.damageReduction + "ダメージ軽減");
-                    target.GetComponent<PlayerHealth>()?.ApplyDamageReduction(support.damageReduction, myCardData.buffDuration);
-                    break;
+                // キャンセル: 高さが足りなかったら元の手札の場所・順番に戻す
+                transform.SetParent(originalParent);// 元の親（HandArea）に戻す
+                transform.SetSiblingIndex(originalSiblingIndex);// 元の並び順に戻す
             }
         }
     }

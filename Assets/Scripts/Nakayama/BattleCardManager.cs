@@ -12,13 +12,33 @@ namespace ForestDraw
         /// カードのPrefabと、生成する親オブジェクトの変数
         /// </summary>
         [SerializeField]
-        private GameObject handCardPrefab;
+        private GameObject handCardPrefab = null;
 
         /// <summary>
         /// 空間上でカードを並べる場所の変数
         /// </summary>
         [SerializeField]
-        private Transform handArea;
+        private Transform handArea = null;
+
+        /// <summary>
+        /// ドローする間隔の変数
+        /// </summary>
+        [SerializeField]
+        private float drawInterval = 3f;
+
+        /// <summary>
+        /// 手持ちのカードの最大枚数の変数
+        /// </summary>
+        [SerializeField]
+        private int maxHandSize = 8;
+        /// <summary>
+        /// スタート時に引くカードの枚数の変数
+        /// </summary>
+        [SerializeField]
+        private int startDrawCount = 4;
+
+        [SerializeField]
+        private GameObject player;
 
         /// <summary>
         /// リストに全カードのマスターデータを入れておく変数
@@ -38,8 +58,23 @@ namespace ForestDraw
         /// </summary>
         private const string SAVE_KEY = "UserDeckSaveData";
 
-        [SerializeField]
-        private GameObject player;
+        /// <summary>
+        /// ドローのタイミングを管理するためのタイマーの変数
+        /// </summary>
+        private float drawTimer = 0f;
+
+        /// <summary>
+        /// スタート時のシャッフルの回数の変数
+        /// </summary>
+        private int shuffleStartCount = 1;
+        /// <summary>
+        /// ランダムなインデックスを生成するための変数
+        /// </summary>
+        private int shuffleRangeIndex = 1;
+        /// <summary>
+        /// 自動ドローするカードの枚数の変数
+        /// </summary>
+        private int drawCount = 1;
 
         /// <summary>
         /// 初期設定の関数
@@ -48,7 +83,7 @@ namespace ForestDraw
         {
             LoadDeckData();
             InitializeDrawPile();// デッキをシャッフルして、カードを引く準備をする
-            DrawCards(4);// 4枚引く
+            DrawCards(startDrawCount);// ?枚引く
         }
 
         /// <summary>
@@ -57,13 +92,13 @@ namespace ForestDraw
         private void LoadDeckData()
         {
             // もしセーブデータがある場合
-            if (PlayerPrefs.HasKey(SAVE_KEY))
+            if(PlayerPrefs.HasKey(SAVE_KEY))
             {
                 string jsonStr = PlayerPrefs.GetString(SAVE_KEY);// セーブデータをJSONからクラスに変換
                 DeckSaveData loadedData = JsonUtility.FromJson<DeckSaveData>(jsonStr);// ロードしたカードIDを元に、マスターデータからカードを探してデッキに追加
 
                 // もしセーブデータのカードIDがマスターデータに存在する場合
-                foreach (string id in loadedData.savedCardIds)
+                foreach(string id in loadedData.savedCardIds)
                 {
                     CardData foundCard = allCardMasterList.Find(card => card.cardId == id);// マスターデータからIDが一致するカードを探す
 
@@ -84,9 +119,9 @@ namespace ForestDraw
             drawPile = new List<CardData>(playerDeck);// デッキの内容を山札にコピーする
 
             // ドローのたびに山札の順番が変わるように、シャッフルするループ
-            for (int i = drawPile.Count - 1; i > 0; i--)
+            for(int i = drawPile.Count - shuffleStartCount; i > 0; i--)
             {
-                int j = Random.Range(0, i + 1);// 0からiの範囲でランダムなインデックスを選ぶ
+                int j = Random.Range(0, i + shuffleRangeIndex);// 0からiの範囲でランダムなインデックスを選ぶ
                 CardData temp = drawPile[i];// i番目のカードを一時的に保存する
                 drawPile[i] = drawPile[j];// j番目のカードをi番目に移動する
                 drawPile[j] = temp;// 一時的に保存しておいたカードをj番目に移動する
@@ -100,10 +135,15 @@ namespace ForestDraw
         private void DrawCards(int drawCount)
         {
             // 指定された枚数だけ引くループ
-            for (int i = 0; i < drawCount; i++)
+            for(int i = 0; i < drawCount; i++)
             {
+                // もし手札の枚数が最大枚数以上の場合
+                if (handArea.childCount >= maxHandSize)
+                {
+                    break;
+                }
                 // もし山札が空の場合
-                if (drawPile.Count == 0)
+                else if(drawPile.Count == 0)
                 {
                     break;
                 }
@@ -114,8 +154,40 @@ namespace ForestDraw
 
                 GameObject cardObj = Instantiate(handCardPrefab, handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
                 HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
-                handCardUI.Setup(drawnCard,player);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
+                handCardUI.Setup(drawnCard, this);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
             }
+        }
+
+        /// <summary>
+        /// 毎フレーム呼び出される関数
+        /// </summary>
+        private void Update()
+        {
+            drawTimer += Time.deltaTime;
+
+            // もしドローのタイマーがドローする間隔を超えた場合
+            if(drawTimer >= drawInterval)
+            {
+                drawTimer = 0f;
+
+                // もし手札の枚数が最大枚数より少なくて、山札にカードが残っている場合
+                if(handArea.childCount < maxHandSize && drawPile.Count > 0)
+                {
+                    DrawCards(drawCount);
+                }
+            }
+        }
+
+        /// <summary>
+        /// カードを使用する関数
+        /// </summary>
+        /// <param name="usedCard"></param>
+        /// <param name="cardObj"></param>
+        public void UseCard(CardData usedCard, GameObject cardObj)
+        {
+            drawPile.Add(usedCard);// 使用するカードを山札の一番下に戻す
+
+            Destroy(cardObj);
         }
     }
 }
