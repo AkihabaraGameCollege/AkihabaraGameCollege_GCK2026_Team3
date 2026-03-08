@@ -11,19 +11,16 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// カードを実行する
         /// </summary>
-        public static void Execute(CardData card, Transform player)
+        public static bool Execute(CardData card, Transform player)
         {
-            // プレイヤー位置を取得（攻撃の基準位置）
             Vector3 origin = player.position;
 
-            // 必要なコンポーネント取得
-            if (!player.TryGetComponent<PlayerCost>(out var playerCost)) return;
-            if (!player.TryGetComponent<PlayerHealth>(out var playerHealth)) return;
+            if (!player.TryGetComponent<PlayerCost>(out var playerCost)) return false;
+            if (!player.TryGetComponent<PlayerHealth>(out var playerHealth)) return false;
 
-            // コストが足りなければカードを使用できない
-            if (!playerCost.UseCost(card.cost)) return;
+            // コスト不足なら失敗
+            if (!playerCost.UseCost(card.cost)) return false;
 
-            // カードタイプごとに処理を分岐
             switch (card.cardType)
             {
                 case CardType.Attack:
@@ -38,6 +35,8 @@ namespace ForestDraw.Player.Combat
                     ExecuteSupport(card, playerHealth);
                     break;
             }
+
+            return true;
         }
 
         /// <summary>
