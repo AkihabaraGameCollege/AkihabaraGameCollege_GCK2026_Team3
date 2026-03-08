@@ -1,102 +1,93 @@
+using ForestDraw;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace ForestDraw
+[RequireComponent(typeof(CanvasGroup))] // ★付け忘れ防止
+public class HandCardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    /// <summary>
-    /// 手持ちのカードのUIを管理するクラス
-    /// </summary>
-    public class HandCardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    [SerializeField] private Image cardImage;
+
+    private CardData myCardData;
+    private BattleCardManager battleManager;
+
+    // ドラッグ制御用の変数
+    private Transform originalParent;
+    private GameObject placeholder; // ★追加: 隙間をキープする身代わり
+    private Canvas mainCanvas;      // ★追加: 座標計算用のCanvas
+
+    private void Start()
     {
-        /// <summary>
-        /// カードの画像を表示するためのImageコンポーネントの変数
-        /// </summary>
-        [SerializeField]
-        private Image cardImage = null;
+        // 親を遡って一番大元のCanvasを取得しておく
+        mainCanvas = GetComponentInParent<Canvas>();
+    }
 
-        /// <summary>
-        /// カードのデータを保持する変数
-        /// </summary>
-        private CardData myCardData;
-
-        /// <summary>
-        /// カードの使用判定や、使用後の処理を行うためのマネージャーへの参照変数
-        /// </summary>
-        private BattleCardManager battleManager;
-
-        /// <summary>
-        /// 元にの親（HandArea）を記憶しておくための変数
-        /// </summary>
-        private Transform originalParent;
-
-        /// <summary>
-        /// 元の並び順を記憶しておくための変数
-        /// </summary>
-        private int originalSiblingIndex;
-
-        /// <summary>
-        /// セットアップ用の関数
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="manager"></param>
-        public void Setup(CardData data, BattleCardManager manager)
+    public void Setup(CardData data, BattleCardManager manager)
+    {
+        myCardData = data;
+        battleManager = manager;
+        if (cardImage != null && data.cardImage != null)
         {
-            myCardData = data;
-            battleManager = manager;
-
-            // もしカード画像がセットされいる場合
-            if (cardImage != null && data.cardImage != null)
-            {
-                cardImage.sprite = data.cardImage;
-            }
+            cardImage.sprite = data.cardImage;
         }
+    }
 
-        /// <summary>
-        /// ドラッグ開始の瞬間に呼ばれる関数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        originalParent = transform.parent;
+
+        // 1. 隙間をキープするための「透明な身代わり（Placeholder）」を作る
+        placeholder = new GameObject("Placeholder");
+        RectTransform placeholderRect = placeholder.AddComponent<RectTransform>();
+        placeholderRect.SetParent(originalParent, false);
+        placeholderRect.SetSiblingIndex(transform.GetSiblingIndex());
+
+        // 身代わりのサイズを、今のカードと全く同じサイズに設定する
+        LayoutElement le = placeholder.AddComponent<LayoutElement>();
+        RectTransform myRect = GetComponent<RectTransform>();
+        le.preferredWidth = myRect.rect.width;
+        le.preferredHeight = myRect.rect.height;
+        le.flexibleWidth = 0;
+        le.flexibleHeight = 0;
+
+        // 2. カード本体をCanvas直下に移動して、レイアウトの支配から解放する
+        transform.SetParent(mainCanvas.transform, true);
+        transform.SetAsLastSibling(); // 一番手前に表示させる
+
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        // 3. 【最重要】Screen Space - Camera など、どんなCanvas設定でも
+        // マウスのピクセル位置を、正確にUI用のワールド座標に変換して追従させる
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            mainCanvas.GetComponent<RectTransform>(),
+            eventData.position,
+            mainCanvas.worldCamera,
+            out Vector3 globalMousePos
+        );
+
+        transform.position = globalMousePos;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        // 4. 発動チェック：カードの座標ではなく「マウスの画面上のY座標」で判定する
+        if (eventData.position.y > Screen.height * 0.4f)
         {
-            // 元の親（HandArea）と、並び順を記憶しておく
-            originalParent = transform.parent;// ドラッグ開始の瞬間の親（HandArea）を記憶しておく
-            originalSiblingIndex = transform.GetSiblingIndex();// ドラッグ開始の瞬間の並び順を記憶しておく
-
-            // HorizontalLayoutGroup の影響を一時的に外すため、親を一番上のCanvasに変更する
-            transform.SetParent(transform.root);// ドラッグ中はCanvas直下に移動させることで、レイアウトの影響を受けずに自由に動かせるようにする
-            transform.SetAsLastSibling(); // ドラッグ中のカードが他のUIの下に隠れないように最前面へ
-
-            GetComponent<CanvasGroup>().blocksRaycasts = false;// ドラッグ中はカードがレイキャストをブロックしないようにする
+            // 使用成功！
+            battleManager.UseCard(myCardData, gameObject);
+            Destroy(placeholder); // 身代わりを消す
         }
-
-        /// <summary>
-        /// ドラッグ中（指を動かしている間）に毎フレーム呼ばれる関数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnDrag(PointerEventData eventData)
+        else
         {
-            transform.position = eventData.position;// ドラッグ中はカードの位置を常に指の位置に合わせる
-        }
-
-        /// <summary>
-        /// ドラッグ終了の瞬間に呼ばれる関数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            GetComponent<CanvasGroup>().blocksRaycasts = true;// ドラッグが終わったらカードがレイキャストをブロックするように戻す
-
-            // もしカードの高さが画面の40%より高い位置にある場合
-            if (transform.position.y > Screen.height * 0.4f)
-            {
-                battleManager.UseCard(myCardData, gameObject);
-            }
-            else
-            {
-                // キャンセル: 高さが足りなかったら元の手札の場所・順番に戻す
-                transform.SetParent(originalParent);// 元の親（HandArea）に戻す
-                transform.SetSiblingIndex(originalSiblingIndex);// 元の並び順に戻す
-            }
+            // キャンセル：身代わりが置いてある場所に戻る
+            transform.SetParent(originalParent, false);
+            transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+            Destroy(placeholder); // 身代わりを消す
         }
     }
 }

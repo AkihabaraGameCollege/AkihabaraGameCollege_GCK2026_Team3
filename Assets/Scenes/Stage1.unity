@@ -3372,17 +3372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512ea1ac6d853d843a731fc5a1ab6bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestAttack
-  radius: 20
-  damage: 200
-  width: 10
-  length: 100
-  target: {fileID: 1079281322}
-  origin: {x: 0, y: 0, z: 30}
-  useCost: 2
-  recoverCost: 5
-  timeCost: 2
-  recoverCostInterval: 10
-  playerCost: {fileID: 1079281330}
+  data1: {fileID: 0}
+  data2: {fileID: 0}
+  data3: {fileID: 0}
+  data4: {fileID: 0}
+  data5: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1916343612
 GameObject:
   m_ObjectHideFlags: 0
