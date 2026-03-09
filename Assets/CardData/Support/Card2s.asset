@@ -31,3 +31,6 @@ MonoBehaviour:
     intervalReduction: 0
   supportParams:
     damageReduction: 50
+    attackMultiplier: 0
+  utilityParams:
+    drawCount: 2

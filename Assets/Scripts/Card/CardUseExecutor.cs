@@ -8,31 +8,37 @@ namespace ForestDraw.Player.Combat
     /// </summary>
     public static class CardUseExecutor
     {
+        public class CardUseContext
+        {
+            public PlayerCost playerCost;
+            public PlayerHealth playerHealth;
+            public BattleCardManager cardManager;
+            public Vector3 target;
+        }
         /// <summary>
         /// カードを実行する
         /// </summary>
-        public static bool Execute(CardData card, Transform player)
+        public static bool Execute(CardData card, CardUseContext context)
         {
-            Vector3 origin = player.position;
-
-            if (!player.TryGetComponent<PlayerCost>(out var playerCost)) return false;
-            if (!player.TryGetComponent<PlayerHealth>(out var playerHealth)) return false;
-
             // コスト不足なら失敗
-            if (!playerCost.UseCost(card.cost)) return false;
+            if (!context.playerCost.UseCost(card.cost)) return false;
 
             switch (card.cardType)
             {
                 case CardType.Attack:
-                    ExecuteAttack(card, origin);
+                    ExecuteAttack(card, context.target);
                     break;
 
                 case CardType.Recovery:
-                    ExecuteRecovery(card, playerHealth, playerCost);
+                    ExecuteRecovery(card, context.playerHealth, context.playerCost);
                     break;
 
                 case CardType.Support:
-                    ExecuteSupport(card, playerHealth);
+                    ExecuteSupport(card, context.playerHealth);
+                    break;
+
+                case CardType.Utility:
+                    ExecuteUtility(card, context.cardManager);
                     break;
             }
 
@@ -118,6 +124,23 @@ namespace ForestDraw.Player.Combat
                 case CardEffectType.BuffNext:
                     // 次の攻撃のダメージ倍率を強化
                     PlayerAttack.SetNextAttackMultiplier(support.attackMultiplier);
+                    break;
+            }
+        }
+        /// <summary>
+        /// ユーティリティカードの処理
+        /// </summary>
+        private static void ExecuteUtility(
+            CardData card,
+            BattleCardManager cardManager)
+        {
+            var utility = card.utilityParams;
+
+            switch (card.effectType)
+            {
+                case CardEffectType.Draw:
+                    // カードをドロー
+                    cardManager.DrawCards(utility.drawCount);
                     break;
             }
         }

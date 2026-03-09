@@ -42,6 +42,9 @@ namespace ForestDraw
         /// <summary>サポートカード用のパラメータ</summary>
         public SupportParams supportParams;
 
+        /// <summary>サポートカード用のパラメータ</summary>
+        public UtilityParams utilityParams;
+
         /// <summary>
         /// ScriptableObject読み込み時に各パラメータを初期化
         /// nullの場合のみ生成する
@@ -51,6 +54,7 @@ namespace ForestDraw
             attackParams ??= new AttackParams();
             supportParams ??= new SupportParams();
             recoverParams ??= new RecoverParams();
+            utilityParams ??= new UtilityParams();
         }
     }
 
@@ -100,5 +104,15 @@ namespace ForestDraw
 
         /// <summary>次の攻撃のダメージ倍率</summary>
         public float attackMultiplier;
+    }
+
+    /// <summary>
+    /// ユーティリティカード用パラメータ
+    /// </summary>
+    [System.Serializable]
+    public class UtilityParams
+    {
+        /// <summary> カードを引く枚数 /// </summary>
+        public int drawCount;
     }
 }
