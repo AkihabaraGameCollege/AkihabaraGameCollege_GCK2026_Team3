@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ForestDraw.Player.Combat;
+using static ForestDraw.Player.Combat.CardUseExecutor;
+using static UnityEngine.GraphicsBuffer;
 
 namespace ForestDraw
 {
@@ -24,7 +26,7 @@ namespace ForestDraw
         /// プレイヤーの
         /// </summary>
         [SerializeField]
-        private Transform playerTransform;
+        private GameObject player;
 
         /// <summary>
         /// ドローする間隔の変数
@@ -51,8 +53,12 @@ namespace ForestDraw
         /// <summary>
         /// プレイヤーのコストの管理クラスを指定する変数
         /// </summary>
-        [SerializeField]
         private PlayerCost playerCost = null;
+        
+        /// <summary>
+        /// プレイヤーのHPの管理クラスを指定する変数
+        /// </summary>
+        private PlayerHealth playerHealth = null;
 
         /// <summary>
         /// リストに全カードのマスターデータを入れておく変数
@@ -61,11 +67,11 @@ namespace ForestDraw
         /// <summary>
         /// リストにロードしたデッキの中身を入れておく変数
         /// </summary>
-        private List<CardData> playerDeck = new List<CardData>();
+        private List<CardData> playerDeck = new();
         /// <summary>
         /// ドローするための山札のリスト変数
         /// </summary>
-        private List<CardData> drawPile = new List<CardData>();
+        private List<CardData> drawPile = new();
 
         /// <summary>
         /// セーブ機能で使うキーの定数の変数
@@ -93,6 +99,12 @@ namespace ForestDraw
         /// <summary>
         /// 初期設定の関数
         /// </summary>
+
+        private void Awake()
+        {
+            playerCost = GetComponent<PlayerCost>();
+            playerHealth = player.GetComponent<PlayerHealth>();
+        }
         private void Start()
         {
             LoadDeckData();
@@ -146,11 +158,12 @@ namespace ForestDraw
         /// ドローする関数
         /// </summary>
         /// <param name="drawCount"></param>
-        private void DrawCards(int drawCount)
+        public void DrawCards(int drawCount)
         {
             // 指定された枚数だけ引くループ
             for (int i = 0; i < drawCount; i++)
             {
+                Debug.Log(drawCount + "枚引く");
                 // もし手札の枚数が最大枚数以上の場合
                 if (handArea.childCount >= maxHandSize)
                 {
@@ -199,10 +212,14 @@ namespace ForestDraw
         /// <param name="cardObj"></param>
         public bool UseCard(CardData usedCard, GameObject cardObj)
         {
-            if (!CardUseExecutor.Execute(usedCard, playerTransform))
+            var context = new CardUseContext
             {
-                return false;
-            }
+                playerCost = playerCost,
+                playerHealth = playerHealth,
+                cardManager = this,
+                target = player.transform.position
+            };
+            if (!CardUseExecutor.Execute(usedCard, context)) return false;
 
             drawPile.Add(usedCard);// 使用するカードを山札の一番下に戻す
 

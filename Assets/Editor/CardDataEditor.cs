@@ -49,6 +49,11 @@ public class CardDataEditor : Editor
                 };
                 break;
             case CardType.Utility:
+                availableEffects = new CardEffectType[]
+                {
+                    CardEffectType.Draw
+                };
+                break;
 
             default:
                 availableEffects = Enum.GetValues(typeof(CardEffectType))
@@ -141,6 +146,19 @@ public class CardDataEditor : Editor
                         break;
                 }
                 break;
+            case CardType.Utility:
+                EditorGUILayout.LabelField("Support Parameters", EditorStyles.boldLabel);
+                var utility = card.utilityParams;
+
+                // 効果タイプ別の追加パラメータ
+                switch (card.effectType)
+                {
+                    case CardEffectType.Draw:
+                        utility.drawCount = EditorGUILayout.IntField("ドロー枚数", utility.drawCount);
+                        break;
+                }
+                break;
+
         }
 
         // 保存

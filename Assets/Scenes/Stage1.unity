@@ -392,12 +392,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.BattleCardManager
   handCardPrefab: {fileID: 4958202801746025387, guid: e018d7578b3490b4ea1bb306061068e9, type: 3}
   handArea: {fileID: 844520532}
-  playerTransform: {fileID: 1079281326}
+  player: {fileID: 1079281322}
   drawInterval: 3
   maxHandSize: 8
   startDrawCount: 4
   costCount: 4
-  playerCost: {fileID: 243141230}
   allCardMasterList:
   - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
   - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
