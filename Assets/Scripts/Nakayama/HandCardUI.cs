@@ -116,16 +116,34 @@ namespace ForestDraw
             if (eventData.position.y > Screen.height * 0.4f)
             {
                 // 使用成功！
-                battleManager.UseCard(myCardData, gameObject);
-                Destroy(placeholder); // 身代わりを消す
+                bool flag = battleManager.UseCard(myCardData, gameObject);
+
+                if (flag)
+                {
+                    CanUse();
+                }
+                else
+                {
+                    CanNotUse();
+                }
             }
             else
             {
-                // キャンセル：身代わりが置いてある場所に戻る
-                transform.SetParent(originalParent, false);
-                transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
-                Destroy(placeholder); // 身代わりを消す
+                CanNotUse();
             }
+        }
+
+        private void CanUse()
+        {
+            Destroy(placeholder); // 身代わりを消す
+        }
+
+        private void CanNotUse()
+        {
+            // キャンセル：身代わりが置いてある場所に戻る
+            transform.SetParent(originalParent, false);
+            transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+            Destroy(placeholder); // 身代わりを消す
         }
     }
 }
