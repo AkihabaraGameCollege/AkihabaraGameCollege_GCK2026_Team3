@@ -75,7 +75,6 @@ namespace ForestDraw.Enemy.Components
         {
             EnemyManager.Instance.RemoveEnemy(gameObject);
             Died?.Invoke();
-            Destroy(gameObject);
         }
 
         private void UpdateHPBar()

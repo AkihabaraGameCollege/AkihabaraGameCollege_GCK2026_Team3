@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 250277710141293007}
   - component: {fileID: 7949831502371010199}
   - component: {fileID: 2044133792775035203}
+  - component: {fileID: 212409950212801308}
   m_Layer: 0
   m_Name: GoblinRanged
   m_TagString: Untagged
@@ -176,6 +177,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8453a8a01becc4943a953c3d20158ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewEnemyMove
+--- !u!114 &212409950212801308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717454675415249708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009e68e7787ff794e8368c53da249712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Enemy.EnemyController
 --- !u!1 &2094746500540093174
 GameObject:
   m_ObjectHideFlags: 0

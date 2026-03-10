@@ -18,7 +18,7 @@ namespace ForestDraw.Enemy.Attack
         // ===== ó‘Ô =====
         protected float attackTimer = 0f;
         protected bool canAttack = false;
-        protected GameObject target;
+        protected Transform target;
 
         private EnemyMove move;
         private EnemyHealth health;
@@ -26,7 +26,7 @@ namespace ForestDraw.Enemy.Attack
         /// <summary>
         /// UŒ‚‘ÎÛ‚ğİ’è‚·‚é
         /// </summary>
-        public void SetTarget(GameObject t)
+        public void SetTarget(Transform t)
         {
             target = t;
         }
@@ -71,7 +71,18 @@ namespace ForestDraw.Enemy.Attack
         protected void EnableAttack()
         {
             if (target == null) return;
+
+            LookAtTarget();
             canAttack = true;
+        }
+
+        private void LookAtTarget()
+        {
+            Vector3 dir = target.position - transform.position;
+            dir.y = 0;
+
+            if (dir.sqrMagnitude > 0.001f)
+                transform.forward = dir.normalized;
         }
 
         protected void StopAttack()

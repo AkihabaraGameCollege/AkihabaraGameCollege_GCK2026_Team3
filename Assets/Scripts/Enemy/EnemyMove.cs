@@ -26,8 +26,8 @@ namespace ForestDraw.Enemy.Components
         // ===== 内部状態 =====
         private Vector3 currentTargetPos;
         private bool hasTarget = false;
-        private Transform target;
         private bool hasReachedGoal = false;
+        private bool isPaused = false;
 
         /// <summary>
         /// ScriptableObjectから移動パラメータを設定する
@@ -48,14 +48,6 @@ namespace ForestDraw.Enemy.Components
             hasTarget = false;
         }
 
-        private void Start()
-        {
-            if (Camera.main != null)
-            {
-                target = Camera.main.transform;
-            }
-        }
-
         private void Update()
         {
             if (!CanMove()) return;
@@ -71,7 +63,8 @@ namespace ForestDraw.Enemy.Components
 
         private bool CanMove()
         {
-            return !hasReachedGoal
+            return !isPaused
+                   && !hasReachedGoal
                    && waypoints != null
                    && currentIndex < waypoints.Length;
         }
@@ -145,21 +138,18 @@ namespace ForestDraw.Enemy.Components
         private void HandleGoalReached()
         {
             hasReachedGoal = true;
-            LookAtTarget();
             ReachedGoal?.Invoke();
         }
+        // ===== 外部制御 =====
 
-        private void LookAtTarget()
+        public void PauseMove()
         {
-            if (target == null) return;
+            isPaused = true;
+        }
 
-            Vector3 direction = target.position - transform.position;
-            direction.y = 0f;
-
-            if (direction.sqrMagnitude > 0.001f)
-            {
-                transform.forward = direction.normalized;
-            }
+        public void ResumeMove()
+        {
+            isPaused = false;
         }
     }
 }
