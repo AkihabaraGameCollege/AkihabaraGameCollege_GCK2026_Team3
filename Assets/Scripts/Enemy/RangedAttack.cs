@@ -6,7 +6,7 @@ namespace ForestDraw.Enemy.Attack
     /// 遠距離攻撃を行うクラス。
     /// 一定間隔で弾を生成し、ターゲットへ発射する。
     /// </summary>
-    public class RangedAttack : EnemyAttackBase
+    public class RangedAttack : EnemyAttackGoal
     {
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firePoint;

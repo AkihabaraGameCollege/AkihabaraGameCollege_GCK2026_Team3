@@ -1,5 +1,3 @@
-using ForestDraw.Enemy.Attack;
-using ForestDraw.Enemy.Components;
 using ForestDraw.Enemy.Data;
 using System.Collections;
 using UnityEngine;
@@ -77,8 +75,7 @@ namespace ForestDraw.Enemy.Spawner
         /// </summary>
         private void EnemyInitialize(GameObject enemy)
         {
-            var controller = enemy.GetComponent<EnemyController>();
-            if (controller == null) return;
+            if (!enemy.TryGetComponent<EnemyController>(out var controller)) return;
 
             Transform[] waypoints = new Transform[waypointRoot.childCount];
             for (int i = 0; i < waypointRoot.childCount; i++)
