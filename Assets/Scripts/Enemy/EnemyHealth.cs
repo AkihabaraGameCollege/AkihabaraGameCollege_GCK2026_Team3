@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using ForestDraw.Enemy.Data;
 using System;
 using ForestDraw.Combat;
 
@@ -11,7 +10,7 @@ namespace ForestDraw.Enemy.Components
     /// 敵のHPを管理するコンポーネント。
     /// ダメージ処理、無敵時間制御、死亡通知を行う。
     /// </summary>
-    public class EnemyHealth : MonoBehaviour, IDamageable
+    public class EnemyHealth : MonoBehaviour, IDamageable, IEnemyComponent
     {
         // ===== 状態 =====
         private int health;
@@ -32,10 +31,10 @@ namespace ForestDraw.Enemy.Components
         /// <summary>
         /// ScriptableObjectから初期ステータスを設定する
         /// </summary>
-        public void Initialize(EnemyData data)
+        public void Initialize(EnemyInitContext context)
         {
-            damageInterval = data.takeDamageInterval;
-            maxHealth = data.maxHealth;
+            damageInterval = context.data.takeDamageInterval;
+            maxHealth = context.data.maxHealth;
             health = maxHealth;
             UpdateHPBar();
         }
@@ -75,7 +74,6 @@ namespace ForestDraw.Enemy.Components
         {
             EnemyManager.Instance.RemoveEnemy(gameObject);
             Died?.Invoke();
-            Destroy(gameObject);
         }
 
         private void UpdateHPBar()

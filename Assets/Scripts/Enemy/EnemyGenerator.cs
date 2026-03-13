@@ -1,5 +1,3 @@
-using ForestDraw.Enemy.Attack;
-using ForestDraw.Enemy.Components;
 using ForestDraw.Enemy.Data;
 using System.Collections;
 using UnityEngine;
@@ -24,7 +22,7 @@ namespace ForestDraw.Enemy.Spawner
         [Header("参照設定")]
         [SerializeField] private GameObject enemyPrefab;      // 敵Prefab
         [SerializeField] private Transform waypointRoot;      // 移動ルート
-        [SerializeField] private GameObject player;           // 攻撃対象
+        [SerializeField] private Transform player;           // 攻撃対象
         [SerializeField] private EnemyData enemyData;         // 敵のステータスデータ
 
         private void Start()
@@ -56,9 +54,7 @@ namespace ForestDraw.Enemy.Spawner
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 EnemyManager.Instance.AddEnemy(enemy);
 
-                SetupMove(enemy);
-                SetupHealth(enemy);
-                SetupAttack(enemy);
+                EnemyInitialize(enemy);
             }
         }
 
@@ -75,14 +71,11 @@ namespace ForestDraw.Enemy.Spawner
         }
 
         /// <summary>
-        /// 移動コンポーネントの初期化
+        /// エネミーコンポーネントの初期化
         /// </summary>
-        private void SetupMove(GameObject enemy)
+        private void EnemyInitialize(GameObject enemy)
         {
-            var move = enemy.GetComponent<EnemyMove>();
-            if (move == null) return;
-
-            move.Initialize(enemyData);
+            if (!enemy.TryGetComponent<EnemyController>(out var controller)) return;
 
             Transform[] waypoints = new Transform[waypointRoot.childCount];
             for (int i = 0; i < waypointRoot.childCount; i++)
@@ -90,30 +83,7 @@ namespace ForestDraw.Enemy.Spawner
                 waypoints[i] = waypointRoot.GetChild(i);
             }
 
-            move.SetPath(waypoints);
-        }
-
-        /// <summary>
-        /// HPコンポーネントの初期化
-        /// </summary>
-        private void SetupHealth(GameObject enemy)
-        {
-            var health = enemy.GetComponent<EnemyHealth>();
-            if (health == null) return;
-
-            health.Initialize(enemyData);
-        }
-
-        /// <summary>
-        /// 攻撃コンポーネントの初期化
-        /// </summary>
-        private void SetupAttack(GameObject enemy)
-        {
-            var attack = enemy.GetComponent<EnemyAttackBase>();
-            if (attack == null) return;
-
-            attack.Initialize(enemyData);
-            attack.SetTarget(player);
+            controller.Initialize(waypoints, player, enemyData);
         }
     }
 }

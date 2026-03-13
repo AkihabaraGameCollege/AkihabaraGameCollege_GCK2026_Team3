@@ -3,12 +3,12 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace ForestDraw
-{ 
+{
     /// <summary>
     /// ポーズUI
     /// </summary>
-public class PauseManager : MonoBehaviour
-{
+    public class PauseManager : MonoBehaviour
+    {
         /// <summary>
         /// 戻るボタンの変数
         /// </summary>
@@ -41,35 +41,36 @@ public class PauseManager : MonoBehaviour
         /// <summary>
         /// 初期設定を行う関数
         /// </summary>
-    void Awake()
-    {
-        // UnityEvent を追加
-        resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
-           settingButton.onClick.AddListener(() => { onSettingButtonClick.Invoke(); });// 設定ボタンのイベントを設定
-        exitButton.onClick.AddListener(() =>{ onExitButtonClick.Invoke(); });// ステージセレクトボタンのイベントを設定
-
-        Hide();// 起動時はUIを隠す
-    }
-
-    /// <summary>
-    /// UIを見せる関数
-    /// </summary>
-    public void Show()
-    {
-        // 子オブジェクトをすべてアクティブ化
-        foreach (Transform child in transform)
+        void Awake()
         {
-            child.gameObject.SetActive(true);
+            // UnityEvent を追加
+            resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
+            settingButton.onClick.AddListener(() => { onSettingButtonClick.Invoke(); });// 設定ボタンのイベントを設定
+            exitButton.onClick.AddListener(() => { onExitButtonClick.Invoke(); });// ステージセレクトボタンのイベントを設定
+
+            Hide();// 起動時はUIを隠す
         }
-    }
 
-    // このUIを非表示に設定します。
-    public void Hide()
-    {
-        // 子オブジェクトをすべて非アクティブ化
-        foreach (Transform child in transform)
+        /// <summary>
+        /// UIを見せる関数
+        /// </summary>
+        public void Show()
         {
-            child.gameObject.SetActive(false);
+            // 子オブジェクトをすべてアクティブ化
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        // このUIを非表示に設定します。
+        public void Hide()
+        {
+            // 子オブジェクトをすべて非アクティブ化
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
 }

@@ -1,14 +1,14 @@
 using UnityEngine;
 using System;
-using ForestDraw.Enemy.Data;
 
 namespace ForestDraw.Enemy.Components
 {
     /// <summary>
     /// 敵の移動を管理するコンポーネント。
-    /// Waypointに沿って移動し、最終到達時にイベントを通知する。
+    /// ・Waypointに沿って移動
+    /// ・最終到達時にイベントを通知
     /// </summary>
-    public class EnemyMove : MonoBehaviour
+    public class EnemyMove : MonoBehaviour, IEnemyComponent
     {
         // ===== ルート情報 =====
         private Transform[] waypoints;
@@ -26,34 +26,19 @@ namespace ForestDraw.Enemy.Components
         // ===== 内部状態 =====
         private Vector3 currentTargetPos;
         private bool hasTarget = false;
-        private Transform target;
         private bool hasReachedGoal = false;
+        private bool isPaused = false;
 
         /// <summary>
-        /// ScriptableObjectから移動パラメータを設定する
+        /// 初期化（パラメータとルートを設定）
         /// </summary>
-        public void Initialize(EnemyData data)
+        public void Initialize(EnemyInitContext context)
         {
-            moveSpeed = data.moveSpeed;
-            waypointRadius = data.waypointRadius;
-        }
-
-        /// <summary>
-        /// 移動ルートを設定する
-        /// </summary>
-        public void SetPath(Transform[] newWaypoints)
-        {
-            waypoints = newWaypoints;
+            moveSpeed = context.data.moveSpeed;
+            waypointRadius = context.data.waypointRadius;
+            waypoints = context.path;
             currentIndex = 0;
             hasTarget = false;
-        }
-
-        private void Start()
-        {
-            if (Camera.main != null)
-            {
-                target = Camera.main.transform;
-            }
         }
 
         private void Update()
@@ -61,27 +46,33 @@ namespace ForestDraw.Enemy.Components
             if (!CanMove()) return;
 
             if (!hasTarget)
-                GenerateRandomTarget();
+                GenerateRandomTarget(); // 次のWaypointを決める
 
             MoveToTarget();
 
             if (HasReachedTarget())
-                AdvanceWaypoint();
+                AdvanceWaypoint(); // Waypoint更新
         }
 
+        /// <summary>
+        /// 移動可能か判定
+        /// </summary>
         private bool CanMove()
         {
-            return !hasReachedGoal
+            return !isPaused
+                   && !hasReachedGoal
                    && waypoints != null
                    && currentIndex < waypoints.Length;
         }
 
+        /// <summary>
+        /// 現在のターゲットに向かって移動
+        /// </summary>
         private void MoveToTarget()
         {
             Vector3 direction = (currentTargetPos - transform.position).normalized;
 
             transform.forward = direction;
-
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 currentTargetPos,
@@ -89,11 +80,17 @@ namespace ForestDraw.Enemy.Components
             );
         }
 
+        /// <summary>
+        /// ターゲットに到達したか判定
+        /// </summary>
         private bool HasReachedTarget()
         {
             return (transform.position - currentTargetPos).sqrMagnitude < 0.01f;
         }
 
+        /// <summary>
+        /// Waypointを進める
+        /// </summary>
         private void AdvanceWaypoint()
         {
             currentIndex++;
@@ -101,10 +98,13 @@ namespace ForestDraw.Enemy.Components
 
             if (currentIndex >= waypoints.Length)
             {
-                HandleGoalReached();
+                HandleGoalReached(); // ゴール到達処理
             }
         }
 
+        /// <summary>
+        /// 次のWaypointに向かう位置を決定
+        /// </summary>
         private void GenerateRandomTarget()
         {
             if (waypoints[currentIndex] == null)
@@ -125,10 +125,14 @@ namespace ForestDraw.Enemy.Components
             hasTarget = true;
         }
 
+        /// <summary>
+        /// Waypoint位置にランダムオフセットを加える
+        /// </summary>
         private Vector2 GenerateRandomOffset()
         {
             Vector2 random = UnityEngine.Random.insideUnitCircle * waypointRadius;
 
+            // 最終WaypointではY方向オフセットを無効に
             if (IsLastWaypoint())
             {
                 random.y = 0f;
@@ -142,24 +146,31 @@ namespace ForestDraw.Enemy.Components
             return currentIndex == waypoints.Length - 1;
         }
 
+        /// <summary>
+        /// ゴール到達時の処理
+        /// </summary>
         private void HandleGoalReached()
         {
             hasReachedGoal = true;
-            LookAtTarget();
             ReachedGoal?.Invoke();
         }
 
-        private void LookAtTarget()
+        // ===== 外部制御 =====
+
+        /// <summary>
+        /// 移動一時停止
+        /// </summary>
+        public void PauseMove()
         {
-            if (target == null) return;
+            isPaused = true;
+        }
 
-            Vector3 direction = target.position - transform.position;
-            direction.y = 0f;
-
-            if (direction.sqrMagnitude > 0.001f)
-            {
-                transform.forward = direction.normalized;
-            }
+        /// <summary>
+        /// 移動再開
+        /// </summary>
+        public void ResumeMove()
+        {
+            isPaused = false;
         }
     }
 }

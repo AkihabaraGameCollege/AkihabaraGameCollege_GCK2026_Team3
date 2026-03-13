@@ -7,7 +7,7 @@ namespace ForestDraw.Enemy.Attack
     /// 近接攻撃を行うクラス。
     /// 一定間隔でターゲットへ直接ダメージを与える。
     /// </summary>
-    public class MeleeAttack : EnemyAttackBase
+    public class MeleeAttack : EnemyAttackGoal
     {
         /// <summary>
         /// 攻撃処理を実行する

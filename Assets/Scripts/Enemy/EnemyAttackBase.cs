@@ -1,96 +1,60 @@
 using UnityEngine;
-using ForestDraw.Enemy.Data;
 using ForestDraw.Enemy.Components;
 
 namespace ForestDraw.Enemy.Attack
 {
     /// <summary>
-    /// 敵の攻撃処理の基底クラス。
-    /// 攻撃間隔管理と攻撃開始／停止制御を行い、
-    /// 実際の攻撃内容は継承先で実装する。
+    /// 敵の攻撃の基底クラス
+    /// ・攻撃間隔やダメージ管理
+    /// ・ターゲットを向く処理
     /// </summary>
-    public abstract class EnemyAttackBase : MonoBehaviour
+    public abstract class EnemyAttackBase : MonoBehaviour, IEnemyComponent
     {
         // ===== 攻撃設定 =====
         protected float attackInterval;
         protected int attackDamage;
 
-        // ===== 状態 =====
+        // ===== 状態管理 =====
         protected float attackTimer = 0f;
-        protected bool canAttack = false;
-        protected GameObject target;
+        protected Transform target;
 
-        private EnemyMove move;
-        private EnemyHealth health;
+        protected EnemyMove move;
+        protected EnemyHealth health;
 
         /// <summary>
-        /// 攻撃対象を設定する
+        /// EnemyInitContextから初期化
         /// </summary>
-        public void SetTarget(GameObject t)
+        public void Initialize(EnemyInitContext context)
         {
-            target = t;
+            attackDamage = context.data.attackDamage;
+            attackInterval = context.data.attackInterval;
+            target = context.target;
         }
 
         /// <summary>
-        /// ScriptableObjectから攻撃パラメータを設定する
+        /// コンポーネント取得
         /// </summary>
-        public void Initialize(EnemyData data)
-        {
-            attackDamage = data.attackDamage;
-            attackInterval = data.attackInterval;
-        }
-
         protected virtual void Awake()
         {
             move = GetComponent<EnemyMove>();
             health = GetComponent<EnemyHealth>();
         }
 
-        protected virtual void Start()
+        /// <summary>
+        /// ターゲットの方向を向く
+        /// </summary>
+        protected void LookAtTarget()
         {
-            if (move != null)
-                move.ReachedGoal += EnableAttack;
+            Vector3 dir = target.position - transform.position;
+            dir.y = 0;
 
-            if (health != null)
-                health.Died += StopAttack;
-        }
-
-        protected virtual void Update()
-        {
-            if (!canAttack || target == null) return;
-
-            attackTimer += Time.deltaTime;
-
-            if (attackTimer >= attackInterval)
-            {
-                attackTimer = 0f;
-                PerformAttack();
-            }
-        }
-
-        protected void EnableAttack()
-        {
-            if (target == null) return;
-            canAttack = true;
-        }
-
-        protected void StopAttack()
-        {
-            canAttack = false;
-            attackTimer = 0f;
-        }
-
-        protected virtual void OnDestroy()
-        {
-            if (move != null)
-                move.ReachedGoal -= EnableAttack;
-
-            if (health != null)
-                health.Died -= StopAttack;
+            // 方向ベクトルがほぼゼロでなければ向きを更新
+            if (dir.sqrMagnitude > 0.001f)
+                transform.forward = dir.normalized;
         }
 
         /// <summary>
-        /// 実際の攻撃処理を実装する
+        /// 個別攻撃処理（派生クラスで実装）
         /// </summary>
         protected abstract void PerformAttack();
     }
