@@ -102,19 +102,10 @@ namespace ForestDraw
         [SerializeField]
         private Sprite[] Panel_Sprite = null;
 
-
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
         /// </summary>
         private static readonly int startTrigger = Animator.StringToHash("Start");
-        /// <summary>
-        /// 設定ボタンが押されたときに呼ばれるIDの変数
-        /// </summary>
-        private static readonly int settingTrigger = Animator.StringToHash("Setting");
-        /// <summary>
-        /// 設定画面から戻るときに呼ばれるIDの変数
-        /// </summary>
-        private static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
         /// <summary>
         /// ゲーム終了するときに呼ばれるIDの変数
         /// </summary>
@@ -137,9 +128,14 @@ namespace ForestDraw
         private static readonly int goStageTrigger = Animator.StringToHash("GoStage");
 
         /// <summary>
+        /// ポーズから出た後か判別する変数
+        /// </summary>
+        public bool isPauseExit = false;
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
-        void Start()
+        private void Start()
         {
             // タイトルBGMを再生
             audioSetting.PlayBGM(0);
@@ -148,7 +144,6 @@ namespace ForestDraw
             // ボタンに関数を登録
             deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
-            settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンに設定画面から戻る関数を登録
             stageSelectReturnButton.onClick.AddListener(StageSelectReturn);// ステージセレクトから戻るボタンにステージセレクトから戻る関数を登録
             stageButton1.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(0)));// 第一ステージへのボタンに第一ステージへの関数を登録
             stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
@@ -161,22 +156,6 @@ namespace ForestDraw
         public void DisplayStageSelect()
         {
             animator.SetTrigger(startTrigger);// ステージセレクトを表示させるトリガーをセット
-        }
-
-        /// <summary>
-        /// 設定画面を表示する関数
-        /// </summary>
-        public void DisplaySetting()
-        {
-            animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
-        }
-
-        /// <summary>
-        /// 設定画面から戻る関数
-        /// </summary>
-        public void SettingReturn()
-        {
-            animator.SetTrigger(settingReturnTrigger);// 設定画面から戻るトリガーをセット
         }
 
         /// <summary>
