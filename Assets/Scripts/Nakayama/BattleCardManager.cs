@@ -105,6 +105,7 @@ namespace ForestDraw
             playerCost = GetComponent<PlayerCost>();
             playerHealth = player.GetComponent<PlayerHealth>();
         }
+
         private void Start()
         {
             LoadDeckData();

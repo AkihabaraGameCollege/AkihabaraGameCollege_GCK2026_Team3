@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.BattleCardManager
   handCardPrefab: {fileID: 4958202801746025387, guid: e018d7578b3490b4ea1bb306061068e9, type: 3}
   handArea: {fileID: 844520532}
-  player: {fileID: 1079281322}
+  player: {fileID: 0}
   drawInterval: 3
   maxHandSize: 8
   startDrawCount: 4
@@ -428,6 +428,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Player.Combat.PlayerCost
   maxCost: 8
   baseRecoverInterval: 3
+--- !u!114 &243141231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243141227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &259874668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1517,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7138406432269052659, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 243141230}
+    - targetCorrespondingSourceObject: {fileID: 7138406432269052659, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 243141231}
   m_SourcePrefab: {fileID: 100100000, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
 --- !u!1 &1313784408
 GameObject:
@@ -1861,22 +1894,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 882665966}
     m_Modifications:
-    - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: onExitButtonClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: onResumeButtonClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: onExitButtonClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: onResumeButtonClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Name
       value: PauseUI
@@ -1961,9 +1978,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6192917949937913924, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-    - {fileID: 5038602467303019558, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

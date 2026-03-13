@@ -560,15 +560,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 7371905810345152499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b86469e17f2dc4fa9184234b4bfbae, type: 3}
+  m_Script: {fileID: 11500000, guid: f64852a663ee3444092ddf2f917ca10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseUI
+  resumeButton: {fileID: 516316059542914833}
+  settingButton: {fileID: 6027228925724345001}
+  exitButton: {fileID: 5986552178864903443}
   onResumeButtonClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onSettingButtonClick:
     m_PersistentCalls:
       m_Calls: []
   onExitButtonClick:
     m_PersistentCalls:
       m_Calls: []
-  resumeButton: {fileID: 516316059542914833}
-  settingButton: {fileID: 6027228925724345001}
-  exitButton: {fileID: 5986552178864903443}
