@@ -7,6 +7,10 @@ namespace ForestDraw.Enemy
     {
         public static EnemyManager Instance;
 
+        [SerializeField] int maxEnemyCount = 150;
+
+        public bool CanGenerate { get; private set; } = true;
+
         public List<GameObject> Enemies { get; } = new();
 
         private void Awake()
@@ -17,11 +21,18 @@ namespace ForestDraw.Enemy
         public void AddEnemy(GameObject enemy)
         {
             Enemies.Add(enemy);
+            CheckEnemyCount();
         }
 
         public void RemoveEnemy(GameObject enemy)
         {
             Enemies.Remove(enemy);
+            CheckEnemyCount();
+        }
+
+        void CheckEnemyCount()
+        {
+            CanGenerate = Enemies.Count < maxEnemyCount;
         }
     }
 }
