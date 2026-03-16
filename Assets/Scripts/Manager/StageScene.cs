@@ -14,16 +14,45 @@ namespace ForestDraw
         private AudioSetting audioSetting = null;
 
         /// <summary>
+        /// ゲームオーバーUIの変数
+        /// </summary>
+        [SerializeField]
+        private GameObject gameOverUI = null;
+        /// <summary>
+        /// プレイヤー関係UIの変数配列
+        /// </summary>
+       [SerializeField]
+        private GameObject[] playerUI = null;
+
+        /// <summary>
         /// BGMのインデックスの変数
         /// </summary>
         [SerializeField]
         private int bgmIndex = 0;
 
+        public static StageScene Instance { get; private set; } = null;
         /// <summary>
         /// 初期設定の関数
         /// </summary>
+        private void Awake()
+        {
+            // 自分自身をインスタンスとして保存
+            Instance = this;
+        }
         private void Start()
         {
+            // 配列内のゲームオブジェクトをすべて参照
+            foreach (GameObject obj in playerUI)
+            {
+                // オブジェクトがあった場合
+                if (obj != null) 
+                {
+                    obj.SetActive(true);
+                }
+            }
+
+            gameOverUI.SetActive(false);
+
             audioSetting.PlayBGM(bgmIndex);
         }
 
@@ -33,6 +62,24 @@ namespace ForestDraw
         public void InClearScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
+        }
+
+        /// <summary>
+        /// ゲームオーバーした際にゲームオーバー画面を表示する関数
+        /// </summary>
+        public void GameOver()
+        {
+            // 配列内のゲームオブジェクトをすべて参照
+            foreach (GameObject obj in playerUI)
+            {
+                // オブジェクトがあった場合
+                if (obj != null)
+                {
+                    obj.SetActive(false);
+                }
+            }
+
+            gameOverUI.SetActive(true);
         }
     }
 }

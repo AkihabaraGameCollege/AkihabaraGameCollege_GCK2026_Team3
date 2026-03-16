@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using ForestDraw.Combat;
+using ForestDraw;
 
 /// <summary>
 /// プレイヤーのHP管理クラス
@@ -59,7 +60,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
         }
 
         // プレイヤー死亡処理
-        // Die();
+        StageScene.Instance.GameOver();
     }
 
     /// <summary>
