@@ -30,9 +30,15 @@ namespace ForestDraw
         [SerializeField]
         private int bgmIndex = 0;
 
+        public static StageScene Instance { get; private set; } = null;
         /// <summary>
         /// 初期設定の関数
         /// </summary>
+        private void Awake()
+        {
+            // 自分自身をインスタンスとして保存
+            Instance = this;
+        }
         private void Start()
         {
             // 配列内のゲームオブジェクトをすべて参照
