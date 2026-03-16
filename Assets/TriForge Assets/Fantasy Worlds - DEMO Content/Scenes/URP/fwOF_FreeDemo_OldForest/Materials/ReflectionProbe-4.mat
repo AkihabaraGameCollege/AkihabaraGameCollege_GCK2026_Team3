@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ReflectionProbe-0
+  m_Name: ReflectionProbe-4
   m_Shader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Tex:
-        m_Texture: {fileID: 8900000, guid: cb2c94bd37294fa45929c781048323cc, type: 3}
+        m_Texture: {fileID: 8900000, guid: 4131f98bb93f3514d8e8d22e6afe6a6f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -32,6 +32,6 @@ Material:
     - _Exposure: 1
     - _Rotation: 0
     m_Colors:
-    - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _Tint: {r: 0.07910995, g: 0.080169044, b: 0.15471691, a: 0.5019608}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
