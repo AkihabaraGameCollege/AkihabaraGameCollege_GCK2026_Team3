@@ -9823,6 +9823,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4334362933986609354}
+  - component: {fileID: 4287100174500768013}
+  - component: {fileID: 1846654620816297303}
   m_Layer: 0
   m_Name: PlayerRootStage
   m_TagString: Untagged
@@ -9847,6 +9849,56 @@ Transform:
   - {fileID: 1483881056210393570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4287100174500768013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138406432269052659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12bd62ed6a2a41445bdf603cabfbf8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.BattleCardManager
+  handCardPrefab: {fileID: 4958202801746025387, guid: e018d7578b3490b4ea1bb306061068e9, type: 3}
+  handArea: {fileID: 0}
+  player: {fileID: 7138406432269052659}
+  drawInterval: 3
+  maxHandSize: 8
+  startDrawCount: 4
+  costCount: 4
+  allCardMasterList:
+  - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
+  - {fileID: 11400000, guid: 69838c3f3c9bab84d9e7217efe4124d9, type: 2}
+  - {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
+  - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
+  - {fileID: 11400000, guid: 066dc55e46da1134e9a0c0bda07ea78b, type: 2}
+  - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: 9e97641bec299a2499b231789240b42a, type: 2}
+  - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
+  - {fileID: 11400000, guid: c61b9de64a3270b4194e2676991bb7ef, type: 2}
+  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
+  - {fileID: 11400000, guid: 5aa420060370fea4383b492a6ee1c670, type: 2}
+  - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
+  - {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
+  - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
+  - {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
+--- !u!114 &1846654620816297303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138406432269052659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ef1ea251ff6544db7842ce3ac99183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Player.Combat.PlayerCost
+  maxCost: 8
+  baseRecoverInterval: 3
 --- !u!1 &7698873310528219971
 GameObject:
   m_ObjectHideFlags: 0

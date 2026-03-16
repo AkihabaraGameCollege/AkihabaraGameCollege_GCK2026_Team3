@@ -10,6 +10,8 @@ namespace ForestDraw.Enemy.Attack
     public abstract class EnemyAttackGoal : EnemyAttackBase
     {
         protected bool canAttack = false;
+        [SerializeField]
+        protected GoalEnemyAnimator enemyAnimator;
 
         /// <summary>
         /// イベント登録（ゴール到達・死亡）
@@ -35,7 +37,7 @@ namespace ForestDraw.Enemy.Attack
             if (attackTimer >= attackInterval)
             {
                 attackTimer = 0f;
-                PerformAttack(); // 実際の攻撃処理は派生クラスで実装
+                enemyAnimator.PlayAttack();
             }
         }
 
@@ -46,6 +48,7 @@ namespace ForestDraw.Enemy.Attack
         {
             LookAtTarget();
             canAttack = true;
+            enemyAnimator.EnableAttack();
         }
 
         /// <summary>
@@ -66,6 +69,10 @@ namespace ForestDraw.Enemy.Attack
 
             if (health != null)
                 health.Died -= StopAttack;
+        }
+        public void PerformAttackEvent()
+        {
+            PerformAttack();
         }
     }
 }

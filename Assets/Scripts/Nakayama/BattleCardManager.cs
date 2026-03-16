@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using ForestDraw.Player.Combat;
 using static ForestDraw.Player.Combat.CardUseExecutor;
-using static UnityEngine.GraphicsBuffer;
 
 namespace ForestDraw
 {
@@ -22,8 +21,9 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private Transform handArea = null;
+
         /// <summary>
-        /// プレイヤーの
+        /// プレイヤー
         /// </summary>
         [SerializeField]
         private GameObject player;
@@ -39,11 +39,13 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private int maxHandSize = 8;
+
         /// <summary>
         /// スタート時に引くカードの枚数の変数
         /// </summary>
         [SerializeField]
         private int startDrawCount = 4;
+
         /// <summary>
         /// コストの量を指定する変数
         /// </summary>
@@ -54,7 +56,7 @@ namespace ForestDraw
         /// プレイヤーのコストの管理クラスを指定する変数
         /// </summary>
         private PlayerCost playerCost = null;
-        
+
         /// <summary>
         /// プレイヤーのHPの管理クラスを指定する変数
         /// </summary>
@@ -64,10 +66,12 @@ namespace ForestDraw
         /// リストに全カードのマスターデータを入れておく変数
         /// </summary>
         public List<CardData> allCardMasterList;
+
         /// <summary>
         /// リストにロードしたデッキの中身を入れておく変数
         /// </summary>
         private List<CardData> playerDeck = new();
+
         /// <summary>
         /// ドローするための山札のリスト変数
         /// </summary>

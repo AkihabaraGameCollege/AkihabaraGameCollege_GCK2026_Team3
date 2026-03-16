@@ -48,6 +48,7 @@ namespace ForestDraw.Enemy.Spawner
         /// </summary>
         private void Spawn()
         {
+            if (!EnemyManager.Instance.CanGenerate) return;
             for (int i = 0; i < enemiesPerWave; i++)
             {
                 Vector3 spawnPosition = GetSpawnPosition();

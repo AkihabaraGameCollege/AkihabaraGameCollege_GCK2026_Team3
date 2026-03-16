@@ -17,6 +17,7 @@ namespace ForestDraw.Enemy.Attack
         /// </summary>
         protected override void PerformAttack()
         {
+            Debug.Log("çUåÇ");
             if (target == null || bulletPrefab == null || firePoint == null) return;
 
             GameObject bullet = Instantiate(

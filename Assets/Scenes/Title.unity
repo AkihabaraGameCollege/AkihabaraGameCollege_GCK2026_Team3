@@ -4369,17 +4369,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1150343984798294537, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1952750274380822774, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3132252946741064753, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
-      propertyPath: m_Name
-      value: SettingReturnButton
       objectReference: {fileID: 0}
     - target: {fileID: 5002772798995926758, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
       propertyPath: m_Pivot.x
@@ -4465,10 +4457,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7551144962832517708, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 171094786}
     - target: {fileID: 8442229396044619628, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4477,11 +4465,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9012823341950295561, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 171094788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
+--- !u!114 &1744936071069845041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9012823341950295561, guid: d99ff0961b6a7014fb9df555d227388d, type: 3}
+  m_PrefabInstance: {fileID: 1744936071069845039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55d506a3d36be049a31aa9846103146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.SettingManager
 --- !u!114 &1925558877363623309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4767,8 +4770,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 171094786}
-        m_TargetAssemblyTypeName: CardDefenseGame.TitleScene, Assembly-CSharp
+      - m_Target: {fileID: 1744936071069845041}
+        m_TargetAssemblyTypeName: ForestDraw.SettingManager, Assembly-CSharp
         m_MethodName: DisplaySetting
         m_Mode: 1
         m_Arguments:
