@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace ForestDraw
@@ -40,11 +39,6 @@ namespace ForestDraw
         /// </summary>         
         public UnityEvent onExitButtonClick = null;
 
-        /// <summary>
-        /// タイトル管理クラスの参照変数
-        /// </summary>
-        private TitleScene titleScene;
-
         /// <summary>         
         /// 初期設定を行う関数         
         /// </summary>         
@@ -55,19 +49,6 @@ namespace ForestDraw
             settingButton.onClick.AddListener(() => { onSettingButtonClick.Invoke(); });// 設定ボタンのイベントを設定
             exitButton.onClick.AddListener(() => { onExitButtonClick.Invoke(); });// ステージセレクトボタンのイベントを設定
             Hide();// 起動時はUIを隠す
-        }
-
-        /// <summary>
-        /// ポーズの入力判定を行う関数
-        /// </summary>
-        /// <param name="context"></param>
-        public void OnPause(InputAction.CallbackContext context)
-        {
-            // もし入力された場合
-            if (context.started)
-            {
-                Show();// ポーズの機能を起動する
-            }
         }
 
         /// <summary>         
