@@ -20,6 +20,11 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private Button settingReturnButton = null;
+        /// <summary>
+        /// 設定画面を表示するボタンの参照用変数
+        /// </summary>
+        [SerializeField]
+        private Button settingButton = null;
 
         /// <summary>
         /// ポーズUIのオブジェクト参照変数
@@ -44,7 +49,9 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
-            settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンに設定画面から戻る関数を登録
+            Hide();// UIは消しておく
+            settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンにその機能をつかさどる関数を登録
+            settingButton.onClick.AddListener(DisplaySetting);// 設定画面を表示するボタンにその機能をつかさどる関数を登録
         }
 
         /// <summary>
@@ -73,6 +80,30 @@ namespace ForestDraw
             animator.SetTrigger(settingReturnTrigger);// 設定画面から戻るトリガーをセット
             yield return new WaitForSecondsRealtime(settingReturnTime);// アニメーション分待機
             pauseUI.SetActive(true);
+        }
+
+        /// <summary>         
+        /// UIを表示させる関数         
+        /// </summary>         
+        public void Show()
+        {
+            // 子オブジェクトをすべてアクティブ化
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        /// <summary>         
+        /// UIを非表示にする関数         
+        /// </summary>         
+        public void Hide()
+        {
+            // 子オブジェクトをすべて非アクティブ化
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
 }

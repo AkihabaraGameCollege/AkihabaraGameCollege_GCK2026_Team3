@@ -1691,6 +1691,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2071726259}
+    - target: {fileID: 5970745555005975266, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      propertyPath: pauseManager
+      value: 
+      objectReference: {fileID: 1930167626}
     - target: {fileID: 7138406432269052659, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: m_Name
       value: PlayerRootStage
@@ -2226,10 +2230,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseUI
       objectReference: {fileID: 0}
-    - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8743471404233309487, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2310,8 +2310,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1777172695749788367, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2321,6 +2320,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8743471404233309487, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
   m_PrefabInstance: {fileID: 1930167624}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1930167626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+  m_PrefabInstance: {fileID: 1930167624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64852a663ee3444092ddf2f917ca10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseUI
 --- !u!4 &2065283036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8921343074000639949, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
