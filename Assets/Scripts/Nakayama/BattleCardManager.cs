@@ -47,12 +47,6 @@ namespace ForestDraw
         private int startDrawCount = 4;
 
         /// <summary>
-        /// コストの量を指定する変数
-        /// </summary>
-        [SerializeField]
-        private int costCount = 4;
-
-        /// <summary>
         /// プレイヤーのコストの管理クラスを指定する変数
         /// </summary>
         private PlayerCost playerCost = null;

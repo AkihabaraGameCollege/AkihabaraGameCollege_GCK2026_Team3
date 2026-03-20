@@ -20,17 +20,6 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private Button settingReturnButton = null;
-        /// <summary>
-        /// 設定画面を表示するボタンの参照用変数
-        /// </summary>
-        [SerializeField]
-        private Button settingButton = null;
-
-        /// <summary>
-        /// ポーズUIのオブジェクト参照変数
-        /// </summary>
-        [SerializeField]
-        private GameObject pauseUI = null;
 
         [SerializeField]
         private float settingReturnTime = 1;
@@ -38,20 +27,39 @@ namespace ForestDraw
         /// <summary>
         /// 設定ボタンが押されたときに呼ばれるIDの変数
         /// </summary>
-        private static readonly int settingTrigger = Animator.StringToHash("Setting");
+        public static readonly int settingTrigger = Animator.StringToHash("Setting");
         /// <summary>
         /// 設定画面から戻るときに呼ばれるIDの変数
         /// </summary>
-        private static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
+        public static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
+
+        /// <summary>
+        /// プレイヤー操作クラスを参照する変数
+        /// </summary>
+        private PlayerController playerController = null;
+        /// <summary>
+        /// タイトルシーン管理クラスを参照する変数
+        /// </summary>
+        private TitleScene titleScene = null;
+
+        /// <summary>
+        /// プレイヤーのオブジェクト名を参照する変数
+        /// </summary>
+        public string playerRootName = "PlayerRoot";
+        /// <summary>
+        /// タイトルマネージャーのオブジェクト名を参照する変数
+        /// </summary>
+        public string titleSceneRootName = "SceneRoot";
 
         /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Start()
         {
+            playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
+            titleScene = GameObject.Find(titleSceneRootName).GetComponent<TitleScene>();// シーン内からタイトルマネージャーを探して取得
             Hide();// UIは消しておく
             settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンにその機能をつかさどる関数を登録
-            settingButton.onClick.AddListener(DisplaySetting);// 設定画面を表示するボタンにその機能をつかさどる関数を登録
         }
 
         /// <summary>
@@ -59,8 +67,13 @@ namespace ForestDraw
         /// </summary>
         public void DisplaySetting()
         {
-            pauseUI.SetActive(false);
             animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
+          
+            // ゲームの最初の画面にいない場合
+            if (!titleScene.isStartScene)
+            {
+                playerController.isCanPause = false;// ポーズ操作を禁止する
+            }
         }
 
         /// <summary>
@@ -69,6 +82,12 @@ namespace ForestDraw
         public void SettingReturn()
         {
             StartCoroutine(SettingReturnCoroutine());// コルーチンを呼び出し
+
+            // ゲームの最初の画面にいない場合
+            if (!titleScene.isStartScene)
+            {
+                playerController.isCanPause = true;// ポーズ操作を許可する
+            }
         }
 
         /// <summary>
@@ -79,7 +98,6 @@ namespace ForestDraw
         {
             animator.SetTrigger(settingReturnTrigger);// 設定画面から戻るトリガーをセット
             yield return new WaitForSecondsRealtime(settingReturnTime);// アニメーション分待機
-            pauseUI.SetActive(true);
         }
 
         /// <summary>         

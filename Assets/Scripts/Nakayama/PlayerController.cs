@@ -16,7 +16,7 @@ namespace ForestDraw
         /// <summary>
         /// ポーズクラスの参照変数
         /// </summary>
-        public PauseManager pauseManager;
+        public PauseManager pauseManager = null;
 
         /// <summary>
         /// 左右の最大回転角度の参照変数
@@ -41,11 +41,21 @@ namespace ForestDraw
         private Quaternion initialRotation;
 
         /// <summary>
+        /// ポーズ操作の許可禁止を判別する変数
+        /// </summary>
+        public bool isCanPause = false;
+
+        /// <summary>
+        /// ポーズUIのオブジェクト名を参照する変数
+        /// </summary>
+        public string mainCameraName = "Main Camera";
+
+        /// <summary>
         /// 初期設定を行う関数
         /// </summary>
         private void Start()
         {
-            mainCamera = GameObject.Find("MainCamera").GetComponent<Transform>();
+            mainCamera = GameObject.Find(mainCameraName).GetComponent<Transform>();
             initialRotation = mainCamera.transform.localRotation;// カメラを初期回転状態にする
         }
 
@@ -68,7 +78,7 @@ namespace ForestDraw
         public void OnPause(InputAction.CallbackContext context)
         {
             // もし入力された場合
-            if (context.started)
+            if (context.started && isCanPause)
             {
                 pauseManager.Show();// ポーズの機能を起動する
             }

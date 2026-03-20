@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ForestDraw
 {
@@ -21,7 +22,7 @@ namespace ForestDraw
         /// <summary>
         /// プレイヤー関係UIの変数配列
         /// </summary>
-       [SerializeField]
+        [SerializeField]
         private GameObject[] playerUI = null;
 
         /// <summary>
@@ -30,22 +31,59 @@ namespace ForestDraw
         [SerializeField]
         private int bgmIndex = 0;
 
+        /// <summary>
+        /// プレイヤー操作クラスを参照する変数
+        /// </summary>
+        private PlayerController playerController = null;
+        /// <summary>
+        /// メインステージ管理クラスのインスタンスを参照する変数
+        /// </summary>
         public static StageScene Instance { get; private set; } = null;
+
+        /// <summary>
+        /// クリアボタンを参照する変数
+        /// </summary>
+        public Button clearButton = null;
+        /// <summary>
+        /// クリアボタンを参照する変数
+        /// </summary>
+        public Button gameOverButton = null;
+
+        /// <summary>
+        /// 最大のステージ番号を参照する変数
+        /// </summary>
+        private int stageNumberMax = 3;
+        /// <summary>
+        /// 今いるステージ番号を参照する変数
+        /// </summary>
+        public int stageNumber = 1;
+
+        /// <summary>
+        /// クリアシーン名を参照する変数
+        /// </summary>
+        private string clearSceneName = "Clear";
+        // <summary>
+        /// ステージシーン名を参照する変数
+        /// </summary>
+        private string titleSceneName = "Title";
+        /// <summary>
+        /// プレイヤーのオブジェクト名を参照する変数
+        /// </summary>
+        public string playerRootName = "PlayerRootStage";
+
         /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Awake()
         {
-            // 自分自身をインスタンスとして保存
-            Instance = this;
-        }
-        private void Start()
-        {
+            Instance = this; // 自分自身をインスタンスとして保存
+            playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
+
             // 配列内のゲームオブジェクトをすべて参照
             foreach (GameObject obj in playerUI)
             {
                 // オブジェクトがあった場合
-                if (obj != null) 
+                if (obj != null)
                 {
                     obj.SetActive(true);
                 }
@@ -54,6 +92,12 @@ namespace ForestDraw
             gameOverUI.SetActive(false);
 
             audioSetting.PlayBGM(bgmIndex);
+
+            // ボタンイベントの登録
+            clearButton.onClick.AddListener(InClearScene);// クリアボタンにシーン遷移の関数を登録
+            gameOverButton.onClick.AddListener(GameOver);// ゲームオーバーボタンにシーン遷移の関数を登録
+
+            playerController.isCanPause = true;// ポーズ操作を許可する
         }
 
         /// <summary>
@@ -61,7 +105,18 @@ namespace ForestDraw
         /// </summary>
         public void InClearScene()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
+            int number = stageNumber;// 今いるステージ番号を参照
+
+            // 最終ステージの場合
+            if (number == stageNumberMax)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
+            }
+            else
+            {
+                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+            }
         }
 
         /// <summary>
@@ -80,6 +135,8 @@ namespace ForestDraw
             }
 
             gameOverUI.SetActive(true);
+            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+            UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
         }
     }
 }

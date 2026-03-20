@@ -39,10 +39,15 @@ namespace ForestDraw
         /// </summary>         
         public UnityEvent onExitButtonClick = null;
 
+        /// <summary>
+        /// タイトルシーン名を参照する変数
+        /// </summary>
+        private string titleScene = "Title";
+
         /// <summary>         
         /// 初期設定を行う関数         
         /// </summary>         
-        void Awake()
+        private void Awake()
         {
             // UnityEvent を追加
             resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
@@ -61,7 +66,7 @@ namespace ForestDraw
             {
                 child.gameObject.SetActive(true);
             }
-        
+
             Time.timeScale = 0;
         }
 
@@ -85,7 +90,8 @@ namespace ForestDraw
         public void ExitStage()
         {
             Time.timeScale = 1.0f;
-            SceneManager.LoadScene("Title");
+            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+            SceneManager.LoadScene(titleScene);
         }
     }
 }
