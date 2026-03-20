@@ -543,7 +543,7 @@ MonoBehaviour:
   - {fileID: -2000492216, guid: 342f049dec18ced498e331d97eb1162b, type: 3}
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   settingManager: {fileID: 7288153572538685478}
-  introTime: 3
+  introTime: 1.5
   playerRootName: PlayerRootTitle
   pauseUI_Name: PauseUI
   settingUI_Name: SettingUI
