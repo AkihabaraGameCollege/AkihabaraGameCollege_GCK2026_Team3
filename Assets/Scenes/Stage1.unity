@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 16276661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.3, y: 0, z: 72.9}
+  m_LocalPosition: {x: 23.3, y: 1, z: 72.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 138725055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -574,7 +574,7 @@ Transform:
   m_GameObject: {fileID: 281881340}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.43, y: 0, z: 13.59}
+  m_LocalPosition: {x: -0.43, y: 1, z: 13.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1223,7 +1223,7 @@ Transform:
   m_GameObject: {fileID: 624782777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.9, y: 0, z: -3.6}
+  m_LocalPosition: {x: 17.9, y: 1, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2314,6 +2314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1313784409}
+  - component: {fileID: 1313784410}
   m_Layer: 0
   m_Name: WaypointsRanged
   m_TagString: Untagged
@@ -2339,6 +2340,19 @@ Transform:
   - {fileID: 259874669}
   m_Father: {fileID: 461601634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1313784410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313784408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3040213b5650c3841a41a656393090ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaypointDebugger
+  lineColor: {r: 0, g: 0.33269644, b: 1, a: 1}
 --- !u!1 &1323741301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,7 +2378,7 @@ Transform:
   m_GameObject: {fileID: 1323741301}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.9, y: 0, z: 30.5}
+  m_LocalPosition: {x: -12.9, y: 1, z: 30.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2514,6 +2528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1476839648}
+  - component: {fileID: 1476839649}
   m_Layer: 0
   m_Name: WaypointsMelee
   m_TagString: Untagged
@@ -2543,6 +2558,19 @@ Transform:
   - {fileID: 1889019377}
   m_Father: {fileID: 461601634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1476839649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476839647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3040213b5650c3841a41a656393090ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaypointDebugger
+  lineColor: {r: 1, g: 0.00000024437904, b: 0, a: 1}
 --- !u!1001 &1599552715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3034,7 +3062,7 @@ Transform:
   m_GameObject: {fileID: 1889019376}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.76}
+  m_LocalPosition: {x: 0, y: 1, z: -5.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3065,7 +3093,7 @@ Transform:
   m_GameObject: {fileID: 1916343612}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.7, y: 0, z: 13}
+  m_LocalPosition: {x: 14.7, y: 1, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
