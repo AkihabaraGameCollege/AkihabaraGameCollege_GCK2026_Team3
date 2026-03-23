@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace ForestDraw
@@ -41,33 +40,20 @@ namespace ForestDraw
         public UnityEvent onExitButtonClick = null;
 
         /// <summary>
-        /// タイトル管理クラスの参照変数
+        /// タイトルシーン名を参照する変数
         /// </summary>
-        private TitleScene titleScene;
+        private string titleScene = "Title";
 
         /// <summary>         
         /// 初期設定を行う関数         
         /// </summary>         
-        void Awake()
+        private void Awake()
         {
             // UnityEvent を追加
             resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
             settingButton.onClick.AddListener(() => { onSettingButtonClick.Invoke(); });// 設定ボタンのイベントを設定
             exitButton.onClick.AddListener(() => { onExitButtonClick.Invoke(); });// ステージセレクトボタンのイベントを設定
             Hide();// 起動時はUIを隠す
-        }
-
-        /// <summary>
-        /// ポーズの入力判定を行う関数
-        /// </summary>
-        /// <param name="context"></param>
-        public void OnPause(InputAction.CallbackContext context)
-        {
-            // もし入力された場合
-            if (context.started)
-            {
-                Show();// ポーズの機能を起動する
-            }
         }
 
         /// <summary>         
@@ -80,7 +66,7 @@ namespace ForestDraw
             {
                 child.gameObject.SetActive(true);
             }
-        
+
             Time.timeScale = 0;
         }
 
@@ -104,7 +90,8 @@ namespace ForestDraw
         public void ExitStage()
         {
             Time.timeScale = 1.0f;
-            SceneManager.LoadScene("Title");
+            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+            SceneManager.LoadScene(titleScene);
         }
     }
 }

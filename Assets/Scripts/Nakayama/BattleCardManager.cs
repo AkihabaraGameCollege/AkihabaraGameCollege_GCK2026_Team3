@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ForestDraw.Player.Combat;
 using static ForestDraw.Player.Combat.CardUseExecutor;
+using System.Collections;
 
 namespace ForestDraw
 {
@@ -45,12 +46,6 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private int startDrawCount = 4;
-
-        /// <summary>
-        /// コストの量を指定する変数
-        /// </summary>
-        [SerializeField]
-        private int costCount = 4;
 
         /// <summary>
         /// プレイヤーのコストの管理クラスを指定する変数
@@ -99,6 +94,11 @@ namespace ForestDraw
         /// 自動ドローするカードの枚数の変数
         /// </summary>
         private int drawCount = 1;
+
+        /// <summary>
+        /// カードの使用状態判定用
+        /// </summary>
+        private bool IsUseingCard = false;
 
         /// <summary>
         /// 初期設定の関数
@@ -223,13 +223,31 @@ namespace ForestDraw
                 cardManager = this,
                 target = player.transform.position
             };
+
+            if (IsUseingCard) return false;
             if (!CardUseExecutor.Execute(usedCard, context)) return false;
+
+            StartCoroutine(IsUseing(usedCard.useDuration));
 
             drawPile.Add(usedCard);// 使用するカードを山札の一番下に戻す
 
             Destroy(cardObj);
 
             return true;
+        }
+
+        /// <summary>
+        /// カードの使用状態管理用
+        /// </summary>
+        private IEnumerator IsUseing(float duration)
+        {
+            IsUseingCard = true;
+
+            // 使用時間待ち
+            if (duration > 0f)
+                yield return new WaitForSeconds(duration);
+
+            IsUseingCard = false;
         }
     }
 }

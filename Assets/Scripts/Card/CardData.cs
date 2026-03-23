@@ -27,6 +27,9 @@ namespace ForestDraw
         /// <summary>使用コスト</summary>
         public int cost;
 
+        /// <summary>カードの使用時間</summary>
+        public float useDuration;
+
         /// <summary>カード画像</summary>
         public Sprite cardImage;
 

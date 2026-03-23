@@ -18,6 +18,7 @@ MonoBehaviour:
   effectType: 0
   description: "\u6575\u5358\u4F53\u306B\u30C0\u30E1\u30FC\u30B8\uFF08\u5F31\u653B\u6483\uFF09"
   cost: 1
+  useDuration: 1
   cardImage: {fileID: 347562089, guid: ca7a96b5a9111db4fb05017a3f7595d8, type: 3}
   buffDuration: 0
   attackParams:
@@ -31,3 +32,6 @@ MonoBehaviour:
     intervalReduction: 0
   supportParams:
     damageReduction: 0
+    attackMultiplier: 0
+  utilityParams:
+    drawCount: 0

@@ -77,6 +77,7 @@ public class CardDataEditor : Editor
         card.description = EditorGUILayout.TextArea(card.description, GUILayout.Height(60));
 
         card.cost = EditorGUILayout.IntField("必要コスト", card.cost);
+        card.useDuration = EditorGUILayout.FloatField("カードの使用時間", card.useDuration);
         card.cardImage = (Sprite)EditorGUILayout.ObjectField("画像", card.cardImage, typeof(Sprite), false);
 
         EditorGUILayout.Space();
