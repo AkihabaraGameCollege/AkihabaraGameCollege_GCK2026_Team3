@@ -24,6 +24,7 @@ namespace ForestDraw.Enemy.Spawner
         [SerializeField] private Transform waypointRoot;      // 移動ルート
         [SerializeField] private Transform player;           // 攻撃対象
         [SerializeField] private EnemyData enemyData;         // 敵のステータスデータ
+        [SerializeField] private Camera UICamera;
 
         private void Start()
         {
@@ -84,7 +85,7 @@ namespace ForestDraw.Enemy.Spawner
                 waypoints[i] = waypointRoot.GetChild(i);
             }
 
-            controller.Initialize(waypoints, player, enemyData);
+            controller.Initialize(waypoints, player, enemyData, UICamera);
         }
     }
 }

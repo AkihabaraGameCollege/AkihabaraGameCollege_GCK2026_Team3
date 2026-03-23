@@ -11,7 +11,7 @@ namespace ForestDraw.Enemy
     {
         IEnemyComponent[] components;
         EnemyHealth health;
-
+        [SerializeField] Canvas canvas;
         void Awake()
         {
             // Enemyコンポーネント取得
@@ -29,7 +29,7 @@ namespace ForestDraw.Enemy
         /// <summary>
         /// Spawnerから呼ばれる初期化処理
         /// </summary>
-        public void Initialize(Transform[] path, Transform target, EnemyData data)
+        public void Initialize(Transform[] path, Transform target, EnemyData data, Camera camera)
         {
             var context = new EnemyInitContext
             {
@@ -40,6 +40,7 @@ namespace ForestDraw.Enemy
 
             foreach (var c in components)
                 c.Initialize(context);
+            canvas.worldCamera = camera;
         }
 
         /// <summary>
