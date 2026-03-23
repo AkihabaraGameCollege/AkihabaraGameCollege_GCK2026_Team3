@@ -12,7 +12,6 @@ namespace ForestDraw
         /// <summary>
         /// アニメーターコンポーネントの変数
         /// </summary>
-        [SerializeField]
         private Animator animator = null;
 
         /// <summary>
@@ -27,11 +26,11 @@ namespace ForestDraw
         /// <summary>
         /// 設定ボタンが押されたときに呼ばれるIDの変数
         /// </summary>
-        public static readonly int settingTrigger = Animator.StringToHash("Setting");
+        private static readonly int settingTrigger = Animator.StringToHash("Setting");
         /// <summary>
         /// 設定画面から戻るときに呼ばれるIDの変数
         /// </summary>
-        public static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
+        private static readonly int settingReturnTrigger = Animator.StringToHash("SettingReturn");
 
         /// <summary>
         /// プレイヤー操作クラスを参照する変数
@@ -50,15 +49,21 @@ namespace ForestDraw
         /// タイトルマネージャーのオブジェクト名を参照する変数
         /// </summary>
         public string titleSceneRootName = "SceneRoot";
+        /// <summary>
+        /// アニメーターの親オブジェクト名を参照する変数
+        /// </summary>
+        public string animatorParentName = "SceneRoot";
 
         /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Start()
         {
+            // コンポーネントの登録
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             titleScene = GameObject.Find(titleSceneRootName).GetComponent<TitleScene>();// シーン内からタイトルマネージャーを探して取得
-            Hide();// UIは消しておく
+            animator = GameObject.Find(animatorParentName).GetComponent<Animator>();// シーン内からアニメーターを探して取得
+
             settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンにその機能をつかさどる関数を登録
         }
 
@@ -109,18 +114,6 @@ namespace ForestDraw
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
-            }
-        }
-
-        /// <summary>         
-        /// UIを非表示にする関数         
-        /// </summary>         
-        public void Hide()
-        {
-            // 子オブジェクトをすべて非アクティブ化
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
             }
         }
     }

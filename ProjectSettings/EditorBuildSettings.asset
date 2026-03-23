@@ -6,19 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title.unity
+    path: Assets/Prefabs/Scenes/Title.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Stage1.unity
+    path: Assets/Prefabs/Scenes/Stage1.unity
     guid: 99dd52765a1f9d2408d6921a57124885
   - enabled: 1
-    path: Assets/Scenes/Stage2.unity
+    path: Assets/Prefabs/Scenes/Stage2.unity
     guid: 1dc4ae1c0eb91df49be0b4ef69c8b593
   - enabled: 1
-    path: Assets/Scenes/Stage3.unity
+    path: Assets/Prefabs/Scenes/Stage3.unity
     guid: b52a0a2d253ad444ea11b0e9222e4400
   - enabled: 1
-    path: Assets/Scenes/Clear.unity
+    path: Assets/Prefabs/Scenes/Clear.unity
     guid: 567b86a9dab6bbf4faeced7f406ae79a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d66024d6ebc0c7d429c9249bf5ac4e06, type: 2}

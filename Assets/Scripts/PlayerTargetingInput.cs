@@ -10,7 +10,7 @@ public class PlayerTargetingInput : MonoBehaviour
 {
     Camera mainCam;
 
-    [SerializeField, Tooltip("Tabで検索する最大距離")] float searchRadius = 30f;
+    // [SerializeField, Tooltip("Tabで検索する最大距離")] float searchRadius = 30f;// エラーを出すため削除
     [SerializeField, Tooltip("クリック判定の最大距離")] float clickRayDistance = 100f;
 
     // Input System 用アクション参照（Inspectorで Input Actions のアクションを割り当てる）

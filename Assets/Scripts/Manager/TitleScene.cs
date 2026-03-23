@@ -130,6 +130,14 @@ namespace ForestDraw
         /// ゲーム終了ボタンのオブジェクト名を参照する変数
         /// </summary>
         public string exitButtonName = "ExitButton";
+        /// <summary>
+        /// ステージセレクトUIのオブジェクト名を参照する変数
+        /// </summary>
+        public string stageSelectUI_Name = "StageSelectUI";
+        /// <summary>
+        /// デッキUIのオブジェクト名を参照する変数
+        /// </summary>
+        public string deckUI_Name = "DeckUI";
 
         /// <summary>
         /// シーン最初の画面にいるかどうか判別する変数
@@ -182,15 +190,11 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
-            // ゲームオブジェクトからの取得
+            // コンポーネントの登録
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseManager>();// シーン内からポーズUIを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
-
-            // タイトルBGMを再生
-            audioSetting.PlayBGM(0);
-            audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
 
             // ボタンに関数を登録
             deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
@@ -203,11 +207,14 @@ namespace ForestDraw
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
             exitButton.onClick.AddListener(() => StartCoroutine(ExitCoroutine()));// 第三ステージへのボタンに第三ステージへの関数を登録
 
+            // タイトルBGMを再生
+            audioSetting.PlayBGM(0);
+            audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
+
             // 別シーンからタイトルに来た場合
             if (isExit)
             {
                 StartCoroutine(DisplayStageSelectCoroutine());// それ専用のステージセレクト表示イベントを呼び出し
-                isExit = false;// フラグをリセット
             }
         }
 
@@ -285,6 +292,7 @@ namespace ForestDraw
         {
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
             DisplayStageSelect();
+            isExit = false;// フラグをリセット
         }
     }
 }
