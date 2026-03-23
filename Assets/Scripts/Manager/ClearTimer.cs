@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using ForestDraw;
 
 public class ClearTimer : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class ClearTimer : MonoBehaviour
             isCleared = true;
             UpdateText(); 
             Debug.Log("ステージクリア！！！！！");
-            // StageScene.Instance.StageClear();
+            StageScene.Instance.InClearScene();
             return;
         }
 

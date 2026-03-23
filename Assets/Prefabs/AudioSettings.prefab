@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5513656949494454174}
   - component: {fileID: 6077341416951376988}
-  - component: {fileID: 4594460663529761312}
   m_Layer: 0
   m_Name: SE
   m_TagString: Untagged
@@ -130,29 +129,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4594460663529761312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834854990874730264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSetting
-  bgmAudioSource: {fileID: 8569326688928269671}
-  seAudioSource: {fileID: 6077341416951376988}
-  bgmVolumeSlider: {fileID: 0}
-  seVolumeSlider: {fileID: 0}
-  bgms: []
-  ses:
-  - {fileID: 8300000, guid: 2767dcb770405a04e95e5f06e9a17178, type: 3}
-  - {fileID: 8300000, guid: 1c9ab58c7c12f6647a832dbc2f6381cf, type: 3}
-  - {fileID: 8300000, guid: 49096d16e976e224d913a196b6860a8c, type: 3}
-  isOpening: 0
-  isFading: 0
 --- !u!1 &1986807907001451839
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +139,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5281571148353191389}
   - component: {fileID: 8569326688928269671}
-  - component: {fileID: 4558272317457140581}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -283,31 +258,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4558272317457140581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986807907001451839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSetting
-  bgmAudioSource: {fileID: 8569326688928269671}
-  seAudioSource: {fileID: 6077341416951376988}
-  bgmVolumeSlider: {fileID: 0}
-  seVolumeSlider: {fileID: 0}
-  bgms:
-  - {fileID: 8300000, guid: 1e89b1240bc5629498cd7b0f2b85436c, type: 3}
-  - {fileID: 8300000, guid: d128be1342c3c5c48af5ad9ce626b1c8, type: 3}
-  - {fileID: 8300000, guid: 6cddbf075fc0dc847810d4ef529cfb11, type: 3}
-  - {fileID: 8300000, guid: c6be98c7d250c0942bb15de1e2878ae9, type: 3}
-  - {fileID: 8300000, guid: 1a77c128317aea444b9d9f0d815fe318, type: 3}
-  ses: []
-  isOpening: 0
-  isFading: 0
 --- !u!1 &7523757481898297153
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4361456171762168881}
+  - component: {fileID: 8941938246596373269}
   m_Layer: 0
   m_Name: AudioSettings
   m_TagString: Untagged
@@ -341,3 +292,31 @@ Transform:
   - {fileID: 5513656949494454174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8941938246596373269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523757481898297153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.AudioSetting
+  bgmAudioSource: {fileID: 8569326688928269671}
+  seAudioSource: {fileID: 6077341416951376988}
+  bgmVolumeSlider: {fileID: 0}
+  seVolumeSlider: {fileID: 0}
+  bgms:
+  - {fileID: 8300000, guid: 423a79bca3ce81e4899c996ca6abbf58, type: 3}
+  - {fileID: 8300000, guid: bfe161886a90edf43ba50ff972a4cb08, type: 3}
+  - {fileID: 8300000, guid: 6ec27d9003ba13a41944d82dd5bb020c, type: 3}
+  - {fileID: 8300000, guid: 0b91e8a1686f4fb429d7ff825d30918e, type: 3}
+  - {fileID: 8300000, guid: 1a77c128317aea444b9d9f0d815fe318, type: 3}
+  ses:
+  - {fileID: 8300000, guid: 2767dcb770405a04e95e5f06e9a17178, type: 3}
+  - {fileID: 8300000, guid: 1c9ab58c7c12f6647a832dbc2f6381cf, type: 3}
+  - {fileID: 8300000, guid: 49096d16e976e224d913a196b6860a8c, type: 3}
+  isOpening: 0
+  isFading: 0

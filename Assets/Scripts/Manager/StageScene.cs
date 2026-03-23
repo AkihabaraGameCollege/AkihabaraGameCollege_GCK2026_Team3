@@ -72,6 +72,22 @@ namespace ForestDraw
         public string playerRootName = "PlayerRootStage";
 
         /// <summary>
+        /// ステージの状況管理用(駒田追加)
+        /// </summary>
+        private enum SceneState
+        {
+            // ステージ開始演出中
+            Intro,
+            // ステージプレイ中
+            Play,
+            // ゲームオーバーが確定していて演出中
+            GameOver,
+            // ステージクリアーが確定していて演出中
+            StageClear,
+        }
+        SceneState sceneState = SceneState.Intro;
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Awake()
@@ -98,6 +114,8 @@ namespace ForestDraw
             gameOverButton.onClick.AddListener(GameOver);// ゲームオーバーボタンにシーン遷移の関数を登録
 
             playerController.isCanPause = true;// ポーズ操作を許可する
+
+            sceneState = SceneState.Play;
         }
 
         /// <summary>
@@ -105,17 +123,21 @@ namespace ForestDraw
         /// </summary>
         public void InClearScene()
         {
-            int number = stageNumber;// 今いるステージ番号を参照
+            if (sceneState == SceneState.Play)
+            {
+                sceneState = SceneState.StageClear;
+                int number = stageNumber;// 今いるステージ番号を参照
 
-            // 最終ステージの場合
-            if (number == stageNumberMax)
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
-            }
-            else
-            {
-                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-                UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+                // 最終ステージの場合
+                if (number == stageNumberMax)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
+                }
+                else
+                {
+                    TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+                }
             }
         }
 
@@ -124,19 +146,23 @@ namespace ForestDraw
         /// </summary>
         public void GameOver()
         {
-            // 配列内のゲームオブジェクトをすべて参照
-            foreach (GameObject obj in playerUI)
+            if (sceneState == SceneState.Play)
             {
-                // オブジェクトがあった場合
-                if (obj != null)
+                sceneState = SceneState.GameOver;
+                // 配列内のゲームオブジェクトをすべて参照
+                foreach (GameObject obj in playerUI)
                 {
-                    obj.SetActive(false);
+                    // オブジェクトがあった場合
+                    if (obj != null)
+                    {
+                        obj.SetActive(false);
+                    }
                 }
-            }
 
-            gameOverUI.SetActive(true);
-            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-            UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+                gameOverUI.SetActive(true);
+                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+            }
         }
     }
 }
