@@ -1,3 +1,4 @@
+using ForestDraw.Combat;
 using UnityEngine;
 
 namespace ForestDraw.Player.Combat
@@ -15,19 +16,19 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// 一番近い敵1体にダメージを与える（単体攻撃）
         /// </summary>
-        public static void AttackNearest(Vector3 origin, int damage)
+        public static void AttackNearest(Vector3 origin, int damage, float duration)
         {
             var target = TargetFinder.FindNearest(origin);
 
             Debug.Log("単体攻撃");
             int finalDamage = ApplyMultiplier(damage);
-            target?.TakeDamage(finalDamage);
+            DealDamageOverTime(target, finalDamage, duration);
         }
 
         /// <summary>
         /// プレイヤー前方の直線範囲にいる敵にダメージ（直線攻撃）
         /// </summary>
-        public static void AttackLine(Vector3 origin, int damage, float width, float length)
+        public static void AttackLine(Vector3 origin, int damage, float width, float length, float duration)
         {
             var targets = TargetFinder.FindLine(origin, width, length);
             int finalDamage = ApplyMultiplier(damage);
@@ -35,14 +36,14 @@ namespace ForestDraw.Player.Combat
             foreach (var target in targets)
             {
                 Debug.Log("直線攻撃");
-                target.TakeDamage(finalDamage);
+                DealDamageOverTime(target, finalDamage, duration);
             }
         }
 
         /// <summary>
         /// 指定半径内の敵すべてにダメージ（円範囲攻撃）
         /// </summary>
-        public static void AttackCircle(Vector3 origin, float radius, int damage)
+        public static void AttackCircle(Vector3 origin, float radius, int damage, float duration)
         {
             var targets = TargetFinder.FindCircle(origin, radius);
             int finalDamage = ApplyMultiplier(damage);
@@ -50,14 +51,14 @@ namespace ForestDraw.Player.Combat
             foreach (var target in targets)
             {
                 Debug.Log("円形範囲攻撃");
-                target.TakeDamage(finalDamage);
+                DealDamageOverTime(target, finalDamage, duration);
             }
         }
 
         /// <summary>
         /// すべての敵にダメージ（全体攻撃）
         /// </summary>
-        public static void AttackAll(int damage)
+        public static void AttackAll(int damage, float duration)
         {
             var targets = TargetFinder.FindAll();
             int finalDamage = ApplyMultiplier(damage);
@@ -65,7 +66,7 @@ namespace ForestDraw.Player.Combat
             foreach (var target in targets)
             {
                 Debug.Log("全体攻撃");
-                target.TakeDamage(finalDamage);
+                DealDamageOverTime(target, finalDamage, duration);
             }
         }
 
@@ -86,6 +87,30 @@ namespace ForestDraw.Player.Combat
             int result = Mathf.RoundToInt(damage * nextAttackMultiplier);
             nextAttackMultiplier = 1f;
             return result;
+        }
+
+        /// <summary>
+        /// ダメージを徐々に与える
+        /// </summary>
+        private static void DealDamageOverTime(IDamageable target, int damage, float duration)
+        {
+            AttackExecutor.Instance.StartCoroutine(DamageCoroutine(target, damage, duration));
+        }
+
+        private static System.Collections.IEnumerator DamageCoroutine(IDamageable target, int totalDamage, float duration)
+        {
+            int ticks = 10; // 分割数（滑らかさ）
+            float interval = duration / ticks;
+
+            int damagePerTick = Mathf.CeilToInt((float)totalDamage / ticks);
+
+            for (int i = 0; i < ticks; i++)
+            {
+                if (target == null) yield break;
+
+                target.TakeDamage(damagePerTick);
+                yield return new WaitForSeconds(interval);
+            }
         }
     }
 }

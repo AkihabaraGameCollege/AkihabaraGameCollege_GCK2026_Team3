@@ -56,22 +56,22 @@ namespace ForestDraw.Player.Combat
             {
                 case CardEffectType.DamageSingle:
                     // 最も近い敵1体にダメージ
-                    PlayerAttack.AttackNearest(origin, attack.damage);
+                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration);
                     break;
 
                 case CardEffectType.DamageLine:
                     // 前方直線範囲の敵にダメージ
-                    PlayerAttack.AttackLine(origin, attack.damage, attack.lineWidth, attack.lineLength);
+                    PlayerAttack.AttackLine(origin, attack.damage, attack.lineWidth, attack.lineLength, card.useDuration);
                     break;
 
                 case CardEffectType.DamageArea:
                     // 円範囲の敵にダメージ
-                    PlayerAttack.AttackCircle(origin, attack.areaRadius, attack.damage);
+                    PlayerAttack.AttackCircle(origin, attack.areaRadius, attack.damage, card.useDuration);
                     break;
 
                 case CardEffectType.DamageAllOnScreen:
                     // 画面内すべての敵にダメージ
-                    PlayerAttack.AttackAll(attack.damage);
+                    PlayerAttack.AttackAll(attack.damage, card.useDuration);
                     break;
             }
         }
