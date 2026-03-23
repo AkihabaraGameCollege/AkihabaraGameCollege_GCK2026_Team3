@@ -94,7 +94,7 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         private static void DealDamageOverTime(IDamageable target, int damage, float duration)
         {
-            AttackExecutor.Instance.StartCoroutine(DamageCoroutine(target, damage, duration));
+            StageScene.Instance.StartCoroutine(DamageCoroutine(target, damage, duration));
         }
 
         private static System.Collections.IEnumerator DamageCoroutine(IDamageable target, int totalDamage, float duration)
