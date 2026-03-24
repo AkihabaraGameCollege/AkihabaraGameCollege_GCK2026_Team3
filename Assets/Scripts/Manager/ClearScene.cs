@@ -31,6 +31,10 @@ namespace ForestDraw
         /// クリアシーンで何番目のBGMを再生するかのインデックスを参照する変数
         /// </summary>
         private int bgmIndex = 5;
+        /// <summary>
+        /// 花火サウンドで何番目のSEを再生するかのインデックスを参照する変数
+        /// </summary>
+        private int fireworkSeIndex = 4;
 
         /// <summary>
         /// 初期設定の関数
@@ -38,7 +42,7 @@ namespace ForestDraw
         private void Start()
         {
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            audioSetting.PlaySE(1);
+            audioSetting.PlayBGS(fireworkSeIndex);
             audioSetting.PlayBGM(bgmIndex);
             playerController.isCanPause = true;// ポーズ操作を許可する
         }

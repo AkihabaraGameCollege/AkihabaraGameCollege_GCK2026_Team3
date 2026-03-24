@@ -2278,6 +2278,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: playerRootName
+      value: PlayerRootStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: animatorParentName
+      value: SceneRoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: titleSceneRootName
+      value: SceneRoot
+      objectReference: {fileID: 0}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

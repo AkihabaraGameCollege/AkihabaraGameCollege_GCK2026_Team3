@@ -13,13 +13,15 @@ namespace ForestDraw
         /// <summary>
         /// BGM用のオーディオソースの変数
         /// </summary>
-        [SerializeField]
         public AudioSource bgmAudioSource = null;
         /// <summary>
         /// SE用のオーディオソースの変数
         /// </summary>
-        [SerializeField]
         public AudioSource seAudioSource = null;
+        /// <summary>
+        /// BGS用のオーディオソースの変数
+        /// </summary>
+        public AudioSource bgsAudioSource = null;
 
         /// <summary>
         /// BGM音量のスライダーの変数
@@ -65,13 +67,14 @@ namespace ForestDraw
         /// </summary>
         void Update()
         {
-                // スライダーの値を取得
-                UpdateVolume.bgmSliderValue = bgmVolumeSlider.value;
-                UpdateVolume.seSliderValue = seVolumeSlider.value;
+            // スライダーの値を取得
+            UpdateVolume.bgmSliderValue = bgmVolumeSlider.value;
+            UpdateVolume.seSliderValue = seVolumeSlider.value;
 
-                // オーディオの音量を設定
-                bgmAudioSource.volume = UpdateVolume.bgmSliderValue;
-                seAudioSource.volume = UpdateVolume.seSliderValue;
+            // オーディオの音量を設定
+            bgmAudioSource.volume = UpdateVolume.bgmSliderValue;
+            seAudioSource.volume = UpdateVolume.seSliderValue;
+            bgsAudioSource.volume = UpdateVolume.seSliderValue;
 
             // スライダーの値が変更されたときに呼び出される関数を登録
             bgmVolumeSlider.onValueChanged.AddListener(ChangeVolumeBGM);// BGM音量スライダーの値が変更されたときに呼び出される関数を登録
@@ -94,6 +97,7 @@ namespace ForestDraw
         void ChangeVolumeSE(float newVolume)
         {
             seAudioSource.volume = newVolume;
+            bgsAudioSource.volume = newVolume;
         }
 
         /// <summary>
@@ -102,8 +106,8 @@ namespace ForestDraw
         /// <param name="seIndex"></param>
         public void PlaySE(int seIndex)
         {
-            seAudioSource.clip = ses[seIndex];// SEのオーディオクリップを設定
-            seAudioSource.Play();
+                seAudioSource.clip = ses[seIndex];// SEのオーディオクリップを設定
+                seAudioSource.Play();
         }
 
         /// <summary>
@@ -127,9 +131,9 @@ namespace ForestDraw
         /// <summary>
         /// SEを止めるための関数
         /// </summary>
-        public void StopSE()
+        public void StopBGS()
         {
-            seAudioSource.Stop();
+            bgsAudioSource.Stop();
         }
 
         /// <summary>
@@ -139,6 +143,7 @@ namespace ForestDraw
         {
             bgmAudioSource.Stop();
             seAudioSource.Stop();
+            bgsAudioSource.Stop();
         }
 
         /// <summary>
@@ -201,6 +206,16 @@ namespace ForestDraw
 
             isFading = false;// フェード中フラグを下ろす
             bgmAudioSource.volume = targetVolume;// 音量を目標の音量に設定
+        }
+
+        /// <summary>
+        /// BGSを鳴らすための関数
+        /// </summary>
+        /// <param name="bgsIndex"></param>
+        public void PlayBGS(int bgsIndex)
+        {
+            bgsAudioSource.clip = ses[bgsIndex];// BGSのオーディオクリップを設定
+            bgsAudioSource.Play();
         }
     }
 }

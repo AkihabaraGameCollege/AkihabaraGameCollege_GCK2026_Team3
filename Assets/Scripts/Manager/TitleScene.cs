@@ -99,9 +99,13 @@ namespace ForestDraw
         /// </summary>
         private float introTime = 1f;
         /// <summary>
-        /// イントロアニメーション中の待機時間
+        /// デッキが動いている最中の待機時間
         /// </summary>
-        private float displayDeckTime = 2.5f;
+        private float deckMoveTime = 1.25f;
+        /// <summary>
+        /// デッキが開いている最中の待機時間
+        /// </summary>
+        private float deckOpenTime = 1.25f;
 
         /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
@@ -179,10 +183,6 @@ namespace ForestDraw
         public Button settingButton = null;
 
         /// <summary>
-        /// 第何ステージかのインデックスを参照する変数
-        /// </summary>
-        public int stageSceneIndex = 0;
-        /// <summary>
         /// タイトルでBGMの何番を流すかのインデックスを参照する変数
         /// </summary>
         private int titleBgmIndex = 0;
@@ -190,6 +190,18 @@ namespace ForestDraw
         /// デッキ編集画面でBGMの何番を流すかのインデックスを参照する変数
         /// </summary>
         private int deckBgmIndex = 1;
+        /// <summary>
+        /// タイトルの環境SEの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int titleDirectionSeIndex = 1;
+        /// <summary>
+        /// デッキが開くときにSEの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int deckOpenSeIndex = 2;
+        /// <summary>
+        /// 第何ステージかのインデックスを参照する変数
+        /// </summary>
+        public int stageSceneIndex = 0;
 
         /// <summary>
         /// 初期設定の関数
@@ -216,6 +228,7 @@ namespace ForestDraw
             // タイトルBGMを再生
             audioSetting.PlayBGM(titleBgmIndex);
             audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
+            audioSetting.PlayBGS(titleDirectionSeIndex);// タイトルシーンのBGSを再生
 
             // 別シーンからタイトルに来た場合
             if (isExit)
@@ -230,7 +243,7 @@ namespace ForestDraw
         public void DisplayStageSelect()
         {
             animator.SetTrigger(startTrigger);// ステージセレクトを表示させるトリガーをセット
-            
+
             // フラグ操作
             playerController.isCanPause = true;// ポーズ操作を許可する
             isStartScene = false;// 最初のシーンから出る
@@ -305,7 +318,10 @@ namespace ForestDraw
         private IEnumerator DisplayDeckCoroutine()
         {
             animator.SetTrigger(deckTrigger);// デッキ画面を表示させるトリガーをセット
-            yield return new WaitForSeconds(displayDeckTime);// イントロ中は待つ
+            yield return new WaitForSeconds(deckMoveTime);// デッキが動いている時間は待つ
+            audioSetting.PlaySE(deckOpenSeIndex);
+            yield return new WaitForSeconds(deckOpenTime);// デッキが開いている時間は待つ
+            audioSetting.StopBGS();
             audioSetting.PlayBGM(deckBgmIndex);
         }
     }

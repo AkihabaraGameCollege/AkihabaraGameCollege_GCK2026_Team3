@@ -48,6 +48,10 @@ namespace ForestDraw
         /// </summary>
         private int stageNumberMax = 3;
         /// <summary>
+        /// タイトルの環境SEの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int fireSeIndex = 3;
+        /// <summary>
         /// 今いるステージ番号を参照する変数
         /// </summary>
         public int stageNumber = 1;
@@ -106,6 +110,12 @@ namespace ForestDraw
             gameOverUI.SetActive(false);
 
             audioSetting.PlayBGM(bgmIndex);
+
+            // もしステージが第三ステージなら
+            if (stageNumber == stageNumberMax)
+            {
+                audioSetting.PlayBGS(fireSeIndex);// ステージのBGSを再生
+            }
 
             // ボタンイベントの登録
             clearButton.onClick.AddListener(InClearScene);// クリアボタンにシーン遷移の関数を登録
