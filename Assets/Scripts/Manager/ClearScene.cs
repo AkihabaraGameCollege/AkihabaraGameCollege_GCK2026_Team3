@@ -8,15 +8,10 @@ namespace ForestDraw
     public class ClearScene : MonoBehaviour
     {
         /// <summary>
-        /// BGMオーディオ設定の変数
+        /// オーディオ設定の変数
         /// </summary>
         [SerializeField]
-        private AudioSetting audioSettingBGM = null;
-        /// <summary>
-        /// SEオーディオ設定の変数
-        /// </summary>
-        [SerializeField]
-        private AudioSetting audioSettingSE = null;
+        private AudioSetting audioSetting = null;
 
         /// <summary>
         /// タイトルシーン名を参照する変数
@@ -33,13 +28,18 @@ namespace ForestDraw
         private PlayerController playerController = null;
 
         /// <summary>
+        /// クリアシーンで何番目のBGMを再生するかのインデックスを参照する変数
+        /// </summary>
+        private int bgmIndex = 5;
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Start()
         {
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            audioSettingSE.PlaySE(1);
-            audioSettingBGM.PlayBGM(4);
+            audioSetting.PlaySE(1);
+            audioSetting.PlayBGM(bgmIndex);
             playerController.isCanPause = true;// ポーズ操作を許可する
         }
 

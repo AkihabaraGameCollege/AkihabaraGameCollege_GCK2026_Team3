@@ -309,14 +309,17 @@ MonoBehaviour:
   bgmVolumeSlider: {fileID: 0}
   seVolumeSlider: {fileID: 0}
   bgms:
-  - {fileID: 8300000, guid: 423a79bca3ce81e4899c996ca6abbf58, type: 3}
-  - {fileID: 8300000, guid: bfe161886a90edf43ba50ff972a4cb08, type: 3}
-  - {fileID: 8300000, guid: 6ec27d9003ba13a41944d82dd5bb020c, type: 3}
-  - {fileID: 8300000, guid: 0b91e8a1686f4fb429d7ff825d30918e, type: 3}
-  - {fileID: 8300000, guid: 1a77c128317aea444b9d9f0d815fe318, type: 3}
+  - {fileID: 8300000, guid: 01f8c07b4aea0e94aac04b36a51bd4bd, type: 3}
+  - {fileID: 8300000, guid: 362633a45bdaa3843aa858931e7ccd7b, type: 3}
+  - {fileID: 8300000, guid: c3794b9bcba163048864b155e5d65390, type: 3}
+  - {fileID: 8300000, guid: 11ff0aa90d68cd842be15b4990c5edfe, type: 3}
+  - {fileID: 8300000, guid: 1be045c3959a9814998f9b688c509323, type: 3}
+  - {fileID: 8300000, guid: 1e89b1240bc5629498cd7b0f2b85436c, type: 3}
   ses:
-  - {fileID: 8300000, guid: 2767dcb770405a04e95e5f06e9a17178, type: 3}
-  - {fileID: 8300000, guid: 1c9ab58c7c12f6647a832dbc2f6381cf, type: 3}
   - {fileID: 8300000, guid: 49096d16e976e224d913a196b6860a8c, type: 3}
+  - {fileID: 8300000, guid: 4772c44f97524494f836ef86ccc3b6a1, type: 3}
+  - {fileID: 8300000, guid: 9982313fbca898749b0084845b188695, type: 3}
+  - {fileID: 8300000, guid: 29e292aa7c5aac64d894d334df875e78, type: 3}
+  - {fileID: 8300000, guid: 1c9ab58c7c12f6647a832dbc2f6381cf, type: 3}
   isOpening: 0
   isFading: 0

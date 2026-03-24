@@ -269,11 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8923be05ee5e5489e4a4d02d0fd8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckSlotUI
---- !u!1 &67941812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7978868792212657355, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 8585890095164797410}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &96796443
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +508,7 @@ GameObject:
   - component: {fileID: 171094786}
   - component: {fileID: 171094788}
   m_Layer: 0
-  m_Name: SceneRoot
+  m_Name: SceneRootTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,15 +535,12 @@ MonoBehaviour:
   - Stage1
   - Stage2
   - Stage3
-  stageSceneIndex: 0
-  panel_SpriteIndex: 0
   Panel_Image: {fileID: 6196729479051325432}
   Panel_Sprite:
   - {fileID: 599138475, guid: 481cbef0e55cecd4a9074c6067fa90f4, type: 3}
   - {fileID: -2000492216, guid: 342f049dec18ced498e331d97eb1162b, type: 3}
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   settingManager: {fileID: 7288153572538685478}
-  introTime: 1.5
   playerRootName: PlayerRootTitle
   pauseUI_Name: PauseUI
   settingUI_Name: SettingUI
@@ -564,6 +556,7 @@ MonoBehaviour:
   stageButton2: {fileID: 4146549194359104320}
   stageButton3: {fileID: 2481948457516966776}
   settingButton: {fileID: 3281988513266481014}
+  stageSceneIndex: 0
 --- !u!4 &171094787
 Transform:
   m_ObjectHideFlags: 0
@@ -3027,10 +3020,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 510868975}
     m_Modifications:
+    - target: {fileID: 516316059542914833, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1258431602}
     - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: onSettingButtonClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7288153572538685478}
+    - target: {fileID: 5986552178864903443, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1258431602}
+    - target: {fileID: 6027228925724345001, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1258431602}
     - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Name
       value: PauseUI
@@ -4647,7 +4652,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3010617363059062608}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2648889200976686538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4705,35 +4722,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2962358724465098715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6811246414671662303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: CardDefenseGame.AudioSetting, Assembly-CSharp
-          m_MethodName: PlaySE
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &3010617363059062608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4808,14 +4796,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1258431602}
         m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
         m_MethodName: PlaySE
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4901,7 +4889,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2648889200976686538}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3541652956824244617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,14 +5086,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardDefenseGame.AudioSetting, Assembly-CSharp
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
         m_MethodName: PlaySE
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5141,7 +5141,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3654340813724681792}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4209632493490895459
 GameObject:
   m_ObjectHideFlags: 0
@@ -5240,35 +5252,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5448705934964005438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6765053001244204094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: CardDefenseGame.AudioSetting, Assembly-CSharp
-          m_MethodName: PlaySE
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!224 &5652352265126598856
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5288,35 +5271,6 @@ RectTransform:
   m_AnchoredPosition: {x: -429, y: 342}
   m_SizeDelta: {x: 629, y: 189}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5719239978025183537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6063700908500917345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: CardDefenseGame.AudioSetting, Assembly-CSharp
-          m_MethodName: PlaySE
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &5887708520347210824
 GameObject:
   m_ObjectHideFlags: 0
@@ -5348,7 +5302,6 @@ GameObject:
   - component: {fileID: 3927897190397400854}
   - component: {fileID: 1057162987250860509}
   - component: {fileID: 3281988513266481014}
-  - component: {fileID: 5719239978025183537}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -5534,7 +5487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3541652956824244617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6246747943090762593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5578,7 +5543,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1925558877363623309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258431602}
+        m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6546035591014677547
 GameObject:
   m_ObjectHideFlags: 0
@@ -5650,7 +5627,6 @@ GameObject:
   - component: {fileID: 6217834164910710781}
   - component: {fileID: 7749419834266198455}
   - component: {fileID: 4114350393433452695}
-  - component: {fileID: 5448705934964005438}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -5670,7 +5646,6 @@ GameObject:
   - component: {fileID: 926322537327063196}
   - component: {fileID: 2648889200976686538}
   - component: {fileID: 3485528777106045167}
-  - component: {fileID: 2962358724465098715}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -5772,41 +5747,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8492552946175260372, guid: 36917260830e9094796b61d62b649d46, type: 3}
   m_PrefabInstance: {fileID: 8585890095164797410}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67941812}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &7375086079160285788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67941812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ForestDraw.AudioSetting, Assembly-CSharp
-          m_MethodName: PlaySE
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!224 &7461895883391219667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5916,26 +5862,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4558272317457140581, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: seVolumeSlider
-      value: 
-      objectReference: {fileID: 7375086079160285786}
-    - target: {fileID: 4558272317457140581, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: bgmVolumeSlider
-      value: 
-      objectReference: {fileID: 8813411236601014970}
-    - target: {fileID: 4594460663529761312, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: seVolumeSlider
-      value: 
-      objectReference: {fileID: 7375086079160285786}
-    - target: {fileID: 4594460663529761312, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: bgmVolumeSlider
-      value: 
-      objectReference: {fileID: 8813411236601014970}
     - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: m_Name
       value: AudioSettings
       objectReference: {fileID: 0}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: seVolumeSlider
+      value: 
+      objectReference: {fileID: 7375086079160285786}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: bgmVolumeSlider
+      value: 
+      objectReference: {fileID: 8813411236601014970}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6045,6 +5983,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2201206349994913022, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1258431602}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6129,6 +6071,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6031799195331574736, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1258431602}
     - target: {fileID: 6289396456306501893, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6144,10 +6090,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7978868792212657355, guid: 36917260830e9094796b61d62b649d46, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7375086079160285788}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36917260830e9094796b61d62b649d46, type: 3}
 --- !u!224 &8621637534746423622
 RectTransform:

@@ -26,12 +26,6 @@ namespace ForestDraw
         private GameObject[] playerUI = null;
 
         /// <summary>
-        /// BGMのインデックスの変数
-        /// </summary>
-        [SerializeField]
-        private int bgmIndex = 0;
-
-        /// <summary>
         /// プレイヤー操作クラスを参照する変数
         /// </summary>
         private PlayerController playerController = null;
@@ -57,6 +51,10 @@ namespace ForestDraw
         /// 今いるステージ番号を参照する変数
         /// </summary>
         public int stageNumber = 1;
+        /// <summary>
+        /// BGMのインデックスを参照する変数
+        /// </summary>
+        public int bgmIndex = 2;
 
         /// <summary>
         /// クリアシーン名を参照する変数

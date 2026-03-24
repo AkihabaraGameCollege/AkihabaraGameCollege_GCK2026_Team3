@@ -45,17 +45,6 @@ namespace ForestDraw
         private string[] stageSceneNames = null;
 
         /// <summary>
-        /// インデックスの変数
-        /// </summary>
-        [SerializeField]
-        private int stageSceneIndex = 0;
-        /// <summary>
-        /// パネルスプライトのインデックスの変数
-        /// </summary>
-        [SerializeField]
-        private int panel_SpriteIndex = 0;
-
-        /// <summary>
         /// パネルのイメージの変数
         /// </summary>
         [SerializeField]
@@ -108,7 +97,11 @@ namespace ForestDraw
         /// <summary>
         /// イントロアニメーション中の待機時間
         /// </summary>
-        public float introTime = 1f;
+        private float introTime = 1f;
+        /// <summary>
+        /// イントロアニメーション中の待機時間
+        /// </summary>
+        private float displayDeckTime = 2.5f;
 
         /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
@@ -186,6 +179,19 @@ namespace ForestDraw
         public Button settingButton = null;
 
         /// <summary>
+        /// 第何ステージかのインデックスを参照する変数
+        /// </summary>
+        public int stageSceneIndex = 0;
+        /// <summary>
+        /// タイトルでBGMの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int titleBgmIndex = 0;
+        /// <summary>
+        /// デッキ編集画面でBGMの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int deckBgmIndex = 1;
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Start()
@@ -197,7 +203,6 @@ namespace ForestDraw
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
 
             // ボタンに関数を登録
-            deckButton.onClick.AddListener(DisplayDeck);// デッキ表示のボタンにデッキ表示の関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
             stageSelectReturnButton.onClick.AddListener(StageSelectReturn);// ステージセレクトから戻るボタンにステージセレクトから戻る関数を登録
             startButton.onClick.AddListener(DisplayStageSelect);// スタートボタンにステージセレクトへ行く関数を登録
@@ -206,9 +211,10 @@ namespace ForestDraw
             stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
             exitButton.onClick.AddListener(() => StartCoroutine(ExitCoroutine()));// 第三ステージへのボタンに第三ステージへの関数を登録
+            deckButton.onClick.AddListener(() => StartCoroutine(DisplayDeckCoroutine()));// デッキ表示のボタンにデッキ表示の関数を登録
 
             // タイトルBGMを再生
-            audioSetting.PlayBGM(0);
+            audioSetting.PlayBGM(titleBgmIndex);
             audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
 
             // 別シーンからタイトルに来た場合
@@ -244,18 +250,11 @@ namespace ForestDraw
         }
 
         /// <summary>
-        /// デッキ画面を表示する関数
-        /// </summary>
-        public void DisplayDeck()
-        {
-            animator.SetTrigger(deckTrigger);// デッキ画面を表示させるトリガーをセット
-        }
-
-        /// <summary>
         /// デッキ画面から戻る関数
         /// </summary>
         public void DeckReturn()
         {
+            audioSetting.PlayBGM(titleBgmIndex);
             animator.SetTrigger(deckReturnTrigger);// デッキ画面から戻るトリガーをセット
         }
 
@@ -278,9 +277,9 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator GoStageCoroutine(int number = 0)
         {
-            panel_SpriteIndex = number;// パネルスプライトのインデックスにステージの番号を代入
+            stageSceneIndex = number;// パネルスプライトのインデックスにステージの番号を代入
 
-            Panel_Image.sprite = Panel_Sprite[panel_SpriteIndex];// パネルのスプライトをステージに合わせて変更
+            Panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
             stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
             animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
@@ -288,11 +287,26 @@ namespace ForestDraw
             UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
         }
 
+        /// <summary>
+        /// 強制的にステージセレクトへ遷移するコルーチン
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator DisplayStageSelectCoroutine()
         {
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
             DisplayStageSelect();
             isExit = false;// フラグをリセット
+        }
+
+        /// <summary>
+        /// デッキ編集画面に移る演出用コルーチン
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator DisplayDeckCoroutine()
+        {
+            animator.SetTrigger(deckTrigger);// デッキ画面を表示させるトリガーをセット
+            yield return new WaitForSeconds(displayDeckTime);// イントロ中は待つ
+            audioSetting.PlayBGM(deckBgmIndex);
         }
     }
 }
