@@ -21,8 +21,25 @@ namespace ForestDraw.Player.Combat
         // UI更新用イベント
         public event Action<int, float> OnCostChanged;
 
+        /// <summary>
+        /// アニメーターを参照する変数（中山が編集）
+        /// </summary>
+        private Animator animator = null;
+
+        /// <summary>
+        /// アニメーターの名前を参照する変数（中山が編集）
+        /// </summary>
+        public string animatorName = null;
+
+        /// <summary>
+        /// 使用コストが足りないときに呼ばれるIDの変数（中山が編集）
+        /// </summary>
+        private static readonly int costNotEnoughTrigger = Animator.StringToHash("NotEnough");
+
         private void Start()
         {
+            animator = GameObject.Find(animatorName).GetComponent<Animator>();// シーン内からアニメーターを探して取得（中山が編集）
+
             currentCost = 0;
             recoverInterval = baseRecoverInterval;
 
@@ -48,7 +65,11 @@ namespace ForestDraw.Player.Combat
         // コスト使用
         public bool UseCost(int cost)
         {
-            if (currentCost < cost) return false;
+            if (currentCost < cost)
+            {
+                animator.SetTrigger(costNotEnoughTrigger);// アニメーションを再生してプレイヤーに通知（中山が編集）
+                return false;
+            }
 
             currentCost -= cost;
             OnCostChanged?.Invoke(currentCost, 0);
