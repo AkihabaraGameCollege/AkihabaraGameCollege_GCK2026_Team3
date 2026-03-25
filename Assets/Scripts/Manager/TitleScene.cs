@@ -47,14 +47,62 @@ namespace ForestDraw
         /// <summary>
         /// パネルのイメージの変数
         /// </summary>
-        [SerializeField]
         private Image Panel_Image = null;
 
         /// <summary>
         /// パネルのスプライトのリスト変数
         /// </summary>
-        [SerializeField]
-        private Sprite[] Panel_Sprite = null;
+        public Sprite[] Panel_Sprite = null;
+
+        /// <summary>
+        /// プレイヤー操作クラスを参照する変数
+        /// </summary>
+        private PlayerController playerController = null;
+        /// <summary>
+        /// ポーズ機能クラスを参照する変数
+        /// </summary>
+        private PauseManager pauseManager = null;
+        /// <summary>
+        /// 設定機能クラスを参照する変数
+        /// </summary>
+        public SettingManager settingManager = null;
+
+        /// <summary>
+        ///スタートボタンの変数
+        /// </summary>
+        private Button startButton = null;
+        /// <summary>
+        /// ゲーム終了ボタンの変数
+        /// </summary>
+        private Button exitButton = null;
+        /// <summary>
+        /// デッキ表示のボタンの変数
+        /// </summary>
+        public Button deckButton = null;
+        /// <summary>
+        /// デッキ表示から戻るボタンの変数
+        /// </summary>
+        public Button deckReturnButton = null;
+        /// <summary>
+        /// ステージセレクトから戻るボタンの変数
+        /// </summary>
+        public Button stageSelectReturnButton = null;
+        /// <summary>
+        /// 第一ステージへのボタンの変数
+        /// </summary>
+        public Button stageButton1 = null;
+        /// <summary>
+        /// 第二ステージへのボタンの変数
+        /// </summary>
+        public Button stageButton2 = null;
+        /// <summary>
+        /// 第三ステージへのボタンの変数
+        /// </summary>
+        public Button stageButton3 = null;
+        /// <summary>
+        /// 設定へのボタンの変数
+        /// </summary>
+        public Button settingButton = null;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -80,19 +128,6 @@ namespace ForestDraw
         /// ステージへ遷移するときに呼ばれるIDの変数
         /// </summary>
         private static readonly int goStageTrigger = Animator.StringToHash("GoStage");
-
-        /// <summary>
-        /// プレイヤー操作クラスを参照する変数
-        /// </summary>
-        private PlayerController playerController = null;
-        /// <summary>
-        /// ポーズ機能クラスを参照する変数
-        /// </summary>
-        private PauseManager pauseManager = null;
-        /// <summary>
-        /// 設定機能クラスを参照する変数
-        /// </summary>
-        public SettingManager settingManager = null;
 
         /// <summary>
         /// イントロアニメーション中の待機時間
@@ -135,6 +170,10 @@ namespace ForestDraw
         /// デッキUIのオブジェクト名を参照する変数
         /// </summary>
         public string deckUI_Name = "DeckUI";
+        /// <summary>
+        /// デッキUIのオブジェクト名を参照する変数
+        /// </summary>
+        public string TreePanel_Name = "TreePanel_Image";
 
         /// <summary>
         /// シーン最初の画面にいるかどうか判別する変数
@@ -144,43 +183,6 @@ namespace ForestDraw
         /// 別シーンからタイトルへ遷移したかを判別する変数
         /// </summary>
         public static bool isExit = false;
-
-        /// <summary>
-        ///スタートボタンの変数
-        /// </summary>
-        private Button startButton = null;
-        /// <summary>
-        /// ゲーム終了ボタンの変数
-        /// </summary>
-        private Button exitButton = null;
-        /// <summary>
-        /// デッキ表示のボタンの変数
-        /// </summary>
-        public Button deckButton = null;
-        /// <summary>
-        /// デッキ表示から戻るボタンの変数
-        /// </summary>
-        public Button deckReturnButton = null;
-        /// <summary>
-        /// ステージセレクトから戻るボタンの変数
-        /// </summary>
-        public Button stageSelectReturnButton = null;
-        /// <summary>
-        /// 第一ステージへのボタンの変数
-        /// </summary>
-        public Button stageButton1 = null;
-        /// <summary>
-        /// 第二ステージへのボタンの変数
-        /// </summary>
-        public Button stageButton2 = null;
-        /// <summary>
-        /// 第三ステージへのボタンの変数
-        /// </summary>
-        public Button stageButton3 = null;
-        /// <summary>
-        /// 設定へのボタンの変数
-        /// </summary>
-        public Button settingButton = null;
 
         /// <summary>
         /// タイトルでBGMの何番を流すかのインデックスを参照する変数
@@ -213,6 +215,7 @@ namespace ForestDraw
             pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseManager>();// シーン内からポーズUIを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
+            Panel_Image = GameObject.Find(TreePanel_Name).GetComponent<Image>();// シーン内からステージパネルを探して取得
 
             // ボタンに関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
