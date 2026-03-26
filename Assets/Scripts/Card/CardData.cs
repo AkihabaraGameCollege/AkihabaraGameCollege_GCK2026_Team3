@@ -33,6 +33,9 @@ namespace ForestDraw
         /// <summary>カード画像</summary>
         public Sprite cardImage;
 
+        /// <summary>カード使用時のSE</summary>
+        public AudioClip usedSE;
+
         /// <summary>バフ系効果の持続時間</summary>
         public int buffDuration;
 

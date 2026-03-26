@@ -20,6 +20,7 @@ MonoBehaviour:
   cost: 3
   useDuration: 3
   cardImage: {fileID: 1741413774, guid: 4f70038bd5290374eb3731f3734c68c6, type: 3}
+  usedSE: {fileID: 8300000, guid: 4031f207d63e746498fd7cf7b43f44a6, type: 3}
   buffDuration: 10
   attackParams:
     damage: 2000
