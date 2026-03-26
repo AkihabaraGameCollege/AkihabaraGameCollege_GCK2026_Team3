@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 namespace ForestDraw
 {
@@ -51,12 +52,17 @@ namespace ForestDraw
         /// フェード中かどうかのフラグ
         /// </summary>
         public bool isFading = false;
+        /// <summary>
+        /// サウンド管理クラスのインスタンスを参照する変数
+        /// </summary>
+        public static AudioSetting Instance { get; private set; } = null;
 
         /// <summary>
         /// 初期設定の関数
         /// </summary>
         void Awake()
         {
+            Instance = this;
             // 保存された音量を反映
             bgmVolumeSlider.value = UpdateVolume.bgmSliderValue;
             seVolumeSlider.value = UpdateVolume.seSliderValue;
@@ -108,6 +114,16 @@ namespace ForestDraw
         {
                 seAudioSource.clip = ses[seIndex];// SEのオーディオクリップを設定
                 seAudioSource.Play();
+        }
+        public void CardSE(AudioClip clip)
+        {
+            if (clip == null)
+            {
+                Debug.LogError("カード使用時のSEがない");
+                return;
+            }
+            seAudioSource.clip = clip;  
+            seAudioSource.Play();
         }
 
         /// <summary>
