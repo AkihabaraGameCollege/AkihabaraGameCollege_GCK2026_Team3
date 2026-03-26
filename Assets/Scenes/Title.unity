@@ -530,7 +530,7 @@ MonoBehaviour:
   audioSetting: {fileID: 1258431602}
   exitTime: 3
   fadeTime: 0.05
-  GoStageTime: 2
+  GoStageTime: 1
   stageSceneNames:
   - Stage1
   - Stage2

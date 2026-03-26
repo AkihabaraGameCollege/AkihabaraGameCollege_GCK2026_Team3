@@ -61,7 +61,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: BaseLayer
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8437443584336556882}
@@ -85,7 +85,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoticeText
+  m_Name: NoticeCostText
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: NotEnough
@@ -94,9 +94,15 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: EnemyEncount
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: BaseLayer
     m_StateMachine: {fileID: -5961461612291969049}
     m_Mask: {fileID: 0}
     m_Motions: []
