@@ -86,9 +86,13 @@ namespace ForestDraw
             {
                 sprite_Index = wizardSprite_Index;// スプライトのインデックスにウィザードの情報を代入
             }
-            else
+            else if (name == treantName)
             {
                 sprite_Index = treantSprite_Index;// スプライトのインデックスにトレントの情報を代入
+            }
+            else
+            {
+                return;// どの敵の名前でもないのなら通知しない
             }
 
             notice_Image.sprite = notice_Sprite[sprite_Index];// 通知UIのスプライトをステージに合わせて変更

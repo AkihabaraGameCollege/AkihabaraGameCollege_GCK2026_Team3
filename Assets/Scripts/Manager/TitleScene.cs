@@ -131,7 +131,7 @@ namespace ForestDraw
         /// <summary>
         /// イントロアニメーション中の待機時間
         /// </summary>
-        private float introTime = 1f;
+        private float introTime = 3.5f;
         /// <summary>
         /// デッキが動いている最中の待機時間
         /// </summary>
