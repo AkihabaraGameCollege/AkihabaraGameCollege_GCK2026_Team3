@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009e68e7787ff794e8368c53da249712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Enemy.EnemyController
+  canvas: {fileID: 130705879348967846}
 --- !u!114 &8991152890040047157
 MonoBehaviour:
   m_ObjectHideFlags: 0
