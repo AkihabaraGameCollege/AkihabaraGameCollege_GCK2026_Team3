@@ -1033,6 +1033,7 @@ MonoBehaviour:
   tutorial_BgmIndex: 6
   stageNumber: 1
   stageBgmIndex: 2
+  stageSceneIndex: 0
 --- !u!114 &461601636
 MonoBehaviour:
   m_ObjectHideFlags: 0
