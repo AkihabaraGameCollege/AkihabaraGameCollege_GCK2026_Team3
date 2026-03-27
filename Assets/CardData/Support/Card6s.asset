@@ -21,7 +21,7 @@ MonoBehaviour:
   useDuration: 0
   cardImage: {fileID: 1229862330, guid: 468c4fe9cad8b144db76b8ffa650c3c4, type: 3}
   cardAbout_Image: {fileID: 0}
-  usedSE: {fileID: 0}
+  usedSE: {fileID: 8300000, guid: d0c62a56c336ad64484daa43fa167af2, type: 3}
   buffDuration: 3
   attackParams:
     damage: 200
