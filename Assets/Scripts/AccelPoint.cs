@@ -16,14 +16,11 @@ public class AccelPoint : MonoBehaviour
     // SoundManagerの参照
     private SoundManager soundManager;
 
-    // エラーを出すため削除
-    /*
     private void Start()
     {
         // シーン内のSoundManagerを検索して取得
         soundManager = FindObjectOfType<SoundManager>();
     }
-    */
 
     private void OnTriggerEnter(Collider Player)
     {
