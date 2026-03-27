@@ -3957,7 +3957,7 @@ MonoBehaviour:
   - {fileID: -2000492216, guid: 342f049dec18ced498e331d97eb1162b, type: 3}
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   tutorial_BgmIndex: 6
-  stageNumber: 2
+  stageNumber: 3
   stageBgmIndex: 2
   stageSceneIndex: 1
 --- !u!1 &1536109044

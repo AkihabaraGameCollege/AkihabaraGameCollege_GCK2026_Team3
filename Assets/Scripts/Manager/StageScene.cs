@@ -181,18 +181,22 @@ namespace ForestDraw
             if (sceneState == SceneState.Play)
             {
                 sceneState = SceneState.StageClear;
-                int number = stageNumber;// 今いるステージ番号を参照
 
-                // 最終ステージの場合
-                if (number == stageNumberMax)
-                {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
-                }
-                else
-                {
-                    TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
-                }
+                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
+
+                //int number = stageNumber;// 今いるステージ番号を参照
+
+                //// 最終ステージの場合
+                //if (number == stageNumberMax)
+                //{
+                //    UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
+                //}
+                //else
+                //{
+                //    TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                //    UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+                //}
             }
         }
 
