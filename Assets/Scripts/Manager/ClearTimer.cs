@@ -13,16 +13,21 @@ public class ClearTimer : MonoBehaviour
     private float currentTime = 0f;
     private bool isCleared = false;
 
+    void Start()
+    {
+        currentTime = clearTime;
+        UpdateText();
+    }
 
     void Update()
     {
         if (isCleared) return;
 
-        currentTime += Time.deltaTime;
+        currentTime -= Time.deltaTime;
 
-        if (currentTime >= clearTime)
+        if (currentTime <= 0f)
         {
-            currentTime = clearTime;
+            currentTime = 0f;
             isCleared = true;
             UpdateText(); 
             Debug.Log("ステージクリア！！！！！");
