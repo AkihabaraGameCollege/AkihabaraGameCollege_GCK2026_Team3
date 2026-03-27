@@ -18,7 +18,10 @@ MonoBehaviour:
   effectType: 7
   description: "\u30B3\u30B9\u30C8\u304C\u4E00\u756A\u9AD8\u3044\u30AB\u30FC\u30C9\u3092\u6307\u5B9A\u3057\u3066\u3001\u305D\u306E\u30AB\u30FC\u30C9\u306E\u8907\u88FD\u3092\u624B\u672D\u306B\u52A0\u3048\u308B"
   cost: 1
-  cardImage: {fileID: -1346473593, guid: 49ff1c69013d2be4a912067f28320ed4, type: 3}
+  useDuration: 0
+  cardImage: {fileID: 426227444, guid: 040c1443be7a72f44b6e61327f36485a, type: 3}
+  cardAbout_Image: {fileID: 0}
+  usedSE: {fileID: 0}
   buffDuration: 10
   attackParams:
     damage: 0
@@ -31,3 +34,6 @@ MonoBehaviour:
     intervalReduction: 0
   supportParams:
     damageReduction: 50
+    attackMultiplier: 0
+  utilityParams:
+    drawCount: 0
