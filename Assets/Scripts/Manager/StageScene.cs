@@ -148,7 +148,7 @@ namespace ForestDraw
             // コンポーネントの登録
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            nextButton = GameObject.Find(nextButtonName).GetComponent<Button>();// シーン内から次へボタンを探して取得
+            if (GameObject.Find(nextButtonName) != null) nextButton = GameObject.Find(nextButtonName).GetComponent<Button>();// シーン内から次へボタンを探して取得
             Panel_Image = GameObject.Find(TreePanel_Name).GetComponent<Image>();// シーン内からステージパネルを探して取得
 
             // 配列内のゲームオブジェクトをすべて参照
@@ -164,8 +164,8 @@ namespace ForestDraw
             gameOverUI.SetActive(false);
 
             // ボタンイベントの登録
-            clearButton.onClick.AddListener(InClearScene);// クリアボタンにシーン遷移の関数を登録
-            gameOverButton.onClick.AddListener(GameOver);// ゲームオーバーボタンにシーン遷移の関数を登録
+            if (clearButton != null) clearButton.onClick.AddListener(InClearScene);// クリアボタンにシーン遷移の関数を登録
+            if (gameOverButton != null) gameOverButton.onClick.AddListener(GameOver);// ゲームオーバーボタンにシーン遷移の関数を登録
             nextButton.onClick.AddListener(SkipTutorial);// 次へボタンにチュートリアルスキップの関数を登録
 
             playerController.isCanPause = true;// ポーズ操作を許可する
@@ -226,13 +226,13 @@ namespace ForestDraw
         /// <param name="number"></param>
         private void Stage_Intro(int number)
         {
-            Time.timeScale = 0;
 
             Panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
             // もし第一ステージなら
             if (number == stageNumberStart)
             {
+                Time.timeScale = 0;
                 audioSetting.PlayBGM(tutorial_BgmIndex);
             }
             else 
