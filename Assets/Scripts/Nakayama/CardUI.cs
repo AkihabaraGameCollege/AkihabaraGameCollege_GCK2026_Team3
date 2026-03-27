@@ -11,14 +11,16 @@ namespace ForestDraw
         /// <summary>
         /// カードの見た目を管理するための変数
         /// </summary>
-        [SerializeField]
-        private Image cardImage;
+        public Image cardImage;
+        /// <summary>
+        /// カード詳細の見た目を管理するための変数
+        /// </summary>
+        public Image cardAbout_Image;
 
         /// <summary>
         /// カードがクリックされたときの処理を管理するための変数
         /// </summary>
-        [SerializeField]
-        private Button clickButton;
+        public Button clickButton;
 
         /// <summary>
         /// カードのデータを管理するための変数
@@ -28,6 +30,28 @@ namespace ForestDraw
         /// デッキの管理クラスを参照するための変数
         /// </summary>
         private DeckManager deckManager;
+
+        /// <summary>
+        /// アニメーターを参照する変数.
+        /// </summary>
+        private Animator animator = null;
+
+        /// <summary>
+        /// カードの詳細を表示するときに呼ばれるIDを参照する変数
+        /// </summary>
+        private static readonly int displayTrigger = Animator.StringToHash("CardDisplay");
+        /// <summary>
+        /// カードの詳細を非表示するときに呼ばれるIDを参照する変数
+        /// </summary>
+        private static readonly int nonDisplayTrigger = Animator.StringToHash("CardNonDisplay");
+
+        /// <summary>
+        /// 初期設定を行う関数
+        /// </summary>
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         /// <summary>
         /// 生成されたカードUIを初期化するための関数
@@ -85,6 +109,40 @@ namespace ForestDraw
             bool isAlreadyInDeck = deckManager.currentDeck.Contains(myCardData);// カードがすでにデッキに含まれているかどうかをチェック
 
             gameObject.SetActive(!isAlreadyInDeck);// もしカードがデッキに含まれている場合は非表示にする
+        }
+
+        /// <summary>
+        /// カードを詳細に表示する関数
+        /// </summary>
+        public void DisplayCard(CardData data, DeckManager manager)
+        {
+            myCardData = data;// カードのデータを保存
+            deckManager = manager;// デッキマネージャーを保存
+
+            // もしカードの画像が存在する場合
+            if (cardAbout_Image != null && data.cardAbout_Image != null)
+            {
+                cardAbout_Image.sprite = data.cardAbout_Image;// カードの画像を設定
+            }
+
+            animator.SetTrigger(displayTrigger);// 表示する
+        }
+
+        /// <summary>
+        /// カードを詳細に非表示する関数
+        /// </summary>
+        public void NonDisplayCard(CardData data, DeckManager manager)
+        {
+            myCardData = data;// カードのデータを保存
+            deckManager = manager;// デッキマネージャーを保存
+
+            // もしカードの画像が存在する場合
+            if (cardAbout_Image != null && data.cardAbout_Image != null)
+            {
+                cardAbout_Image.sprite = data.cardAbout_Image;// カードの画像を設定
+            }
+
+            animator.SetTrigger(nonDisplayTrigger);// 非表示にする
         }
     }
 }

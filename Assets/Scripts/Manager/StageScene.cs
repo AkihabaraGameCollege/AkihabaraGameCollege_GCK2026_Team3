@@ -39,14 +39,6 @@ namespace ForestDraw
         /// 次へボタンを参照する変数
         /// </summary>
         private Button nextButton = null;
-        /// <summary>
-        /// クリアボタンを参照する変数
-        /// </summary>
-        public Button clearButton = null;
-        /// <summary>
-        /// クリアボタンを参照する変数
-        /// </summary>
-        public Button gameOverButton = null;
 
         /// <summary>
         /// アニメーターを参照する変数
@@ -163,9 +155,6 @@ namespace ForestDraw
 
             gameOverUI.SetActive(false);
 
-            // ボタンイベントの登録
-            clearButton.onClick.AddListener(InClearScene);// クリアボタンにシーン遷移の関数を登録
-            gameOverButton.onClick.AddListener(GameOver);// ゲームオーバーボタンにシーン遷移の関数を登録
             nextButton.onClick.AddListener(SkipTutorial);// 次へボタンにチュートリアルスキップの関数を登録
 
             playerController.isCanPause = true;// ポーズ操作を許可する
