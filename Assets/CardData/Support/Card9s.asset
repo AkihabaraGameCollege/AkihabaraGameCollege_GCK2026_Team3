@@ -19,7 +19,8 @@ MonoBehaviour:
   description: "\u30B3\u30B9\u30C8\u3092\u652F\u6255\u3063\u3066\u30E9\u30A4\u30D5\u30921500\u56DE\u5FA9\u3059\u308B"
   cost: 4
   useDuration: 0
-  cardImage: {fileID: 1583499004, guid: 5029885519ec2b04aaeeb09177866177, type: 3}
+  cardImage: {fileID: 311798560, guid: 3a5b0d1e491900545a3c43f0d7c4c918, type: 3}
+  cardAbout_Image: {fileID: 0}
   usedSE: {fileID: 8300000, guid: d0c62a56c336ad64484daa43fa167af2, type: 3}
   buffDuration: 0
   attackParams:

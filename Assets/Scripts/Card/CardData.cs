@@ -32,6 +32,7 @@ namespace ForestDraw
 
         /// <summary>カード画像</summary>
         public Sprite cardImage;
+
         /// <summary>カード詳細の画像</summary>
         public Sprite cardAbout_Image;
 

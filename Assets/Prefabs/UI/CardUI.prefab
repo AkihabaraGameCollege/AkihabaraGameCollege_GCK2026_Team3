@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardUI
   cardImage: {fileID: 9080587273221170338}
+  cardAbout_Image: {fileID: 173727599934994471}
   clickButton: {fileID: 8957621782139548169}
   myCardData: {fileID: 0}
 --- !u!95 &1594131811178692103
