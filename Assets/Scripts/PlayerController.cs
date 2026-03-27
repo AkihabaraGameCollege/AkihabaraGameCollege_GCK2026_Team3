@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-// using Unity.Cinemachine;// エラーを出すため削除
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -40,12 +40,9 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting = false;  // スプリント中かどうか
     private new Rigidbody rigidbody;  // プレイヤーのRigidbodyコンポーネント
 
-    // エラーを出すため削除
-    /*
     [Header("シネマシーンカメラの設定")]
     [SerializeField]
     private CinemachineVirtualCameraBase cinemachineCamera;  // シネマシーンカメラ
-    */
 
     [Header("停止時のパーティクル")]
     [SerializeField]
@@ -94,8 +91,6 @@ public class PlayerController : MonoBehaviour
         _pauseManager = FindFirstObjectByType<PauseManager>();
     }
 
-    // エラーを出すため削除
-    /*
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();  // Rigidbodyコンポーネントを取得
@@ -107,7 +102,6 @@ public class PlayerController : MonoBehaviour
             cinemachineCamera.LookAt = transform;
         }
     }
-    */
 
     void Update()
     {
