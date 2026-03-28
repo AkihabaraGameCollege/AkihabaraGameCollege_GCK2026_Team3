@@ -39,6 +39,11 @@ namespace ForestDraw
         private const string SAVE_KEY = "UserDeckSaveData";
 
         /// <summary>
+        /// デッキが満タンかどうかを返すプロパティを参照する変数
+        /// </summary>
+        public bool isDeckFull => currentDeck.Count == MAX_DECK_SIZE;
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Start()

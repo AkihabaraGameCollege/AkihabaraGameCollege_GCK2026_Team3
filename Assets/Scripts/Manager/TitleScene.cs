@@ -10,10 +10,13 @@ namespace ForestDraw
     public class TitleScene : MonoBehaviour
     {
         /// <summary>
-        /// アニメーターコンポーネントの変数
+        /// アニメーターを参照する変数
         /// </summary>
-        [SerializeField]
-        private Animator animator = null;
+        private Animator animator;
+        /// <summary>
+        /// 通知UI用アニメーターを参照する変数
+        /// </summary>
+        public Animator noticeAnimator;
 
         /// <summary>
         /// AudioSettingコンポーネントの変数
@@ -22,20 +25,21 @@ namespace ForestDraw
         private AudioSetting audioSetting = null;
 
         /// <summary>
+        /// デッキが満タンではないことを通知するアニメーションの時間
+        /// </summary>
+        private float noticeTime = 1.0f;
+        /// <summary>
         /// ゲーム終了までの待機時間
         /// </summary>
-        [SerializeField]
-        private float exitTime = 1.0f;
+        public float exitTime = 1.0f;
         /// <summary>
         /// フェードアウトの時間
         /// </summary>
-        [SerializeField]
-        private float fadeTime = 1.0f;
+              public float fadeTime = 1.0f;
         /// <summary>
         /// ステージへ遷移するまでの待機時間
         /// </summary>
-        [SerializeField]
-        private float GoStageTime = 2.0f;
+        public float GoStageTime = 2.0f;
 
         /// <summary>
         /// ステージシーンへ遷移するときのシーン名のリスト変数
@@ -65,6 +69,14 @@ namespace ForestDraw
         /// 設定機能クラスを参照する変数
         /// </summary>
         public SettingManager settingManager = null;
+        /// <summary>
+        /// デッキ管理クラスを参照する変数
+        /// </summary>
+        private DeckManager deckManager;
+        /// <summary>
+        /// 通知UI管理クラスを参照する変数
+        /// </summary>
+        private NoticeTextUI noticeTextUI;
 
         /// <summary>
         ///スタートボタンの変数
@@ -127,6 +139,10 @@ namespace ForestDraw
         /// ステージへ遷移するときに呼ばれるIDの変数
         /// </summary>
         private static readonly int goStageTrigger = Animator.StringToHash("GoStage");
+        /// <summary>
+        /// デッキが満タンではないときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int deckNonFullTrigger = Animator.StringToHash("DeckNonFull");
 
         /// <summary>
         /// イントロアニメーション中の待機時間
@@ -141,6 +157,14 @@ namespace ForestDraw
         /// </summary>
         private float deckOpenTime = 1.25f;
 
+        /// <summary>
+        /// 通知UI管理クラスのオブジェクト名を参照する変数
+        /// </summary>
+        private string noticeTextUI_Name = "NoticeTextUI";
+        /// <summary>
+        /// デッキ管理クラスのオブジェクト名を参照する変数
+        /// </summary>
+        private string deckManagerName = "DeckManager";
         /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
         /// </summary>
@@ -210,11 +234,14 @@ namespace ForestDraw
         private void Start()
         {
             // コンポーネントの登録
+            animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseManager>();// シーン内からポーズUIを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
             Panel_Image = GameObject.Find(TreePanel_Name).GetComponent<Image>();// シーン内からステージパネルを探して取得
+            noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内から通知UI管理クラスを探して取得
+            deckManager = GameObject.Find(deckManagerName).GetComponent<DeckManager>();// シーン内からデッキ管理クラスを探して取得
 
             // ボタンに関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
@@ -292,14 +319,24 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator GoStageCoroutine(int number = 0)
         {
-            stageSceneIndex = number;// パネルスプライトのインデックスにステージの番号を代入
+            if (deckManager.isDeckFull)
+            {
+                stageSceneIndex = number;// パネルスプライトのインデックスにステージの番号を代入
 
-            Panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
+                Panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
-            stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
-            animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
-            yield return new WaitForSeconds(GoStageTime);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
+                stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
+                animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
+                yield return new WaitForSeconds(GoStageTime);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
+            }
+            else
+            {
+                noticeTextUI.Show();// 通知UIを表示
+                noticeAnimator.SetTrigger(deckNonFullTrigger);// デッキが満タンではないことをプレイヤーに伝えるアニメーション
+                yield return new WaitForSeconds(noticeTime);// アニメーション分待機
+                noticeTextUI.Hide();// 通知UIを非表示
+            }
         }
 
         /// <summary>
