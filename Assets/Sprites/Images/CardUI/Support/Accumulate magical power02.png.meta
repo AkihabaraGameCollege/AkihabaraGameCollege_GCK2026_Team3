@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 520391e1c5ef62b47afca9fbc96958ee
+guid: e60e2730fb52b81418791e6af64e1508
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: light spear01_0
+      name: Accumulate magical power02_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 320
+        width: 640
         height: 420
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1855cc290439dd6469f0df4d642b480b
-      internalID: 1473559349
+      spriteID: 667b879f314ce6848b9ae7bb75200f83
+      internalID: -2038043782
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e0c2e9a72de7b29419fce4481a773b83
+    spriteID: 84879d7ad636fbb479611a1f374e98ad
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      light spear01_0: 1473559349
+      Accumulate magical power02_0: -2038043782
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
