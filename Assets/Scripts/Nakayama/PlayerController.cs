@@ -16,7 +16,7 @@ namespace ForestDraw
         /// <summary>
         /// ポーズクラスの参照変数
         /// </summary>
-        public PauseManager pauseManager = null;
+        public PauseUI_Manager pauseManager = null;
 
         /// <summary>
         /// 左右の最大回転角度の参照変数

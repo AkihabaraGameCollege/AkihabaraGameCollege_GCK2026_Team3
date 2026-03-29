@@ -25,23 +25,6 @@ namespace ForestDraw
         private AudioSetting audioSetting = null;
 
         /// <summary>
-        /// デッキが満タンではないことを通知するアニメーションの時間
-        /// </summary>
-        private float noticeTime = 1.0f;
-        /// <summary>
-        /// ゲーム終了までの待機時間
-        /// </summary>
-        public float exitTime = 1.0f;
-        /// <summary>
-        /// フェードアウトの時間
-        /// </summary>
-              public float fadeTime = 1.0f;
-        /// <summary>
-        /// ステージへ遷移するまでの待機時間
-        /// </summary>
-        public float GoStageTime = 2.0f;
-
-        /// <summary>
         /// ステージシーンへ遷移するときのシーン名のリスト変数
         /// </summary>
         [SerializeField]
@@ -64,7 +47,7 @@ namespace ForestDraw
         /// <summary>
         /// ポーズ機能クラスを参照する変数
         /// </summary>
-        private PauseManager pauseManager = null;
+        private PauseUI_Manager pauseManager = null;
         /// <summary>
         /// 設定機能クラスを参照する変数
         /// </summary>
@@ -147,7 +130,7 @@ namespace ForestDraw
         /// <summary>
         /// イントロアニメーション中の待機時間
         /// </summary>
-        private float introTime = 3.5f;
+        private float introTime = 4.5f;
         /// <summary>
         /// デッキが動いている最中の待機時間
         /// </summary>
@@ -156,6 +139,22 @@ namespace ForestDraw
         /// デッキが開いている最中の待機時間
         /// </summary>
         private float deckOpenTime = 1.25f;
+        /// <summary>
+        /// デッキが満タンではないことを通知するアニメーションの時間
+        /// </summary>
+        private float noticeTime = 1.0f;
+        /// <summary>
+        /// ゲーム終了までの待機時間
+        /// </summary>
+        public float exitTime = 1.0f;
+        /// <summary>
+        /// フェードアウトの時間
+        /// </summary>
+        public float fadeTime = 1.0f;
+        /// <summary>
+        /// ステージへ遷移するまでの待機時間
+        /// </summary>
+        public float GoStageTime = 2.0f;
 
         /// <summary>
         /// 通知UI管理クラスのオブジェクト名を参照する変数
@@ -236,7 +235,7 @@ namespace ForestDraw
             // コンポーネントの登録
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseManager>();// シーン内からポーズUIを探して取得
+            pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseUI_Manager>();// シーン内からポーズUIを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
             Panel_Image = GameObject.Find(TreePanel_Name).GetComponent<Image>();// シーン内からステージパネルを探して取得
