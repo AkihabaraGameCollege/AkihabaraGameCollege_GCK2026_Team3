@@ -10,12 +10,27 @@ using ForestDraw;
 /// </summary>
 public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
 {
+    /// <summary>
+    /// ダメージアニメーション用のアニメーター
+    /// </summary>
+    private Animator damageAnimator;
+
+    /// <summary>
+    /// ダメージUI管理クラスを参照する変数
+    /// </summary>
+    private DamageUI_Manager damageUI_Manager;
+
     /// <summary>最大HP</summary>
     [SerializeField]
     private int maxHealth = 1000;
 
     /// <summary>現在HP</summary>
     private int health;
+
+    /// <summary>
+    /// ダメージを受けたときに呼ばれるIDを参照する変数
+    /// </summary>
+    private static readonly int getDamageTrigger = Animator.StringToHash("GetDamage");
 
     /// <summary>HPバーUI</summary>
     [SerializeField] private Image hpFillImage;
@@ -27,11 +42,25 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
     private float previousReduction;
 
     /// <summary>
+    /// 被ダメージ時の演出時間を参照する変数
+    /// </summary>
+    private float damageEffectTime = 0.5f;
+
+    /// <summary>
+    /// 被ダメージUIのオブジェクト名を参照する変数
+    /// </summary>
+    private string damageUI_Name = "DamageUI";
+
+    /// <summary>
     /// 初期化処理
     /// HPを最大値に設定しHPバーを更新
     /// </summary>
     private void Awake()
     {
+        // コンポーネントの登録
+        damageAnimator = GameObject.Find(damageUI_Name).GetComponent<Animator>();// シーン内から被ダメージUIを探してアニメーターを取得
+        damageUI_Manager = GameObject.Find(damageUI_Name).GetComponent<DamageUI_Manager>();// シーン内から被ダメージUIを探してクラスを取得
+
         health = maxHealth;
         UpdateHPBar();
         previousReduction = damageReduction;
@@ -53,6 +82,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
         health = Mathf.Max(health - reducedDamage, 0);
 
         UpdateHPBar();
+
+        StartCoroutine(DamageEffectCoroutine());// ダメージ演出開始
 
         if (health > 0)
         {
@@ -103,5 +134,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
 
         // 元の軽減率に戻す
         damageReduction = previousReduction;
+    }
+
+    /// <summary>
+    /// 被ダメージ時の演出を行うコルーチン
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DamageEffectCoroutine()
+    {
+        damageUI_Manager.Show();
+        damageAnimator.SetTrigger(getDamageTrigger);// ダメージアニメーションを再生
+        yield return new WaitForSeconds(damageEffectTime);// ダメージエフェクト中は待機
+        damageUI_Manager.Hide();
     }
 }
