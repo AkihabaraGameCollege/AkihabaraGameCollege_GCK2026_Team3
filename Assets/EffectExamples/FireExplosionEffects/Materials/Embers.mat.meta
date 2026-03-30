@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 233b7b714d7b7b84089b1d4e80d14a24
+timeCreated: 1471532950
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146554
+  packageName: Camera Shake FX
+  packageVersion: 1.0
+  assetPath: Assets/EffectExamples/FireExplosionEffects/Materials/Embers.mat
+  uploadId: 557664
