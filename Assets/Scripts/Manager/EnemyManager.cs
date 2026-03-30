@@ -18,10 +18,11 @@ namespace ForestDraw.Enemy
             Instance = this;
         }
 
-        public void AddEnemy(GameObject enemy)
+        public void AddEnemy(GameObject enemy, string name)
         {
             Enemies.Add(enemy);
             CheckEnemyCount();
+            EnemyEncountNotice.Instance.NoticeEnemyEncount(name);
         }
 
         public void RemoveEnemy(GameObject enemy)

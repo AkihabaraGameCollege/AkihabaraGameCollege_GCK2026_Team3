@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c246398abe0bf47bca3b7bd5975747, type: 3}
   m_Name: Golem
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: Golem
   maxHealth: 1000
   takeDamageInterval: 0
   moveSpeed: 2
