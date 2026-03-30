@@ -19,15 +19,17 @@ MonoBehaviour:
   description: "\u6575\u5358\u4F53\u306B\u30C0\u30E1\u30FC\u30B8\uFF08\u5F31\u653B\u6483\uFF09"
   cost: 1
   useDuration: 1
-  cardImage: {fileID: 284271370, guid: 8db9d67327c343e40a82c0bf963e8bdb, type: 3}
-  cardAbout_Image: {fileID: 0}
+  cardImage: {fileID: 347562089, guid: ca7a96b5a9111db4fb05017a3f7595d8, type: 3}
+  cardDetail_Image: {fileID: 0}
   usedSE: {fileID: 8300000, guid: 29733b22905bf0142876be3f8c1e7447, type: 3}
+  usedEffect: {fileID: 5072054893257078331, guid: 70c296436187c8441921e3cbcab7ed62, type: 3}
   buffDuration: 0
   attackParams:
     damage: 800
     lineLength: 0
     lineWidth: 0
     areaRadius: 0
+    areaRange: 0
   recoverParams:
     healAmount: 0
     costRecoverAmount: 0

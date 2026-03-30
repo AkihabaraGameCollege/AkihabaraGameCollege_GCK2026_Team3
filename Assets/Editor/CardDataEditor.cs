@@ -24,6 +24,7 @@ public class CardDataEditor : Editor
         card.cardImage = (Sprite)EditorGUILayout.ObjectField("画像", card.cardImage, typeof(Sprite), false);
         card.cardDetail_Image   = (Sprite)EditorGUILayout.ObjectField("詳細画像", card.cardDetail_Image, typeof(Sprite), false);// データオブジェクトに情報追加（中山が編集）
         card.usedSE = (AudioClip)EditorGUILayout.ObjectField("SE", card.usedSE, typeof(AudioClip), false);
+        card.usedEffect = (GameObject)EditorGUILayout.ObjectField("エフェクト", card.usedEffect, typeof(GameObject), false);
 
         // CardType に応じて EffectType を制限
         CardEffectType[] availableEffects;
@@ -103,6 +104,7 @@ public class CardDataEditor : Editor
 
                     case CardEffectType.DamageArea:
                         attack.areaRadius = EditorGUILayout.FloatField("半径", attack.areaRadius);
+                        attack.areaRange = EditorGUILayout.FloatField("前に出す距離", attack.areaRange);
                         break;
 
                     case CardEffectType.DamageSingle:

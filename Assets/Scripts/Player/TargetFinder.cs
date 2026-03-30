@@ -15,7 +15,7 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// w’èÀ•W‚©‚çÅ‚à‹ß‚¢“G‚ğ1‘Ìæ“¾
         /// </summary>
-        public static IDamageable FindNearest(Vector3 origin)
+        public static IDamageable FindNearest(Vector3 origin, GameObject effect)
         {
             GameObject nearest = null;
             float minDist = Mathf.Infinity;
@@ -31,7 +31,7 @@ namespace ForestDraw.Player.Combat
                     nearest = enemy;
                 }
             }
-
+            StageScene.Instance.PlayCardEffect(effect,nearest.transform);
             // IDamageable‚ğæ“¾‚µ‚Ä•Ô‚·
             return nearest?.GetComponent<IDamageable>();
         }
@@ -82,9 +82,10 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// w’è”¼Œa“à‚Ì“G‚ğ‚·‚×‚Äæ“¾i‰~Œ`”ÍˆÍUŒ‚j
         /// </summary>
-        public static List<IDamageable> FindCircle(Vector3 origin, float radius)
+        public static List<IDamageable> FindCircle(Vector3 origin, float radius, float forward)
         {
             List<IDamageable> targets = new();
+            Vector3 center = origin + new Vector3(0,0, forward);
             float radiusSq = radius * radius;
 
             // ==================================================
@@ -93,13 +94,13 @@ namespace ForestDraw.Player.Combat
 #if UNITY_EDITOR
 
             int segments = 20;
-            Vector3 prev = origin + new Vector3(radius, 0, 0);
+            Vector3 prev = center + new Vector3(radius, 0, 0);
 
             for (int i = 1; i <= segments; i++)
             {
                 float angle = i * Mathf.PI * 2 / segments;
 
-                Vector3 next = origin + new Vector3(
+                Vector3 next = center + new Vector3(
                     Mathf.Cos(angle) * radius,
                     0,
                     Mathf.Sin(angle) * radius
@@ -117,7 +118,7 @@ namespace ForestDraw.Player.Combat
             foreach (var enemy in EnemyManager.Instance.Enemies)
             {
                 // ”¼Œa“à‚É‚¢‚é‚©”»’è
-                if ((enemy.transform.position - origin).sqrMagnitude <= radiusSq)
+                if ((enemy.transform.position - center).sqrMagnitude <= radiusSq)
                 {
                     var d = enemy.GetComponent<IDamageable>();
                     if (d != null) targets.Add(d);

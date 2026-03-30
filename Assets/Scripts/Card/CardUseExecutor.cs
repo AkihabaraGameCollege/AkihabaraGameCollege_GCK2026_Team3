@@ -24,6 +24,7 @@ namespace ForestDraw.Player.Combat
             if (!context.playerCost.UseCost(card.cost)) return false;
 
             AudioSetting.Instance.CardSE(card.usedSE);
+            if(card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(card.usedEffect);
             switch (card.cardType)
             {
                 case CardType.Attack:
@@ -57,7 +58,7 @@ namespace ForestDraw.Player.Combat
             {
                 case CardEffectType.DamageSingle:
                     // 最も近い敵1体にダメージ
-                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration);
+                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration, card.usedEffect);
                     break;
 
                 case CardEffectType.DamageLine:
@@ -67,7 +68,7 @@ namespace ForestDraw.Player.Combat
 
                 case CardEffectType.DamageArea:
                     // 円範囲の敵にダメージ
-                    PlayerAttack.AttackCircle(origin, attack.areaRadius, attack.damage, card.useDuration);
+                    PlayerAttack.AttackCircle(origin, attack.areaRadius, attack.areaRange, attack.damage, card.useDuration);
                     break;
 
                 case CardEffectType.DamageAllOnScreen:

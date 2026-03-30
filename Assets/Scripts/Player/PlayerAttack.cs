@@ -16,9 +16,9 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// ˆê”Ô‹ß‚¢“G1‘Ì‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚éi’P‘ÌUŒ‚j
         /// </summary>
-        public static void AttackNearest(Vector3 origin, int damage, float duration)
+        public static void AttackNearest(Vector3 origin, int damage, float duration, GameObject effect)
         {
-            var target = TargetFinder.FindNearest(origin);
+            var target = TargetFinder.FindNearest(origin, effect);
 
             Debug.Log("’P‘ÌUŒ‚");
             int finalDamage = ApplyMultiplier(damage);
@@ -43,9 +43,9 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// w’è”¼Œa“à‚Ì“G‚·‚×‚Ä‚Éƒ_ƒ[ƒWi‰~”ÍˆÍUŒ‚j
         /// </summary>
-        public static void AttackCircle(Vector3 origin, float radius, int damage, float duration)
+        public static void AttackCircle(Vector3 origin, float radius, float forward, int damage, float duration)
         {
-            var targets = TargetFinder.FindCircle(origin, radius);
+            var targets = TargetFinder.FindCircle(origin, radius, forward);
             int finalDamage = ApplyMultiplier(damage);
 
             foreach (var target in targets)
