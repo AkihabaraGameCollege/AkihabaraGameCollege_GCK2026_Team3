@@ -28,7 +28,6 @@ namespace ForestDraw.Player.Combat
             {
                 case CardType.Attack:
                     ExecuteAttack(card, context.target);
-                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(card.usedEffect, card.useDuration);
                     break;
 
                 case CardType.Recovery:
@@ -53,12 +52,13 @@ namespace ForestDraw.Player.Combat
         private static void ExecuteAttack(CardData card, Vector3 origin)
         {
             var attack = card.attackParams;
+                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(attack.attackEffect, card.useDuration);
 
             switch (card.effectType)
             {
                 case CardEffectType.DamageSingle:
                     // ç≈Ç‡ãﬂÇ¢ìG1ëÃÇ…É_ÉÅÅ[ÉW
-                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration, card.usedEffect);
+                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration, attack.attackEffect);
                     break;
 
                 case CardEffectType.DamageLine:
