@@ -20,14 +20,16 @@ MonoBehaviour:
   cost: 2
   useDuration: 0
   cardImage: {fileID: 156543731, guid: 1a65171bf99872c468879538ba0c0888, type: 3}
-  cardAbout_Image: {fileID: 0}
+  cardDetail_Image: {fileID: 0}
   usedSE: {fileID: 8300000, guid: d0c62a56c336ad64484daa43fa167af2, type: 3}
+  usedEffect: {fileID: 4968275293387088542, guid: e7a3ecf1f53dfa5408dc8cd04fe89904, type: 3}
   buffDuration: 10
   attackParams:
     damage: 0
     lineLength: 0
     lineWidth: 0
     areaRadius: 0
+    areaRange: 0
   recoverParams:
     healAmount: 0
     costRecoverAmount: 0
