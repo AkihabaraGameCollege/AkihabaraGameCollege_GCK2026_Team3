@@ -416,9 +416,11 @@ namespace ForestDraw
         }
 
         /// <summary>カード使用時のエフェクト再生用</summary>
-        public void PlayCardEffect(GameObject effect)
+        public void PlayCardEffect(GameObject effect, float time)
         {
-            Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+            GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+
+            Destroy(obj, time);
         }
         public void PlayCardEffect(GameObject effect, Transform target)
         {
