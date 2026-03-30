@@ -19,6 +19,11 @@ namespace ForestDraw
         public Button nextButton;
 
         /// <summary>
+        /// スキップボタンを参照する変数
+        /// </summary>
+        public Button skipButton;
+
+        /// <summary>
         /// メインステージ管理クラスを参照する変数
         /// </summary>
         private StageScene stageScene;
@@ -41,6 +46,11 @@ namespace ForestDraw
             stageScene = GameObject.Find(stageSceneName).GetComponent<StageScene>();// シーン内からメインステージ管理クラスを探して取得
 
             nextButton.onClick.AddListener(OnNextButtonClicked);// 次へボタンが押された時の処理を登録
+
+            if (skipButton != null)
+            {
+                skipButton.onClick.AddListener(OnSkipButtonClicked);// スキップボタンが押された時の処理を登録
+            }
 
             HidePages();
         }
@@ -66,7 +76,26 @@ namespace ForestDraw
             else
             {
                 StartCoroutine(stageScene.Tutorial_OutroCoroutine());// チュートリアルを終了する
+                DisableTutorialInteraction();
             }
+        }
+
+        /// <summary>
+        /// スキップボタンが押された時に呼ばれる関数
+        /// </summary>
+        public void OnSkipButtonClicked()
+        {
+            // 表示中のページをすべて非表示にする
+            HidePages();
+
+            // チュートリアル終了処理を開始
+            StartCoroutine(stageScene.Tutorial_OutroCoroutine());
+
+            // 二重実行を防ぐためにUI操作を無効化
+            DisableTutorialInteraction();
+
+            // 現在ページを末尾に設定しておく（念のため）
+            currentPage_Index = tutorial_Pages.Length;
         }
 
         /// <summary>         
@@ -103,6 +132,18 @@ namespace ForestDraw
             {
                 tutorial_Pages[i].SetActive(i == 0);// 最初のページのみ表示
             }
+
+            // 現在ページを先頭にリセット
+            currentPage_Index = 0;
+        }
+
+        /// <summary>
+        /// チュートリアルUIの操作を無効化する（ボタンの重複押下防止）
+        /// </summary>
+        private void DisableTutorialInteraction()
+        {
+            if (nextButton != null) nextButton.interactable = false;
+            if (skipButton != null) skipButton.interactable = false;
         }
     }
 }
