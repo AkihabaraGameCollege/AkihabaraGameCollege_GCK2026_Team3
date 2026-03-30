@@ -38,8 +38,6 @@ namespace ForestDraw.Player.Combat
 
         private void Start()
         {
-            animator = GameObject.Find(animatorName).GetComponent<Animator>();// シーン内からアニメーターを探して取得（中山が編集）
-
             currentCost = 0;
             recoverInterval = baseRecoverInterval;
 

@@ -33,7 +33,7 @@ namespace ForestDraw
         /// <summary>
         /// パネルのイメージの変数
         /// </summary>
-        private Image Panel_Image = null;
+        public Image panel_Image;
 
         /// <summary>
         /// パネルのスプライトのリスト変数
@@ -45,13 +45,9 @@ namespace ForestDraw
         /// </summary>
         private PlayerController playerController = null;
         /// <summary>
-        /// ポーズ機能クラスを参照する変数
-        /// </summary>
-        private PauseUI_Manager pauseManager = null;
-        /// <summary>
         /// 設定機能クラスを参照する変数
         /// </summary>
-        public SettingManager settingManager = null;
+        public SettingUI_Manager settingUI_Manager;
         /// <summary>
         /// デッキ管理クラスを参照する変数
         /// </summary>
@@ -60,6 +56,14 @@ namespace ForestDraw
         /// 通知UI管理クラスを参照する変数
         /// </summary>
         private NoticeTextUI noticeTextUI;
+        /// <summary>
+        /// 演出用UI管理クラスを参照する変数
+        /// </summary>
+        private TransitionUI_Manager transitionUI_Manager;
+        /// <summary>
+        /// ポーズ機能クラスを参照する変数
+        /// </summary>
+        public PauseUI_Manager pauseUI_Manager;
 
         /// <summary>
         ///スタートボタンの変数
@@ -68,7 +72,7 @@ namespace ForestDraw
         /// <summary>
         /// ゲーム終了ボタンの変数
         /// </summary>
-        private Button exitButton = null;
+        private Button exitButton;
         /// <summary>
         /// デッキ表示のボタンの変数
         /// </summary>
@@ -96,7 +100,16 @@ namespace ForestDraw
         /// <summary>
         /// 設定へのボタンの変数
         /// </summary>
-        public Button settingButton = null;
+        public Button settingButton;
+
+        /// <summary>
+        /// 演出用UIの木のスプライトオブジェクトを参照する変数
+        /// </summary>
+        public GameObject treesObject;
+        /// <summary>
+        /// 演出用UIの木のスプライトオブジェクトを参照する変数
+        /// </summary>
+        public GameObject black_ImageObject;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -126,6 +139,10 @@ namespace ForestDraw
         /// デッキが満タンではないときに呼ばれるIDの変数
         /// </summary>
         private static readonly int deckNonFullTrigger = Animator.StringToHash("DeckNonFull");
+        /// <summary>
+        /// 演出用UIのオブジェクト名を参照する変数
+        /// </summary>
+        private string transitionUI_Name = "TransitionUI";
 
         /// <summary>
         /// イントロアニメーション中の待機時間
@@ -165,13 +182,13 @@ namespace ForestDraw
         /// </summary>
         private string deckManagerName = "DeckManager";
         /// <summary>
+        /// ゲーム終了ボタンのオブジェクト名を参照する変数
+        /// </summary>
+        private string exitButtonName = "ExitButton";
+        /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
         /// </summary>
         public string playerRootName = "PlayerRootTitle";
-        /// <summary>
-        /// ポーズUIのオブジェクト名を参照する変数
-        /// </summary>
-        public string pauseUI_Name = "PauseUI";
         /// <summary>
         /// 設定画面管理クラスのオブジェクト名を参照する変数
         /// </summary>
@@ -181,10 +198,6 @@ namespace ForestDraw
         /// </summary>
         public string startButtonName = "StartButton";
         /// <summary>
-        /// ゲーム終了ボタンのオブジェクト名を参照する変数
-        /// </summary>
-        public string exitButtonName = "ExitButton";
-        /// <summary>
         /// ステージセレクトUIのオブジェクト名を参照する変数
         /// </summary>
         public string stageSelectUI_Name = "StageSelectUI";
@@ -192,10 +205,6 @@ namespace ForestDraw
         /// デッキUIのオブジェクト名を参照する変数
         /// </summary>
         public string deckUI_Name = "DeckUI";
-        /// <summary>
-        /// デッキUIのオブジェクト名を参照する変数
-        /// </summary>
-        public string TreePanel_Name = "TreePanel_Image";
 
         /// <summary>
         /// シーン最初の画面にいるかどうか判別する変数
@@ -235,18 +244,17 @@ namespace ForestDraw
             // コンポーネントの登録
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            pauseManager = GameObject.Find(pauseUI_Name).GetComponent<PauseUI_Manager>();// シーン内からポーズUIを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
-            Panel_Image = GameObject.Find(TreePanel_Name).GetComponent<Image>();// シーン内からステージパネルを探して取得
             noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内から通知UI管理クラスを探して取得
             deckManager = GameObject.Find(deckManagerName).GetComponent<DeckManager>();// シーン内からデッキ管理クラスを探して取得
+            transitionUI_Manager = GameObject.Find(transitionUI_Name).GetComponent<TransitionUI_Manager>();// シーン内から演出用UIを探して取得
 
             // ボタンに関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
             stageSelectReturnButton.onClick.AddListener(StageSelectReturn);// ステージセレクトから戻るボタンにステージセレクトから戻る関数を登録
             startButton.onClick.AddListener(DisplayStageSelect);// スタートボタンにステージセレクトへ行く関数を登録
-            settingButton.onClick.AddListener(settingManager.DisplaySetting);// デッキ表示のボタンにデッキ表示の関数を登録
+            settingButton.onClick.AddListener(settingUI_Manager.DisplaySetting);// 設定画面表示のボタンに設定画面表示のコルーチンを登録
             stageButton1.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(0)));// 第一ステージへのボタンに第一ステージへの関数を登録
             stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
@@ -255,13 +263,16 @@ namespace ForestDraw
 
             // タイトルBGMを再生
             audioSetting.PlayBGM(titleBgmIndex);
-            audioSetting.StartFadeIn(fadeTime);// タイトルBGMをフェードインさせるコルーチンを開始
             audioSetting.PlayBGS(titleDirectionSeIndex);// タイトルシーンのBGSを再生
 
             // 別シーンからタイトルに来た場合
             if (isExit)
             {
                 StartCoroutine(DisplayStageSelectCoroutine());// それ専用のステージセレクト表示イベントを呼び出し
+            }
+            else
+            {
+                StartCoroutine(title_IntroCoroutine());// イントロイベントを呼び出し
             }
         }
 
@@ -283,8 +294,9 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator ExitCoroutine()
         {
+            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
+            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
             animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
-            audioSetting.StopFadeOut(fadeTime);// BGMをフェードアウトさせるコルーチンを開始
             yield return new WaitForSeconds(exitTime);
             Debug.Log("ゲームを終了します。");
             Application.Quit();
@@ -322,7 +334,7 @@ namespace ForestDraw
             {
                 stageSceneIndex = number;// パネルスプライトのインデックスにステージの番号を代入
 
-                Panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
+                panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
                 stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
                 animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
@@ -344,7 +356,10 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator DisplayStageSelectCoroutine()
         {
+            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
+            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
+            transitionUI_Manager.Hide();// 演出用UIを非表示
             DisplayStageSelect();
             isExit = false;// フラグをリセット
         }
@@ -361,6 +376,14 @@ namespace ForestDraw
             yield return new WaitForSeconds(deckOpenTime);// デッキが開いている時間は待つ
             audioSetting.StopBGS();
             audioSetting.PlayBGM(deckBgmIndex);
+        }
+
+        private IEnumerator title_IntroCoroutine()
+        {
+            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
+            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
+            yield return new WaitForSeconds(introTime);// イントロ中は待つ
+            transitionUI_Manager.Hide();// 演出用UIを非表示
         }
     }
 }

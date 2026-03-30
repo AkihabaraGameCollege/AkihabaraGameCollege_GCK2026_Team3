@@ -269,6 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8923be05ee5e5489e4a4d02d0fd8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckSlotUI
+--- !u!1 &83186021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8927046860543830155, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+  m_PrefabInstance: {fileID: 6196729479051325431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &96796443
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,18 +533,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.TitleScene
   noticeAnimator: {fileID: 1408616610}
   audioSetting: {fileID: 1258431602}
-  exitTime: 3
-  fadeTime: 0.05
-  GoStageTime: 1
   stageSceneNames:
   - Stage1
   - Stage2
   - Stage3
+  panel_Image: {fileID: 861176260}
   Panel_Sprite:
   - {fileID: 599138475, guid: 481cbef0e55cecd4a9074c6067fa90f4, type: 3}
   - {fileID: -2000492216, guid: 342f049dec18ced498e331d97eb1162b, type: 3}
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
-  settingManager: {fileID: 7288153572538685478}
+  settingUI_Manager: {fileID: 7288153572538685478}
+  pauseUI_Manager: {fileID: 1018944905}
   deckButton: {fileID: 6246747943090762593}
   deckReturnButton: {fileID: 926423366}
   stageSelectReturnButton: {fileID: 8959410258282276057}
@@ -547,14 +551,16 @@ MonoBehaviour:
   stageButton2: {fileID: 4146549194359104320}
   stageButton3: {fileID: 2481948457516966776}
   settingButton: {fileID: 3281988513266481014}
+  treesObject: {fileID: 83186021}
+  black_ImageObject: {fileID: 806861710}
+  exitTime: 3
+  fadeTime: 0.05
+  GoStageTime: 1
   playerRootName: PlayerRootTitle
-  pauseUI_Name: PauseUI
   settingUI_Name: SettingUI
   startButtonName: StartButton
-  exitButtonName: ExitButton
   stageSelectUI_Name: StageSelectUI
   deckUI_Name: DeckUI
-  TreePanel_Name: TreePanel_Image
   isStartScene: 1
   stageSceneIndex: 0
 --- !u!4 &171094787
@@ -900,7 +906,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -83, y: 1831}
+  m_AnchoredPosition: {x: -1910, y: 1739}
   m_SizeDelta: {x: 3000.0002, y: 3000.0002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307098455
@@ -1593,8 +1599,8 @@ RectTransform:
   - {fileID: 14902533}
   - {fileID: 1918025060}
   - {fileID: 268726960}
-  - {fileID: 6726734375528024265}
   - {fileID: 387946747}
+  - {fileID: 6726734375528024265}
   - {fileID: 1018944906}
   m_Father: {fileID: 171094787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1798,6 +1804,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776715044}
   m_CullTransparentMesh: 1
+--- !u!1 &806861710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1439563702989573825, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+  m_PrefabInstance: {fileID: 6196729479051325431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +1880,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &861176260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2323916197982596915, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+  m_PrefabInstance: {fileID: 6196729479051325431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &913558434
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,6 +3257,10 @@ PrefabInstance:
     - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Name
       value: PauseUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8743471404233309487, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Pivot.x
@@ -5785,8 +5811,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7282276133118832126, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
@@ -6349,6 +6374,10 @@ PrefabInstance:
       propertyPath: titleSceneRootName
       value: SceneRootTitle
       objectReference: {fileID: 0}
+    - target: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: settingTransitionUI
+      value: 
+      objectReference: {fileID: 1869650140}
     - target: {fileID: 2201206349994913022, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6419,7 +6448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6452,6 +6481,10 @@ PrefabInstance:
     - target: {fileID: 8109683243731463475, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_Name
       value: SettingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109683243731463475, guid: 36917260830e9094796b61d62b649d46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8450869247869514959, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y

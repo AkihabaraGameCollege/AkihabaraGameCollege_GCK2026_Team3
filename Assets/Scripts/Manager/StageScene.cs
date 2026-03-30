@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -47,7 +48,7 @@ namespace ForestDraw
         /// <summary>
         /// ポーズ管理クラスを参照する変数
         /// </summary>
-        private PauseUI_Manager pauseUI_Manager;
+        public PauseUI_Manager pauseUI_Manager;
         /// <summary>
         /// メインステージ管理クラスのインスタンスを参照する変数
         /// </summary>
@@ -130,6 +131,22 @@ namespace ForestDraw
         /// チュートリアルを終了するときに呼ばれるIDの変数
         /// </summary>
         private static readonly int tutorial_EndTrigger = Animator.StringToHash("Tutorial_End");
+        /// <summary>
+        /// チュートリアルを開始するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int tutorial_StartTrigger = Animator.StringToHash("Tutorial_Start");
+        /// <summary>
+        /// ステージイントロを開始するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int stage_IntroStartTrigger = Animator.StringToHash("Stage_IntroStart");
+        /// <summary>
+        /// ゲームオーバー演出を開始するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int gameOverTrigger = Animator.StringToHash("GameOver");
+        /// <summary>
+        /// ステージクリア演出を開始するときに呼ばれるIDの変数
+        /// </summary>
+        private static readonly int stageClearTrigger = Animator.StringToHash("StageClear");
 
         /// <summary>
         /// クリアシーン名を参照する変数
@@ -151,10 +168,6 @@ namespace ForestDraw
         /// 演出用UIのオブジェクト名を参照する変数
         /// </summary>
         private string transitionUI_Name = "TransitionUI";
-        /// <summary>
-        /// ポーズUIのオブジェクト名を参照する変数
-        /// </summary>
-        private string pauseUI_Name = "PauseUI";
 
         /// <summary>
         /// チュートリアルのイントロ時間を参照する変数
@@ -207,7 +220,6 @@ namespace ForestDraw
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             tutorial_UI_Manager = GameObject.Find(tutorial_UI_Name).GetComponent<Tutorial_UI_Manager>();// シーン内からチュートリアルUIを探して取得
             transitionUI_Manager = GameObject.Find(transitionUI_Name).GetComponent<TransitionUI_Manager>();// シーン内から演出用UIを探して取得
-            pauseUI_Manager = GameObject.Find(pauseUI_Name).GetComponent<PauseUI_Manager>();// シーン内からポーズUIを探して取得
 
             // UnityEvent を追加
             resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
@@ -247,16 +259,7 @@ namespace ForestDraw
 
                 int number = stageNumber;// 今いるステージ番号を参照
 
-                // 最終ステージの場合
-                if (number == stageNumberMax)
-                {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
-                }
-                else
-                {
-                    TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
-                }
+                StartCoroutine(StageClearCoroutine(number));// ステージクリア演出開始
             }
         }
 
@@ -278,9 +281,7 @@ namespace ForestDraw
                     }
                 }
 
-                gameOverUI.SetActive(true);
-                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-                UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+                StartCoroutine(GameOverCoroutine());// ゲームオーバー演出開始
             }
         }
 
@@ -296,10 +297,12 @@ namespace ForestDraw
             // もし第一ステージなら
             if (number == stageNumberStart)
             {
+                animator.SetTrigger(tutorial_StartTrigger);// チュートリアル開始演出
                 StartCoroutine(Tutorial_IntroCoroutine());// チュートリアル開始
             }
             else 
             { 
+                animator.SetTrigger(stage_IntroStartTrigger);// ステージイントロ開始演出
                 StartCoroutine(Stage_IntroCoroutine());// ステージイントロ開始
             }
     }
@@ -374,6 +377,39 @@ namespace ForestDraw
             }
 
             Time.timeScale = scale;// 時間を止めるか動かす
+        }
+
+        /// <summary>
+        /// ゲームオーバー演出を行うコルーチン
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator GameOverCoroutine()
+        {
+            animator.SetTrigger(gameOverTrigger);// ゲームオーバー演出
+            yield return new WaitForSeconds(1.5f);// 演出中は待機
+            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+            UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+        }
+
+        /// <summary>
+        /// ステージクリア演出を行うコルーチン
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator StageClearCoroutine(int number)
+        {
+            animator.SetTrigger(stageClearTrigger);// ステージクリア演出
+            yield return new WaitForSeconds(1f);// 演出中は待機
+
+                                                // 最終ステージの場合
+            if (number == stageNumberMax)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
+            }
+            else
+            {
+                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+            }
         }
     }
 }

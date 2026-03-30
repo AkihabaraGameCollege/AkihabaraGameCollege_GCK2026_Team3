@@ -7,12 +7,12 @@ namespace ForestDraw
     /// <summary>
     /// 設定画面を管理するクラス
     /// </summary>
-    public class SettingManager : MonoBehaviour
+    public class SettingUI_Manager : MonoBehaviour
     {
         /// <summary>
         /// アニメーターコンポーネントの変数
         /// </summary>
-        private Animator animator = null;
+        private Animator animator;
 
         /// <summary>
         /// 設定画面から戻るボタンの変数
@@ -20,8 +20,15 @@ namespace ForestDraw
         [SerializeField]
         private Button settingReturnButton = null;
 
-        [SerializeField]
-        private float settingReturnTime = 1;
+        /// <summary>
+        /// 設定UI内の演出用UIを参照する変数
+        /// </summary>
+        public GameObject settingTransitionUI;
+
+        /// <summary>
+        /// 設定画面を表示するまでの待機時間を参照する変数
+        /// </summary>
+        private float displaySettingTime = 0.5f;
 
         /// <summary>
         /// 設定ボタンが押されたときに呼ばれるIDの変数
@@ -65,20 +72,7 @@ namespace ForestDraw
             animator = GameObject.Find(animatorParentName).GetComponent<Animator>();// シーン内からアニメーターを探して取得
 
             settingReturnButton.onClick.AddListener(SettingReturn);// 設定画面から戻るボタンにその機能をつかさどる関数を登録
-        }
-
-        /// <summary>
-        /// 設定画面を表示する関数
-        /// </summary>
-        public void DisplaySetting()
-        {
-            animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
-          
-            // ゲームの最初の画面にいない場合
-            if (!titleScene.isStartScene)
-            {
-                playerController.isCanPause = false;// ポーズ操作を禁止する
-            }
+            Hide();
         }
 
         /// <summary>
@@ -102,7 +96,9 @@ namespace ForestDraw
         private IEnumerator SettingReturnCoroutine()
         {
             animator.SetTrigger(settingReturnTrigger);// 設定画面から戻るトリガーをセット
-            yield return new WaitForSecondsRealtime(settingReturnTime);// アニメーション分待機
+            yield return new WaitForSecondsRealtime(displaySettingTime);// 設定画面を表示するまでの待機
+            Hide();
+            TargetShow(settingTransitionUI);// 演出用UIを表示する
         }
 
         /// <summary>         
@@ -115,6 +111,58 @@ namespace ForestDraw
             {
                 child.gameObject.SetActive(true);
             }
+        }
+
+        /// <summary>         
+        /// UIを非表示させる関数         
+        /// </summary>         
+        public void Hide()
+        {
+            // 子オブジェクトをすべてアクティブ化
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+
+        /// <summary>
+        /// 設定画面を表示する際の演出用コルーチン
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator DisplaySettingCoroutine()
+        {
+            TargetShow(settingTransitionUI);
+            animator.SetTrigger(settingTrigger);// 設定画面を表示させるトリガーをセット
+            yield return new WaitForSecondsRealtime(displaySettingTime);// 設定画面を表示するまでの待機
+            Show();
+
+            // ゲームの最初の画面にいない場合
+            if (!titleScene.isStartScene)
+            {
+                playerController.isCanPause = false;// ポーズ操作を禁止する
+            }
+        }
+
+        /// <summary>
+        /// 設定画面から戻る関数
+        /// </summary>
+        public void DisplaySetting()
+        {
+                StartCoroutine(DisplaySettingCoroutine());// コルーチンを呼び出し
+
+            // ゲームの最初の画面にいない場合
+            if (!titleScene.isStartScene)
+            {
+                playerController.isCanPause = false;// ポーズ操作を禁止する
+            }
+        }
+
+        /// <summary>         
+        /// 指定したUIの表示をやめる関数         
+        /// </summary>         
+        public void TargetShow(GameObject target)
+        {
+            target.SetActive(true);// 指定したUIをアクティブ化
         }
     }
 }
