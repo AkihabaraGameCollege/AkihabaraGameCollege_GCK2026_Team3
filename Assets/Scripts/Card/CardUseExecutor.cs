@@ -24,11 +24,11 @@ namespace ForestDraw.Player.Combat
             if (!context.playerCost.UseCost(card.cost)) return false;
 
             AudioSetting.Instance.CardSE(card.usedSE);
-            if(card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(card.usedEffect, card.useDuration);
             switch (card.cardType)
             {
                 case CardType.Attack:
                     ExecuteAttack(card, context.target);
+                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(card.usedEffect, card.useDuration);
                     break;
 
                 case CardType.Recovery:
