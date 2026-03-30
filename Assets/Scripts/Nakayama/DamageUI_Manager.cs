@@ -5,7 +5,7 @@ namespace ForestDraw
     /// <summary>     
     /// ポーズUIの管理を行うクラス     
     /// </summary>     
-    public class PauseUI_Manager : MonoBehaviour
+    public class DamageUI_Manager : MonoBehaviour
     {
         /// <summary>         
         /// 初期設定を行う関数         
