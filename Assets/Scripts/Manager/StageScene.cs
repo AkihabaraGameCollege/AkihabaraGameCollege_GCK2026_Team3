@@ -191,6 +191,9 @@ namespace ForestDraw
         /// </summary>
         private bool isTutorial = false;
 
+        [SerializeField]
+        private Transform cardEffectSpawn;
+
         /// <summary>
         /// ステージの状況管理用(駒田追加)
         /// </summary>
@@ -409,6 +412,22 @@ namespace ForestDraw
             {
                 TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
                 UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
+            }
+        }
+
+        /// <summary>カード使用時のエフェクト再生用</summary>
+        public void PlayCardEffect(GameObject effect)
+        {
+            Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+        }
+        public void PlayCardEffect(GameObject effect, Transform target)
+        {
+            GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+
+            var projectile = obj.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.Init(target, 10f, 5f);
             }
         }
     }

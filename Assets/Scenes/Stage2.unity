@@ -1116,6 +1116,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!1001 &425864685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1496094880}
+    m_Modifications:
+    - target: {fileID: 1719105639068904785, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_Name
+      value: CaedEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1895e996b2b25647a752476413e8046, type: 3}
+--- !u!4 &425864686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
+  m_PrefabInstance: {fileID: 425864685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &426289023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3327,6 +3389,7 @@ Transform:
   - {fileID: 207677591}
   - {fileID: 1403039376}
   - {fileID: 1663618758}
+  - {fileID: 425864686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1496094882
@@ -3362,6 +3425,7 @@ MonoBehaviour:
   - {fileID: 1699387600}
   - {fileID: 717488099}
   treePanel_UI: {fileID: 0}
+  pauseUI_Manager: {fileID: 0}
   Panel_Image: {fileID: 0}
   Panel_Sprite:
   - {fileID: 599138475, guid: 481cbef0e55cecd4a9074c6067fa90f4, type: 3}
@@ -3384,6 +3448,7 @@ MonoBehaviour:
   stageNumber: 3
   stageBgmIndex: 2
   stagePanel_Index: 0
+  cardEffectSpawn: {fileID: 425864686}
 --- !u!1 &1593105401
 GameObject:
   m_ObjectHideFlags: 0
