@@ -51,7 +51,7 @@ namespace ForestDraw
         /// <summary>
         /// メインステージ管理クラスのインスタンスを参照する変数
         /// </summary>
-        public static StageScene Instance { get; private set; } 
+        public static StageScene Instance { get; private set; }
 
         /// <summary>
         /// アニメーターを参照する変数
@@ -178,6 +178,9 @@ namespace ForestDraw
         /// </summary>
         private bool isTutorial = false;
 
+        [SerializeField]
+        private Transform cardEffectSpawn;
+
         /// <summary>
         /// ステージの状況管理用(駒田追加)
         /// </summary>
@@ -298,11 +301,11 @@ namespace ForestDraw
             {
                 StartCoroutine(Tutorial_IntroCoroutine());// チュートリアル開始
             }
-            else 
-            { 
+            else
+            {
                 StartCoroutine(Stage_IntroCoroutine());// ステージイントロ開始
             }
-    }
+        }
 
         /// <summary>
         /// チュートリアルイントロの演出を行うコルーチン
@@ -374,6 +377,22 @@ namespace ForestDraw
             }
 
             Time.timeScale = scale;// 時間を止めるか動かす
+        }
+
+        /// <summary>カード使用時のエフェクト再生用</summary>
+        public void PlayCardEffect(GameObject effect)
+        {
+            Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+        }
+        public void PlayCardEffect(GameObject effect, Transform target)
+        {
+            GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
+
+            var projectile = obj.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.Init(target, 10f, 5f);
+            }
         }
     }
 }
