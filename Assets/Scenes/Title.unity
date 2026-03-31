@@ -553,6 +553,8 @@ MonoBehaviour:
   settingButton: {fileID: 3281988513266481014}
   treesObject: {fileID: 83186021}
   black_ImageObject: {fileID: 806861710}
+  treePanel_Object: {fileID: 2092822429}
+  deckNotice: {fileID: 1821581764}
   exitTime: 3
   fadeTime: 0.05
   GoStageTime: 1
@@ -1885,7 +1887,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2323916197982596915, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
   m_PrefabInstance: {fileID: 6196729479051325431}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2092822429}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -3966,6 +3968,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7146174026768480237, guid: 3a7051d2dbd9a0949b8c269126f9e246, type: 3}
   m_PrefabInstance: {fileID: 749960404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1821581764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8208529375815001060, guid: 4de075e41ebdfd840b7b18a449ebe2e0, type: 3}
+  m_PrefabInstance: {fileID: 268726959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1829326309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4511,6 +4518,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028050483}
   m_CullTransparentMesh: 1
+--- !u!1 &2092822429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4774334542293887630, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+  m_PrefabInstance: {fileID: 6196729479051325431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2106563266
 GameObject:
   m_ObjectHideFlags: 0

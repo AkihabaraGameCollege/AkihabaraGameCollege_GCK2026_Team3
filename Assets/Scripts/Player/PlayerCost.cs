@@ -22,14 +22,24 @@ namespace ForestDraw.Player.Combat
         public event Action<int, float> OnCostChanged;
 
         /// <summary>
-        /// アニメーターを参照する変数（中山が編集）
+        /// コスト通知UIのアニメーターを参照する変数（中山が編集）
         /// </summary>
-        private Animator animator = null;
+        public Animator costNoticeAnimator;
 
         /// <summary>
-        /// アニメーターの名前を参照する変数（中山が編集）
+        /// プレイヤー通知UIを参照する変数
         /// </summary>
-        public string animatorName = null;
+        private NoticeTextUI noticeTextUI;
+
+        /// <summary>
+        /// コストに関する通知UIオブジェクトを参照する変数
+        /// </summary>
+        public GameObject costNotice;
+
+        /// <summary>
+        /// プレイヤー通知UIオブジェクトの名前を参照する変数
+        /// </summary>
+        private string noticeTextUI_Name = "NoticeTextUI";
 
         /// <summary>
         /// 使用コストが足りないときに呼ばれるIDの変数（中山が編集）
@@ -38,6 +48,8 @@ namespace ForestDraw.Player.Combat
 
         private void Start()
         {
+            noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内からプレイヤー通知UIを探して取得
+
             currentCost = 0;
             recoverInterval = baseRecoverInterval;
 
@@ -65,7 +77,7 @@ namespace ForestDraw.Player.Combat
         {
             if (currentCost < cost)
             {
-                animator.SetTrigger(costNotEnoughTrigger);// アニメーションを再生してプレイヤーに通知（中山が編集）
+                StartCoroutine(CostNoticeCoroutine());// コスト不足の通知を行うコルーチンを開始（中山が編集）
                 return false;
             }
 
@@ -95,6 +107,18 @@ namespace ForestDraw.Player.Combat
             yield return new WaitForSeconds(duration);
 
             recoverInterval = baseRecoverInterval;
+        }
+
+        /// <summary>
+        /// コスト通知の演出を行うコルーチン
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator CostNoticeCoroutine()
+        {
+            noticeTextUI.TargetShow(costNotice);// コスト不足の通知UIを表示
+            costNoticeAnimator.SetTrigger(costNotEnoughTrigger);// アニメーションを再生してプレイヤーに通知（中山が編集）
+            yield return new WaitForSeconds(1f);
+            noticeTextUI.Hide();
         }
     }
 }

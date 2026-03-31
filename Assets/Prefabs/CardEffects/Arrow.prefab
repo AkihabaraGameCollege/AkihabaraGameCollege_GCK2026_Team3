@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8939240385666354431}
   - component: {fileID: 4741616024902492106}
   m_Layer: 0
-  m_Name: MiniArrow
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

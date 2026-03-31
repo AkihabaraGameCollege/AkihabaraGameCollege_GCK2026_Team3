@@ -419,7 +419,6 @@ namespace ForestDraw
         public void PlayCardEffect(GameObject effect, float time)
         {
             GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
-
             Destroy(obj, time);
         }
         public void PlayCardEffect(GameObject effect, Transform target)

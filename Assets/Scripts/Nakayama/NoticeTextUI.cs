@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ForestDraw
@@ -17,15 +16,11 @@ namespace ForestDraw
         }
 
         /// <summary>         
-        /// UIの表示を行う関数         
+        /// 指定したUIの表示をやめる関数         
         /// </summary>         
-        public void Show()
+        public void TargetShow(GameObject target)
         {
-            // 子オブジェクトをすべてアクティブ化
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
+            target.SetActive(true);// 指定したUIをアクティブ化
         }
 
         /// <summary>         

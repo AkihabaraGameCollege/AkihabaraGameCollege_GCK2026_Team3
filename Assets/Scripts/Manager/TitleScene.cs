@@ -107,9 +107,17 @@ namespace ForestDraw
         /// </summary>
         public GameObject treesObject;
         /// <summary>
-        /// 演出用UIの木のスプライトオブジェクトを参照する変数
+        /// 演出用UIのフェードスプライトオブジェクトを参照する変数
         /// </summary>
         public GameObject black_ImageObject;
+        /// <summary>
+        /// 演出用UIの木製パネルスプライトオブジェクトを参照する変数
+        /// </summary>
+        public GameObject treePanel_Object;
+        /// <summary>
+        /// デッキに関する通知UIオブジェクトを参照する変数
+        /// </summary>
+        public GameObject deckNotice;
 
         /// <summary>
         /// スタートボタンが押されたときに呼ばれるIDの変数
@@ -139,10 +147,6 @@ namespace ForestDraw
         /// デッキが満タンではないときに呼ばれるIDの変数
         /// </summary>
         private static readonly int deckNonFullTrigger = Animator.StringToHash("DeckNonFull");
-        /// <summary>
-        /// 演出用UIのオブジェクト名を参照する変数
-        /// </summary>
-        private string transitionUI_Name = "TransitionUI";
 
         /// <summary>
         /// イントロアニメーション中の待機時間
@@ -205,6 +209,10 @@ namespace ForestDraw
         /// デッキUIのオブジェクト名を参照する変数
         /// </summary>
         public string deckUI_Name = "DeckUI";
+        /// <summary>
+        /// 演出用UIのオブジェクト名を参照する変数
+        /// </summary>
+        private string transitionUI_Name = "TransitionUI";
 
         /// <summary>
         /// シーン最初の画面にいるかどうか判別する変数
@@ -337,13 +345,14 @@ namespace ForestDraw
                 panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
                 stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
+                transitionUI_Manager.TargetShow(treePanel_Object);// 演出用UIの木製パネルを表示
                 animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
                 yield return new WaitForSeconds(GoStageTime);
                 UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
             }
             else
             {
-                noticeTextUI.Show();// 通知UIを表示
+                noticeTextUI.TargetShow(deckNotice);// 通知UIを表示
                 noticeAnimator.SetTrigger(deckNonFullTrigger);// デッキが満タンではないことをプレイヤーに伝えるアニメーション
                 yield return new WaitForSeconds(noticeTime);// アニメーション分待機
                 noticeTextUI.Hide();// 通知UIを非表示
