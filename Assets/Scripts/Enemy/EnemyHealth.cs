@@ -29,6 +29,11 @@ namespace ForestDraw.Enemy.Components
         public event Action Died;
 
         /// <summary>
+        /// ダメージを受けた時のSEインデックスを参照する変数
+        /// </summary>
+        private int damageSE_Index = 6;
+
+        /// <summary>
         /// ScriptableObjectから初期ステータスを設定する
         /// </summary>
         public void Initialize(EnemyInitContext context)
@@ -45,6 +50,8 @@ namespace ForestDraw.Enemy.Components
         public void TakeDamage(int amount)
         {
             if (!canTakeDamage || health <= 0) return;
+
+            AudioSetting.Instance.PlaySE(damageSE_Index);// ダメージを受けるSEを再生
 
             health = Mathf.Max(health - amount, 0);
             UpdateHPBar();

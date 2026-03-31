@@ -1116,18 +1116,6 @@ PrefabInstance:
       propertyPath: bgmVolumeSlider
       value: 
       objectReference: {fileID: 1344467361}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: bgms.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: 'bgms.Array.data[5]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 08ea5ece4d880ed4ab338277c6631d23, type: 3}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: 'bgms.Array.data[6]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 1e89b1240bc5629498cd7b0f2b85436c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -236,6 +236,10 @@ namespace ForestDraw
         /// </summary>
         private int titleDirectionSeIndex = 1;
         /// <summary>
+        /// デッキ内のカードが足りていないSEの何番を流すかのインデックスを参照する変数
+        /// </summary>
+        private int notCardSeIndex = 9;
+        /// <summary>
         /// デッキが開くときにSEの何番を流すかのインデックスを参照する変数
         /// </summary>
         private int deckOpenSeIndex = 2;
@@ -352,6 +356,7 @@ namespace ForestDraw
             }
             else
             {
+                audioSetting.PlaySE(notCardSeIndex);// デッキが満タンではないときのSEを再生
                 noticeTextUI.TargetShow(deckNotice);// 通知UIを表示
                 noticeAnimator.SetTrigger(deckNonFullTrigger);// デッキが満タンではないことをプレイヤーに伝えるアニメーション
                 yield return new WaitForSeconds(noticeTime);// アニメーション分待機
@@ -387,6 +392,10 @@ namespace ForestDraw
             audioSetting.PlayBGM(deckBgmIndex);
         }
 
+        /// <summary>
+        /// タイトルイントロ演出のコルーチン
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator title_IntroCoroutine()
         {
             transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示

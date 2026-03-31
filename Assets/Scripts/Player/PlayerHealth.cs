@@ -28,6 +28,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
     private int health;
 
     /// <summary>
+    /// ダメージを受けたSEの何番を流すかのインデックスを参照する変数
+    /// </summary>
+    private int damageSeIndex = 10;
+
+    /// <summary>
     /// ダメージを受けたときに呼ばれるIDを参照する変数
     /// </summary>
     private static readonly int getDamageTrigger = Animator.StringToHash("GetDamage");
@@ -77,6 +82,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
         // ダメージ軽減率を適用
         float reductionFactor = damageReduction / 100f;
         int reducedDamage = Mathf.RoundToInt(amount * (1f - reductionFactor));
+
+        AudioSetting.Instance.PlaySE(damageSeIndex);// ダメージを受けるSEを再生
 
         // HP減少
         health = Mathf.Max(health - reducedDamage, 0);

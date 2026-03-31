@@ -17,6 +17,11 @@ namespace ForestDraw.Enemy.Attack
         [SerializeField] float speed = 10f;
 
         /// <summary>
+        /// 火球発射攻撃時のSEインデックスを参照する変数
+        /// </summary>
+        private int damageSE_Index = 7;
+
+        /// <summary>
         /// イベント登録（ゴール到達・死亡）
         /// </summary>
         protected override void Start()
@@ -62,6 +67,8 @@ namespace ForestDraw.Enemy.Attack
         private void ShootFireball()
         {
             if (fireballPrefab == null || firePoint == null) return;
+
+            AudioSetting.Instance.PlaySE(damageSE_Index); // 攻撃SE再生
 
             GameObject bullet = Instantiate(
                 fireballPrefab,

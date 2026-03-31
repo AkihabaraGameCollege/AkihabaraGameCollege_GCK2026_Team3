@@ -94,6 +94,10 @@ namespace ForestDraw
         /// 自動ドローするカードの枚数の変数
         /// </summary>
         private int drawCount = 1;
+        /// <summary>
+        /// ドロー時のSEインデックスを参照する変数
+        /// </summary>
+        private int drawSE_Index = 5;
 
         /// <summary>
         /// カードの使用状態判定用
@@ -180,6 +184,8 @@ namespace ForestDraw
                 }
 
                 CardData drawnCard = drawPile[0];// 山札の一番上のカードを引く
+
+                AudioSetting.Instance.PlaySE(drawSE_Index);// カードを引くSEを再生する
 
                 drawPile.RemoveAt(0);// 山札から引いたカードを削除する
 

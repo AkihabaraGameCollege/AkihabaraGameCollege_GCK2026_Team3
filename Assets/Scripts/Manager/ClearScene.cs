@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,14 +59,22 @@ namespace ForestDraw
         /// </summary>
         private int bgmIndex = 6;
         /// <summary>
+        /// クラッカーサウンドで何番目のSEを再生するかのインデックスを参照する変数
+        /// </summary>
+        private int clackerSeIndex = 4;
+        /// <summary>
         /// 花火サウンドで何番目のSEを再生するかのインデックスを参照する変数
         /// </summary>
-        private int fireworkSeIndex = 4;
-
+        private int fireworkSeIndex = 8;
         /// <summary>
         /// クリア演出をスキップするときに呼ばれるIDを参照する変数
         /// </summary>
         private static readonly int skipTrigger = Animator.StringToHash("EventSkip");
+
+        /// <summary>
+        /// 花火サウンド再生中の時間を参照する変数
+        /// </summary>
+        private float fireworkSeTime = 1f;
 
         /// <summary>
         /// 初期設定の関数
@@ -86,8 +95,10 @@ namespace ForestDraw
             playerController.isCanPause = true;// ポーズ操作を許可する
 
             // サウンド再生
-            audioSetting.PlaySE(fireworkSeIndex);// シーン開始時に花火の音を再生
+            audioSetting.PlaySE(clackerSeIndex);// シーン開始時に花火の音を再生
             audioSetting.PlayBGM(bgmIndex);
+
+            StartCoroutine(clearIntroCoroutine());// クリア演出のイントロ部分のコルーチンを開始する
         }
 
         /// <summary>
@@ -104,6 +115,16 @@ namespace ForestDraw
         private void EventSkip()
         {
             animator.SetTrigger(skipTrigger);// クリア演出をスキップする
+        }
+
+        /// <summary>
+        /// クリアイントロ演出のコルーチン
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator clearIntroCoroutine()
+        {
+            yield return new WaitForSeconds(fireworkSeTime);// 花火の音が鳴り終わるまで待つ
+            audioSetting.PlaySE(fireworkSeIndex);// 花火の音を再生
         }
     }
 }
