@@ -24,7 +24,6 @@ namespace ForestDraw.Player.Combat
             if (!context.playerCost.UseCost(card.cost)) return false;
 
             AudioSetting.Instance.CardSE(card.usedSE);
-            if(card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(card.usedEffect, card.useDuration);
             switch (card.cardType)
             {
                 case CardType.Attack:
@@ -53,12 +52,13 @@ namespace ForestDraw.Player.Combat
         private static void ExecuteAttack(CardData card, Vector3 origin)
         {
             var attack = card.attackParams;
+                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(attack.attackEffect, card.useDuration);
 
             switch (card.effectType)
             {
                 case CardEffectType.DamageSingle:
                     // ç≈Ç‡ãﬂÇ¢ìG1ëÃÇ…É_ÉÅÅ[ÉW
-                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration, card.usedEffect);
+                    PlayerAttack.AttackNearest(origin, attack.damage, card.useDuration, attack.attackEffect);
                     break;
 
                 case CardEffectType.DamageLine:

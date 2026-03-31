@@ -6,6 +6,7 @@ namespace ForestDraw.Enemy.Data
     public class EnemyData : ScriptableObject
     {
         [Header("ステータス")]
+        public string enemyName;
         public int maxHealth;
         public float takeDamageInterval;
 

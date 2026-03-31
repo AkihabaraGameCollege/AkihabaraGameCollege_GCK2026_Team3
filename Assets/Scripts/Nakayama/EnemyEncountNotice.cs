@@ -63,10 +63,16 @@ namespace ForestDraw
         private int treantSprite_Index = 2;
 
         /// <summary>
+        /// メインステージ管理クラスのインスタンスを参照する変数
+        /// </summary>
+        public static EnemyEncountNotice Instance { get; private set; }
+
+        /// <summary>
         /// 初期設定を行う関数
         /// </summary>
         private void Start()
         {
+            Instance = this;
             // コンポーネントの登録
             animator = GetComponent<Animator>();// アニメーターを取得
             notice_Image = GameObject.Find(noticeName).GetComponent<Image>();// シーン内から通知UIを探して取得
@@ -78,6 +84,7 @@ namespace ForestDraw
         /// <param name="name"></param>
         public void NoticeEnemyEncount(string name)
         {
+            Debug.Log(name+ "が出現");
             if (name == golemName)
             {
                 sprite_Index = golemSprite_Index;// スプライトのインデックスにゴーレムの情報を代入

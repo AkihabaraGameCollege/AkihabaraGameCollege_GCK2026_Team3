@@ -38,9 +38,6 @@ namespace ForestDraw
         /// <summary>カード使用時のSE</summary>
         public AudioClip usedSE;
 
-        /// <summary>カード使用時のエフェクト</summary>
-        public GameObject usedEffect;
-
         /// <summary>バフ系効果の持続時間</summary>
         public int buffDuration;
 
@@ -89,6 +86,9 @@ namespace ForestDraw
 
         /// <summary>円範囲攻撃の前距離</summary>
         public float areaRange;
+
+        /// <summary>攻撃カード使用時のエフェクト</summary>
+        public GameObject attackEffect;
     }
 
     /// <summary>

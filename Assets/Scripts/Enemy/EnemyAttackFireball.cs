@@ -11,6 +11,7 @@ namespace ForestDraw.Enemy.Attack
     public class EnemyAttackFireball : EnemyAttackMoving
     {
         [SerializeField] GameObject fireballPrefab;
+        [SerializeField] GameObject explosionPrefab;
         [SerializeField] Transform firePoint;
         [SerializeField] float attackStopTime = 1f;
         [SerializeField] float speed = 10f;
@@ -88,9 +89,7 @@ namespace ForestDraw.Enemy.Attack
         {
             Debug.Log("爆発");
 
-            // TODO:
-            // 周囲にダメージ
-            // 爆発エフェクト
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
 
         /// <summary>
