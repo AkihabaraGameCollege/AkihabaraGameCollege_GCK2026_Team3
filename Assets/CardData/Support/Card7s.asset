@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: Card7s
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
   cardId: card_07s
-  cardName: "\u518D\u5E30"
-  cardType: 1
-  effectType: 4
-  description: "\u30B3\u30B9\u30C8\u30921\u56DE\u5FA9"
-  cost: 0
-  useDuration: 0
-  cardImage: {fileID: -1695045000, guid: 55e98e0a336732841b17396c4cc660c4, type: 3}
-  cardDetail_Image: {fileID: 0}
-  usedSE: {fileID: 8300000, guid: d0c62a56c336ad64484daa43fa167af2, type: 3}
-  usedEffect: {fileID: 4968275293387088542, guid: e7a3ecf1f53dfa5408dc8cd04fe89904, type: 3}
+  cardName: "\u5730\u8108\u306E\u518D\u751F"
+  cardType: 3
+  effectType: 7
+  description: "\u30AB\u30FC\u30C9\u30924\u679A\u30C9\u30ED\u30FC"
+  cost: 3
+  useDuration: 1
+  cardImage: {fileID: 226210005, guid: d98ace3551879f647bb7c5c28c1c1a57, type: 3}
+  cardDetail_Image: {fileID: 483604515, guid: 32cc797b31daea8448c10e2589dc34ae, type: 3}
+  usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
   buffDuration: 0
   attackParams:
     damage: 200
-    lineLength: 100
-    lineWidth: 10
+    lineLength: 0
+    lineWidth: 0
     areaRadius: 0
     areaRange: 0
+    attackEffect: {fileID: 0}
   recoverParams:
     healAmount: 0
-    costRecoverAmount: 1
+    costRecoverAmount: 0
     intervalReduction: 0
   supportParams:
     damageReduction: 0
     attackMultiplier: 0
   utilityParams:
-    drawCount: 0
+    drawCount: 4

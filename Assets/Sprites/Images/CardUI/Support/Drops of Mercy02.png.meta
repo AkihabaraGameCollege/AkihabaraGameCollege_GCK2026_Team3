@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d4036aa4a1be6b4cbbeb683c9e1054c
+guid: 8de59e22407766a45ad27d3148dbb03d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: imitation02_0
+      name: Drops of Mercy02_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 640
-        height: 420
+        width: 960
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1703ade88990a9d4385c712fe600d1f8
-      internalID: -1384542316
+      spriteID: e0d6ebc19191ea045911c6e29565b9ae
+      internalID: -359536089
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1a958f4a629eb8f44b74886256496ffa
+    spriteID: e476baff7a44ead4a92f066650a8b678
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      imitation02_0: -1384542316
+      Drops of Mercy02_0: -359536089
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
