@@ -16,7 +16,7 @@ namespace ForestDraw
         }
 
         /// <summary>         
-        /// 指定したUIの表示をやめる関数         
+        /// 指定したUIの表示を行う関数         
         /// </summary>         
         public void TargetShow(GameObject target)
         {

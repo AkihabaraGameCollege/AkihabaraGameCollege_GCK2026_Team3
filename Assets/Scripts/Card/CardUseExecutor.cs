@@ -15,6 +15,7 @@ namespace ForestDraw.Player.Combat
             public BattleCardManager cardManager;
             public Vector3 target;
         }
+
         /// <summary>
         /// カードを実行する
         /// </summary>
@@ -93,16 +94,19 @@ namespace ForestDraw.Player.Combat
                 case CardEffectType.Heal:
                     // プレイヤーHP回復
                     playerHealth.Heal(recover.healAmount);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.heal_EffectNumber);// 回復エフェクト表示
                     break;
 
                 case CardEffectType.CostRecover:
                     // コストを即時回復
                     playerCost.RecoverCost(recover.costRecoverAmount);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.heal_EffectNumber);// 回復エフェクト表示
                     break;
 
                 case CardEffectType.CostRegen:
                     // コスト回復速度を一定時間強化
                     playerCost.ReduceRecoverInterval(recover.intervalReduction, card.buffDuration);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.heal_EffectNumber);// 回復エフェクト表示
                     break;
             }
         }
@@ -121,11 +125,13 @@ namespace ForestDraw.Player.Combat
                 case CardEffectType.DamageReduction:
                     // 一定時間ダメージ軽減
                     playerHealth.ApplyDamageReduction(support.damageReduction, card.buffDuration);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.shieldEffectNumber);// シールドエフェクト表示
                     break;
 
                 case CardEffectType.BuffNext:
                     // 次の攻撃のダメージ倍率を強化
                     PlayerAttack.SetNextAttackMultiplier(support.attackMultiplier);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.buffEffectNumber);// バフエフェクト表示
                     break;
             }
         }
@@ -143,6 +149,7 @@ namespace ForestDraw.Player.Combat
                 case CardEffectType.Draw:
                     // カードをドロー
                     cardManager.DrawCards(utility.drawCount);
+                    SupportEffectUI_Manager.Instance.ShowSupportEffectUI(SupportEffectUI_Manager.Instance.buffEffectNumber);// バフエフェクト表示
                     break;
             }
         }
