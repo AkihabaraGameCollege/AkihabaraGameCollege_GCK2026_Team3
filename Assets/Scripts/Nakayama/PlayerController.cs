@@ -44,6 +44,10 @@ namespace ForestDraw
         /// ポーズ操作の許可禁止を判別する変数
         /// </summary>
         public bool isCanPause = false;
+        /// <summary>
+        /// ポーズをするかどうか判別する変数
+        /// </summary>
+        private bool isPauseON = false;
 
         /// <summary>
         /// ポーズUIのオブジェクト名を参照する変数
@@ -80,7 +84,7 @@ namespace ForestDraw
             // もし入力された場合
             if (context.started && isCanPause)
             {
-                pauseManager.Show();// ポーズの機能を起動する
+                pauseManager.StartCoroutine(pauseManager.PauseAnimationCoroutine(isPauseON));// ポーズの機能を起動する
             }
         }
 
