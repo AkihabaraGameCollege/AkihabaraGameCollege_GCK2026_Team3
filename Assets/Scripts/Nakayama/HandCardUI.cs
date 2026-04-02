@@ -113,7 +113,7 @@ namespace ForestDraw
             GetComponent<CanvasGroup>().blocksRaycasts = true;
 
             // 発動チェック：カードの座標ではなく「マウスの画面上のY座標」で判定する
-            if (eventData.position.y > Screen.height * 0.4f)
+            if (eventData.position.y > Screen.height * 0.2f)
             {
                 // 使用成功！
                 bool flag = battleManager.UseCard(myCardData, gameObject);

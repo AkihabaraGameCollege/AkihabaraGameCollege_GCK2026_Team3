@@ -110,13 +110,22 @@ namespace ForestDraw
             if (isPause)
             {
                 Show();
-                PauseTimeControl(0f);// 時を止める
-                animator.SetTrigger(onPauseTrigger);// ポーズのトリガーをセット
+
+                if (!StageScene.Instance.isTutorial)
+                {
+                    PauseTimeControl(0f);// 時を止める
+                }
+
+                    animator.SetTrigger(onPauseTrigger);// ポーズのトリガーをセット
             }
             else if (!isPause)
             {
-                PauseTimeControl(StageScene.Instance.timeCanMoveValue);// 時を動かす
-                animator.SetTrigger(onPauseRemoveTrigger);// ポーズ解除のトリガーをセット
+                if (!StageScene.Instance.isTutorial)
+                {
+                    PauseTimeControl(StageScene.Instance.timeCanMoveValue);// 時を動かす
+                }
+                    
+                    animator.SetTrigger(onPauseRemoveTrigger);// ポーズ解除のトリガーをセット
             }
 
             yield return new WaitForSecondsRealtime(pauseAnimationTime);// アニメーションが終わるまで待機
@@ -153,12 +162,6 @@ namespace ForestDraw
         /// <param name="scale"></param>
         private void PauseTimeControl(float scale)
         {
-            // もしチュートリアル中の場合
-            if (StageScene.Instance.isTutorial)
-            {
-                return;
-            }
-
             Time.timeScale = scale;// 時間を止めるか動かす
         }
     }

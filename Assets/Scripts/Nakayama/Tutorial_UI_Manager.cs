@@ -85,6 +85,8 @@ namespace ForestDraw
         /// </summary>
         public void OnSkipButtonClicked()
         {
+            DisableTutorialInteraction();
+
             // チュートリアル終了処理を開始
             StartCoroutine(stageScene.Tutorial_OutroCoroutine());
         }

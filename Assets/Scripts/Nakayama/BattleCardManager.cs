@@ -42,20 +42,17 @@ namespace ForestDraw
         private int maxHandSize = 8;
 
         /// <summary>
-        /// スタート時に引くカードの枚数の変数
-        /// </summary>
-        [SerializeField]
-        private int startDrawCount = 4;
-
-        /// <summary>
         /// プレイヤーのコストの管理クラスを指定する変数
         /// </summary>
         private PlayerCost playerCost = null;
-
         /// <summary>
         /// プレイヤーのHPの管理クラスを指定する変数
         /// </summary>
         private PlayerHealth playerHealth = null;
+        /// <summary>
+        /// 手持ちのカード管理クラスのインスタンスを参照する変数
+        /// </summary>
+        public static BattleCardManager instance { get; private set; }
 
         /// <summary>
         /// リストに全カードのマスターデータを入れておく変数
@@ -110,14 +107,16 @@ namespace ForestDraw
 
         private void Awake()
         {
+            instance = this;
+
             playerCost = GetComponent<PlayerCost>();
             playerHealth = player.GetComponent<PlayerHealth>();
         }
+
         private void Start()
         {
             LoadDeckData();
             InitializeDrawPile();// デッキをシャッフルして、カードを引く準備をする
-            DrawCards(startDrawCount);// ?枚引く
         }
 
         /// <summary>

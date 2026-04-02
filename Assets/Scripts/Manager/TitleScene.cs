@@ -57,10 +57,6 @@ namespace ForestDraw
         /// </summary>
         private NoticeTextUI noticeTextUI;
         /// <summary>
-        /// 演出用UI管理クラスを参照する変数
-        /// </summary>
-        private TransitionUI_Manager transitionUI_Manager;
-        /// <summary>
         /// ポーズ機能クラスを参照する変数
         /// </summary>
         public PauseUI_Manager pauseUI_Manager;
@@ -213,15 +209,11 @@ namespace ForestDraw
         /// デッキUIのオブジェクト名を参照する変数
         /// </summary>
         public string deckUI_Name = "DeckUI";
-        /// <summary>
-        /// 演出用UIのオブジェクト名を参照する変数
-        /// </summary>
-        private string transitionUI_Name = "TransitionUI";
 
         /// <summary>
         /// シーン最初の画面にいるかどうか判別する変数
         /// </summary>
-        public bool isStartScene = true;
+        public static bool isStartScene = true;
         /// <summary>
         /// 別シーンからタイトルへ遷移したかを判別する変数
         /// </summary>
@@ -253,9 +245,9 @@ namespace ForestDraw
         public int stageSceneIndex = 0;
 
         /// <summary>
-        /// 初期設定の関数
+        /// 初期設定を行う関数
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             Instance = this;
 
@@ -266,7 +258,6 @@ namespace ForestDraw
             exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
             noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内から通知UI管理クラスを探して取得
             deckManager = GameObject.Find(deckManagerName).GetComponent<DeckManager>();// シーン内からデッキ管理クラスを探して取得
-            transitionUI_Manager = GameObject.Find(transitionUI_Name).GetComponent<TransitionUI_Manager>();// シーン内から演出用UIを探して取得
 
             // ボタンに関数を登録
             deckReturnButton.onClick.AddListener(DeckReturn);// デッキから戻るボタンにデッキから戻る関数を登録
@@ -278,8 +269,14 @@ namespace ForestDraw
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
             exitButton.onClick.AddListener(() => StartCoroutine(ExitCoroutine()));// 第三ステージへのボタンに第三ステージへの関数を登録
             deckButton.onClick.AddListener(() => StartCoroutine(DisplayDeckCoroutine()));// デッキ表示のボタンにデッキ表示の関数を登録
+        }
 
-            TransitionUI_Manager.Instance.Hide();
+        /// <summary>
+        /// タイトルシーン開始時の準備を行う関数
+        /// </summary>
+        private void Start()
+        {
+            TransitionUI_Manager.instance.Hide();
 
             // タイトルBGMを再生
             audioSetting.PlayBGM(titleBgmIndex);
@@ -314,8 +311,8 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator ExitCoroutine()
         {
-            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
-            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(treesObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
             animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
             yield return new WaitForSeconds(exitTime);
             Debug.Log("ゲームを終了します。");
@@ -357,7 +354,7 @@ namespace ForestDraw
                 panel_Image.sprite = Panel_Sprite[stageSceneIndex];// パネルのスプライトをステージに合わせて変更
 
                 stageSceneIndex = number;// ステージセレクトで選択されたステージのインデックスを取得
-                transitionUI_Manager.TargetShow(treePanel_Object);// 演出用UIの木製パネルを表示
+                TransitionUI_Manager.instance.TargetShow(treePanel_Object);// 演出用UIの木製パネルを表示
                 animator.SetTrigger(goStageTrigger);// ステージへ遷移するトリガーをセット
                 yield return new WaitForSeconds(GoStageTime);
                 UnityEngine.SceneManagement.SceneManager.LoadScene(stageSceneNames[stageSceneIndex]);// 指定の番号のステージシーンへ遷移
@@ -378,12 +375,13 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator DisplayStageSelectCoroutine()
         {
-            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
-            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(treesObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
-            transitionUI_Manager.Hide();// 演出用UIを非表示
+            TransitionUI_Manager.instance.Hide();// 演出用UIを非表示
             DisplayStageSelect();
             isExit = false;// フラグをリセット
+            isStartScene = false;// 最初のシーンから出る
         }
 
         /// <summary>
@@ -406,10 +404,10 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator title_IntroCoroutine()
         {
-            transitionUI_Manager.TargetShow(treesObject);// 演出用UIを表示
-            transitionUI_Manager.TargetShow(black_ImageObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(treesObject);// 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
-            transitionUI_Manager.Hide();// 演出用UIを非表示
+            TransitionUI_Manager.instance.Hide();// 演出用UIを非表示
         }
     }
 }

@@ -1,8 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ForestDraw
@@ -45,7 +42,7 @@ namespace ForestDraw
         /// <summary>
         /// チュートリアルUI管理クラスを参照する変数
         /// </summary>
-        private Tutorial_UI_Manager tutorial_UI_Manager;
+        public Tutorial_UI_Manager tutorial_UI_Manager;
         /// <summary>
         /// 演出用UI管理クラスを参照する変数
         /// </summary>
@@ -92,6 +89,10 @@ namespace ForestDraw
         /// </summary>
         private int stageNumberStart = 1;
         /// <summary>
+        /// スタート時に引くカードの枚数の変数
+        /// </summary>
+        private int startDrawCount = 4;
+        /// <summary>
         /// BGMのインデックスを参照する変数
         /// </summary>
         public int tutorial_BgmIndex = 6;
@@ -136,10 +137,6 @@ namespace ForestDraw
         /// プレイヤーのオブジェクト名を参照する変数
         /// </summary>
         private string playerRootName = "PlayerRootStage";
-        /// <summary>
-        /// チュートリアルUIのオブジェクト名を参照する変数
-        /// </summary>
-        private string tutorial_UI_Name = "Tutorial_UI";
         // <summary>
         /// ステージシーン名を参照する変数
         /// </summary>
@@ -188,7 +185,7 @@ namespace ForestDraw
         SceneState sceneState = SceneState.Intro;
 
         /// <summary>
-        /// 初期設定の関数
+        /// 初期設定を行う関数
         /// </summary>
         private void Awake()
         {
@@ -197,10 +194,13 @@ namespace ForestDraw
             // コンポーネントの登録
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
-            tutorial_UI_Manager = GameObject.Find(tutorial_UI_Name).GetComponent<Tutorial_UI_Manager>();// シーン内からチュートリアルUIを探して取得
+        }
 
-            nextButton.enabled = false;
-
+        /// <summary>
+        /// ステージシーン開始時の準備を行う関数
+        /// </summary>
+        private void Start()
+        {
             // 配列内のゲームオブジェクトをすべて参照
             foreach (GameObject obj in playerUI)
             {
@@ -214,7 +214,7 @@ namespace ForestDraw
             // UIを最初は非表示にする
             gameOverUI.SetActive(false);
             stageClearUI.SetActive(false);
-            TransitionUI_Manager.Instance.Hide();
+            TransitionUI_Manager.instance.Hide();
 
             // パネルのスプライトをステージに合わせて変更
             Panel_Image.sprite = Panel_Sprite[stagePanel_Index];// パネルのスプライトをステージに合わせて変更
@@ -233,9 +233,6 @@ namespace ForestDraw
             if (sceneState == SceneState.Play)
             {
                 sceneState = SceneState.StageClear;
-
-                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-                UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
 
                 int number = stageNumber;// 今いるステージ番号を参照
 
@@ -291,6 +288,8 @@ namespace ForestDraw
         private IEnumerator Tutorial_IntroCoroutine()
         {
             Time.timeScale = 0;
+            isTutorial = true;// チュートリアル中フラグをオン
+            nextButton.enabled = false;
             audioSetting.PlayBGM(tutorial_BgmIndex);
             yield return new WaitForSecondsRealtime(tutorial_IntroTime);
             tutorial_UI_Manager.ShowFirstPage();// 最初のページを表示
@@ -307,6 +306,8 @@ namespace ForestDraw
             animator.SetTrigger(tutorial_EndTrigger);// チュートリアル終了演出
             yield return new WaitForSecondsRealtime(tutorial_OutroTime);// イントロ演出中は待機
             tutorial_UI_Manager.Hide();// UIを全部消す
+            Time.timeScale = timeCanMoveValue;// 時を動かす
+            isTutorial = false;// チュートリアル中フラグをオフ
             StartCoroutine(Stage_IntroCoroutine());// ステージイントロ開始
         }
 
@@ -316,7 +317,6 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator Stage_IntroCoroutine()
         {
-            Time.timeScale = timeCanMoveValue;// 時を動かす
             audioSetting.PlayBGM(stageBgmIndex);
 
             // もしステージが第三ステージなら
@@ -327,6 +327,7 @@ namespace ForestDraw
 
             yield return new WaitForSeconds(stage_IntroTime);// ステージイントロ演出中は待機
             transitionUI_Manager.Hide();// 演出用UIを非表示にする
+            BattleCardManager.instance.DrawCards(startDrawCount);// ?枚引く
             sceneState = SceneState.Play;
         }
 
@@ -338,7 +339,7 @@ namespace ForestDraw
         {
             gameOverUI.SetActive(true);
             animator.SetTrigger(gameOverTrigger);// ゲームオーバー演出
-            yield return new WaitForSeconds(1.5f);// 演出中は待機
+            yield return new WaitForSeconds(2.5f);// 演出中は待機
             TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
             UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
         }
@@ -351,7 +352,7 @@ namespace ForestDraw
         {
             stageClearUI.SetActive(true);
             animator.SetTrigger(stageClearTrigger);// ステージクリア演出
-            yield return new WaitForSeconds(1f);// 演出中は待機
+            yield return new WaitForSeconds(2f);// 演出中は待機
 
                                                 // 最終ステージの場合
             if (number == stageNumberMax)

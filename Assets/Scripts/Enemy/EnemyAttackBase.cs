@@ -38,6 +38,16 @@ namespace ForestDraw.Enemy.Attack
         {
             move = GetComponent<EnemyMove>();
             health = GetComponent<EnemyHealth>();
+
+            if (target == null)
+            {
+                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");// プレイヤーオブジェクトをタグで検索
+
+                if (playerObj != null)
+                {
+                    target = playerObj.transform;// ターゲットをプレイヤーのTransformに設定
+                }
+            }
         }
 
         /// <summary>

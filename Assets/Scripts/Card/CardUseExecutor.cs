@@ -21,6 +21,18 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         public static bool Execute(CardData card, CardUseContext context)
         {
+            if (context.playerHealth == null)
+            {
+                // シーン内から PlayerHealth コンポーネントを探して割り当てる
+                context.playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+
+                if (context.playerHealth == null)
+                {
+                    Debug.LogError("PlayerHealthが見つかりません！シーンに配置されていますか？");
+                    return false;
+                }
+            }
+
             // コスト不足なら失敗
             if (!context.playerCost.UseCost(card.cost)) return false;
 

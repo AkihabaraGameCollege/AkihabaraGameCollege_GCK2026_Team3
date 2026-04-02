@@ -10,14 +10,23 @@ namespace ForestDraw
         /// <summary>
         /// 演出用UIのオブジェクト名を参照する変数
         /// </summary>
-        public static TransitionUI_Manager Instance { get; private set; }
+        public static TransitionUI_Manager instance { get; private set; }
 
         /// <summary>
         /// 初期設定を行う関数
         /// </summary>
         private void Awake()
         {
-            Instance = this;
+            // インスタンスの重複チェック
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject); // シーン遷移で破棄しない場合
+            }
+            else
+            {
+                Destroy(gameObject); // 2つ目以降は削除
+            }
         }
 
         /// <summary>         
