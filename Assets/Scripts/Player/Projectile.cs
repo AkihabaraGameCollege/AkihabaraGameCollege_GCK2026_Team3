@@ -4,14 +4,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Transform target;
-    private float speed;
-    private float rotateSpeed;
+    [SerializeField]
+    private float speed = 10;
+    [SerializeField]
+    private float rotateSpeed = 10;
 
-    public void Init(Transform target, float spd, float rotSpd)
+    public void Init(Transform target)
     {
         this.target = target;
-        speed = spd;
-        rotateSpeed = rotSpd;
     }
 
     void Update()

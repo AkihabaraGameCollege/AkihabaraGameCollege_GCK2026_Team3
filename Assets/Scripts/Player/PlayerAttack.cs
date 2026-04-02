@@ -18,7 +18,7 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         public static void AttackNearest(Vector3 origin, int damage, float duration, GameObject effect)
         {
-            var target = TargetFinder.FindNearest(origin, effect);
+            var target = TargetFinder.FindNearest(origin, effect, duration);
 
             Debug.Log("’P‘ÌUŒ‚");
             int finalDamage = ApplyMultiplier(damage);

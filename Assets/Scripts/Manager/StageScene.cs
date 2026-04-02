@@ -371,15 +371,17 @@ namespace ForestDraw
             GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
             Destroy(obj, time);
         }
-        public void PlayCardEffect(GameObject effect, Transform target)
+        public void PlayCardEffect(GameObject effect, Transform target, float time)
         {
             GameObject obj = Instantiate(effect, cardEffectSpawn.position, effect.transform.rotation);
 
             var projectile = obj.GetComponent<Projectile>();
             if (projectile != null)
             {
-                projectile.Init(target, 10f, 5f);
+                projectile.Init(target);
             }
+
+            Destroy(obj, time);
         }
     }
 }

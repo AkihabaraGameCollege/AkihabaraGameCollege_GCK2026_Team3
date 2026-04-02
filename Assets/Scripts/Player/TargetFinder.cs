@@ -15,7 +15,7 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// w’èÀ•W‚©‚çÅ‚à‹ß‚¢“G‚ğ1‘Ìæ“¾
         /// </summary>
-        public static IDamageable FindNearest(Vector3 origin, GameObject effect)
+        public static IDamageable FindNearest(Vector3 origin, GameObject effect, float duration)
         {
             GameObject nearest = null;
             float minDist = Mathf.Infinity;
@@ -31,7 +31,7 @@ namespace ForestDraw.Player.Combat
                     nearest = enemy;
                 }
             }
-            StageScene.Instance.PlayCardEffect(effect,nearest.transform);
+            StageScene.Instance.PlayCardEffect(effect,nearest.transform, duration);
             // IDamageable‚ğæ“¾‚µ‚Ä•Ô‚·
             return nearest?.GetComponent<IDamageable>();
         }
