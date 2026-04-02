@@ -8,11 +8,16 @@ namespace ForestDraw
     public class TransitionUI_Manager : MonoBehaviour
     {
         /// <summary>
+        /// 演出用UIのオブジェクト名を参照する変数
+        /// </summary>
+        public static TransitionUI_Manager Instance { get; private set; }
+
+        /// <summary>
         /// 初期設定を行う関数
         /// </summary>
         private void Awake()
         {
-            Hide();
+            Instance = this;
         }
 
         /// <summary>         

@@ -85,17 +85,8 @@ namespace ForestDraw
         /// </summary>
         public void OnSkipButtonClicked()
         {
-            // 表示中のページをすべて非表示にする
-            HidePages();
-
             // チュートリアル終了処理を開始
             StartCoroutine(stageScene.Tutorial_OutroCoroutine());
-
-            // 二重実行を防ぐためにUI操作を無効化
-            DisableTutorialInteraction();
-
-            // 現在ページを末尾に設定しておく（念のため）
-            currentPage_Index = tutorial_Pages.Length;
         }
 
         /// <summary>         

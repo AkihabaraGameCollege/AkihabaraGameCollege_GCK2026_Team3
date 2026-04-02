@@ -24,6 +24,11 @@ namespace ForestDraw
         [SerializeField]
         private GameObject gameOverUI = null;
         /// <summary>
+        /// ステージクリアUIの変数
+        /// </summary>
+        [SerializeField]
+        private GameObject stageClearUI = null;
+        /// <summary>
         /// プレイヤー関係UIの変数配列
         /// </summary>
         [SerializeField]
@@ -44,7 +49,7 @@ namespace ForestDraw
         /// <summary>
         /// 演出用UI管理クラスを参照する変数
         /// </summary>
-        private TransitionUI_Manager transitionUI_Manager;
+        public TransitionUI_Manager transitionUI_Manager;
         /// <summary>
         /// ポーズ管理クラスを参照する変数
         /// </summary>
@@ -69,35 +74,10 @@ namespace ForestDraw
         /// </summary>
         public Sprite[] Panel_Sprite = null;
 
-        /// <summary>         
-        /// 戻るボタンの変数         
-        /// </summary>         
-        public Button resumeButton;
-        /// <summary>         
-        /// 設定ボタンの変数         
-        /// </summary>         
-        public Button settingButton;
-        /// <summary>         
-        /// ステージセレクトボタンの変数         
-        /// </summary>         
-        public Button exitButton;
         /// <summary>
         /// 次へボタンを参照する変数
         /// </summary>
         public Button nextButton;
-
-        /// <summary>         
-        /// ResumeButtonが押されたときに発生するUnityEventの変数         
-        /// </summary>         
-        public UnityEvent onResumeButtonClick;
-        /// <summary>         
-        /// SettingButtonが押されたときに発生するUnityEventの変数         
-        /// </summary>         
-        public UnityEvent onSettingButtonClick;
-        /// <summary>         
-        /// ExitButtonが押されたときに発生するUnityEventの変数         
-        /// </summary>         
-        public UnityEvent onExitButtonClick;
 
         /// <summary>
         /// 最大のステージ番号を参照する変数
@@ -152,10 +132,6 @@ namespace ForestDraw
         /// クリアシーン名を参照する変数
         /// </summary>
         private string clearSceneName = "Clear";
-        // <summary>
-        /// ステージシーン名を参照する変数
-        /// </summary>
-        private string titleSceneName = "Title";
         /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
         /// </summary>
@@ -164,10 +140,10 @@ namespace ForestDraw
         /// チュートリアルUIのオブジェクト名を参照する変数
         /// </summary>
         private string tutorial_UI_Name = "Tutorial_UI";
-        /// <summary>
-        /// 演出用UIのオブジェクト名を参照する変数
+        // <summary>
+        /// ステージシーン名を参照する変数
         /// </summary>
-        private string transitionUI_Name = "TransitionUI";
+        public string titleSceneName = "Title";
 
         /// <summary>
         /// チュートリアルのイントロ時間を参照する変数
@@ -176,7 +152,7 @@ namespace ForestDraw
         /// <summary>
         /// チュートリアルのアウトロ時間を参照する変数
         /// </summary>
-        private float tutorial_OutroTime = 1f;
+        private float tutorial_OutroTime = 0.9f;
         /// <summary>
         /// ステージイントロの時間を参照する変数
         /// </summary>
@@ -184,12 +160,12 @@ namespace ForestDraw
         /// <summary>
         /// 時を動かす値を参照する変数
         /// </summary>
-        private float timeCanMoveValue = 1f;
+        public float timeCanMoveValue = 1f;
 
         /// <summary>
         /// チュートリアル中かどうかのフラグを参照する変数
         /// </summary>
-        private bool isTutorial = false;
+        public bool isTutorial = false;
 
         [SerializeField]
         private Transform cardEffectSpawn;
@@ -222,12 +198,6 @@ namespace ForestDraw
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             tutorial_UI_Manager = GameObject.Find(tutorial_UI_Name).GetComponent<Tutorial_UI_Manager>();// シーン内からチュートリアルUIを探して取得
-            transitionUI_Manager = GameObject.Find(transitionUI_Name).GetComponent<TransitionUI_Manager>();// シーン内から演出用UIを探して取得
-
-            // UnityEvent を追加
-            resumeButton.onClick.AddListener(() => { onResumeButtonClick.Invoke(); });// 戻るボタンのイベントを設定
-            settingButton.onClick.AddListener(() => { onSettingButtonClick.Invoke(); });// 設定ボタンのイベントを設定
-            exitButton.onClick.AddListener(() => { onExitButtonClick.Invoke(); });// ステージセレクトボタンのイベントを設定
 
             nextButton.enabled = false;
 
@@ -241,7 +211,14 @@ namespace ForestDraw
                 }
             }
 
+            // UIを最初は非表示にする
             gameOverUI.SetActive(false);
+            stageClearUI.SetActive(false);
+            TransitionUI_Manager.Instance.Hide();
+
+            // パネルのスプライトをステージに合わせて変更
+            Panel_Image.sprite = Panel_Sprite[stagePanel_Index];// パネルのスプライトをステージに合わせて変更
+            transitionUI_Manager.TargetShow(treePanel_UI);// パネルを表示
 
             playerController.isCanPause = true;// ポーズ操作を許可する
 
@@ -294,9 +271,6 @@ namespace ForestDraw
         /// <param name="number"></param>
         private void Stage_Intro(int number)
         {
-            Panel_Image.sprite = Panel_Sprite[stagePanel_Index];// パネルのスプライトをステージに合わせて変更
-            transitionUI_Manager.TargetShow(treePanel_UI);// パネルを表示
-
             // もし第一ステージなら
             if (number == stageNumberStart)
             {
@@ -357,37 +331,12 @@ namespace ForestDraw
         }
 
         /// <summary>
-        /// ステージを出る関数
-        /// </summary>
-        public void ExitStage()
-        {
-            isTutorial = false;// チュートリアルフラグをリセット
-            PauseTimeControl(timeCanMoveValue);// 時を動かす
-            TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-            SceneManager.LoadScene(titleSceneName);
-        }
-
-        /// <summary>
-        /// 時間をポーズする関数
-        /// </summary>
-        /// <param name="scale"></param>
-        private void PauseTimeControl(float scale)
-        {
-            // もしチュートリアル中の場合
-            if (isTutorial)
-            {
-                return;
-            }
-
-            Time.timeScale = scale;// 時間を止めるか動かす
-        }
-
-        /// <summary>
         /// ゲームオーバー演出を行うコルーチン
         /// </summary>
         /// <returns></returns>
         public IEnumerator GameOverCoroutine()
         {
+            gameOverUI.SetActive(true);
             animator.SetTrigger(gameOverTrigger);// ゲームオーバー演出
             yield return new WaitForSeconds(1.5f);// 演出中は待機
             TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
@@ -400,6 +349,7 @@ namespace ForestDraw
         /// <returns></returns>
         public IEnumerator StageClearCoroutine(int number)
         {
+            stageClearUI.SetActive(true);
             animator.SetTrigger(stageClearTrigger);// ステージクリア演出
             yield return new WaitForSeconds(1f);// 演出中は待機
 

@@ -326,6 +326,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37983465}
   m_CullTransparentMesh: 1
+--- !u!1 &49380665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9126823165350169565, guid: 32ff4498b2093fd4084467dc8eeef118, type: 3}
+  m_PrefabInstance: {fileID: 983857141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &78328351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -678,17 +683,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126693061}
   m_CullTransparentMesh: 1
---- !u!114 &127814394 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5986552178864903443, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-  m_PrefabInstance: {fileID: 1930167624}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &159706937
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,7 +6448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1267083214499122187, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323916197982596915, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5324070823687068904, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
       propertyPath: m_Pivot.x
@@ -7028,34 +7026,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.StageScene
   audioSetting: {fileID: 274189494}
   gameOverUI: {fileID: 1599552717}
+  stageClearUI: {fileID: 49380665}
   playerUI:
   - {fileID: 1196865517}
   - {fileID: 197885150}
   - {fileID: 513184479}
   treePanel_UI: {fileID: 1110253644}
-  pauseUI_Manager: {fileID: 0}
+  transitionUI_Manager: {fileID: 1398384137}
+  pauseUI_Manager: {fileID: 1930167626}
   Panel_Image: {fileID: 1110253646}
   Panel_Sprite:
   - {fileID: 599138475, guid: 481cbef0e55cecd4a9074c6067fa90f4, type: 3}
   - {fileID: -2000492216, guid: 342f049dec18ced498e331d97eb1162b, type: 3}
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
-  resumeButton: {fileID: 2097105530}
-  settingButton: {fileID: 1680370266}
-  exitButton: {fileID: 127814394}
   nextButton: {fileID: 37983467}
-  onResumeButtonClick:
-    m_PersistentCalls:
-      m_Calls: []
-  onSettingButtonClick:
-    m_PersistentCalls:
-      m_Calls: []
-  onExitButtonClick:
-    m_PersistentCalls:
-      m_Calls: []
   tutorial_BgmIndex: 6
   stageNumber: 1
   stageBgmIndex: 2
   stagePanel_Index: 0
+  titleSceneName: Title
+  timeCanMoveValue: 1
+  isTutorial: 0
   cardEffectSpawn: {fileID: 1903235287}
 --- !u!114 &461601636
 MonoBehaviour:
@@ -8718,7 +8709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &873562722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13925,7 +13916,7 @@ Transform:
   m_GameObject: {fileID: 974648312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14025,7 +14016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126823165350169565, guid: 32ff4498b2093fd4084467dc8eeef118, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14385,6 +14376,14 @@ PrefabInstance:
       propertyPath: handArea
       value: 
       objectReference: {fileID: 844520532}
+    - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      propertyPath: 'allCardMasterList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
+    - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      propertyPath: 'allCardMasterList.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
     - target: {fileID: 4334362933986609354, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.4
@@ -14805,7 +14804,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 952766980360892857, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: playerRootName
@@ -14881,7 +14880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14901,11 +14900,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5788863769193051022, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6289396456306501893, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8109683243731463475, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_Name
@@ -14913,11 +14912,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109683243731463475, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8450869247869514959, guid: 36917260830e9094796b61d62b649d46, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14967,7 +14966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1366003040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15060,6 +15059,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1398384137 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5669942507641161675, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
+  m_PrefabInstance: {fileID: 395833327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db45d3ec799cb5c4e9d1a94b2e62bcf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.TransitionUI_Manager
 --- !u!1 &1435647990
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,7 +15390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869163601976724508, guid: e37c08b49316ef147aecdb0dc86475c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15679,17 +15689,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679109143}
   m_CullTransparentMesh: 1
---- !u!114 &1680370266 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6027228925724345001, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-  m_PrefabInstance: {fileID: 1930167624}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1684372750
 GameObject:
   m_ObjectHideFlags: 0
@@ -21199,14 +21198,10 @@ PrefabInstance:
     - target: {fileID: 4705574500987486968, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: onSettingButtonClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2039129916}
     - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Name
       value: PauseUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371905810345152499, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8743471404233309487, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
       propertyPath: m_Pivot.x
@@ -26309,6 +26304,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017976947}
   m_CullTransparentMesh: 1
+--- !u!114 &2039129916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2139333737157632643, guid: 36917260830e9094796b61d62b649d46, type: 3}
+  m_PrefabInstance: {fileID: 1344467358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55d506a3d36be049a31aa9846103146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.SettingManager
 --- !u!1 &2071726257
 GameObject:
   m_ObjectHideFlags: 0
@@ -26447,17 +26453,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &2097105530 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 516316059542914833, guid: f471aec9340bc7441ba68eb6b7c5da9a, type: 3}
-  m_PrefabInstance: {fileID: 1930167624}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &2120426513
 GameObject:
   m_ObjectHideFlags: 0
@@ -26515,6 +26510,9 @@ MonoBehaviour:
   buffAnimator: {fileID: 1712315413}
   heal_Animator: {fileID: 237394789}
   shieldAnimator: {fileID: 1727138347}
+  buffEffectNumber: 0
+  heal_EffectNumber: 1
+  shieldEffectNumber: 2
 --- !u!1 &2138806293
 GameObject:
   m_ObjectHideFlags: 0

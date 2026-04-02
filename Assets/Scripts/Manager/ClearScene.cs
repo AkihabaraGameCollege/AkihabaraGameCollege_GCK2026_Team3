@@ -92,6 +92,8 @@ namespace ForestDraw
             titleButton.onClick.AddListener(InTitleScene);// タイトルボタンにタイトルへ戻る関数を登録
             skipButton.onClick.AddListener(EventSkip);// スキップボタンにクリア演出をスキップする関数を登録
 
+            TransitionUI_Manager.Instance.Hide();
+
             playerController.isCanPause = true;// ポーズ操作を許可する
 
             // サウンド再生

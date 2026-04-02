@@ -64,6 +64,10 @@ namespace ForestDraw
         /// ポーズ機能クラスを参照する変数
         /// </summary>
         public PauseUI_Manager pauseUI_Manager;
+        /// <summary>
+        /// タイトル管理クラスのインスタンスを参照する変数
+        /// </summary>
+        public static TitleScene Instance { get; private set; }
 
         /// <summary>
         ///スタートボタンの変数
@@ -151,7 +155,7 @@ namespace ForestDraw
         /// <summary>
         /// イントロアニメーション中の待機時間
         /// </summary>
-        private float introTime = 4.5f;
+        private float introTime = 2.5f;
         /// <summary>
         /// デッキが動いている最中の待機時間
         /// </summary>
@@ -167,7 +171,7 @@ namespace ForestDraw
         /// <summary>
         /// ゲーム終了までの待機時間
         /// </summary>
-        public float exitTime = 1.0f;
+        private float exitTime = 3.0f;
         /// <summary>
         /// フェードアウトの時間
         /// </summary>
@@ -253,6 +257,8 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
+            Instance = this;
+
             // コンポーネントの登録
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
@@ -272,6 +278,8 @@ namespace ForestDraw
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
             exitButton.onClick.AddListener(() => StartCoroutine(ExitCoroutine()));// 第三ステージへのボタンに第三ステージへの関数を登録
             deckButton.onClick.AddListener(() => StartCoroutine(DisplayDeckCoroutine()));// デッキ表示のボタンにデッキ表示の関数を登録
+
+            TransitionUI_Manager.Instance.Hide();
 
             // タイトルBGMを再生
             audioSetting.PlayBGM(titleBgmIndex);

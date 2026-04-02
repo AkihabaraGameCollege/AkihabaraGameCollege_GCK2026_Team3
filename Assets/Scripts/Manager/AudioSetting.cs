@@ -55,7 +55,7 @@ namespace ForestDraw
         /// <summary>
         /// サウンド管理クラスのインスタンスを参照する変数
         /// </summary>
-        public static AudioSetting Instance { get; private set; } = null;
+        public static AudioSetting Instance { get; private set; }
 
         /// <summary>
         /// 初期設定の関数
