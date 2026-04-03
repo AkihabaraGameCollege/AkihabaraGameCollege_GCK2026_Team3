@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 681922259520542736}
   - component: {fileID: -8970728328737395225}
   m_Layer: 0
-  m_Name: KariBullet
+  m_Name: WizardBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

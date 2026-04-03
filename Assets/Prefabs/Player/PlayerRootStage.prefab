@@ -9868,8 +9868,6 @@ MonoBehaviour:
   player: {fileID: 7138406432269052659}
   drawInterval: 3
   maxHandSize: 8
-  startDrawCount: 4
-  costCount: 4
   allCardMasterList:
   - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
   - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
@@ -9900,7 +9898,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Player.Combat.PlayerCost
   maxCost: 8
-  baseRecoverInterval: 3
+  baseRecoverInterval: 2
+  costNoticeAnimator: {fileID: 0}
+  costNotice: {fileID: 0}
 --- !u!114 &5970745555005975266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9913,8 +9913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a5bac0dd0eb0942bb49f699015b88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.PlayerController
+  pauseManager: {fileID: 0}
   maxAngle: 30
   rotationSpeed: 50
+  isCanPause: 0
+  mainCameraName: Main Camera
 --- !u!114 &4860600918134899027
 MonoBehaviour:
   m_ObjectHideFlags: 0
