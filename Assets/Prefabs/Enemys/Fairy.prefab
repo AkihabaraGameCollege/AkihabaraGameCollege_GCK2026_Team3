@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Enemy.Attack.RangedAttack
   enemyAnimator: {fileID: 9040169777054419842}
-  bulletPrefab: {fileID: 107395912125315757, guid: 77adf8db1a2a8f44bb22aed962ee3700, type: 3}
+  bulletPrefab: {fileID: 107395912125315757, guid: 92a28d30c811d1c4d905654c96a3f38e, type: 3}
   firePoint: {fileID: 2600058673947290819}
   speed: 10
 --- !u!1 &5037422724402093469

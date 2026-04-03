@@ -29,7 +29,7 @@ MonoBehaviour:
     lineWidth: 0
     areaRadius: 30
     areaRange: 20
-    attackEffect: {fileID: 6930436403598970567, guid: 4c0e7caab5a3fc641925a41c0874503b, type: 3}
+    attackEffect: {fileID: 8941128211414228805, guid: 704aec45bb9b4b940bf2c6f9f364e1e8, type: 3}
   recoverParams:
     healAmount: 0
     costRecoverAmount: 5
