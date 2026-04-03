@@ -62,7 +62,17 @@ namespace ForestDraw
         /// </summary>
         void Awake()
         {
-            Instance = this;
+            // インスタンスの重複チェック
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject); // シーン遷移で破棄しない場合
+            }
+            else
+            {
+                Destroy(gameObject); // 2つ目以降は削除
+            }
+
             // 保存された音量を反映
             bgmVolumeSlider.value = UpdateVolume.bgmSliderValue;
             seVolumeSlider.value = UpdateVolume.seSliderValue;
@@ -160,68 +170,6 @@ namespace ForestDraw
             bgmAudioSource.Stop();
             seAudioSource.Stop();
             bgsAudioSource.Stop();
-        }
-
-        /// <summary>
-        /// フェードアウトの関数
-        /// </summary>
-        /// <param name="time"></param>
-        public void StopFadeOut(float time)
-        {
-            StartCoroutine(FadeOutCoroutine(time));
-        }
-
-        /// <summary>
-        /// BGMフェードアウトのコルーチン
-        /// </summary>
-        /// <param name="time"></param>
-        /// <returns></returns>
-        IEnumerator FadeOutCoroutine(float time)
-        {
-            float startVolume = bgmAudioSource.volume;// 現在の音量を保存
-            isFading = true;// フェード中フラグを立てる
-
-            // 音量が0になるまで徐々に減少させる
-            while (bgmAudioSource.volume > 0)
-            {
-                bgmAudioSource.volume -= startVolume * Time.deltaTime / time;// 音量を減少させる
-                yield return null;
-            }
-
-            bgmAudioSource.Stop();// BGMを停止
-            isFading = false;// フェード中フラグを下ろす
-            bgmAudioSource.volume = startVolume;// 音量を元に戻す
-        }
-
-        /// <summary>
-        /// フェードインの関数
-        /// </summary>
-        /// <param name="time"></param>
-        public void StartFadeIn(float time)
-        {
-            StartCoroutine(FadeInCoroutine(time));
-        }
-
-        /// <summary>
-        /// BGMフェードインのコルーチン
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator FadeInCoroutine(float time)
-        {
-            float targetVolume = UpdateVolume.bgmSliderValue;// 目標の音量を保存
-            isFading = true;// フェード中フラグを立てる
-            bgmAudioSource.volume = 0;// 音量を0に設定
-            bgmAudioSource.Play();// BGMを再生
-
-            // 音量が目標の音量になるまで徐々に増加させる
-            while (bgmAudioSource.volume < targetVolume)
-            {
-                bgmAudioSource.volume += targetVolume * Time.deltaTime / time;// 音量を増加させる
-                yield return null;
-            }
-
-            isFading = false;// フェード中フラグを下ろす
-            bgmAudioSource.volume = targetVolume;// 音量を目標の音量に設定
         }
 
         /// <summary>

@@ -55,6 +55,16 @@ namespace ForestDraw.Enemy.Attack
         /// </summary>
         protected void LookAtTarget()
         {
+            // ターゲットが空なら、再度Playerタグで探してみる
+            if (target == null)
+            {
+                GameObject p = GameObject.FindGameObjectWithTag("Player");
+                if (p != null) target = p.transform;
+            }
+
+            // --- この1行を追加 ---
+            if (target == null) return;
+
             Vector3 dir = target.position - transform.position;
             dir.y = 0;
 

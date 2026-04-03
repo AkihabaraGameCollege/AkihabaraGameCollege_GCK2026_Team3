@@ -23,10 +23,6 @@ namespace ForestDraw
         /// タイトルへ行くボタンを参照する変数
         /// </summary>
         private Button titleButton = null;
-        /// <summary>
-        /// クリア演出をスキップするボタンを参照する変数
-        /// </summary>
-        private Button skipButton = null;
 
         /// <summary>
         /// アニメーターを参照する変数
@@ -49,15 +45,11 @@ namespace ForestDraw
         /// タイトルボタンのオブジェクト名を参照する変数
         /// </summary>
         private string titleButtonName = "TitleButton";
-        /// <summary>
-        /// スキップボタンのオブジェクト名を参照する変数
-        /// </summary>
-        private string skipButtonName = "SkipButton";
 
         /// <summary>
         /// クリアシーンで何番目のBGMを再生するかのインデックスを参照する変数
         /// </summary>
-        private int bgmIndex = 6;
+        private int bgmIndex = 5;
         /// <summary>
         /// クラッカーサウンドで何番目のSEを再生するかのインデックスを参照する変数
         /// </summary>
@@ -66,15 +58,11 @@ namespace ForestDraw
         /// 花火サウンドで何番目のSEを再生するかのインデックスを参照する変数
         /// </summary>
         private int fireworkSeIndex = 8;
-        /// <summary>
-        /// クリア演出をスキップするときに呼ばれるIDを参照する変数
-        /// </summary>
-        private static readonly int skipTrigger = Animator.StringToHash("EventSkip");
 
         /// <summary>
         /// 花火サウンド再生中の時間を参照する変数
         /// </summary>
-        private float fireworkSeTime = 1f;
+        private float fireworkSeTime = 0.5f;
 
         /// <summary>
         /// 初期設定の関数
@@ -86,11 +74,9 @@ namespace ForestDraw
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             audioSetting = GameObject.Find(audioSettingName).GetComponent<AudioSetting>();// シーン内からオーディオ設定クラスを探して取得
             titleButton = GameObject.Find(titleButtonName).GetComponent<Button>();// シーン内からタイトルボタンを探して取得
-            skipButton = GameObject.Find(skipButtonName).GetComponent<Button>();// シーン内からスキップボタンを探して取得
 
             // ボタンにイベントの登録
             titleButton.onClick.AddListener(InTitleScene);// タイトルボタンにタイトルへ戻る関数を登録
-            skipButton.onClick.AddListener(EventSkip);// スキップボタンにクリア演出をスキップする関数を登録
 
             TransitionUI_Manager.instance.Hide();
 
@@ -109,14 +95,6 @@ namespace ForestDraw
         private void InTitleScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
-        }
-
-        /// <summary>
-        /// クリア演出をスキップする関数
-        /// </summary>
-        private void EventSkip()
-        {
-            animator.SetTrigger(skipTrigger);// クリア演出をスキップする
         }
 
         /// <summary>

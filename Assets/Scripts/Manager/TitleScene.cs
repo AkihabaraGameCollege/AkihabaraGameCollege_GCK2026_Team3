@@ -72,7 +72,7 @@ namespace ForestDraw
         /// <summary>
         /// ゲーム終了ボタンの変数
         /// </summary>
-        private Button exitButton;
+        public Button exitButton;
         /// <summary>
         /// デッキ表示のボタンの変数
         /// </summary>
@@ -186,10 +186,6 @@ namespace ForestDraw
         /// </summary>
         private string deckManagerName = "DeckManager";
         /// <summary>
-        /// ゲーム終了ボタンのオブジェクト名を参照する変数
-        /// </summary>
-        private string exitButtonName = "ExitButton";
-        /// <summary>
         /// プレイヤーのオブジェクト名を参照する変数
         /// </summary>
         public string playerRootName = "PlayerRootTitle";
@@ -255,7 +251,6 @@ namespace ForestDraw
             animator = GetComponent<Animator>();
             playerController = GameObject.Find(playerRootName).GetComponent<PlayerController>();// シーン内からプレイヤーを探して取得
             startButton = GameObject.Find(startButtonName).GetComponent<Button>();// シーン内からスタートボタンを探して取得
-            exitButton = GameObject.Find(exitButtonName).GetComponent<Button>();// シーン内からゲーム終了ボタンを探して取得
             noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内から通知UI管理クラスを探して取得
             deckManager = GameObject.Find(deckManagerName).GetComponent<DeckManager>();// シーン内からデッキ管理クラスを探して取得
 
@@ -267,7 +262,7 @@ namespace ForestDraw
             stageButton1.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(0)));// 第一ステージへのボタンに第一ステージへの関数を登録
             stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
             stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
-            exitButton.onClick.AddListener(() => StartCoroutine(ExitCoroutine()));// 第三ステージへのボタンに第三ステージへの関数を登録
+            exitButton.onClick.AddListener(GameExit);// 第三ステージへのボタンに第三ステージへの関数を登録
             deckButton.onClick.AddListener(() => StartCoroutine(DisplayDeckCoroutine()));// デッキ表示のボタンにデッキ表示の関数を登録
         }
 
@@ -313,7 +308,7 @@ namespace ForestDraw
         {
             TransitionUI_Manager.instance.TargetShow(treesObject);// 演出用UIを表示
             TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
-            animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
+           animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
             yield return new WaitForSeconds(exitTime);
             Debug.Log("ゲームを終了します。");
             Application.Quit();
@@ -408,6 +403,15 @@ namespace ForestDraw
             TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
             yield return new WaitForSeconds(introTime);// イントロ中は待つ
             TransitionUI_Manager.instance.Hide();// 演出用UIを非表示
+        }
+
+        /// <summary>
+        /// ゲームを終了する関数
+        /// </summary>
+        private void GameExit()
+        {
+            Debug.Log("ゲームを終了します。");
+            Application.Quit();
         }
     }
 }

@@ -72,7 +72,16 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
-            Instance = this;
+            // ここで Instance に自分自身 (this) を入れる
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
             // コンポーネントの登録
             animator = GetComponent<Animator>();// アニメーターを取得
             notice_Image = GameObject.Find(noticeName).GetComponent<Image>();// シーン内から通知UIを探して取得

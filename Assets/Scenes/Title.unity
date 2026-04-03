@@ -542,6 +542,7 @@ MonoBehaviour:
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   settingUI_Manager: {fileID: 7288153572538685478}
   pauseUI_Manager: {fileID: 1018944905}
+  exitButton: {fileID: 4114350393433452695}
   deckButton: {fileID: 6246747943090762593}
   deckReturnButton: {fileID: 926423366}
   stageSelectReturnButton: {fileID: 8959410258282276057}
@@ -560,7 +561,6 @@ MonoBehaviour:
   startButtonName: StartButton
   stageSelectUI_Name: StageSelectUI
   deckUI_Name: DeckUI
-  isStartScene: 1
   stageSceneIndex: 0
 --- !u!4 &171094787
 Transform:

@@ -26,8 +26,10 @@ namespace ForestDraw.Enemy.Spawner
         [SerializeField] private EnemyData enemyData;         // 敵のステータスデータ
         [SerializeField] private Camera UICamera;
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return null; // 1フレーム待つ（これで他の全オブジェクトの Awake が終わる）
+
             // 生成ループ開始
             StartCoroutine(SpawnLoop());
         }
@@ -49,12 +51,12 @@ namespace ForestDraw.Enemy.Spawner
         /// </summary>
         private void Spawn()
         {
-            if (!EnemyManager.Instance.CanGenerate) return;
+            if (!EnemyManager.instance.CanGenerate) return;
             for (int i = 0; i < enemiesPerWave; i++)
             {
                 Vector3 spawnPosition = GetSpawnPosition();
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-                EnemyManager.Instance.AddEnemy(enemy, enemyData.enemyName);
+                EnemyManager.instance.AddEnemy(enemy, enemyData.enemyName);
 
                 EnemyInitialize(enemy);
             }

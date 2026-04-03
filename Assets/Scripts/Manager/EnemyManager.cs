@@ -5,7 +5,7 @@ namespace ForestDraw.Enemy
 {
     public class EnemyManager : MonoBehaviour
     {
-        public static EnemyManager Instance;
+        public static EnemyManager instance;
 
         [SerializeField] int maxEnemyCount = 150;
 
@@ -15,7 +15,14 @@ namespace ForestDraw.Enemy
 
         private void Awake()
         {
-            Instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void AddEnemy(GameObject enemy, string name)
