@@ -62,16 +62,7 @@ namespace ForestDraw
         /// </summary>
         void Awake()
         {
-            // インスタンスの重複チェック
-            if (Instance == null)
-            {
                 Instance = this;
-                DontDestroyOnLoad(gameObject); // シーン遷移で破棄しない場合
-            }
-            else
-            {
-                Destroy(gameObject); // 2つ目以降は削除
-            }
 
             // 保存された音量を反映
             bgmVolumeSlider.value = UpdateVolume.bgmSliderValue;

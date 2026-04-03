@@ -245,7 +245,7 @@ namespace ForestDraw
         /// </summary>
         private void Awake()
         {
-            Instance = this;
+                Instance = this;
 
             // コンポーネントの登録
             animator = GetComponent<Animator>();

@@ -59,6 +59,15 @@ namespace ForestDraw
         /// ポーズのアニメーション時間を参照する変数
         /// </summary>
         private float pauseAnimationTime = 1f;
+        /// <summary>
+        /// 時を動かす値を参照する変数
+        /// </summary>
+        private float timeCanMoveValue = 1f;
+
+        // <summary>
+        /// ステージシーン名を参照する変数
+        /// </summary>
+        public string titleSceneName = "Title";
 
         /// <summary>         
         /// 初期設定を行う関数         
@@ -111,7 +120,7 @@ namespace ForestDraw
             {
                 Show();
 
-                if (!StageScene.Instance.isTutorial)
+                if (StageScene.Instance != null&&!StageScene.Instance.isTutorial)
                 {
                     PauseTimeControl(0f);// 時を止める
                 }
@@ -120,9 +129,9 @@ namespace ForestDraw
             }
             else if (!isPause)
             {
-                if (!StageScene.Instance.isTutorial)
+                if (StageScene.Instance != null && !StageScene.Instance.isTutorial)
                 {
-                    PauseTimeControl(StageScene.Instance.timeCanMoveValue);// 時を動かす
+                    PauseTimeControl(timeCanMoveValue);// 時を動かす
                 }
                     
                     animator.SetTrigger(onPauseRemoveTrigger);// ポーズ解除のトリガーをセット
@@ -150,10 +159,14 @@ namespace ForestDraw
         /// </summary>
         public void ExitStage()
         {
-            StageScene.Instance.isTutorial = false;// チュートリアルフラグをリセット
-            PauseTimeControl(StageScene.Instance.timeCanMoveValue);// 時を動かす
+            if (StageScene.Instance != null)
+            {
+                StageScene.Instance.isTutorial = false;// チュートリアルフラグをリセット
+            }
+
+            PauseTimeControl(timeCanMoveValue);// 時を動かす
             TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
-            SceneManager.LoadScene(StageScene.Instance.titleSceneName);
+            SceneManager.LoadScene(titleSceneName);
         }
 
         /// <summary>

@@ -140,7 +140,7 @@ namespace ForestDraw
         // <summary>
         /// ステージシーン名を参照する変数
         /// </summary>
-        public string titleSceneName = "Title";
+        private string titleSceneName = "Title";
 
         /// <summary>
         /// チュートリアルのイントロ時間を参照する変数
@@ -157,7 +157,7 @@ namespace ForestDraw
         /// <summary>
         /// 時を動かす値を参照する変数
         /// </summary>
-        public float timeCanMoveValue = 1f;
+        private float timeCanMoveValue = 1f;
 
         /// <summary>
         /// チュートリアル中かどうかのフラグを参照する変数
@@ -189,7 +189,7 @@ namespace ForestDraw
         /// </summary>
         private void Awake()
         {
-            Instance = this; // 自分自身をインスタンスとして保存
+                Instance = this;
 
             // コンポーネントの登録
             animator = GetComponent<Animator>();
