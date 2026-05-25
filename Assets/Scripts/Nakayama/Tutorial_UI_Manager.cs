@@ -29,9 +29,18 @@ namespace ForestDraw
         private StageScene stageScene;
 
         /// <summary>
+        /// アニメーターを参照する変数
+        /// </summary>
+        public Animator Tutorial_Animator;
+
+        /// <summary>
         /// 現在表示しているページのインデックスを参照する変数
         /// </summary>
         private int currentPage_Index;
+        /// <summary>
+        /// チュートリアルを終了するときに呼ばれるIDを参照する変数
+        /// </summary>
+        public static readonly int Tutorial_EndTrigger = Animator.StringToHash("OnTutorial_End");
 
         /// <summary>
         /// メインステージ管理を行うオブジェクト名を参照する変数
@@ -43,7 +52,11 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
-            stageScene = GameObject.Find(stageSceneName).GetComponent<StageScene>();// シーン内からメインステージ管理クラスを探して取得
+            // --- コンポーネントの登録 ---
+            // アニメーションを登録
+            Tutorial_Animator = GetComponent<Animator>();
+            // シーン内からメインステージ管理クラスを探して取得
+            stageScene = GameObject.Find(stageSceneName).GetComponent<StageScene>();
 
             nextButton.onClick.AddListener(OnNextButtonClicked);// 次へボタンが押された時の処理を登録
 

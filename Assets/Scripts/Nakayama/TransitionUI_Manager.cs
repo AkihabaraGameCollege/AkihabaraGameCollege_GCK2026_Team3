@@ -21,11 +21,6 @@ namespace ForestDraw
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(gameObject); // ƒV[ƒ“‘JˆÚ‚Å”jŠü‚µ‚È‚¢ê‡
-            }
-            else
-            {
-                Destroy(gameObject); // 2‚Â–ÚˆÈ~‚Ííœ
             }
         }
 

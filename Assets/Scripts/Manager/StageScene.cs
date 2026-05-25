@@ -109,14 +109,6 @@ namespace ForestDraw
         /// </summary>
         public int stagePanel_Index = 0;
         /// <summary>
-        /// チュートリアルを終了するときに呼ばれるIDの変数
-        /// </summary>
-        private static readonly int tutorial_EndTrigger = Animator.StringToHash("Tutorial_End");
-        /// <summary>
-        /// チュートリアルを開始するときに呼ばれるIDの変数
-        /// </summary>
-        private static readonly int tutorial_StartTrigger = Animator.StringToHash("Tutorial_Start");
-        /// <summary>
         /// ステージイントロを開始するときに呼ばれるIDの変数
         /// </summary>
         private static readonly int stage_IntroStartTrigger = Animator.StringToHash("Stage_IntroStart");
@@ -149,7 +141,7 @@ namespace ForestDraw
         /// <summary>
         /// チュートリアルのアウトロ時間を参照する変数
         /// </summary>
-        private float tutorial_OutroTime = 0.9f;
+        private float tutorial_OutroTime = 1.0f;
         /// <summary>
         /// ステージイントロの時間を参照する変数
         /// </summary>
@@ -271,7 +263,6 @@ namespace ForestDraw
             // もし第一ステージなら
             if (number == stageNumberStart)
             {
-                animator.SetTrigger(tutorial_StartTrigger);// チュートリアル開始演出
                 StartCoroutine(Tutorial_IntroCoroutine());// チュートリアル開始
             }
             else 
@@ -303,7 +294,7 @@ namespace ForestDraw
         public IEnumerator Tutorial_OutroCoroutine()
         {
             tutorial_UI_Manager.HidePages();// ページUIだけ消す
-            animator.SetTrigger(tutorial_EndTrigger);// チュートリアル終了演出
+            tutorial_UI_Manager.Tutorial_Animator.SetTrigger(Tutorial_UI_Manager.Tutorial_EndTrigger);// チュートリアル終了演出
             yield return new WaitForSecondsRealtime(tutorial_OutroTime);// イントロ演出中は待機
             tutorial_UI_Manager.Hide();// UIを全部消す
             Time.timeScale = timeCanMoveValue;// 時を動かす
