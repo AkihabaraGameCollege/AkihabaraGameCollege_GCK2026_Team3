@@ -29,17 +29,12 @@ namespace ForestDraw.Player.Combat
         /// <summary>
         /// プレイヤー通知UIを参照する変数
         /// </summary>
-        private NoticeTextUI noticeTextUI;
+        public NoticeTextUI noticeTextUI;
 
         /// <summary>
         /// コストに関する通知UIオブジェクトを参照する変数
         /// </summary>
         public GameObject costNotice;
-
-        /// <summary>
-        /// プレイヤー通知UIオブジェクトの名前を参照する変数
-        /// </summary>
-        private string noticeTextUI_Name = "NoticeTextUI";
 
         /// <summary>
         /// 使用コストが足りないときに呼ばれるIDの変数（中山が編集）
@@ -48,8 +43,6 @@ namespace ForestDraw.Player.Combat
 
         private void Start()
         {
-            noticeTextUI = GameObject.Find(noticeTextUI_Name).GetComponent<NoticeTextUI>();// シーン内からプレイヤー通知UIを探して取得
-
             currentCost = 0;
             recoverInterval = baseRecoverInterval;
 

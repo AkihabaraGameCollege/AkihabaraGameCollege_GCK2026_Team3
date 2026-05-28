@@ -1,5 +1,7 @@
+using ForestDraw.Enemy.Components;
 using ForestDraw.Enemy.Data;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ForestDraw.Enemy.Spawner
@@ -47,18 +49,30 @@ namespace ForestDraw.Enemy.Spawner
         }
 
         /// <summary>
-        /// 1Wave分の敵を生成する
+        /// 1Wave分の敵を生成する関数
         /// </summary>
         private void Spawn()
         {
-            if (!EnemyManager.instance.CanGenerate) return;
-            for (int i = 0; i < enemiesPerWave; i++)
+            // もしエネミーがスポーン不可能の場合
+            if (!EnemyManager.instance.CanGenerate)
             {
-                Vector3 spawnPosition = GetSpawnPosition();
-                GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-                EnemyManager.instance.AddEnemy(enemy, enemyData.enemyName);
+                return;
+            }
 
-                EnemyInitialize(enemy);
+            // Wave分ループ
+            for (int _i = 0; _i < enemiesPerWave; _i++)
+            {
+                // ---スポーン前の準備---
+                // スポーン場所を取得した上で参照する変数を定義
+                Vector3 _spawnPosition = GetSpawnPosition();
+                // エネミーのプレハブを生成した上で参照する変数を定義
+                GameObject _enemy = Instantiate(enemyPrefab, _spawnPosition, Quaternion.identity);
+
+                // エネミーを追加
+                EnemyManager.instance.AddEnemy(_enemy, enemyData.enemyName);
+
+                // エネミーのコンポーネントを初期化
+                EnemyInitialize(_enemy);
             }
         }
 
