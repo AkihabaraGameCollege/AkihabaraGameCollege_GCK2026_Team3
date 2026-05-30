@@ -7,22 +7,37 @@ namespace ForestDraw
     /// 特殊カード関連UIの管理を行うクラス     
     /// </summary>     
     public class Special_CardUI_Manager : MonoBehaviour
-   {
+    {
         /// <summary>
         /// ゲージの画像を参照する変数
         /// </summary>
-        public Image Gage_Image;
+        [SerializeField]
+        private Image _gage_Image;
 
-        /// <summary>         
-        /// UIを表示する関数         
-        /// </summary>         
-        public void Show()
+        /// <summary>
+        /// ゲージ系のUIオブジェクトを参照する変数
+        /// </summary>
+        [SerializeField]
+        private GameObject _gageUI;
+
+        /// <summary>
+        /// 初期設定を行う関数
+        /// </summary>
+        private void Awake()
         {
-            // 子オブジェクトをすべてアクティブ化
-            foreach (Transform _child in transform)
-            {
-                _child.gameObject.SetActive(true);
-            }
+            // 最初はUIを非表示
+            Hide();
+            // ゲージ系のUIを表示
+            TargetShow(_gageUI);
+        }
+
+        /// <summary>
+        /// 指定したUIの表示を行う関数
+        /// </summary>
+        /// <param name="_target"></param>
+        public void TargetShow(GameObject _target)
+        {
+            _target.SetActive(true);// 指定したUIをアクティブ化
         }
 
         /// <summary>         
@@ -45,7 +60,7 @@ namespace ForestDraw
         public void UpdateGage_Image(float _currentGage, float _maxGage)
         {
             // ゲージの画像の状態を変更する
-            Gage_Image.fillAmount = (float)_currentGage / _maxGage;
+            _gage_Image.fillAmount = (float)_currentGage / _maxGage;
         }
     }
 }
