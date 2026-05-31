@@ -12,11 +12,25 @@ namespace ForestDraw
         /// <summary>
         /// 敵情報管理クラスを参照する変数
         /// </summary>
-        public EnemyManager EnemyManagerClass;
+        [SerializeField]
+        private EnemyManager _enemyManager;
         /// <summary>
         /// 特殊カードのUI管理クラスを参照する変数
         /// </summary>
-        public Special_CardUI_Manager Special_CardUI_ManagerClass;
+        [SerializeField]
+        private Special_CardUI_Manager _special_CardUI_Manager;
+
+        /// <summary>
+        /// 取得カード選択のUIオブジェクトを参照する変数
+        /// </summary>
+        [SerializeField]
+        private GameObject _cardSelectUI;
+
+        /// <summary>
+        /// 一度に付与するポイントの量を参照する変数
+        /// </summary>
+        [SerializeField]
+        private float _pointNumber = 0.05f;
 
         /// <summary>
         /// 特殊カードを使用できるまでに必要なポイントを参照する変数
@@ -26,10 +40,6 @@ namespace ForestDraw
         /// 現在のポイントを参照する変数
         /// </summary>
         private float _currentPoint = 0;
-        /// <summary>
-        /// 一度に付与するポイントの量を参照する変数
-        /// </summary>
-        public float PointNumber = 0.05f;
 
         /// <summary>
         /// 初期設定を行う関数
@@ -37,7 +47,7 @@ namespace ForestDraw
         private void Start()
         {
             // EnemyManagerの「敵が死んだイベント」に、GetPoint関数を登録する
-            EnemyManagerClass.OnEnemyDie += GetPoint;
+            _enemyManager.OnEnemyDie += GetPoint;
         }
 
         /// <summary>
@@ -48,15 +58,19 @@ namespace ForestDraw
             // もし現在のポイントが必要ポイント以上になった場合
             if (_currentPoint >= _pointMaxNumber)
             {
-                Debug.Log("Special_Card!!");
+                // 時を止める
+                Time.timeScale = 0f;
+                // カード選択のUIを表示
+                _special_CardUI_Manager.TargetShow(_cardSelectUI);
+
                 return;
             }
 
             // ポイントを付与
-            _currentPoint += PointNumber;
+            _currentPoint += _pointNumber;
 
             // UIを更新する
-            Special_CardUI_ManagerClass.UpdateGage_Image(_currentPoint, _pointMaxNumber);
+            _special_CardUI_Manager.UpdateGage_Image(_currentPoint, _pointMaxNumber);
         }
 
         /// <summary>
@@ -65,10 +79,10 @@ namespace ForestDraw
         private void OnDestroy()
         {
             // もしエネミー管理クラス参照変数の中身がある場合
-            if (EnemyManagerClass != null)
+            if (_enemyManager != null)
             {
                 // このオブジェクトが消えるときは、イベントの登録を解除する
-                EnemyManagerClass.OnEnemyDie -= GetPoint;
+                _enemyManager.OnEnemyDie -= GetPoint;
             }
         }
     }
