@@ -1,6 +1,6 @@
 using ForestDraw.Enemy;
-using ForestDraw.Enemy.Components;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ForestDraw
 {
@@ -27,6 +27,12 @@ namespace ForestDraw
         private GameObject _cardSelectUI;
 
         /// <summary>
+        /// 特殊カード追加ボタンのリストを参照する変数
+        /// </summary>
+        [SerializeField]
+        private Button[] _addSpecial_Card_Button;
+
+        /// <summary>
         /// 一度に付与するポイントの量を参照する変数
         /// </summary>
         [SerializeField]
@@ -48,6 +54,12 @@ namespace ForestDraw
         {
             // EnemyManagerの「敵が死んだイベント」に、GetPoint関数を登録する
             _enemyManager.OnEnemyDie += GetPoint;
+
+            // ボタンに関数を登録
+            // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
+            _addSpecial_Card_Button[0].onClick.AddListener(ActiveSpecial_Card);
+            // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
+            _addSpecial_Card_Button[1].onClick.AddListener(ActiveSpecial_Card);
         }
 
         /// <summary>
@@ -84,6 +96,19 @@ namespace ForestDraw
                 // このオブジェクトが消えるときは、イベントの登録を解除する
                 _enemyManager.OnEnemyDie -= GetPoint;
             }
+        }
+
+        /// <summary>
+        /// 特殊カードの能力を発動する関数
+        /// </summary>
+        public void ActiveSpecial_Card()
+        {
+            Debug.Log("特殊カードが発動されました");
+
+            // 時を動かす
+            Time.timeScale = 1f;
+            // カード選択のUIを非表示
+            _special_CardUI_Manager.TargetHide(_cardSelectUI);
         }
     }
 }

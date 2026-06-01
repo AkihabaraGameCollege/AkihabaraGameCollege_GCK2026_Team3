@@ -37,7 +37,18 @@ namespace ForestDraw
         /// <param name="_target"></param>
         public void TargetShow(GameObject _target)
         {
-            _target.SetActive(true);// 指定したUIをアクティブ化
+            // 指定したUIをアクティブ化
+            _target.SetActive(true);
+        }
+
+        /// <summary>
+        /// 指定したUIの非表示を行う関数
+        /// </summary>
+        /// <param name="_target"></param>
+        public void TargetHide(GameObject _target)
+        {
+            // 指定したUIを非アクティブ化
+            _target.SetActive(false);
         }
 
         /// <summary>         
