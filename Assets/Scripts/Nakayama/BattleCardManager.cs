@@ -48,7 +48,7 @@ namespace ForestDraw
         /// <summary>
         /// プレイヤーのHPの管理クラスを指定する変数
         /// </summary>
-        private PlayerHealth playerHealth = null;
+        private TreeHealth playerHealth = null;
         /// <summary>
         /// 手持ちのカード管理クラスのインスタンスを参照する変数
         /// </summary>
@@ -110,7 +110,7 @@ namespace ForestDraw
             instance = this;
 
             playerCost = GetComponent<PlayerCost>();
-            playerHealth = player.GetComponent<PlayerHealth>();
+            playerHealth = player.GetComponent<TreeHealth>();
         }
 
         private void Start()
@@ -223,10 +223,10 @@ namespace ForestDraw
         {
             var context = new CardUseContext
             {
-                playerCost = playerCost,
-                playerHealth = playerHealth,
-                cardManager = this,
-                target = player.transform.position
+                PlayerCostClass = playerCost,
+                TreeHealthClass = playerHealth,
+                BattleCardManagerClass = this,
+                ExecuteCardTargetTransform = player.transform.position
             };
 
             if (IsUseingCard) return false;

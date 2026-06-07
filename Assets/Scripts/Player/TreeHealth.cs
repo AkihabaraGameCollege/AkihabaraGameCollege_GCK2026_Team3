@@ -8,7 +8,7 @@ using ForestDraw;
 /// プレイヤーのHP管理クラス
 /// ダメージ処理・回復処理・ダメージ軽減バフを管理する
 /// </summary>
-public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
+public class TreeHealth : MonoBehaviour, IDamageable, IHealable
 {
     /// <summary>
     /// ダメージアニメーション用のアニメーター

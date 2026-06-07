@@ -4,16 +4,30 @@ namespace ForestDraw.Player.Combat
 {
     /// <summary>
     /// カード使用時の処理を管理するクラス
-    /// カードデータを受け取り、種類に応じた処理を実行する
     /// </summary>
     public static class CardUseExecutor
     {
+        /// <summary>
+        /// カード使用時のコンテキスト情報をまとめるクラス
+        /// </summary>
         public class CardUseContext
         {
-            public PlayerCost playerCost;
-            public PlayerHealth playerHealth;
-            public BattleCardManager cardManager;
-            public Vector3 target;
+            /// <summary>
+            /// プレイヤーのコスト管理クラスを参照する変数
+            /// </summary>
+            public PlayerCost PlayerCostClass;
+            /// <summary>
+            /// プレイヤーの体力管理クラスを参照する変数
+            /// </summary>
+            public TreeHealth TreeHealthClass;
+            /// <summary>
+            /// 戦闘カードマネージャーを参照する変数
+            /// </summary>
+            public BattleCardManager BattleCardManagerClass;
+            /// <summary>
+            /// カード使用対象の位置を示す変数
+            /// </summary>
+            public Vector3 ExecuteCardTargetTransform;
         }
 
         /// <summary>
@@ -21,12 +35,12 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         public static bool Execute(CardData card, CardUseContext context)
         {
-            if (context.playerHealth == null)
+            if (context.TreeHealthClass == null)
             {
-                // シーン内から PlayerHealth コンポーネントを探して割り当てる
-                context.playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+                // シーン内から TreeHealth コンポーネントを探して割り当てる
+                context.TreeHealthClass = GameObject.FindObjectOfType<TreeHealth>();
 
-                if (context.playerHealth == null)
+                if (context.TreeHealthClass == null)
                 {
                     Debug.LogError("PlayerHealthが見つかりません！シーンに配置されていますか？");
                     return false;
@@ -34,25 +48,25 @@ namespace ForestDraw.Player.Combat
             }
 
             // コスト不足なら失敗
-            if (!context.playerCost.UseCost(card.cost)) return false;
+            if (!context.PlayerCostClass.UseCost(card.cost)) return false;
 
             AudioSetting.Instance.CardSE(card.usedSE);
             switch (card.cardType)
             {
                 case CardType.Attack:
-                    ExecuteAttack(card, context.target);
+                    ExecuteAttack(card, context.ExecuteCardTargetTransform);
                     break;
 
                 case CardType.Recovery:
-                    ExecuteRecovery(card, context.playerHealth, context.playerCost);
+                    ExecuteRecovery(card, context.TreeHealthClass, context.PlayerCostClass);
                     break;
 
                 case CardType.Support:
-                    ExecuteSupport(card, context.playerHealth);
+                    ExecuteSupport(card, context.TreeHealthClass);
                     break;
 
                 case CardType.Utility:
-                    ExecuteUtility(card, context.cardManager);
+                    ExecuteUtility(card, context.BattleCardManagerClass);
                     break;
             }
 
@@ -96,7 +110,7 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         private static void ExecuteRecovery(
             CardData card,
-            PlayerHealth playerHealth,
+            TreeHealth playerHealth,
             PlayerCost playerCost)
         {
             var recover = card.recoverParams;
@@ -128,7 +142,7 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         private static void ExecuteSupport(
             CardData card,
-            PlayerHealth playerHealth)
+            TreeHealth playerHealth)
         {
             var support = card.supportParams;
 
