@@ -19,12 +19,26 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private GameObject _gageUI;
+        /// <summary>
+        /// 取得カード選択のUIオブジェクトを参照する変数
+        /// </summary>
+        [SerializeField]
+        public GameObject CardSelectUI;
+
+        /// <summary>
+        /// 特殊カード追加ボタンのリストを参照する変数
+        /// </summary>
+        [SerializeField]
+        public Button[] AddSpecial_Card_Button;
 
         /// <summary>
         /// 初期設定を行う関数
         /// </summary>
-        private void Awake()
+        private void Start()
         {
+            // ボタンのスプライトの設定を行う関数を呼び出す
+            CardButtonSpriteSetup();
+
             // 最初はUIを非表示
             Hide();
             // ゲージ系のUIを表示
@@ -72,6 +86,16 @@ namespace ForestDraw
         {
             // ゲージの画像の状態を変更する
             _gage_Image.fillAmount = (float)_currentGage / _maxGage;
+        }
+
+        /// <summary>
+        /// 特殊カード発動ボタンの設定を行う関数
+        /// </summary>
+        private void CardButtonSpriteSetup()
+        {
+            // --- カードボタンに登録したカードデータのカード画像を貼り付ける ---
+            AddSpecial_Card_Button[0].image.sprite = Special_CardManager.Instance.UsedCardData.cardDetail_Image;
+            AddSpecial_Card_Button[1].image.sprite = Special_CardManager.Instance.UsedCardData.cardDetail_Image;
         }
     }
 }

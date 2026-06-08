@@ -1,7 +1,6 @@
 using ForestDraw.Enemy;
 using ForestDraw.Player.Combat;
 using UnityEngine;
-using UnityEngine.UI;
 using static ForestDraw.Player.Combat.CardUseExecutor;
 
 namespace ForestDraw
@@ -36,6 +35,13 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private BattleCardManager _battleCardManager;
+
+        /// <summary>
+        /// 使用するカードのデータを参照する変数
+        /// </summary>
+        [SerializeField]
+        public CardData UsedCardData;
+
         /// <summary>
         /// カード使用対象の位置を示す変数
         /// </summary>
@@ -43,29 +49,16 @@ namespace ForestDraw
         private Vector3 _executeCardTargetTransform;
 
         /// <summary>
-        /// 取得カード選択のUIオブジェクトを参照する変数
-        /// </summary>
-        [SerializeField]
-        private GameObject _cardSelectUI;
-
-        /// <summary>
-        /// 特殊カード追加ボタンのリストを参照する変数
-        /// </summary>
-        [SerializeField]
-        private Button[] _addSpecial_Card_Button;
-
-        /// <summary>
-        /// 使用するカードのデータを参照する変数
-        /// </summary>
-        [SerializeField]
-        private CardData _usedCardData;
-
-        /// <summary>
         /// 一度に付与するポイントの量を参照する変数
         /// </summary>
         [SerializeField]
         private float _pointNumber = 0.05f;
 
+        /// <summary>
+        /// 特殊カードマネージャーのシングルトンインスタンスを参照する変数
+        /// </summary>
+        public static Special_CardManager Instance { get; private set; }
+        
         /// <summary>
         /// 特殊カードを使用できるまでに必要なポイントを参照する変数
         /// </summary>
@@ -76,18 +69,33 @@ namespace ForestDraw
         private float _currentPoint = 0;
 
         /// <summary>
+        /// 時間を停止するかどうかのフラグを参照する変数
+        /// </summary>
+        private bool _isStopTime = false;
+
+        /// <summary>
         /// 初期設定を行う関数
         /// </summary>
-        private void Start()
+        private void Awake()
         {
-            // EnemyManagerの「敵が死んだイベント」に、GetPoint関数を登録する
-            _enemyManager.OnEnemyDie += GetPoint;
+            // もしシングルトンインスタンスがまだ存在しない場合
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             // --- ボタンに関数を登録 ---
             // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
-            _addSpecial_Card_Button[0].onClick.AddListener(ActiveSpecial_Card);
+            _special_CardUI_Manager.AddSpecial_Card_Button[0].onClick.AddListener(ActiveSpecial_Card);
             // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
-            _addSpecial_Card_Button[1].onClick.AddListener(ActiveSpecial_Card);
+            _special_CardUI_Manager.AddSpecial_Card_Button[1].onClick.AddListener(ActiveSpecial_Card);
+
+            // EnemyManagerの「敵が死んだイベント」に、GetPoint関数を登録する
+            _enemyManager.OnEnemyDie += GetPoint;
         }
 
         /// <summary>
@@ -98,10 +106,11 @@ namespace ForestDraw
             // もし現在のポイントが必要ポイント以上になった場合
             if (_currentPoint >= _pointMaxNumber)
             {
-                // 時を止める
-                Time.timeScale = 0f;
+                // 時間停止のフラグをオン
+                _isStopTime = true;
+
                 // カード選択のUIを表示
-                _special_CardUI_Manager.TargetShow(_cardSelectUI);
+                _special_CardUI_Manager.TargetShow(_special_CardUI_Manager.CardSelectUI);
 
                 return;
             }
@@ -131,10 +140,14 @@ namespace ForestDraw
         /// </summary>
         public void ActiveSpecial_Card()
         {
+            // --- 止まっていた時を動かす ---
+            // 時間停止のフラグをオフ
+            _isStopTime = false;
             // 時を動かす
             Time.timeScale = 1f;
+            
             // カード選択のUIを非表示
-            _special_CardUI_Manager.TargetHide(_cardSelectUI);
+            _special_CardUI_Manager.TargetHide(_special_CardUI_Manager.CardSelectUI);
 
             // --- 特殊カードの能力を発動する ---
             // カード選択のUIから、使用するカードの情報を取得すし参照する変数を定義
@@ -146,7 +159,20 @@ namespace ForestDraw
                 ExecuteCardTargetTransform = _executeCardTargetTransform
             };
             // カード使用の実行クラスの関数を呼び出し、カードの能力を発動する
-            CardUseExecutor.Execute(_usedCardData, context);
+            CardUseExecutor.Execute(UsedCardData, context);
+        }
+
+        /// <summary>
+        /// 毎フレーム処理を行う関数
+        /// </summary>
+        private void Update()
+        {
+            // もし時間停止のフラグが音の場合
+            if (_isStopTime)
+            {
+                // 時を止める
+                Time.timeScale = 0f;
+            }
         }
     }
 }

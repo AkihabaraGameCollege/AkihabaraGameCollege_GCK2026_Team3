@@ -7024,6 +7024,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: CardSelectUI
+      value: 
+      objectReference: {fileID: 1927552418}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: AddSpecial_Card_Button.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: _addSpecial_Card_Button.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: 'AddSpecial_Card_Button.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1315318676}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: 'AddSpecial_Card_Button.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1056240017}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: '_addSpecial_Card_Button.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1315318676}
+    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
+      propertyPath: '_addSpecial_Card_Button.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1056240017}
     - target: {fileID: 5699479791539920581, guid: 4ae669487957c9b41be13983148345d4, type: 3}
       propertyPath: m_Name
       value: Special_CardUI
@@ -7194,6 +7222,14 @@ PrefabInstance:
       propertyPath: _playerCost
       value: 
       objectReference: {fileID: 243141235}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: _treeHealth
+      value: 
+      objectReference: {fileID: 1079281328}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: UsedCardData
+      value: 
+      objectReference: {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _cardSelectUI
       value: 
