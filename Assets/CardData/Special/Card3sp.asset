@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
+  m_Name: Card3sp
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
+  cardId: card_06s
+  cardName: "\u518D\u5E30"
+  cardType: 1
+  effectType: 4
+  description: "\u30B3\u30B9\u30C8\u30921\u56DE\u5FA9"
+  cost: 0
+  useDuration: 1
+  cardImage: {fileID: 588311512, guid: ccb62aaf857c95b40b9a283f52828dd7, type: 3}
+  cardDetail_Image: {fileID: 141904740, guid: 4dc9afbef9095c24e82a1d0c9abf43ab, type: 3}
+  usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
+  buffDuration: 0
+  attackParams:
+    damage: 200
+    lineLength: 100
+    lineWidth: 10
+    areaRadius: 0
+    areaRange: 0
+    attackEffect: {fileID: 0}
+  recoverParams:
+    healAmount: 0
+    costRecoverAmount: 1
+    intervalReduction: 0
+  supportParams:
+    damageReduction: 0
+    attackMultiplier: 0
+  utilityParams:
+    drawCount: 0

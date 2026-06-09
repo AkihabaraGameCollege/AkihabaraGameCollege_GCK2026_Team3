@@ -7229,7 +7229,7 @@ PrefabInstance:
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: UsedCardData
       value: 
-      objectReference: {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
+      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _cardSelectUI
       value: 
@@ -7254,6 +7254,22 @@ PrefabInstance:
       propertyPath: _special_CardUI_Manager
       value: 
       objectReference: {fileID: 478123618}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: _allSpecialCardList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: '_allSpecialCardList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 37399c12d8211bc47824280d0b4f839c, type: 2}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: '_allSpecialCardList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
+    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
+      propertyPath: '_allSpecialCardList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9fafcec0c182e94448875172e67423c3, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _addSpecial_Card_Button.Array.size
       value: 2

@@ -1,7 +1,9 @@
+using UnityEngine;
+using UnityEngine.UI;
 using ForestDraw.Enemy;
 using ForestDraw.Player.Combat;
-using UnityEngine;
 using static ForestDraw.Player.Combat.CardUseExecutor;
+using System.Collections.Generic;
 
 namespace ForestDraw
 {
@@ -43,6 +45,12 @@ namespace ForestDraw
         public CardData UsedCardData;
 
         /// <summary>
+        /// 全ての特殊カードのデータを登録しておくマスターリスト
+        /// </summary>
+        [SerializeField]
+        private List<CardData> _allSpecialCardList = new List<CardData>();
+
+        /// <summary>
         /// カード使用対象の位置を示す変数
         /// </summary>
         [SerializeField]
@@ -58,7 +66,7 @@ namespace ForestDraw
         /// 特殊カードマネージャーのシングルトンインスタンスを参照する変数
         /// </summary>
         public static Special_CardManager Instance { get; private set; }
-        
+
         /// <summary>
         /// 特殊カードを使用できるまでに必要なポイントを参照する変数
         /// </summary>
@@ -88,14 +96,21 @@ namespace ForestDraw
                 Destroy(gameObject);
             }
 
-            // --- ボタンに関数を登録 ---
-            // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
-            _special_CardUI_Manager.AddSpecial_Card_Button[0].onClick.AddListener(ActiveSpecial_Card);
-            // 特殊カード発動ボタンに特殊カードの能力を発動する関数を登録
-            _special_CardUI_Manager.AddSpecial_Card_Button[1].onClick.AddListener(ActiveSpecial_Card);
-
             // EnemyManagerの「敵が死んだイベント」に、GetPoint関数を登録する
             _enemyManager.OnEnemyDie += GetPoint;
+        }
+
+        /// <summary>
+        /// 毎フレーム処理を行う関数
+        /// </summary>
+        private void Update()
+        {
+            // もし時間停止のフラグが音の場合
+            if (_isStopTime)
+            {
+                // 時を止める（ポーズ操作時のバグ対策）
+                Time.timeScale = 0f;
+            }
         }
 
         /// <summary>
@@ -108,6 +123,17 @@ namespace ForestDraw
             {
                 // 時間停止のフラグをオン
                 _isStopTime = true;
+
+                // マスターリストからランダムに2枚のカードを重複なしで抽選する
+                List<CardData> drawnCards = GetRandomCards(2);
+
+                // もしマスターリストにカードが2枚以上登録されている場合
+                if (drawnCards.Count >= 2)
+                {
+                    // --- 抽選されたカードをUIのボタンにセットする ---
+                    SetupCardButton(0, drawnCards[0]);
+                    SetupCardButton(1, drawnCards[1]);
+                }
 
                 // カード選択のUIを表示
                 _special_CardUI_Manager.TargetShow(_special_CardUI_Manager.CardSelectUI);
@@ -138,16 +164,19 @@ namespace ForestDraw
         /// <summary>
         /// 特殊カードの能力を発動する関数
         /// </summary>
-        public void ActiveSpecial_Card()
+        public void ActiveSpecial_Card(CardData selectedCard)
         {
             // --- 止まっていた時を動かす ---
             // 時間停止のフラグをオフ
             _isStopTime = false;
             // 時を動かす
             Time.timeScale = 1f;
-            
+
             // カード選択のUIを非表示
             _special_CardUI_Manager.TargetHide(_special_CardUI_Manager.CardSelectUI);
+
+            // インスペクター確認用に代入
+            UsedCardData = selectedCard;
 
             // --- 特殊カードの能力を発動する ---
             // カード選択のUIから、使用するカードの情報を取得すし参照する変数を定義
@@ -159,20 +188,63 @@ namespace ForestDraw
                 ExecuteCardTargetTransform = _executeCardTargetTransform
             };
             // カード使用の実行クラスの関数を呼び出し、カードの能力を発動する
-            CardUseExecutor.Execute(UsedCardData, context);
+            CardUseExecutor.Execute(selectedCard, context);
         }
 
         /// <summary>
-        /// 毎フレーム処理を行う関数
+        /// マスターリストから指定した枚数だけランダムに重複なしでカードを取得する関数
         /// </summary>
-        private void Update()
+        private List<CardData> GetRandomCards(int count)
         {
-            // もし時間停止のフラグが音の場合
-            if (_isStopTime)
+            // --- 元のリストを崩さないようにコピーを作成 ---
+            List<CardData> pool = new List<CardData>(_allSpecialCardList);
+            List<CardData> result = new List<CardData>();
+
+            // 指定した枚数分サーチ
+            for (int i = 0; i < count; i++)
             {
-                // 時を止める
-                Time.timeScale = 0f;
+                // もしプールが空になった場合
+                if (pool.Count == 0)
+                {
+                    break;
+                }
+
+                // --- カードをランダムに抽選 ---
+                // プール内の枚数分をランダムに抽選し参照する変数を定義
+                int random_Index = Random.Range(0, pool.Count);
+                // ランダムに選んだカードを結果に追加
+                result.Add(pool[random_Index]);
+                // 選んだカードをプールから消す（重複防止）
+                pool.RemoveAt(random_Index);
             }
+
+            // 結果を返す
+            return result;
+        }
+
+        /// <summary>
+        /// 指定したボタンの画像と、クリック時の機能をセットする関数
+        /// </summary>
+        private void SetupCardButton(int button_Index, CardData cardData)
+        {
+            // 特殊カード選択ボタンを参照する変数を定義
+            Button button = _special_CardUI_Manager.AddSpecial_Card_Button[button_Index];
+
+            // --- 画像の更新 ---
+            // CardDataの中にある画像変数の名前に合わせて変更し参照する変数を定義
+            Image button_Image = button.GetComponent<Image>();
+            // もしボタンの画像があり、カードデータの画像もある場合
+            if (button_Image != null && cardData.cardDetail_Image != null)
+            {
+                // 画像をそのカードの画像に変更
+                button_Image.sprite = cardData.cardDetail_Image;
+            }
+
+            // --- クリックイベントの登録 ---
+            // 以前の登録をリセット
+            button.onClick.RemoveAllListeners();
+            // 選ばれたカードを渡すように登録
+            button.onClick.AddListener(() => ActiveSpecial_Card(cardData));
         }
     }
 }
