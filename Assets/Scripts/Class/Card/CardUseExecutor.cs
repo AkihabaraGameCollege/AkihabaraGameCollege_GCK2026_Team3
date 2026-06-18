@@ -38,7 +38,7 @@ namespace ForestDraw.Player.Combat
             if (context.TreeHealthClass == null)
             {
                 // シーン内から TreeHealth コンポーネントを探して割り当てる
-                context.TreeHealthClass = GameObject.FindObjectOfType<TreeHealth>();
+                context.TreeHealthClass = GameObject.FindAnyObjectByType<TreeHealth>();
 
                 if (context.TreeHealthClass == null)
                 {
