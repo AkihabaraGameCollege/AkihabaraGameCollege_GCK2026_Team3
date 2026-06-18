@@ -3401,6 +3401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Enemy.EnemyManager
   maxEnemyCount: 100
+  DeadEnemyCount: 0
 --- !u!1001 &918380666
 PrefabInstance:
   m_ObjectHideFlags: 0
