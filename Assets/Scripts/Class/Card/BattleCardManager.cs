@@ -107,7 +107,14 @@ namespace ForestDraw
 
         private void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+               instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             playerCost = GetComponent<PlayerCost>();
             playerHealth = player.GetComponent<TreeHealth>();

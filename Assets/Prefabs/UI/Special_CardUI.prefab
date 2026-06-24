@@ -101,7 +101,7 @@ RectTransform:
   m_GameObject: {fileID: 3265771280624774853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.98, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 822280806384362569}
@@ -417,6 +417,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.Special_CardUI_Manager
   _gage_Image: {fileID: 1390162261245108686}
   _gageUI: {fileID: 8456886819490585539}
+  CardSelectUI: {fileID: 3265771280624774853}
+  AddSpecial_Card_Button:
+  - {fileID: 8917501311526869595}
+  - {fileID: 5855815526227013724}
 --- !u!1 &7609780668238893934
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1418629115, guid: 1798a0609344c364087d4886ed86fa9d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

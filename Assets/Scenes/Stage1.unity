@@ -3563,10 +3563,10 @@ RectTransform:
   - {fileID: 2120426514}
   - {fileID: 873562722}
   - {fileID: 444047418}
-  - {fileID: 478123617}
   - {fileID: 278081951}
   - {fileID: 1173550923}
   - {fileID: 622225695}
+  - {fileID: 478123617}
   - {fileID: 1599552716}
   - {fileID: 983857142}
   - {fileID: 395833328}
@@ -4156,17 +4156,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046836156}
   m_CullTransparentMesh: 1
---- !u!114 &1056240017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5855815526227013724, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-  m_PrefabInstance: {fileID: 4915614531464039103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1079281322
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,10 +4253,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1994405626}
     - target: {fileID: 1846654620816297303, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
-      propertyPath: animatorName
-      value: CostNotice
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846654620816297303, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: noticeTextUI
       value: 
       objectReference: {fileID: 622225696}
@@ -4279,14 +4264,6 @@ PrefabInstance:
       propertyPath: handArea
       value: 
       objectReference: {fileID: 844520532}
-    - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
-      propertyPath: 'allCardMasterList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
-    - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
-      propertyPath: 'allCardMasterList.Array.data[9]'
-      value: 
-      objectReference: {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
     - target: {fileID: 4334362933986609354, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.4
@@ -4335,10 +4312,6 @@ PrefabInstance:
       propertyPath: pauseManager
       value: 
       objectReference: {fileID: 1930167626}
-    - target: {fileID: 5970745555005975266, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
-      propertyPath: mainCameraName
-      value: MainCamera
-      objectReference: {fileID: 0}
     - target: {fileID: 7138406432269052659, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: m_Name
       value: PlayerRootStage
@@ -4608,17 +4581,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf3629393289b174fabe717ad672d281, type: 3}
---- !u!114 &1315318676 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8917501311526869595, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-  m_PrefabInstance: {fileID: 4915614531464039103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1344467358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5814,11 +5776,6 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3358956517310796659, guid: f1895e996b2b25647a752476413e8046, type: 3}
   m_PrefabInstance: {fileID: 3201715650315487614}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1927552418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3265771280624774853, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-  m_PrefabInstance: {fileID: 4915614531464039103}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1930167624
 PrefabInstance:
@@ -7024,34 +6981,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: CardSelectUI
-      value: 
-      objectReference: {fileID: 1927552418}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: AddSpecial_Card_Button.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: _addSpecial_Card_Button.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: 'AddSpecial_Card_Button.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1315318676}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: 'AddSpecial_Card_Button.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1056240017}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1315318676}
-    - target: {fileID: 3900306171671883003, guid: 4ae669487957c9b41be13983148345d4, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1056240017}
     - target: {fileID: 5699479791539920581, guid: 4ae669487957c9b41be13983148345d4, type: 3}
       propertyPath: m_Name
       value: Special_CardUI
@@ -7227,25 +7156,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1079281328}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: UsedCardData
-      value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _cardSelectUI
-      value: 
-      objectReference: {fileID: 1927552418}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _enemyManager
       value: 
       objectReference: {fileID: 469681426}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _playerHealth
-      value: 
-      objectReference: {fileID: 1079281328}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _usedCardData
-      value: 
-      objectReference: {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _battleCardManager
       value: 
@@ -7254,34 +7167,6 @@ PrefabInstance:
       propertyPath: _special_CardUI_Manager
       value: 
       objectReference: {fileID: 478123618}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _allSpecialCardList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 37399c12d8211bc47824280d0b4f839c, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 9fafcec0c182e94448875172e67423c3, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _addSpecial_Card_Button.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1315318676}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1056240017}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7572,10 +7457,6 @@ PrefabInstance:
     - target: {fileID: 8267679647950590036, guid: 4de075e41ebdfd840b7b18a449ebe2e0, type: 3}
       propertyPath: m_Name
       value: NoticeTextUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267679647950590036, guid: 4de075e41ebdfd840b7b18a449ebe2e0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

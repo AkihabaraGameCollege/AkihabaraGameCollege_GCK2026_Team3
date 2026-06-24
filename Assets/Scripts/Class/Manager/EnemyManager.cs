@@ -11,7 +11,7 @@ namespace ForestDraw.Enemy
         /// </summary>
         public Action OnEnemyDie;
 
-        public static EnemyManager instance;
+        public static EnemyManager Instance { get; private set; }
 
         [SerializeField] int maxEnemyCount = 150;
 
@@ -26,9 +26,9 @@ namespace ForestDraw.Enemy
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
             }
             else
             {

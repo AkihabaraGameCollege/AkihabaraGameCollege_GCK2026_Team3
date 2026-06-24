@@ -73,7 +73,14 @@ namespace ForestDraw
         /// </summary>
         void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             // ミキサーが指定されていれば、SE/BGSを bgms グループへ割り当てる（存在する場合）
             if (audioMixer != null)

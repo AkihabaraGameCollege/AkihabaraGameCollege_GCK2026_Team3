@@ -11,27 +11,18 @@ namespace ForestDraw
         /// <summary>
         /// アニメーターコンポーネントを参照する変数
         /// </summary>
-        private Animator animator = null;
-
-        /// <summary>
-        /// 通知UIのイメージを参照する変数
-        /// </summary>
-        private Image notice_Image = null;
+        private Animator animator;
 
         /// <summary>
         /// 通知UIのスプライトを参照するリスト変数
         /// </summary>
-        public Sprite[] notice_Sprite = null;
+        public Sprite[] notice_Sprite;
 
         /// <summary>
         /// 特定の敵出現するときに呼ばれるIDを参照する変数
         /// </summary>
         private static readonly int enemyEncountTrigger = Animator.StringToHash("EnemyEncount");
 
-        /// <summary>
-        /// 敵出現通知UIのオブジェクト名を参照する変数
-        /// </summary>
-        private string noticeName = "EnemyEncount";
         /// <summary>
         /// ゴーレムのエネミー名を参照する変数
         /// </summary>
@@ -70,7 +61,7 @@ namespace ForestDraw
         /// <summary>
         /// 初期設定を行う関数
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             // ここで Instance に自分自身 (this) を入れる
             if (Instance == null)
@@ -83,8 +74,7 @@ namespace ForestDraw
             }
 
             // コンポーネントの登録
-            animator = GetComponent<Animator>();// アニメーターを取得
-            notice_Image = GameObject.Find(noticeName).GetComponent<Image>();// シーン内から通知UIを探して取得
+            animator = GetComponent<Animator>();
         }
 
         /// <summary>
@@ -111,7 +101,7 @@ namespace ForestDraw
                 return;// どの敵の名前でもないのなら通知しない
             }
 
-            notice_Image.sprite = notice_Sprite[sprite_Index];// 通知UIのスプライトをステージに合わせて変更
+            NoticeTextUI.Instance.Notice_Image.sprite = notice_Sprite[sprite_Index];// 通知UIのスプライトをステージに合わせて変更
             animator.SetTrigger(enemyEncountTrigger);// 通知するトリガーをセット
         }
     }

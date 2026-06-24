@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.AudioSetting
+  audioMixer: {fileID: 0}
   bgmAudioSource: {fileID: 8569326688928269671}
   seAudioSource: {fileID: 6077341416951376988}
   bgsAudioSource: {fileID: 4236310234801907059}

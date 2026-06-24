@@ -271,6 +271,8 @@ namespace ForestDraw
         /// </summary>
         private void Start()
         {
+            isStartScene = true;// 最初のシーン
+
             TransitionUI_Manager.instance.Hide();
 
             // タイトルBGMを再生
@@ -410,8 +412,8 @@ namespace ForestDraw
         /// </summary>
         private void GameExit()
         {
-            Debug.Log("ゲームを終了します。");
-            Application.Quit();
+            // ゲーム終了処理コルーチンを実行
+            StartCoroutine(ExitCoroutine());
         }
     }
 }

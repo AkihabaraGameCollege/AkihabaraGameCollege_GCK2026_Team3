@@ -80,6 +80,10 @@ namespace ForestDraw
         /// 時間を停止するかどうかのフラグを参照する変数
         /// </summary>
         private bool _isStopTime = false;
+        /// <summary>
+        /// 特殊カードを使用したかどうかのフラグを参照する変数
+        /// </summary>
+        private bool _isExecuted = false;
 
         /// <summary>
         /// 初期設定を行う関数
@@ -118,6 +122,12 @@ namespace ForestDraw
         /// </summary>
         private void GetPoint()
         {
+            // もし発動済みなら
+            if (_isExecuted)
+            {
+                return;
+            }
+
             // もし現在のポイントが必要ポイント以上になった場合
             if (_currentPoint >= _pointMaxNumber)
             {
@@ -189,6 +199,8 @@ namespace ForestDraw
             };
             // カード使用の実行クラスの関数を呼び出し、カードの能力を発動する
             CardUseExecutor.Execute(selectedCard, context);
+            // カード発動を行ったとフラグする
+            _isExecuted = true;
         }
 
         /// <summary>

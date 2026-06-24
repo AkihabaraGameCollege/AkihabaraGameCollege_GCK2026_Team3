@@ -50,7 +50,7 @@ namespace ForestDraw
         /// <summary>
         /// 初期設定を行う関数
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             // --- コンポーネントの登録 ---
             // アニメーションを登録

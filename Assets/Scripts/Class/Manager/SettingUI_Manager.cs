@@ -68,12 +68,6 @@ namespace ForestDraw
         public void SettingReturn()
         {
             StartCoroutine(SettingReturnCoroutine());// コルーチンを呼び出し
-
-            // ゲームの最初の画面にいない場合
-            if (!TitleScene.isStartScene)
-            {
-                playerController.isCanPause = true;// ポーズ操作を許可する
-            }
         }
 
         /// <summary>
@@ -86,10 +80,13 @@ namespace ForestDraw
             yield return new WaitForSecondsRealtime(displaySettingTime);// 設定画面を表示するまでの待機
             Hide();
             TargetShow(settingTransitionUI);// 演出用UIを表示する
+            yield return new WaitForSecondsRealtime(displaySettingTime);// 設定画面を表示するまでの待機
+            Hide();
 
             // ゲームの最初の画面にいない場合
             if (!TitleScene.isStartScene)
             {
+                playerController.isCanPause = true;// ポーズ操作を許可する
                 PauseUI_Manager.Instance.Show();
             }
         }
@@ -148,12 +145,6 @@ namespace ForestDraw
         public void DisplaySetting()
         {
             StartCoroutine(DisplaySettingCoroutine());// コルーチンを呼び出し
-
-            // ゲームの最初の画面にいない場合
-            if (!TitleScene.isStartScene)
-            {
-                playerController.isCanPause = false;// ポーズ操作を禁止する
-            }
         }
 
         /// <summary>         

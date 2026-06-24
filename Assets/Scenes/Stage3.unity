@@ -1396,7 +1396,7 @@ PrefabInstance:
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: UsedCardData
       value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
+      objectReference: {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _cardSelectUI
       value: 
@@ -1428,15 +1428,15 @@ PrefabInstance:
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: '_allSpecialCardList.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 37399c12d8211bc47824280d0b4f839c, type: 2}
+      objectReference: {fileID: 11400000, guid: 066dc55e46da1134e9a0c0bda07ea78b, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: '_allSpecialCardList.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
+      objectReference: {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: '_allSpecialCardList.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 9fafcec0c182e94448875172e67423c3, type: 2}
+      objectReference: {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _addSpecial_Card_Button.Array.size
       value: 2
@@ -3584,13 +3584,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1782038396}
-  - {fileID: 725647308}
   - {fileID: 950499659}
   - {fileID: 1660204433}
   - {fileID: 135657643}
   - {fileID: 475153327}
   - {fileID: 848759538}
   - {fileID: 1118732592}
+  - {fileID: 725647308}
   - {fileID: 781277191}
   - {fileID: 2039151674}
   - {fileID: 182403778}

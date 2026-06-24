@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ForestDraw
 {
@@ -8,10 +9,27 @@ namespace ForestDraw
     public class NoticeTextUI : MonoBehaviour
     {
         /// <summary>
+        /// 通知UIのイメージを参照する変数
+        /// </summary>
+        [SerializeField]
+        public Image Notice_Image;
+
+        public static NoticeTextUI Instance { get; private set; }
+
+        /// <summary>
         /// 初期設定の関数
         /// </summary>
-        private void Start()
+        private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
             Hide();
         }
 

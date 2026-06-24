@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
-  m_Name: Card3s
+  m_Name: Card5s 1
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
-  cardId: card_03s
-  cardName: "\u7121\u6211"
-  cardType: 1
-  effectType: 5
-  description: "\u30B3\u30B9\u30C8\u652F\u6255\u3063\u3066\u300110\u79D2\u9593\u30B3\u30B9\u30C8\u56DE\u5FA9\u529B\u3092\u6BCE\u79D21\u56DE\u5FA9\u306B\u3059\u308B"
-  cost: 0
+  cardId: card_05s
+  cardName: "\u5149\u306E\u76FE"
+  cardType: 2
+  effectType: 10
+  description: "\u30B3\u30B9\u30C8\u3092\u652F\u6255\u3063\u30663\u79D2\u9593\u76F8\u624B\u304B\u3089\u53D7\u3051\u308B\u30C0\u30E1\u30FC\u30B8\u309250%\u30AB\u30C3\u30C8"
+  cost: 1
   useDuration: 1
-  cardImage: {fileID: 2064010294, guid: 0ccaeba1cd2d94f4ebfa3c76944eaa89, type: 3}
-  cardDetail_Image: {fileID: 1863628191, guid: c80f2183882baa847b7a674d4830dc74, type: 3}
+  cardImage: {fileID: -143678885, guid: ad167a4ca97bbf247bc5f002df622abe, type: 3}
+  cardDetail_Image: {fileID: -1496414773, guid: 81e9f5c570a540b46b6f329fec0efe5f, type: 3}
   usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
-  buffDuration: 10
+  buffDuration: 3
   attackParams:
-    damage: 0
-    lineLength: 0
-    lineWidth: 0
+    damage: 200
+    lineLength: 100
+    lineWidth: 10
     areaRadius: 0
     areaRange: 0
     attackEffect: {fileID: 0}
   recoverParams:
-    healAmount: 500
+    healAmount: 0
     costRecoverAmount: 0
-    intervalReduction: 1
+    intervalReduction: 0
   supportParams:
-    damageReduction: 0
+    damageReduction: 50
     attackMultiplier: 0
   utilityParams:
     drawCount: 0

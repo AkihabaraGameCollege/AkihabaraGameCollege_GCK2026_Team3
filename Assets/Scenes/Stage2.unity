@@ -151,13 +151,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 29547450}
-  - {fileID: 681313617}
   - {fileID: 872708965}
   - {fileID: 658709490}
   - {fileID: 1263212493}
   - {fileID: 629689482}
   - {fileID: 877438488}
   - {fileID: 1911733933}
+  - {fileID: 681313617}
   - {fileID: 1617833571}
   - {fileID: 1461242287}
   - {fileID: 1083223401}
@@ -2154,25 +2154,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 609352035}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: UsedCardData
-      value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _cardSelectUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _enemyManager
       value: 
       objectReference: {fileID: 1896459474}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _playerHealth
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _usedCardData
-      value: 
-      objectReference: {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _battleCardManager
       value: 
@@ -2181,34 +2165,6 @@ PrefabInstance:
       propertyPath: _special_CardUI_Manager
       value: 
       objectReference: {fileID: 681313613}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _allSpecialCardList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 37399c12d8211bc47824280d0b4f839c, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 3ee4ccf3bd81b3e429d87912e64a2dfb, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_allSpecialCardList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 9fafcec0c182e94448875172e67423c3, type: 2}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: _addSpecial_Card_Button.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
-      propertyPath: '_addSpecial_Card_Button.Array.data[1]'
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

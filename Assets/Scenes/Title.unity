@@ -2708,21 +2708,21 @@ MonoBehaviour:
   deckManager: {fileID: 2106563267}
   allOwnedCards:
   - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: add9d7e4dbbe89d4cb8a899a2a959aac, type: 2}
   - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
   - {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
-  - {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
   - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
-  - {fileID: 11400000, guid: 066dc55e46da1134e9a0c0bda07ea78b, type: 2}
   - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: 0b953f7af26c08240b462f781b0c15fd, type: 2}
   - {fileID: 11400000, guid: 9e97641bec299a2499b231789240b42a, type: 2}
   - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
   - {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
-  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
   - {fileID: 11400000, guid: 5aa420060370fea4383b492a6ee1c670, type: 2}
   - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
+  - {fileID: 11400000, guid: c90f0364e2983e14c86210d3504add79, type: 2}
   - {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
+  - {fileID: 11400000, guid: e5c1cc44c37e2e545bb0ad072b285746, type: 2}
   - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
-  - {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
 --- !u!1 &1546381013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3932,21 +3932,21 @@ MonoBehaviour:
   currentDeck: []
   allCardMasterList:
   - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: add9d7e4dbbe89d4cb8a899a2a959aac, type: 2}
   - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
   - {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
-  - {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
   - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
-  - {fileID: 11400000, guid: 066dc55e46da1134e9a0c0bda07ea78b, type: 2}
   - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: 0b953f7af26c08240b462f781b0c15fd, type: 2}
   - {fileID: 11400000, guid: 9e97641bec299a2499b231789240b42a, type: 2}
   - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
   - {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
-  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
   - {fileID: 11400000, guid: 5aa420060370fea4383b492a6ee1c670, type: 2}
   - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
+  - {fileID: 11400000, guid: c90f0364e2983e14c86210d3504add79, type: 2}
   - {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
+  - {fileID: 11400000, guid: e5c1cc44c37e2e545bb0ad072b285746, type: 2}
   - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
-  - {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
 --- !u!224 &2106563268
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4867,7 +4867,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

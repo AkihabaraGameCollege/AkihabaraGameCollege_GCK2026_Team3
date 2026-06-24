@@ -263,11 +263,11 @@ namespace ForestDraw
             // もし第一ステージなら
             if (number == stageNumberStart)
             {
+                Time.timeScale = 0;
                 StartCoroutine(Tutorial_IntroCoroutine());// チュートリアル開始
             }
             else 
             { 
-                animator.SetTrigger(stage_IntroStartTrigger);// ステージイントロ開始演出
                 StartCoroutine(Stage_IntroCoroutine());// ステージイントロ開始
             }
     }
@@ -278,7 +278,6 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator Tutorial_IntroCoroutine()
         {
-            Time.timeScale = 0;
             isTutorial = true;// チュートリアル中フラグをオン
             nextButton.enabled = false;
             audioSetting.PlayBGM(tutorial_BgmIndex);
@@ -316,6 +315,7 @@ namespace ForestDraw
                 audioSetting.PlayBGS(fireSeIndex);// ステージのBGSを再生
             }
 
+            animator.SetTrigger(stage_IntroStartTrigger);// ステージイントロ開始演出
             yield return new WaitForSeconds(stage_IntroTime);// ステージイントロ演出中は待機
             transitionUI_Manager.Hide();// 演出用UIを非表示にする
             BattleCardManager.instance.DrawCards(startDrawCount);// ?枚引く

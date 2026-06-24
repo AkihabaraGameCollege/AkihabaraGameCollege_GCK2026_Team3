@@ -394,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3957f77d2d10c4b844d56194538a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.NoticeTextUI
+  Notice_Image: {fileID: 3081394417264469181}
 --- !u!1 &9221821475754315152
 GameObject:
   m_ObjectHideFlags: 0

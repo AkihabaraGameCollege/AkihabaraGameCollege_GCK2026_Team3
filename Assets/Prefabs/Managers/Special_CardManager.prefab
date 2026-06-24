@@ -46,5 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Special_CardManager
   _enemyManager: {fileID: 0}
   _special_CardUI_Manager: {fileID: 0}
-  _cardSelectUI: {fileID: 0}
+  _playerCost: {fileID: 0}
+  _treeHealth: {fileID: 0}
+  _battleCardManager: {fileID: 0}
+  UsedCardData: {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
+  _allSpecialCardList:
+  - {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}
+  - {fileID: 11400000, guid: 066dc55e46da1134e9a0c0bda07ea78b, type: 2}
+  - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
+  - {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
+  _executeCardTargetTransform: {x: 0, y: 0, z: 0}
   _pointNumber: 0.05

@@ -20,7 +20,7 @@ namespace ForestDraw.Player.Combat
             GameObject nearest = null;
             float minDist = Mathf.Infinity;
 
-            foreach (var enemy in EnemyManager.instance.Enemies)
+            foreach (var enemy in EnemyManager.Instance.Enemies)
             {
                 // 距離計算（平方距離で計算してパフォーマンス向上）
                 float dist = (enemy.transform.position - origin).sqrMagnitude;
@@ -64,7 +64,7 @@ namespace ForestDraw.Player.Combat
             // ▲ DEBUG END
             // ==================================================
 
-            foreach (var enemy in EnemyManager.instance.Enemies)
+            foreach (var enemy in EnemyManager.Instance.Enemies)
             {
                 Vector3 diff = enemy.transform.position - origin;
 
@@ -115,7 +115,7 @@ namespace ForestDraw.Player.Combat
             // ▲ DEBUG END
             // ==================================================
 
-            foreach (var enemy in EnemyManager.instance.Enemies)
+            foreach (var enemy in EnemyManager.Instance.Enemies)
             {
                 // 半径内にいるか判定
                 if ((enemy.transform.position - center).sqrMagnitude <= radiusSq)
@@ -135,7 +135,7 @@ namespace ForestDraw.Player.Combat
         {
             List<IDamageable> targets = new();
 
-            foreach (var enemy in EnemyManager.instance.Enemies)
+            foreach (var enemy in EnemyManager.Instance.Enemies)
             {
                 var d = enemy.GetComponent<IDamageable>();
                 if (d != null) targets.Add(d);

@@ -54,7 +54,7 @@ namespace ForestDraw.Enemy.Spawner
         private void Spawn()
         {
             // もしエネミーがスポーン不可能の場合
-            if (!EnemyManager.instance.CanGenerate)
+            if (!EnemyManager.Instance.CanGenerate)
             {
                 return;
             }
@@ -69,7 +69,7 @@ namespace ForestDraw.Enemy.Spawner
                 GameObject _enemy = Instantiate(enemyPrefab, _spawnPosition, Quaternion.identity);
 
                 // エネミーを追加
-                EnemyManager.instance.AddEnemy(_enemy, enemyData.enemyName);
+                EnemyManager.Instance.AddEnemy(_enemy, enemyData.enemyName);
 
                 // エネミーのコンポーネントを初期化
                 EnemyInitialize(_enemy);
