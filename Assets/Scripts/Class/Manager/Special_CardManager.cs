@@ -128,6 +128,12 @@ namespace ForestDraw
                 return;
             }
 
+            // --- エネミー撃破ポイントをプレイヤーに付与する ---
+            // ポイントを付与
+            _currentPoint += _pointNumber;
+            // UIを更新する
+            _special_CardUI_Manager.UpdateGage_Image(_currentPoint, _pointMaxNumber);
+
             // もし現在のポイントが必要ポイント以上になった場合
             if (_currentPoint >= _pointMaxNumber)
             {
@@ -150,12 +156,6 @@ namespace ForestDraw
 
                 return;
             }
-
-            // ポイントを付与
-            _currentPoint += _pointNumber;
-
-            // UIを更新する
-            _special_CardUI_Manager.UpdateGage_Image(_currentPoint, _pointMaxNumber);
         }
 
         /// <summary>
@@ -189,16 +189,8 @@ namespace ForestDraw
             UsedCardData = selectedCard;
 
             // --- 特殊カードの能力を発動する ---
-            // カード選択のUIから、使用するカードの情報を取得すし参照する変数を定義
-            var context = new CardUseContext
-            {
-                PlayerCostClass = _playerCost,
-                TreeHealthClass = _treeHealth,
-                BattleCardManagerClass = _battleCardManager,
-                ExecuteCardTargetTransform = _executeCardTargetTransform
-            };
-            // カード使用の実行クラスの関数を呼び出し、カードの能力を発動する
-            CardUseExecutor.Execute(selectedCard, context);
+            // 指定したカードの能力を発動
+            BattleCardManager.Instance.CardAbilityExecute(selectedCard);
             // カード発動を行ったとフラグする
             _isExecuted = true;
         }

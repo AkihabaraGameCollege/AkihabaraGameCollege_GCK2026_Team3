@@ -4261,7 +4261,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1994405628}
     - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
-      propertyPath: handArea
+      propertyPath: _handArea
       value: 
       objectReference: {fileID: 844520532}
     - target: {fileID: 4334362933986609354, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}

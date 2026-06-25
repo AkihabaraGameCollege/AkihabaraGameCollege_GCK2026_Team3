@@ -318,7 +318,7 @@ namespace ForestDraw
             animator.SetTrigger(stage_IntroStartTrigger);// ステージイントロ開始演出
             yield return new WaitForSeconds(stage_IntroTime);// ステージイントロ演出中は待機
             transitionUI_Manager.Hide();// 演出用UIを非表示にする
-            BattleCardManager.instance.DrawCards(startDrawCount);// ?枚引く
+            BattleCardManager.Instance.DrawCards(startDrawCount);// ?枚引く
             sceneState = SceneState.Play;
         }
 

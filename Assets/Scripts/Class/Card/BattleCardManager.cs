@@ -7,7 +7,7 @@ using System.Collections;
 namespace ForestDraw
 {
     /// <summary>
-    /// バトルシーンで、編成画面で作ったデッキからカードを引いて手札に表示するクラス
+    /// バトルシーンにて編成画面で作ったデッキからカードを引いて手札に表示するクラス
     /// </summary>
     public class BattleCardManager : MonoBehaviour
     {
@@ -15,19 +15,24 @@ namespace ForestDraw
         /// カードのPrefabと、生成する親オブジェクトの変数
         /// </summary>
         [SerializeField]
-        private GameObject handCardPrefab = null;
+        private GameObject _handCardPrefab;
 
         /// <summary>
         /// 空間上でカードを並べる場所の変数
         /// </summary>
         [SerializeField]
-        private Transform handArea = null;
-
+        private Transform _handArea;
         /// <summary>
-        /// プレイヤー
+        /// 空間上でカードを並べる場所の変数
         /// </summary>
         [SerializeField]
-        private GameObject player;
+        private Transform _cardUseEffectPoision;
+
+        /// <summary>
+        /// カード使用時に出るエフェクトを参照する変数
+        /// </summary>
+        [SerializeField]
+        private ParticleSystem _cardUseEffect;
 
         /// <summary>
         /// ドローする間隔の変数
@@ -52,7 +57,7 @@ namespace ForestDraw
         /// <summary>
         /// 手持ちのカード管理クラスのインスタンスを参照する変数
         /// </summary>
-        public static BattleCardManager instance { get; private set; }
+        public static BattleCardManager Instance { get; private set; }
 
         /// <summary>
         /// リストに全カードのマスターデータを入れておく変数
@@ -104,20 +109,21 @@ namespace ForestDraw
         /// <summary>
         /// 初期設定の関数
         /// </summary>
-
         private void Awake()
         {
-            if (instance == null)
+            // もしインスタンスが無い場合
+            if (Instance == null)
             {
-               instance = this;
+               Instance = this;
             }
             else
             {
                 Destroy(gameObject);
             }
 
+            // --- コンポーネントの登録 ---
             playerCost = GetComponent<PlayerCost>();
-            playerHealth = player.GetComponent<TreeHealth>();
+            playerHealth = gameObject.GetComponent<TreeHealth>();
         }
 
         private void Start()
@@ -179,7 +185,7 @@ namespace ForestDraw
             {
                 Debug.Log(drawCount + "枚引く");
                 // もし手札の枚数が最大枚数以上の場合
-                if (handArea.childCount >= maxHandSize)
+                if (_handArea.childCount >= maxHandSize)
                 {
                     break;
                 }
@@ -195,7 +201,7 @@ namespace ForestDraw
 
                 drawPile.RemoveAt(0);// 山札から引いたカードを削除する
 
-                GameObject cardObj = Instantiate(handCardPrefab, handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
+                GameObject cardObj = Instantiate(_handCardPrefab, _handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
                 HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
                 handCardUI.Setup(drawnCard, this);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
             }
@@ -214,7 +220,7 @@ namespace ForestDraw
                 drawTimer = 0f;
 
                 // もし手札の枚数が最大枚数より少なくて、山札にカードが残っている場合
-                if (handArea.childCount < maxHandSize && drawPile.Count > 0)
+                if (_handArea.childCount < maxHandSize && drawPile.Count > 0)
                 {
                     DrawCards(drawCount);
                 }
@@ -225,41 +231,74 @@ namespace ForestDraw
         /// カードを使用する関数
         /// </summary>
         /// <param name="usedCard"></param>
-        /// <param name="cardObj"></param>
-        public bool UseCard(CardData usedCard, GameObject cardObj)
+        /// <param name="cardObject"></param>
+        public bool UseCard(CardData usedCard, GameObject cardObject)
         {
-            var context = new CardUseContext
+            // もし今カードを使っているなら
+            if (IsUseingCard)
             {
-                PlayerCostClass = playerCost,
-                TreeHealthClass = playerHealth,
-                BattleCardManagerClass = this,
-                ExecuteCardTargetTransform = player.transform.position
-            };
+                // falseを返す
+                return false;
+            }
 
-            if (IsUseingCard) return false;
-            if (!CardUseExecutor.Execute(usedCard, context)) return false;
+            // カード能力を発動
+            CardAbilityExecute(usedCard);
 
+            // カードの使用状態管理用コルーチンを呼び出し
             StartCoroutine(IsUseing(usedCard.useDuration));
 
-            drawPile.Add(usedCard);// 使用するカードを山札の一番下に戻す
-
-            Destroy(cardObj);
-
+                // --- 使用後の後片付け ---
+            // 使用するカードを山札の一番下に戻す
+            drawPile.Add(usedCard);
+            // 使用したカードを破壊
+            Destroy(cardObject);
+            // falseを返す
             return true;
         }
 
         /// <summary>
-        /// カードの使用状態管理用
+        /// カードの使用状態管理用コルーチン
         /// </summary>
         private IEnumerator IsUseing(float duration)
         {
+            // カード使用中フラグをオン
             IsUseingCard = true;
 
-            // 使用時間待ち
+            // もし使用時間が0より大きい場合
             if (duration > 0f)
+            {
+                // 使用時間待ち
                 yield return new WaitForSeconds(duration);
+            }
 
+            // カード使用中フラグをオフ
             IsUseingCard = false;
+        }
+
+        /// <summary>
+        /// カード能力を発動する関数
+        /// </summary>
+        /// <param name="usedCard"></param>
+        public void CardAbilityExecute(CardData usedCard)
+        {
+            // カード使用時の情報をまとめたコンテキストを新しく生成し参照する変数を定義
+            var context = new CardUseContext
+            {
+                // --- 情報を代入 ---
+                PlayerCostClass = playerCost,
+                TreeHealthClass = playerHealth,
+                BattleCardManagerClass = this,
+                ExecuteCardTargetTransform = gameObject.transform.position
+            };
+
+            // もしカード能力発動クラスが機能していない場合
+            if (!CardUseExecutor.Execute(usedCard, context))
+            {
+                return;
+            }
+
+            // 使用時のエフェクトを生成
+            Instantiate(_cardUseEffect, _cardUseEffectPoision.transform);
         }
     }
 }

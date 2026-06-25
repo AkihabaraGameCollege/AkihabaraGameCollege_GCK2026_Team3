@@ -1610,6 +1610,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2981487231955787612, guid: 4de075e41ebdfd840b7b18a449ebe2e0, type: 3}
   m_PrefabInstance: {fileID: 658709487}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &658709491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5397388865919180565, guid: 4de075e41ebdfd840b7b18a449ebe2e0, type: 3}
+  m_PrefabInstance: {fileID: 658709487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3957f77d2d10c4b844d56194538a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.NoticeTextUI
 --- !u!1001 &674242023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3602,11 +3613,19 @@ PrefabInstance:
       value: CostNotice
       objectReference: {fileID: 0}
     - target: {fileID: 1846654620816297303, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      propertyPath: noticeTextUI
+      value: 
+      objectReference: {fileID: 658709491}
+    - target: {fileID: 1846654620816297303, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: costNoticeAnimator
       value: 
       objectReference: {fileID: 658709489}
     - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
       propertyPath: handArea
+      value: 
+      objectReference: {fileID: 1263212491}
+    - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
+      propertyPath: _handArea
       value: 
       objectReference: {fileID: 1263212491}
     - target: {fileID: 4287100174500768013, guid: 6618e5325da17ff43a5e8cf21fda7ee7, type: 3}
