@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using System.Collections;
-using UnityEngine.Rendering.Universal;
 
 namespace ForestDraw
 {
@@ -12,12 +9,6 @@ namespace ForestDraw
     /// </summary>
     public class AudioSetting : MonoBehaviour
     {
-        /// <summary>
-        /// オーディオミキサー
-        /// </summary>
-        [SerializeField]
-        private AudioMixer audioMixer = null;
-
         /// <summary>
         /// BGM用のオーディオソースの変数
         /// </summary>
@@ -52,21 +43,9 @@ namespace ForestDraw
         public List<AudioClip> ses;
 
         /// <summary>
-        /// 開いているかどうかのフラグ
-        /// </summary>
-        public bool isOpening = false;
-        /// <summary>
-        /// フェード中かどうかのフラグ
-        /// </summary>
-        public bool isFading = false;
-        /// <summary>
         /// サウンド管理クラスのインスタンスを参照する変数
         /// </summary>
         public static AudioSetting Instance { get; private set; }
-
-        // ミキサーパラメータ名（インスペクタで変更したければ[SerializeField]にしても可）
-        private const string MixerParamBGM = "BGMVolume";
-        private const string MixerParamSE = "SEVolume";
 
         /// <summary>
         /// 初期設定の関数
@@ -80,19 +59,6 @@ namespace ForestDraw
             else
             {
                 Destroy(gameObject);
-            }
-
-            // ミキサーが指定されていれば、SE/BGSを bgms グループへ割り当てる（存在する場合）
-            if (audioMixer != null)
-            {
-                var groups = audioMixer.FindMatchingGroups("bgms");
-                if (groups != null && groups.Length > 0)
-                {
-                    if (seAudioSource != null) seAudioSource.outputAudioMixerGroup = groups[0];
-                    if (bgsAudioSource != null) bgsAudioSource.outputAudioMixerGroup = groups[0];
-                    // BGMは別グループ（既に設定されている想定）または同じグループでも問題ない
-                    if (bgmAudioSource != null) bgmAudioSource.outputAudioMixerGroup = groups[0];
-                }
             }
 
             // スライダーの初期値を1にする（保存値があればそれを優先）
@@ -132,8 +98,6 @@ namespace ForestDraw
             {
                 UpdateVolume.seSliderValue = seVolumeSlider.value;
             }
-
-            // AudioMixerで音量管理しているので AudioSource.volume を毎フレーム更新する必要はない
         }
 
         /// <summary>
@@ -145,18 +109,9 @@ namespace ForestDraw
             // UpdateVolumeとの同期（既存コード互換）
             UpdateVolume.bgmSliderValue = newVolume;
 
-            if (audioMixer != null)
-            {
-                // スライダー直線値を人間の感覚に近づけるために平方根カーブを適用してから dB に変換
-                float adjusted = Mathf.Pow(Mathf.Clamp01(newVolume), 0.5f);
-                float dbVolume = Mathf.Log10(Mathf.Max(adjusted, 0.0001f)) * 20f;
-                audioMixer.SetFloat(MixerParamBGM, dbVolume);
-            }
-            else
-            {
-                // ミキサーが無ければソースボリュームで代替
-                if (bgmAudioSource != null) bgmAudioSource.volume = newVolume;
-            }
+
+            // ミキサーが無ければソースボリュームで代替
+            if (bgmAudioSource != null) bgmAudioSource.volume = newVolume;
         }
 
         /// <summary>
@@ -168,18 +123,8 @@ namespace ForestDraw
             // UpdateVolumeとの同期（既存コード互換）
             UpdateVolume.seSliderValue = newVolume;
 
-            if (audioMixer != null)
-            {
-                // スライダー直線値を人間の感覚に近づけるために平方根カーブを適用してから dB に変換
-                float adjusted = Mathf.Pow(Mathf.Clamp01(newVolume), 0.5f);
-                float dbVolume = Mathf.Log10(Mathf.Max(adjusted, 0.0001f)) * 20f;
-                audioMixer.SetFloat(MixerParamSE, dbVolume);
-            }
-            else
-            {
-                if (seAudioSource != null) seAudioSource.volume = newVolume;
-                if (bgsAudioSource != null) bgsAudioSource.volume = newVolume;
-            }
+            if (seAudioSource != null) seAudioSource.volume = newVolume;
+            if (bgsAudioSource != null) bgsAudioSource.volume = newVolume;
         }
 
         /// <summary>
@@ -200,8 +145,8 @@ namespace ForestDraw
                 return;
             }
 
-            seAudioSource.clip = ses[seIndex];
-            seAudioSource.Play();
+            // PlayOneShotを使うことで音が重なるように再生
+            seAudioSource.PlayOneShot(ses[seIndex]);
         }
         public void CardSE(AudioClip clip)
         {
@@ -215,8 +160,9 @@ namespace ForestDraw
                 Debug.LogError("seAudioSource が設定されていません");
                 return;
             }
-            seAudioSource.clip = clip;
-            seAudioSource.Play();
+
+            // PlayOneShotを使うことで音が重なるように再生
+            seAudioSource.PlayOneShot(clip);
         }
 
         /// <summary>

@@ -308,11 +308,16 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator ExitCoroutine()
         {
-            TransitionUI_Manager.instance.TargetShow(treesObject);// 演出用UIを表示
-            TransitionUI_Manager.instance.TargetShow(black_ImageObject);// 演出用UIを表示
-           animator.SetTrigger(exitTrigger);// ゲーム終了のトリガーをセット
+            // --- 演出を行う ---
+            // 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(treesObject);
+            // 演出用UIを表示
+            TransitionUI_Manager.instance.TargetShow(black_ImageObject);
+            // ゲーム終了のトリガーをセット
+            animator.SetTrigger(exitTrigger);
+            // 演出時間分待機
             yield return new WaitForSeconds(exitTime);
-            Debug.Log("ゲームを終了します。");
+
             Application.Quit();
         }
 

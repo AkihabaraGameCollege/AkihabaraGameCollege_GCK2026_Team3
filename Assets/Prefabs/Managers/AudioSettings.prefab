@@ -331,6 +331,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 025301f7757956c43b92b2fc06cc6eb2, type: 3}
   - {fileID: 8300000, guid: 88b0f15a9b9ad5549a3026c7de3de9a1, type: 3}
   - {fileID: 8300000, guid: a3d85873472251b46a9ee795b24d3c3f, type: 3}
+  - {fileID: 8300000, guid: f2616aa234c3b064a93ca7d9281bb1ce, type: 3}
   isOpening: 0
   isFading: 0
 --- !u!1 &7638533859291844780

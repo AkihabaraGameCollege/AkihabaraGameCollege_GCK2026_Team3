@@ -181,7 +181,15 @@ namespace ForestDraw
         /// </summary>
         private void Awake()
         {
+            // もしインスタンスが無い場合
+            if (Instance == null)
+            {
                 Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             // コンポーネントの登録
             animator = GetComponent<Animator>();

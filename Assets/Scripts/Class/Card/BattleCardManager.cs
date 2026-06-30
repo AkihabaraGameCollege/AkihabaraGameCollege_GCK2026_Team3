@@ -297,6 +297,9 @@ namespace ForestDraw
                 return;
             }
 
+            // カード使用SEを再生
+            AudioSetting.Instance.PlaySE(11);
+
             // 使用時のエフェクトを生成
             Instantiate(_cardUseEffect, _cardUseEffectPoision.transform);
         }
