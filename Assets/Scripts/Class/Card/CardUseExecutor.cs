@@ -42,7 +42,6 @@ namespace ForestDraw.Player.Combat
 
                 if (context.TreeHealthClass == null)
                 {
-                    Debug.LogError("PlayerHealthが見つかりません！シーンに配置されていますか？");
                     return false;
                 }
             }

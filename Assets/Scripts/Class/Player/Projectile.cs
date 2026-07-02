@@ -1,4 +1,3 @@
-using ForestDraw.Combat;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour

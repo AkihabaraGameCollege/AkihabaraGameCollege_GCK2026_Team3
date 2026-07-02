@@ -24,12 +24,12 @@ MonoBehaviour:
   usedSE: {fileID: 8300000, guid: 1f5b52ba697dd0a44a3485a0627027cf, type: 3}
   buffDuration: 0
   attackParams:
-    damage: 1000
+    damage: 500
     lineLength: 30
     lineWidth: 10
     areaRadius: 0
     areaRange: 0
-    attackEffect: {fileID: 8941128211414228805, guid: 2eaa72bc407b7264c853964b10d20356, type: 3}
+    attackEffect: {fileID: 436050317304506684, guid: ff9013c981d85ce4389b1b7e75c59ec5, type: 3}
   recoverParams:
     healAmount: 0
     costRecoverAmount: 0

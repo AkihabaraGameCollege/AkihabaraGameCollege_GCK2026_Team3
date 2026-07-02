@@ -13,6 +13,7 @@ namespace ForestDraw.Player.Combat
         /// Ÿ‚ÌUŒ‚‚É“K—p‚·‚éƒ_ƒ[ƒW”{—¦i‰Šú’l‚Í1”{j
         /// </summary>
         private static float nextAttackMultiplier = 1f;
+
         /// <summary>
         /// ˆê”Ô‹ß‚¢“G1‘Ì‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚éi’P‘ÌUŒ‚j
         /// </summary>
@@ -20,7 +21,6 @@ namespace ForestDraw.Player.Combat
         {
             var target = TargetFinder.FindNearest(origin, effect, duration);
 
-            Debug.Log("’P‘ÌUŒ‚");
             int finalDamage = ApplyMultiplier(damage);
             DealDamageOverTime(target, finalDamage, duration);
         }
@@ -35,7 +35,6 @@ namespace ForestDraw.Player.Combat
 
             foreach (var target in targets)
             {
-                Debug.Log("’¼üUŒ‚");
                 DealDamageOverTime(target, finalDamage, duration);
             }
         }
@@ -50,7 +49,6 @@ namespace ForestDraw.Player.Combat
 
             foreach (var target in targets)
             {
-                Debug.Log("‰~Œ`”ÍˆÍUŒ‚");
                 DealDamageOverTime(target, finalDamage, duration);
             }
         }
@@ -65,7 +63,6 @@ namespace ForestDraw.Player.Combat
 
             foreach (var target in targets)
             {
-                Debug.Log("‘S‘ÌUŒ‚");
                 DealDamageOverTime(target, finalDamage, duration);
             }
         }
@@ -83,7 +80,6 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         private static int ApplyMultiplier(int damage)
         {
-            Debug.Log("UŒ‚‚ª" + nextAttackMultiplier + "”{");
             int result = Mathf.RoundToInt(damage * nextAttackMultiplier);
             nextAttackMultiplier = 1f;
             return result;

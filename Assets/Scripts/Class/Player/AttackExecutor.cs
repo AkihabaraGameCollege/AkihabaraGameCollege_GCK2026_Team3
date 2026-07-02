@@ -1,11 +1,21 @@
 using UnityEngine;
 
-public class AttackExecutor : MonoBehaviour
+namespace ForestDraw
 {
-    public static AttackExecutor Instance;
-
-    private void Awake()
+    public class AttackExecutor : MonoBehaviour
     {
-        Instance = this;
+        public static AttackExecutor Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
