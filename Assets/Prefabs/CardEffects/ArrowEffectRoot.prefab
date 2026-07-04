@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9300c3ca7205fc947b066d1aed23a1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 100
+  speed: 50
   rotateSpeed: 10
 --- !u!1 &6953067546531647516
 GameObject:

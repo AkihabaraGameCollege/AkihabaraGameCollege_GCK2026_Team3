@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using ForestDraw.Enemy;
 using ForestDraw.Player.Combat;
-using static ForestDraw.Player.Combat.CardUseExecutor;
 using System.Collections.Generic;
 
 namespace ForestDraw
@@ -60,7 +59,7 @@ namespace ForestDraw
         /// 一度に付与するポイントの量を参照する変数
         /// </summary>
         [SerializeField]
-        private float _pointNumber = 0.05f;
+        private float _awardPoint = 0.05f;
 
         /// <summary>
         /// 特殊カードマネージャーのシングルトンインスタンスを参照する変数
@@ -130,7 +129,7 @@ namespace ForestDraw
 
             // --- エネミー撃破ポイントをプレイヤーに付与する ---
             // ポイントを付与
-            _currentPoint += _pointNumber;
+            _currentPoint += _awardPoint;
             // UIを更新する
             _special_CardUI_Manager.UpdateGage_Image(_currentPoint, _pointMaxNumber);
 

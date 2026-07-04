@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 7.74, z: 0}
-  m_LocalScale: {x: 0.16541, y: 8.0288, z: 0.28245}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.86, y: 41.743355, z: 1.4685146}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6322120347263934862}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -225,7 +225,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5015,7 +5015,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1e-45, y: 1e-45, z: 1e-45, w: 7e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -5081,8 +5081,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.29, z: 0}
-  m_LocalScale: {x: 0.16541, y: 8.0288, z: 0.28245}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.43000004, y: 20.87168, z: 0.73425734}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6322120347263934862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5276,7 +5276,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.23635206, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9917,8 +9917,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.29, z: 0}
-  m_LocalScale: {x: 0.16541, y: 8.0288, z: 0.28245}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.69, y: 33.49176, z: 1.1782268}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6322120347263934862}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -10112,7 +10112,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14794,8 +14794,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.29, z: 0}
-  m_LocalScale: {x: 0.16541, y: 8.0288, z: 0.28245}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.99, y: 48.053394, z: 1.6904993}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6322120347263934862}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -14989,7 +14989,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.010419595, g: 0, b: 0.01886791, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19838,7 +19838,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.10188681, g: 0.020538282, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
