@@ -80,9 +80,9 @@ namespace ForestDraw
         /// </summary>
         private bool _isStopTime = false;
         /// <summary>
-        /// 特殊カードを使用したかどうかのフラグを参照する変数
+        /// 特殊カードを使用できるようになったかのフラグを参照する変数
         /// </summary>
-        private bool _isExecuted = false;
+        private bool _isCanExecuted = false;
 
         /// <summary>
         /// 初期設定を行う関数
@@ -121,8 +121,8 @@ namespace ForestDraw
         /// </summary>
         private void GetPoint()
         {
-            // もし発動済みなら
-            if (_isExecuted)
+            // もし特殊カード使用可能済みなら
+            if (_isCanExecuted)
             {
                 return;
             }
@@ -133,8 +133,8 @@ namespace ForestDraw
             // UIを更新する
             _special_CardUI_Manager.UpdateGage_Image(_currentPoint, _pointMaxNumber);
 
-            // もし現在のポイントが必要ポイント以上になった場合
-            if (_currentPoint >= _pointMaxNumber)
+            // もし現在のポイントが必要ポイント以上かつ特殊カード使用可能でない場合
+            if (_currentPoint >= _pointMaxNumber&& !_isCanExecuted)
             {
                 // 時間停止のフラグをオン
                 _isStopTime = true;
@@ -152,6 +152,8 @@ namespace ForestDraw
 
                 // カード選択のUIを表示
                 _special_CardUI_Manager.TargetShow(_special_CardUI_Manager.CardSelectUI);
+                // 特殊カード使用可能のフラグをオン
+                _isCanExecuted = true;
 
                 return;
             }
@@ -190,8 +192,6 @@ namespace ForestDraw
             // --- 特殊カードの能力を発動する ---
             // 指定したカードの能力を発動
             BattleCardManager.Instance.CardAbilityExecute(selectedCard);
-            // カード発動を行ったとフラグする
-            _isExecuted = true;
         }
 
         /// <summary>

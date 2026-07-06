@@ -733,17 +733,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &880892911 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1891349861906528158, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 432309062}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &889675650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6416,18 +6405,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 942863985}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &1639476657 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8492552946175260372, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 432309062}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!1001 &1701566692
+--- !u!1001 &1571572781
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6437,7 +6415,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6482,11 +6460,11 @@ PrefabInstance:
     - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: seVolumeSlider
       value: 
-      objectReference: {fileID: 1639476657}
+      objectReference: {fileID: 0}
     - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
       propertyPath: bgmVolumeSlider
       value: 
-      objectReference: {fileID: 880892911}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11717,4 +11695,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1850456505}
-  - {fileID: 1701566692}
+  - {fileID: 1571572781}

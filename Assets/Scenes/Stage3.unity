@@ -311,82 +311,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8921343074000639949, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
   m_PrefabInstance: {fileID: 54443528}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &83649341
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_Name
-      value: AudioSettings
-      objectReference: {fileID: 0}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: seVolumeSlider
-      value: 
-      objectReference: {fileID: 238432393}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: bgmVolumeSlider
-      value: 
-      objectReference: {fileID: 238432396}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
---- !u!114 &83649342 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-  m_PrefabInstance: {fileID: 83649341}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.AudioSetting
 --- !u!1 &125440540
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,17 +777,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36917260830e9094796b61d62b649d46, type: 3}
---- !u!114 &238432393 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8492552946175260372, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 238432392}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!224 &238432394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
@@ -880,17 +793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55d506a3d36be049a31aa9846103146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.SettingManager
---- !u!114 &238432396 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1891349861906528158, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 238432392}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &319199649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1582,6 +1484,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1001 &491770147
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_Name
+      value: AudioSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: seVolumeSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: bgmVolumeSlider
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
 --- !u!1001 &492521478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3886,7 +3853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb1e241d9fb682489eca66fc47e1e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.StageScene
-  audioSetting: {fileID: 83649342}
+  audioSetting: {fileID: 0}
   gameOverUI: {fileID: 781277192}
   stageClearUI: {fileID: 2039151675}
   playerUI:
@@ -3908,7 +3875,7 @@ MonoBehaviour:
   stageBgmIndex: 4
   stagePanel_Index: 2
   isTutorial: 0
-  cardEffectSpawn: {fileID: 0}
+  cardEffectSpawn: {fileID: 13405601}
 --- !u!1001 &1337025389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4810,4 +4777,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1321936537}
   - {fileID: 164842011}
-  - {fileID: 83649341}
+  - {fileID: 491770147}

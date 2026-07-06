@@ -34,8 +34,11 @@ MonoBehaviour:
     healAmount: 0
     costRecoverAmount: 0
     intervalReduction: 0
+    SupportEffect: {fileID: 0}
   supportParams:
     damageReduction: 0
     attackMultiplier: 0
+    SupportEffect: {fileID: 0}
   utilityParams:
     drawCount: 0
+    SupportEffect: {fileID: 0}

@@ -105,6 +105,11 @@ namespace ForestDraw
 
         /// <summary>コスト回復間隔短縮量</summary>
         public int intervalReduction;
+
+        /// <summary>
+        /// 支援カード使用時のエフェクト（中山が追加）
+        /// </summary>
+        public GameObject SupportEffect;
     }
 
     /// <summary>
@@ -118,6 +123,11 @@ namespace ForestDraw
 
         /// <summary>次の攻撃のダメージ倍率</summary>
         public float attackMultiplier;
+
+        /// <summary>
+        /// 支援カード使用時のエフェクト（中山が追加）
+        /// </summary>
+        public GameObject SupportEffect;
     }
 
     /// <summary>
@@ -128,5 +138,10 @@ namespace ForestDraw
     {
         /// <summary> カードを引く枚数 /// </summary>
         public int drawCount;
+
+        /// <summary>
+        /// 支援カード使用時のエフェクト（中山が追加）
+        /// </summary>
+        public GameObject SupportEffect;
     }
 }

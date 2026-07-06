@@ -370,82 +370,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1001550457001854085, guid: 36f83b080de9dcc46929b3658e55e468, type: 3}
   m_PrefabInstance: {fileID: 29547447}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &30071939
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: m_Name
-      value: AudioSettings
-      objectReference: {fileID: 0}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: seVolumeSlider
-      value: 
-      objectReference: {fileID: 1357358231}
-    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-      propertyPath: bgmVolumeSlider
-      value: 
-      objectReference: {fileID: 1357358234}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
---- !u!114 &30071940 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
-  m_PrefabInstance: {fileID: 30071939}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.AudioSetting
 --- !u!1001 &112015494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2014,7 +1938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb1e241d9fb682489eca66fc47e1e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.StageScene
-  audioSetting: {fileID: 30071940}
+  audioSetting: {fileID: 0}
   gameOverUI: {fileID: 1617833572}
   stageClearUI: {fileID: 1461242288}
   playerUI:
@@ -2091,7 +2015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _awardPoint
-      value: 0.05
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _playerCost
@@ -2127,6 +2051,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5033055250553210171, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
   m_PrefabInstance: {fileID: 799025252}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &817617541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361456171762168881, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523757481898297153, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: m_Name
+      value: AudioSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: seVolumeSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941938246596373269, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
+      propertyPath: bgmVolumeSlider
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfb3798d4f8a81a4da41c1d1d169a014, type: 3}
 --- !u!4 &818606202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8921343074000639949, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
@@ -3728,17 +3717,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36917260830e9094796b61d62b649d46, type: 3}
---- !u!114 &1357358231 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8492552946175260372, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 1357358230}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!224 &1357358232 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4163847314070248296, guid: 36917260830e9094796b61d62b649d46, type: 3}
@@ -3755,17 +3733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55d506a3d36be049a31aa9846103146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.SettingManager
---- !u!114 &1357358234 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1891349861906528158, guid: 36917260830e9094796b61d62b649d46, type: 3}
-  m_PrefabInstance: {fileID: 1357358230}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &1403039375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4593,4 +4560,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 723263310}
   - {fileID: 1723933751}
-  - {fileID: 30071939}
+  - {fileID: 817617541}
