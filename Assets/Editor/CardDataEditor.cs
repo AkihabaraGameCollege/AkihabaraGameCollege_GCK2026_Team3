@@ -118,6 +118,9 @@ public class CardDataEditor : Editor
                 EditorGUILayout.LabelField("recovery Parameters", EditorStyles.boldLabel);
                 var recover = card.recoverParams;
 
+                // エフェクトの設定（中山が追加）
+                recover.SupportEffect = (GameObject)EditorGUILayout.ObjectField("エフェクト", recover.SupportEffect, typeof(GameObject), false);
+
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
                 {
@@ -140,6 +143,9 @@ public class CardDataEditor : Editor
                 EditorGUILayout.LabelField("Support Parameters", EditorStyles.boldLabel);
                 var support = card.supportParams;
 
+                // エフェクトの設定（中山が追加）
+                support.SupportEffect = (GameObject)EditorGUILayout.ObjectField("エフェクト", support.SupportEffect, typeof(GameObject), false);
+
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
                 {
@@ -155,6 +161,9 @@ public class CardDataEditor : Editor
             case CardType.Utility:
                 EditorGUILayout.LabelField("Support Parameters", EditorStyles.boldLabel);
                 var utility = card.utilityParams;
+
+                // エフェクトの設定（中山が追加）
+                utility.SupportEffect = (GameObject)EditorGUILayout.ObjectField("エフェクト", utility.SupportEffect, typeof(GameObject), false);
 
                 // 効果タイプ別の追加パラメータ
                 switch (card.effectType)
