@@ -18,7 +18,7 @@ MonoBehaviour:
   effectType: 4
   description: "\u30B3\u30B9\u30C8\u30921\u56DE\u5FA9"
   cost: 0
-  useDuration: 1
+  useDuration: 2
   cardImage: {fileID: 588311512, guid: ccb62aaf857c95b40b9a283f52828dd7, type: 3}
   cardDetail_Image: {fileID: 141904740, guid: 4dc9afbef9095c24e82a1d0c9abf43ab, type: 3}
   usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
@@ -34,8 +34,11 @@ MonoBehaviour:
     healAmount: 0
     costRecoverAmount: 1
     intervalReduction: 0
+    SupportEffect: {fileID: 3542468840168589027, guid: 53a24a2d43449174c81778ccfe56b5d9, type: 3}
   supportParams:
     damageReduction: 0
     attackMultiplier: 0
+    SupportEffect: {fileID: 0}
   utilityParams:
     drawCount: 0
+    SupportEffect: {fileID: 0}

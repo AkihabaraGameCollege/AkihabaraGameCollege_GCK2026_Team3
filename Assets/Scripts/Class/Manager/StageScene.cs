@@ -10,12 +10,6 @@ namespace ForestDraw
     public class StageScene : MonoBehaviour
     {
         /// <summary>
-        /// オーディオ設定の変数
-        /// </summary>
-        [SerializeField]
-        private AudioSetting audioSetting = null;
-
-        /// <summary>
         /// ゲームオーバーUIの変数
         /// </summary>
         [SerializeField]
@@ -288,7 +282,7 @@ namespace ForestDraw
         {
             isTutorial = true;// チュートリアル中フラグをオン
             nextButton.enabled = false;
-            audioSetting.PlayBGM(tutorial_BgmIndex);
+            AudioSetting.Instance.PlayBGM(tutorial_BgmIndex);
             yield return new WaitForSecondsRealtime(tutorial_IntroTime);
             tutorial_UI_Manager.ShowFirstPage();// 最初のページを表示
             nextButton.enabled = true;
@@ -315,12 +309,12 @@ namespace ForestDraw
         /// <returns></returns>
         private IEnumerator Stage_IntroCoroutine()
         {
-            audioSetting.PlayBGM(stageBgmIndex);
+            AudioSetting.Instance.PlayBGM(stageBgmIndex);
 
             // もしステージが第三ステージなら
             if (stageNumber == stageNumberMax)
             {
-                audioSetting.PlayBGS(fireSeIndex);// ステージのBGSを再生
+                AudioSetting.Instance.PlayBGS(fireSeIndex);// ステージのBGSを再生
             }
 
             animator.SetTrigger(stage_IntroStartTrigger);// ステージイントロ開始演出

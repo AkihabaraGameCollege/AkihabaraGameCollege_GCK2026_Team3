@@ -1894,7 +1894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb1e241d9fb682489eca66fc47e1e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDefenseGame.StageScene
-  audioSetting: {fileID: 0}
   gameOverUI: {fileID: 1599552717}
   stageClearUI: {fileID: 49380665}
   playerUI:
