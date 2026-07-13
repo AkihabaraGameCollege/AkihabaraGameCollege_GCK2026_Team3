@@ -150,13 +150,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 29547450}
-  - {fileID: 872708965}
-  - {fileID: 658709490}
-  - {fileID: 1263212493}
-  - {fileID: 629689482}
   - {fileID: 877438488}
   - {fileID: 1911733933}
+  - {fileID: 29547450}
+  - {fileID: 872708965}
+  - {fileID: 629689482}
+  - {fileID: 658709490}
+  - {fileID: 1263212493}
   - {fileID: 681313617}
   - {fileID: 1617833571}
   - {fileID: 1461242287}
@@ -532,7 +532,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -657,7 +657,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -782,7 +782,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -1311,7 +1311,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -1564,7 +1564,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -2014,7 +2014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _awardPoint
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _playerCost
@@ -2649,7 +2649,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -3117,7 +3117,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1302600650}
+      objectReference: {fileID: 609352033}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
