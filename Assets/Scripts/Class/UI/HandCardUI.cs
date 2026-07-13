@@ -8,7 +8,7 @@ namespace ForestDraw
     /// 手持ちのカードUIを管理するクラス
     /// </summary>
     [RequireComponent(typeof(CanvasGroup))]
-    public class HandCardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class HandCardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>
         /// カード画像の変数
@@ -144,6 +144,24 @@ namespace ForestDraw
             transform.SetParent(originalParent, false);
             transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
             Destroy(placeholder); // 身代わりを消す
+        }
+
+        /// <summary>
+        /// マウスカーソルがカードに入った瞬間に呼び出す関数
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            CardDetailViewer.instance.ShowDetail(myCardData.cardDetail_Image, this.transform.position);
+        }
+
+        /// <summary>
+        /// マウスカーソルがカードから出た瞬間に呼び出す関数
+        /// </summary>
+        /// <param name="eventData"></param>
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            CardDetailViewer.instance.HideDetail();
         }
     }
 }
