@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
+  m_Name: Card1a-1
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
+  cardId: card_01a-1
+  cardName: "\u30E9\u30A4\u30C8\u30CB\u30F3\u30B0\u30A2\u30ED\u30FC"
+  cardType: 0
+  effectType: 0
+  description: "\u6575\u5358\u4F53\u306B\u30C0\u30E1\u30FC\u30B8\uFF08\u5F31\u653B\u6483\uFF09"
+  cost: 1
+  useDuration: 2
+  cardImage: {fileID: 347562089, guid: ca7a96b5a9111db4fb05017a3f7595d8, type: 3}
+  cardDetail_Image: {fileID: -1543238729, guid: 46dcef592415d7f4d92c36c20c6d266b, type: 3}
+  usedSE: {fileID: 8300000, guid: 04038c28a51432e49925537829800eac, type: 3}
+  buffDuration: 0
+  attackParams:
+    damage: 900
+    lineLength: 0
+    lineWidth: 0
+    areaRadius: 0
+    areaRange: 0
+    attackEffect: {fileID: 2071945413629567713, guid: aa409d0e5fe6562408f288ea7d62f951, type: 3}
+  recoverParams:
+    healAmount: 0
+    costRecoverAmount: 0
+    intervalReduction: 0
+    SupportEffect: {fileID: 0}
+  supportParams:
+    damageReduction: 0
+    attackMultiplier: 0
+    SupportEffect: {fileID: 0}
+  utilityParams:
+    drawCount: 0
+    SupportEffect: {fileID: 0}

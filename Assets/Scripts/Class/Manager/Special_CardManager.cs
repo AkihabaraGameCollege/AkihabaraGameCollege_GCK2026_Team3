@@ -38,12 +38,6 @@ namespace ForestDraw
         private BattleCardManager _battleCardManager;
 
         /// <summary>
-        /// 使用するカードのデータを参照する変数
-        /// </summary>
-        [SerializeField]
-        public CardData UsedCardData;
-
-        /// <summary>
         /// 全ての特殊カードのデータを登録しておくマスターリスト
         /// </summary>
         [SerializeField]
@@ -65,6 +59,11 @@ namespace ForestDraw
         /// 特殊カードマネージャーのシングルトンインスタンスを参照する変数
         /// </summary>
         public static Special_CardManager Instance { get; private set; }
+
+        /// <summary>
+        /// 使用するカードのデータを参照する変数
+        /// </summary>
+        public CardData UsedCardData;
 
         /// <summary>
         /// 特殊カードを使用できるまでに必要なポイントを参照する変数

@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
-  m_Name: Card7s
+  m_Name: Card5s-1
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
-  cardId: card_07s
-  cardName: "\u5730\u8108\u306E\u518D\u751F"
-  cardType: 3
-  effectType: 7
-  description: "\u30AB\u30FC\u30C9\u30924\u679A\u30C9\u30ED\u30FC"
-  cost: 3
-  useDuration: 2
-  cardImage: {fileID: 226210005, guid: d98ace3551879f647bb7c5c28c1c1a57, type: 3}
-  cardDetail_Image: {fileID: 483604515, guid: 32cc797b31daea8448c10e2589dc34ae, type: 3}
+  cardId: card_05s-1
+  cardName: "\u5149\u306E\u76FE"
+  cardType: 2
+  effectType: 10
+  description: "\u30B3\u30B9\u30C8\u3092\u652F\u6255\u3063\u30663\u79D2\u9593\u76F8\u624B\u304B\u3089\u53D7\u3051\u308B\u30C0\u30E1\u30FC\u30B8\u309250%\u30AB\u30C3\u30C8"
+  cost: 1
+  useDuration: 3
+  cardImage: {fileID: -143678885, guid: ad167a4ca97bbf247bc5f002df622abe, type: 3}
+  cardDetail_Image: {fileID: -1496414773, guid: 81e9f5c570a540b46b6f329fec0efe5f, type: 3}
   usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
-  buffDuration: 0
+  buffDuration: 3
   attackParams:
     damage: 200
-    lineLength: 0
-    lineWidth: 0
+    lineLength: 100
+    lineWidth: 10
     areaRadius: 0
     areaRange: 0
     attackEffect: {fileID: 0}
@@ -36,9 +36,9 @@ MonoBehaviour:
     intervalReduction: 0
     SupportEffect: {fileID: 0}
   supportParams:
-    damageReduction: 0
+    damageReduction: 50
     attackMultiplier: 0
-    SupportEffect: {fileID: 0}
+    SupportEffect: {fileID: 1467341284852398234, guid: badc95dadd6adad4db41bc1fddd512ab, type: 3}
   utilityParams:
-    drawCount: 4
-    SupportEffect: {fileID: 6667115098364233396, guid: 066118d7623affd4d817d1fc59528c3c, type: 3}
+    drawCount: 0
+    SupportEffect: {fileID: 0}
