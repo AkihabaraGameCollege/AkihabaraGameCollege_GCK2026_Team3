@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   hpFillImage: {fileID: 8748458053630085044}
+  _damagePopup: {fileID: 3370638208151353108, guid: 3891d86a4744c554b861cb7e782209a5, type: 3}
 --- !u!114 &1661438578454980804
 MonoBehaviour:
   m_ObjectHideFlags: 0

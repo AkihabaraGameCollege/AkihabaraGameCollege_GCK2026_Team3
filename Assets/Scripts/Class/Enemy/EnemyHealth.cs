@@ -24,6 +24,12 @@ namespace ForestDraw.Enemy.Components
         [SerializeField] private Image hpFillImage;
 
         /// <summary>
+        /// ダメージポップアップ管理クラスを参照する変数（中山が追加）
+        /// </summary>
+        [SerializeField] 
+        private DamagePopup _damagePopup;
+
+        /// <summary>
         /// HPが0になったときに発火する
         /// </summary>
         public event Action Died;
@@ -55,6 +61,15 @@ namespace ForestDraw.Enemy.Components
 
             health = Mathf.Max(health - amount, 0);
             UpdateHPBar();
+
+            // --- ダメージポップアップ（中山が追加） ---
+            // エネミーの適切な位置に生成座標を設定
+            Vector3 spawnPos = transform.position + Vector3.up * 1.5f;
+            // ダメージポップアップを生成
+            var popup = Instantiate(_damagePopup, spawnPos, Quaternion.identity);
+            // 数値を渡してセットアップ
+            popup.Setup(amount);
+
 
             if (health > 0)
             {
