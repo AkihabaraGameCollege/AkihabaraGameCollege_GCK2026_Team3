@@ -21,8 +21,15 @@ public class CardDataEditor : Editor
 
         card.cost = EditorGUILayout.IntField("必要コスト", card.cost);
         card.useDuration = EditorGUILayout.FloatField("カードの使用時間", card.useDuration);
+
+        // データオブジェクトにカードエフェクト表示時間情報追加（中山が追加）
+        card.EffectDuration = EditorGUILayout.FloatField("カードエフェクトの使用時間", card.EffectDuration);
+        
         card.cardImage = (Sprite)EditorGUILayout.ObjectField("画像", card.cardImage, typeof(Sprite), false);
-        card.cardDetail_Image   = (Sprite)EditorGUILayout.ObjectField("詳細画像", card.cardDetail_Image, typeof(Sprite), false);// データオブジェクトに情報追加（中山が編集）
+
+        // データオブジェクトにカード詳細画像情報追加（中山が編集）
+        card.cardDetail_Image   = (Sprite)EditorGUILayout.ObjectField("詳細画像", card.cardDetail_Image, typeof(Sprite), false);
+        
         card.usedSE = (AudioClip)EditorGUILayout.ObjectField("SE", card.usedSE, typeof(AudioClip), false);
 
         // CardType に応じて EffectType を制限

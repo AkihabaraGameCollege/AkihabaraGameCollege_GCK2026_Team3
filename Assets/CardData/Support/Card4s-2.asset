@@ -18,7 +18,8 @@ MonoBehaviour:
   effectType: 6
   description: "\u30B3\u30B9\u30C8\u3092\u652F\u6255\u3063\u3066\u30E9\u30A4\u30D5\u3092500\u56DE\u5FA9\u3059\u308B"
   cost: 2
-  useDuration: 3
+  useDuration: 0.5
+  EffectDuration: 3
   cardImage: {fileID: 1281884608, guid: e2ba39567ce8e254183f500646f816f9, type: 3}
   cardDetail_Image: {fileID: 1382097983, guid: f8c8fd9218486804e8a6496fc2343de6, type: 3}
   usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
