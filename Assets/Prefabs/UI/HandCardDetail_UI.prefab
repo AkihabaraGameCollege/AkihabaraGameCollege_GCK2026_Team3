@@ -27,8 +27,8 @@ RectTransform:
   m_GameObject: {fileID: 573347677772573680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6008647466025203709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 6008647466025203709}
   - component: {fileID: 6489608597416495974}
   m_Layer: 5
-  m_Name: HandCardDetailUI
+  m_Name: HandCardDetail_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,4 +127,4 @@ MonoBehaviour:
   detail_Image: {fileID: 8925988141706929444}
   detail_ImageTrasform: {fileID: 9007360569810184586}
   showOffsetX: 0
-  showOffsetY: 1
+  showOffsetY: 0.5
