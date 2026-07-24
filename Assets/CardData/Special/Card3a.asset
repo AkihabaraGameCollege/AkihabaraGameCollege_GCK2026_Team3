@@ -18,7 +18,7 @@ MonoBehaviour:
   effectType: 2
   description: "\u5186\u5F62\u7BC4\u56F2\u5185\u306E\u6575\u306B\u653B\u6483\u3092\u4E0E\u3048\u308B"
   cost: 0
-  useDuration: 0.5
+  useDuration: 3
   EffectDuration: 3
   cardImage: {fileID: -1683877217, guid: d054c97ef62ed8e4b8c313487edbcbe0, type: 3}
   cardDetail_Image: {fileID: 727353715, guid: 71c5116369159414e9ba02c35f86d38b, type: 3}

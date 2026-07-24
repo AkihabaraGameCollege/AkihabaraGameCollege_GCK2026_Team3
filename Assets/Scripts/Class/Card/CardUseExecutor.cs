@@ -78,7 +78,7 @@ namespace ForestDraw.Player.Combat
         private static void ExecuteAttack(CardData card, Vector3 origin)
         {
             var attack = card.attackParams;
-                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(attack.attackEffect, card.EffectDuration);
+                    if (card.effectType != CardEffectType.DamageSingle) StageScene.Instance.PlayCardEffect(attack.attackEffect, card.useDuration);
 
             switch (card.effectType)
             {
@@ -113,7 +113,7 @@ namespace ForestDraw.Player.Combat
             PlayerCost playerCost)
         {
             var recover = card.recoverParams;
-            StageScene.Instance.PlayCardEffect(recover.SupportEffect, card.EffectDuration);
+            StageScene.Instance.PlayCardEffect(recover.SupportEffect, card.useDuration);
 
             switch (card.effectType)
             {
@@ -145,7 +145,7 @@ namespace ForestDraw.Player.Combat
             TreeHealth playerHealth)
         {
             var support = card.supportParams;
-            StageScene.Instance.PlayCardEffect(support.SupportEffect, card.EffectDuration);
+            StageScene.Instance.PlayCardEffect(support.SupportEffect, card.useDuration);
 
             switch (card.effectType)
             {
@@ -170,7 +170,7 @@ namespace ForestDraw.Player.Combat
             BattleCardManager cardManager)
         {
             var utility = card.utilityParams;
-            StageScene.Instance.PlayCardEffect(utility.SupportEffect, card.EffectDuration);
+            StageScene.Instance.PlayCardEffect(utility.SupportEffect, card.useDuration);
 
             switch (card.effectType)
             {

@@ -30,11 +30,6 @@ namespace ForestDraw
         /// <summary>カードの使用時間</summary>
         public float useDuration;
 
-        /// <summary>
-        /// カードエフェクトの表示時間（中山が追加）
-        /// </summary>
-        public float EffectDuration;
-
         /// <summary>カード画像</summary>
         public Sprite cardImage;
         /// <summary>カード詳細の画像</summary>（中山が編集）

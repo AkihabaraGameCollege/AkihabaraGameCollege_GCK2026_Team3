@@ -18,7 +18,7 @@ MonoBehaviour:
   effectType: 7
   description: "\u30AB\u30FC\u30C9\u30924\u679A\u30C9\u30ED\u30FC"
   cost: 3
-  useDuration: 0.5
+  useDuration: 2
   EffectDuration: 2
   cardImage: {fileID: 226210005, guid: d98ace3551879f647bb7c5c28c1c1a57, type: 3}
   cardDetail_Image: {fileID: 483604515, guid: 32cc797b31daea8448c10e2589dc34ae, type: 3}

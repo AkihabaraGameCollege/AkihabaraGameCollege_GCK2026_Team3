@@ -102,11 +102,6 @@ namespace ForestDraw
         private int drawSE_Index = 5;
 
         /// <summary>
-        /// カードの使用状態判定用
-        /// </summary>
-        private bool IsUseingCard = false;
-
-        /// <summary>
         /// 初期設定の関数
         /// </summary>
         private void Awake()
@@ -114,7 +109,7 @@ namespace ForestDraw
             // もしインスタンスが無い場合
             if (Instance == null)
             {
-               Instance = this;
+                Instance = this;
             }
             else
             {
@@ -234,45 +229,16 @@ namespace ForestDraw
         /// <param name="cardObject"></param>
         public bool UseCard(CardData usedCard, GameObject cardObject)
         {
-            // もし今カードを使っているなら
-            if (IsUseingCard)
-            {
-                // falseを返す
-                return false;
-            }
-
             // カード能力を発動
             CardAbilityExecute(usedCard);
 
-            // カードの使用状態管理用コルーチンを呼び出し
-            StartCoroutine(IsUseing(usedCard.useDuration));
-
-                // --- 使用後の後片付け ---
+            // --- 使用後の後片付け ---
             // 使用するカードを山札の一番下に戻す
             drawPile.Add(usedCard);
             // 使用したカードを破壊
             Destroy(cardObject);
-            // falseを返す
+            // trueで返す
             return true;
-        }
-
-        /// <summary>
-        /// カードの使用状態管理用コルーチン
-        /// </summary>
-        private IEnumerator IsUseing(float duration)
-        {
-            // カード使用中フラグをオン
-            IsUseingCard = true;
-
-            // もし使用時間が0より大きい場合
-            if (duration > 0f)
-            {
-                // 使用時間待ち
-                yield return new WaitForSeconds(duration);
-            }
-
-            // カード使用中フラグをオフ
-            IsUseingCard = false;
         }
 
         /// <summary>
