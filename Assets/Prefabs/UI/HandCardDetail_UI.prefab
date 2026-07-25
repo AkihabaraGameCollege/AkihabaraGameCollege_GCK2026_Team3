@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardDetailViewer
   detail_Image: {fileID: 8925988141706929444}
   detail_ImageTrasform: {fileID: 9007360569810184586}
-  showOffsetX: 0
-  showOffsetY: 0.5
+  showOffsetX: -0.9
+  showOffsetY: 0.3

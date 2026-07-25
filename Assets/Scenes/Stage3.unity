@@ -434,6 +434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHandCardUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5007012999346835503, guid: e05fd96964c9a854693746e0c6c5af94, type: 3}
+      propertyPath: m_Spacing
+      value: 13.59
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3522,7 +3526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8315097783990232480, guid: 14bcf5a5414d4174d94e8b9433357549, type: 3}
       propertyPath: m_Name
-      value: HandCardDetailUI
+      value: HandCardDetail_UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
