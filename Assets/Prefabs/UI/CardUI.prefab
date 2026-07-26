@@ -246,9 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9769c500b09886e46aa4780d32d789d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardUI
-  cardImage: {fileID: 9080587273221170338}
-  clickButton: {fileID: 8957621782139548169}
-  myCardData: {fileID: 0}
+  _card_Image: {fileID: 9080587273221170338}
+  _clickButton: {fileID: 8957621782139548169}
+  MyCardData: {fileID: 0}
 --- !u!1 &6096778922517652315
 GameObject:
   m_ObjectHideFlags: 0

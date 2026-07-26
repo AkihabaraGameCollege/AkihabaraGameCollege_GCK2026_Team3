@@ -13,24 +13,23 @@ MonoBehaviour:
   m_Name: Card4a-2
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
   cardId: card_04a-2
-  cardName: "\u96F7\u7D76"
+  cardName: "\u70C8\u6012"
   cardType: 0
-  effectType: 0
-  description: "\u30E9\u30A4\u30D5\u3092500\u6D88\u8CBB\u3057\u3066\u6575\u5358\u4F53\u653B\u6483\u3092\u4E0E\u3048\u308B"
+  effectType: 2
+  description: "\u5186\u5F62\u7BC4\u56F2\u5185\u306E\u6575\u306B\u653B\u6483\u3092\u4E0E\u3048\u308B"
   cost: 2
   useDuration: 3
-  EffectDuration: 3
-  cardImage: {fileID: -2080476143, guid: 82438a458e6bb7843a15ac699dfa24cd, type: 3}
-  cardDetail_Image: {fileID: -1066369331, guid: 2b52e06d0aed0994083191d857e34d6a, type: 3}
-  usedSE: {fileID: 8300000, guid: 783ee36217034554787b6ce218eda9c8, type: 3}
+  cardImage: {fileID: -1683877217, guid: d054c97ef62ed8e4b8c313487edbcbe0, type: 3}
+  cardDetail_Image: {fileID: 727353715, guid: 71c5116369159414e9ba02c35f86d38b, type: 3}
+  usedSE: {fileID: 8300000, guid: 368c811f1cde909418c0567772ab775e, type: 3}
   buffDuration: 0
   attackParams:
-    damage: 3000
+    damage: 340
     lineLength: 0
     lineWidth: 0
-    areaRadius: 20
-    areaRange: 0
-    attackEffect: {fileID: 7915945958795039574, guid: 1e27a7d1bdffc6c4c93339499fe54336, type: 3}
+    areaRadius: 30
+    areaRange: 20
+    attackEffect: {fileID: 6993693443320308206, guid: 704aec45bb9b4b940bf2c6f9f364e1e8, type: 3}
   recoverParams:
     healAmount: 0
     costRecoverAmount: 0

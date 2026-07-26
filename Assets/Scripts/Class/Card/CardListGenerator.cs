@@ -50,7 +50,7 @@ namespace ForestDraw
                 GameObject obj = Instantiate(cardPrefab, contentTransform);// カードのPrefabをContentの子オブジェクトとして生成
 
                 // 生成するためのカードの設定
-                CardUI cardUI = obj.GetComponent<CardUI>();// 生成したカードのUIスクリプトを取得
+                CardUI_Manager cardUI = obj.GetComponent<CardUI_Manager>();// 生成したカードのUIスクリプトを取得
                 cardUI.Setup(cardData, deckManager);// カードUIの初期設定を行う
             }
         }
@@ -64,7 +64,7 @@ namespace ForestDraw
             GameObject obj = Instantiate(cardPrefab, contentTransform);// カードのPrefabをContentの子オブジェクトとして生成
 
             // 生成するためのカードの設定
-            CardUI cardUI = obj.GetComponent<CardUI>();// 生成したカードのUIスクリプトを取得
+            CardUI_Manager cardUI = obj.GetComponent<CardUI_Manager>();// 生成したカードのUIスクリプトを取得
             cardUI.Setup(cardData, deckManager);// カードUIの初期設定を行う
         }
 
@@ -74,9 +74,9 @@ namespace ForestDraw
             // Contentの子オブジェクトをループ
             foreach (Transform child in contentTransform)
             {
-                CardUI cardUI = child.GetComponent<CardUI>();// 子オブジェクトのCardUIスクリプトを取得
+                CardUI_Manager cardUI = child.GetComponent<CardUI_Manager>();// 子オブジェクトのCardUIスクリプトを取得
                 // もしカードデータが一致する場合
-                if (cardUI.myCardData == cardData)
+                if (cardUI.MyCardData == cardData)
                 {
                     Destroy(child.gameObject);// 子オブジェクトを削除
                     break;// ループを抜ける

@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 790070479280309140}
   - component: {fileID: 4902277688985424767}
   m_Layer: 5
-  m_Name: CardDetailUI
+  m_Name: CardDetail_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardDetailViewer
   detail_Image: {fileID: 4790775714628174686}
   detail_ImageTrasform: {fileID: 406457714678803331}
-  showOffsetX: -2
-  showOffsetY: -1
+  showOffsetX: -1.5
+  showOffsetY: -0.5
