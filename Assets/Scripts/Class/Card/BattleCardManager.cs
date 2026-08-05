@@ -1,8 +1,9 @@
+using ForestDraw.Player.Combat;
 using System.Collections.Generic;
 using UnityEngine;
-using ForestDraw.Player.Combat;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static ForestDraw.Player.Combat.CardUseExecutor;
-using System.Collections;
 
 namespace ForestDraw
 {
@@ -38,68 +39,68 @@ namespace ForestDraw
         /// ドローする間隔の変数
         /// </summary>
         [SerializeField]
-        private float drawInterval = 3f;
+        private float _draw_Interval = 3f;
 
         /// <summary>
         /// 手持ちのカードの最大枚数の変数
         /// </summary>
         [SerializeField]
-        private int maxHandSize = 8;
+        private int _maxHandSize = 8;
 
-        /// <summary>
-        /// プレイヤーのコストの管理クラスを指定する変数
-        /// </summary>
-        private PlayerCost playerCost = null;
-        /// <summary>
-        /// プレイヤーのHPの管理クラスを指定する変数
-        /// </summary>
-        private TreeHealth playerHealth = null;
         /// <summary>
         /// 手持ちのカード管理クラスのインスタンスを参照する変数
         /// </summary>
         public static BattleCardManager Instance { get; private set; }
+        /// <summary>
+        /// プレイヤーのコストの管理クラスを指定する変数
+        /// </summary>
+        private PlayerCost _playerCost;
+        /// <summary>
+        /// プレイヤーのHPの管理クラスを指定する変数
+        /// </summary>
+        private TreeHealth _playerHealth;
 
         /// <summary>
         /// リストに全カードのマスターデータを入れておく変数
         /// </summary>
-        public List<CardData> allCardMasterList;
+        [SerializeField]
+        private List<CardData> _allCardMasterList;
 
         /// <summary>
         /// リストにロードしたデッキの中身を入れておく変数
         /// </summary>
-        private List<CardData> playerDeck = new();
-
+        private List<CardData> _playerDeck = new();
         /// <summary>
         /// ドローするための山札のリスト変数
         /// </summary>
-        private List<CardData> drawPile = new();
+        private List<CardData> _drawPile = new();
 
         /// <summary>
         /// セーブ機能で使うキーの定数の変数
         /// </summary>
-        private const string SAVE_KEY = "UserDeckSaveData";
+        private const string _saveKey = "UserDeckSaveData";
 
         /// <summary>
         /// ドローのタイミングを管理するためのタイマーの変数
         /// </summary>
-        private float drawTimer = 0f;
+        private float _drawTimer = 0f;
 
         /// <summary>
         /// スタート時のシャッフルの回数の変数
         /// </summary>
-        private int shuffleStartCount = 1;
+        private int _shuffleStartCount = 1;
         /// <summary>
         /// ランダムなインデックスを生成するための変数
         /// </summary>
-        private int shuffleRangeIndex = 1;
+        private int _shuffleRange_Index = 1;
         /// <summary>
         /// 自動ドローするカードの枚数の変数
         /// </summary>
-        private int drawCount = 1;
+        private int _drawCount = 1;
         /// <summary>
         /// ドロー時のSEインデックスを参照する変数
         /// </summary>
-        private int drawSE_Index = 5;
+        private int _drawSE_Index = 5;
 
         /// <summary>
         /// 初期設定の関数
@@ -117,14 +118,19 @@ namespace ForestDraw
             }
 
             // --- コンポーネントの登録 ---
-            playerCost = GetComponent<PlayerCost>();
-            playerHealth = gameObject.GetComponent<TreeHealth>();
+            _playerCost = GetComponent<PlayerCost>();
+            _playerHealth = gameObject.GetComponent<TreeHealth>();
         }
 
+        /// <summary>
+        /// 初回起動時の処理を行う関数
+        /// </summary>
         private void Start()
         {
+            // デッキの中身をロードする関数を呼び出す
             LoadDeckData();
-            InitializeDrawPile();// デッキをシャッフルして、カードを引く準備をする
+            // デッキをシャッフルして、カードを引く準備をする
+            InitializeDrawPile();
         }
 
         /// <summary>
@@ -133,20 +139,24 @@ namespace ForestDraw
         private void LoadDeckData()
         {
             // もしセーブデータがある場合
-            if (PlayerPrefs.HasKey(SAVE_KEY))
+            if (PlayerPrefs.HasKey(_saveKey))
             {
-                string jsonStr = PlayerPrefs.GetString(SAVE_KEY);// セーブデータをJSONからクラスに変換
-                DeckSaveData loadedData = JsonUtility.FromJson<DeckSaveData>(jsonStr);// ロードしたカードIDを元に、マスターデータからカードを探してデッキに追加
+                // セーブデータをJSONからクラスに変換
+                string jsonString = PlayerPrefs.GetString(_saveKey);
+                // ロードしたカードIDを元に、マスターデータからカードを探してデッキに追加
+                DeckSaveData loadedData = JsonUtility.FromJson<DeckSaveData>(jsonString);
 
                 // もしセーブデータのカードIDがマスターデータに存在する場合
                 foreach (string id in loadedData.savedCardIds)
                 {
-                    CardData foundCard = allCardMasterList.Find(card => card.cardId == id);// マスターデータからIDが一致するカードを探す
+                    // マスターデータからIDが一致するカードを探す
+                    CardData foundCard = _allCardMasterList.Find(card => card.cardId == id);
 
                     // もし見つかった場合
                     if (foundCard != null)
                     {
-                        playerDeck.Add(foundCard);// デッキに追加
+                        // デッキに追加
+                        _playerDeck.Add(foundCard);
                     }
                 }
             }
@@ -157,15 +167,20 @@ namespace ForestDraw
         /// </summary>
         private void InitializeDrawPile()
         {
-            drawPile = new List<CardData>(playerDeck);// デッキの内容を山札にコピーする
+            // デッキの内容を山札にコピーする
+            _drawPile = new List<CardData>(_playerDeck);
 
             // ドローのたびに山札の順番が変わるように、シャッフルするループ
-            for (int i = drawPile.Count - shuffleStartCount; i > 0; i--)
+            for (int i = _drawPile.Count - _shuffleStartCount; i > 0; i--)
             {
-                int j = Random.Range(0, i + shuffleRangeIndex);// 0からiの範囲でランダムなインデックスを選ぶ
-                CardData temp = drawPile[i];// i番目のカードを一時的に保存する
-                drawPile[i] = drawPile[j];// j番目のカードをi番目に移動する
-                drawPile[j] = temp;// 一時的に保存しておいたカードをj番目に移動する
+                // 0からiの範囲でランダムなインデックスを選ぶ
+                int j = Random.Range(0, i + _shuffleRange_Index);
+                // i番目のカードを一時的に保存する
+                CardData template = _drawPile[i];
+                // j番目のカードをi番目に移動する
+                _drawPile[i] = _drawPile[j];
+                // 一時的に保存しておいたカードをj番目に移動する
+                _drawPile[j] = template;
             }
         }
 
@@ -178,27 +193,32 @@ namespace ForestDraw
             // 指定された枚数だけ引くループ
             for (int i = 0; i < drawCount; i++)
             {
-                Debug.Log(drawCount + "枚引く");
                 // もし手札の枚数が最大枚数以上の場合
-                if (_handArea.childCount >= maxHandSize)
+                if (_handArea.childCount >= _maxHandSize)
                 {
                     break;
                 }
                 // もし山札が空の場合
-                else if (drawPile.Count == 0)
+                else if (_drawPile.Count == 0)
                 {
                     break;
                 }
 
-                CardData drawnCard = drawPile[0];// 山札の一番上のカードを引く
+                // 山札の一番上のカードを引く
+                CardData drawnCard = _drawPile[0];
 
-                AudioSetting.Instance.PlaySE(drawSE_Index);// カードを引くSEを再生する
+                // カードを引くSEを再生する
+                AudioSetting.Instance.PlaySE(_drawSE_Index);
 
-                drawPile.RemoveAt(0);// 山札から引いたカードを削除する
+                // 山札から引いたカードを削除する
+                _drawPile.RemoveAt(0);
 
-                GameObject cardObj = Instantiate(_handCardPrefab, _handArea);// カードのPrefabを生成して、手札エリアの子オブジェクトにする
-                HandCardUI handCardUI = cardObj.GetComponent<HandCardUI>();// 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
-                handCardUI.Setup(drawnCard, this);// 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
+                // カードのPrefabを生成して、手札エリアの子オブジェクトにする
+                GameObject cardObject = Instantiate(_handCardPrefab, _handArea);
+                // 生成したカードオブジェクトからHandCardUIコンポーネントを取得する
+                HandCardUI_Manager handCardUI = cardObject.GetComponent<HandCardUI_Manager>();
+                // 取得したHandCardUIコンポーネントのSetup関数を呼び出して、引いたカードのデータを渡す
+                handCardUI.Setup(drawnCard);
             }
         }
 
@@ -207,17 +227,20 @@ namespace ForestDraw
         /// </summary>
         private void Update()
         {
-            drawTimer += Time.deltaTime;
+            // ドローのタイマーを更新する
+            _drawTimer += Time.deltaTime;
 
             // もしドローのタイマーがドローする間隔を超えた場合
-            if (drawTimer >= drawInterval)
+            if (_drawTimer >= _draw_Interval)
             {
-                drawTimer = 0f;
+                // タイマーをリセットする
+                _drawTimer = 0f;
 
                 // もし手札の枚数が最大枚数より少なくて、山札にカードが残っている場合
-                if (_handArea.childCount < maxHandSize && drawPile.Count > 0)
+                if (_handArea.childCount < _maxHandSize && _drawPile.Count > 0)
                 {
-                    DrawCards(drawCount);
+                    // カードを引く関数を呼び出す
+                    DrawCards(_drawCount);
                 }
             }
         }
@@ -229,16 +252,24 @@ namespace ForestDraw
         /// <param name="cardObject"></param>
         public bool UseCard(CardData usedCard, GameObject cardObject)
         {
-            // カード能力を発動
-            CardAbilityExecute(usedCard);
+            // もしプレイヤーのコストがカードのコストより少ない場合
+            if (!_playerCost.UseCost(usedCard.cost))
+            {
+                return false;
+            }
+            else
+            {
+                // カード能力を発動
+                CardAbilityExecute(usedCard);
 
-            // --- 使用後の後片付け ---
-            // 使用するカードを山札の一番下に戻す
-            drawPile.Add(usedCard);
-            // 使用したカードを破壊
-            Destroy(cardObject);
-            // trueで返す
-            return true;
+                // --- 使用後の後片付け ---
+                // 使用するカードを山札の一番下に戻す
+                _drawPile.Add(usedCard);
+                // 使用したカードを破壊
+                Destroy(cardObject);
+                // trueで返す
+                return true;
+            }
         }
 
         /// <summary>
@@ -251,8 +282,8 @@ namespace ForestDraw
             var context = new CardUseContext
             {
                 // --- 情報を代入 ---
-                PlayerCostClass = playerCost,
-                TreeHealthClass = playerHealth,
+                PlayerCostClass = _playerCost,
+                TreeHealthClass = _playerHealth,
                 BattleCardManagerClass = this,
                 ExecuteCardTargetTransform = gameObject.transform.position
             };

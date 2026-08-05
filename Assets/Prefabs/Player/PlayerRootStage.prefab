@@ -9899,19 +9899,19 @@ MonoBehaviour:
   _handArea: {fileID: 0}
   _cardUseEffectPoision: {fileID: 6359362371708291572}
   _cardUseEffect: {fileID: 198829856200406792, guid: f61a463d2bbcb974cbc52cc78089f173, type: 3}
-  drawInterval: 3
-  maxHandSize: 8
-  allCardMasterList:
+  _draw_Interval: 3
+  _maxHandSize: 8
+  _allCardMasterList:
   - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
   - {fileID: 11400000, guid: add9d7e4dbbe89d4cb8a899a2a959aac, type: 2}
-  - {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
+  - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
   - {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
   - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
   - {fileID: 11400000, guid: 9f75bce8f236bb24c96a03f3fb9f4d05, type: 2}
   - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
   - {fileID: 11400000, guid: 0b953f7af26c08240b462f781b0c15fd, type: 2}
   - {fileID: 11400000, guid: 9e97641bec299a2499b231789240b42a, type: 2}
-  - {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
+  - {fileID: 11400000, guid: 848e02eba162c644186928f72e4d848f, type: 2}
   - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
   - {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
   - {fileID: 11400000, guid: 5aa420060370fea4383b492a6ee1c670, type: 2}

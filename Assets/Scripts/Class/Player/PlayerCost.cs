@@ -41,6 +41,16 @@ namespace ForestDraw.Player.Combat
         /// </summary>
         private static readonly int costNotEnoughTrigger = Animator.StringToHash("NotEnough");
 
+        /// <summary>
+        /// アニメーション中かどうかのフラグ変数
+        /// </summary>
+        private bool _isAnimating = false;
+
+        /// <summary>
+        /// アニメーションの時間を参照する変数
+        /// </summary>
+        private float _animationTime = 1.0f;
+
         private void Start()
         {
             currentCost = 0;
@@ -65,19 +75,27 @@ namespace ForestDraw.Player.Combat
             }
         }
 
-        // コスト使用
+        /// <summary>
+        /// コスト使用を行う関数
+        /// </summary>
+        /// <param name="cost"></param>
+        /// <returns></returns>
         public bool UseCost(int cost)
         {
+            // コストが足りない場合は使用できない
             if (currentCost < cost)
             {
-                StartCoroutine(CostNoticeCoroutine());// コスト不足の通知を行うコルーチンを開始（中山が編集）
+                // --- コスト不足の通知を行うコルーチンを開始 ---
+                StartCoroutine(CostNoticeCoroutine());
                 return false;
             }
-
-            currentCost -= cost;
-            OnCostChanged?.Invoke(currentCost, 0);
-
-            return true;
+            else
+            {
+                // --- コストを使用 ---
+                currentCost -= cost;
+                OnCostChanged?.Invoke(currentCost, 0);
+                return true;
+            }
         }
 
         // コスト回復
@@ -108,10 +126,25 @@ namespace ForestDraw.Player.Combat
         /// <returns></returns>
         private IEnumerator CostNoticeCoroutine()
         {
-            noticeTextUI.TargetShow(costNotice);// コスト不足の通知UIを表示
-            costNoticeAnimator.SetTrigger(costNotEnoughTrigger);// アニメーションを再生してプレイヤーに通知（中山が編集）
-            yield return new WaitForSeconds(1f);
+            // もしアニメーション中の場合
+            if (_isAnimating)
+            {
+                yield break;
+            }
+
+            // --- アニメーション処理 ---
+            // アニメーション中フラグを立てる
+            _isAnimating = true;
+            // コスト不足の通知UIを表示
+            noticeTextUI.TargetShow(costNotice);
+            // アニメーションを再生してプレイヤーに通知
+            costNoticeAnimator.SetTrigger(costNotEnoughTrigger);
+            // 指定時間待機
+            yield return new WaitForSeconds(_animationTime);
+            // UIを非表示にする
             noticeTextUI.Hide();
+            // アニメーション中フラグをリセット
+            _isAnimating = false;
         }
     }
 }

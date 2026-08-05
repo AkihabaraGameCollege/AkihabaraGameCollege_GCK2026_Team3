@@ -46,10 +46,8 @@ namespace ForestDraw.Player.Combat
                 }
             }
 
-            // コスト不足なら失敗
-            if (!context.PlayerCostClass.UseCost(card.cost)) return false;
-
             AudioSetting.Instance.CardSE(card.usedSE);
+            
             switch (card.cardType)
             {
                 case CardType.Attack:
