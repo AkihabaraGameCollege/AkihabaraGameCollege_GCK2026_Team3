@@ -1,8 +1,10 @@
+using ForestDraw.Combat;
+using ForestDraw.Enemy.Attack;
+using ForestDraw.Player.Combat;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System;
-using ForestDraw.Combat;
 
 namespace ForestDraw.Enemy.Components
 {
@@ -10,7 +12,7 @@ namespace ForestDraw.Enemy.Components
     /// 敵のHPを管理するコンポーネント。
     /// ダメージ処理、無敵時間制御、死亡通知を行う。
     /// </summary>
-    public class EnemyHealth : MonoBehaviour, IDamageable, IEnemyComponent
+    public class EnemyHealth : MonoBehaviour, IDamageable, IEnemyComponent, IStoppable
     {
         // ===== 状態 =====
         private int health;
@@ -26,7 +28,7 @@ namespace ForestDraw.Enemy.Components
         /// <summary>
         /// ダメージポップアップ管理クラスを参照する変数（中山が追加）
         /// </summary>
-        [SerializeField] 
+        [SerializeField]
         private DamagePopup _damagePopup;
 
         /// <summary>
@@ -38,6 +40,21 @@ namespace ForestDraw.Enemy.Components
         /// ダメージを受けた時のSEインデックスを参照する変数
         /// </summary>
         private int damageSE_Index = 6;
+
+        private bool isStopped = false;
+
+        // EnemyMove スクリプトの参照を保持する変数
+        private EnemyMove enemyMove;
+
+        private EnemyAttackGoal enemyAttackGoal;
+
+        private void Awake()
+        {
+            // 同じオブジェクトについている EnemyMove を取得
+            enemyMove = GetComponent<EnemyMove>();
+            // 同じオブジェクトについている EnemyAttackGoal を取得
+            enemyAttackGoal = GetComponent<EnemyAttackGoal>();
+        }
 
         /// <summary>
         /// ScriptableObjectから初期ステータスを設定する
@@ -63,13 +80,9 @@ namespace ForestDraw.Enemy.Components
             UpdateHPBar();
 
             // --- ダメージポップアップ（中山が追加） ---
-            // エネミーの適切な位置に生成座標を設定
             Vector3 spawnPos = transform.position + Vector3.up * 1.5f;
-            // ダメージポップアップを生成
             var popup = Instantiate(_damagePopup, spawnPos, Quaternion.identity);
-            // 数値を渡してセットアップ
             popup.Setup(amount);
-
 
             if (health > 0)
             {
@@ -102,8 +115,41 @@ namespace ForestDraw.Enemy.Components
         private void UpdateHPBar()
         {
             if (hpFillImage == null || maxHealth <= 0) return;
-
             hpFillImage.fillAmount = (float)health / maxHealth;
+        }
+
+        // --- IStoppable の実装 ---
+        public void StopMovement(float duration)
+        {
+            // 既に止まっている場合は処理しない（上書きしたい場合はここを調整できます）
+            if (!isStopped)
+            {
+                StartCoroutine(StopCoroutine(duration));
+            }
+        }
+
+        private IEnumerator StopCoroutine(float duration)
+        {
+            isStopped = true;
+
+            // EnemyMove が取得できていれば移動を一時停止
+            if (enemyMove != null&& enemyAttackGoal != null)
+            {
+                enemyMove.PauseMove();
+                enemyAttackGoal.StopAttack();
+            }
+
+            // 指定された時間（duration）待機する
+            yield return new WaitForSeconds(duration);
+
+            // 待機後、EnemyMove で移動を再開
+            if (enemyMove != null && enemyAttackGoal != null)
+            {
+                enemyMove.ResumeMove();
+                enemyAttackGoal.EnableAttack();
+            }
+
+            isStopped = false;
         }
     }
 }

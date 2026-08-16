@@ -68,6 +68,48 @@ namespace ForestDraw.Player.Combat
         }
 
         /// <summary>
+        /// 一番近い敵1体を中心に円形ダメージを与えて敵の動きを止める
+        /// </summary>
+        public static void AttackSingleAreaStop(Vector3 origin, float radius, int damage, float duration, float stopDuration, GameObject effect)
+        {
+            // 一番近い敵を取得（ターゲットの中心点）
+            var centerTarget = TargetFinder.FindNearest(origin, effect, duration);
+
+            // 敵が見つからなければ処理を終了
+            if (centerTarget == null) return;
+
+            // 中心となる敵の座標を取得する
+            Vector3 centerPosition = ((Component)centerTarget).transform.position;
+
+            // その座標を中心に円形範囲にいる敵を取得
+            var targets = TargetFinder.FindCircle(centerPosition, radius, 0f);
+
+            int finalDamage = ApplyMultiplier(damage);
+
+            // 範囲内の敵全員にダメージと停止効果を与える
+            foreach (var target in targets)
+            {
+                // 徐々にダメージを与える（既存機能）
+                DealDamageOverTime(target, finalDamage, duration);
+
+                // 動きを止める処理を適用（後述のメソッドを呼び出す）
+                ApplyStopEffect(target, stopDuration);
+            }
+        }
+
+        /// <summary>
+        /// 敵の動きを止める処理
+        /// </summary>
+        private static void ApplyStopEffect(IDamageable target, float duration)
+        {
+            // 対象が「動きを止められる」インターフェースを持っていれば実行する
+            if (target is IStoppable stoppable)
+            {
+                stoppable.StopMovement(duration);
+            }
+        }
+
+        /// <summary>
         /// 次の攻撃のダメージ倍率を設定する
         /// </summary>
         public static void SetNextAttackMultiplier(float multiplier)

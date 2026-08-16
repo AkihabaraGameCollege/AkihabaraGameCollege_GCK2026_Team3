@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// カードの効果タイプを定義する列挙型
 /// カードがどのような効果を持つかを分類するために使用する
 /// </summary>
@@ -17,6 +15,9 @@ public enum CardEffectType
 
     /// <summary>画面内すべての敵にダメージを与える</summary>
     DamageAllOnScreen,
+
+    /// <summary>単体の敵を中心に円形ダメージを与えて敵の動きを止める</summary>
+    DamageSingleAreaStop,
 
     /// <summary>コストを回復する</summary>
     CostRecover,

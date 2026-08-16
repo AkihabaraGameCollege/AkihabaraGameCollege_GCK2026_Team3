@@ -40,7 +40,8 @@ public class CardDataEditor : Editor
                     CardEffectType.DamageSingle,
                     CardEffectType.DamageLine,
                     CardEffectType.DamageArea,
-                    CardEffectType.DamageAllOnScreen
+                    CardEffectType.DamageAllOnScreen,
+                    CardEffectType.DamageSingleAreaStop
                 };
                 break;
 
@@ -114,6 +115,10 @@ public class CardDataEditor : Editor
 
                     case CardEffectType.DamageSingle:
                     case CardEffectType.DamageAllOnScreen:
+
+                    case CardEffectType.DamageSingleAreaStop:
+                        attack.areaRadius = EditorGUILayout.FloatField("”¼Œa", attack.areaRadius);
+                        attack.stopDuration = EditorGUILayout.FloatField("’âŽ~ŽžŠÔ", attack.stopDuration);
                         break;
                 }
                 break;

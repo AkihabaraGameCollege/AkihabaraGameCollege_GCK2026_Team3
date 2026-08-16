@@ -99,6 +99,11 @@ namespace ForestDraw.Player.Combat
                     // 画面内すべての敵にダメージ
                     PlayerAttack.AttackAll(attack.damage, card.useDuration);
                     break;
+
+                case CardEffectType.DamageSingleAreaStop:
+                    // 単体の敵を中心に円形ダメージを与えて敵の動きを止める
+                    PlayerAttack.AttackSingleAreaStop(origin, attack.areaRadius, attack.damage, card.useDuration, attack.stopDuration, attack.attackEffect);
+                    break;
             }
         }
 

@@ -87,6 +87,8 @@ namespace ForestDraw
         /// <summary>円範囲攻撃の前距離</summary>
         public float areaRange;
 
+        public float stopDuration = 10f; // 停止時間のデフォルト値
+
         /// <summary>攻撃カード使用時のエフェクト</summary>
         public GameObject attackEffect;
     }

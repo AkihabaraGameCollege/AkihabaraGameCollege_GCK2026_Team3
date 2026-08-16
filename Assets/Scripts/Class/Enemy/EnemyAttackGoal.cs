@@ -44,7 +44,7 @@ namespace ForestDraw.Enemy.Attack
         /// <summary>
         /// ƒS[ƒ‹“’B‚ÉUŒ‚‚ğ—LŒø‰»
         /// </summary>
-        private void EnableAttack()
+        public void EnableAttack()
         {
             LookAtTarget();
             canAttack = true;
@@ -54,7 +54,7 @@ namespace ForestDraw.Enemy.Attack
         /// <summary>
         /// €–S‚ÉUŒ‚‚ğ’â~
         /// </summary>
-        private void StopAttack()
+        public void StopAttack()
         {
             canAttack = false;
         }

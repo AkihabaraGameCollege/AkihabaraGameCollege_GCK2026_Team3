@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6737219306822897608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5964797925040647461}
+  - component: {fileID: 115877489867069762}
+  - component: {fileID: 7462841824689843979}
+  m_Layer: 5
+  m_Name: DeckManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5964797925040647461
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737219306822897608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &115877489867069762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737219306822897608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b42e2ec6b00e54ea75ebcca51da8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckManager
+  currentDeck: []
+  allCardMasterList:
+  - {fileID: 11400000, guid: 40c7b38f830a3d049ab3caba74f36654, type: 2}
+  - {fileID: 11400000, guid: add9d7e4dbbe89d4cb8a899a2a959aac, type: 2}
+  - {fileID: 11400000, guid: 6498616c61d32c74a83ca620cb4849b6, type: 2}
+  - {fileID: 11400000, guid: 05f277982249d3b4e81531c4c5257cfc, type: 2}
+  - {fileID: 11400000, guid: 5cf42928f9293204b97441d0cc598657, type: 2}
+  - {fileID: 11400000, guid: 9f75bce8f236bb24c96a03f3fb9f4d05, type: 2}
+  - {fileID: 11400000, guid: 482290b86503c534ba77bdbec504f709, type: 2}
+  - {fileID: 11400000, guid: 0b953f7af26c08240b462f781b0c15fd, type: 2}
+  - {fileID: 11400000, guid: 39ab28c284bdd864e81db92d70b4150a, type: 2}
+  - {fileID: 11400000, guid: 9e97641bec299a2499b231789240b42a, type: 2}
+  - {fileID: 11400000, guid: 848e02eba162c644186928f72e4d848f, type: 2}
+  - {fileID: 11400000, guid: ffb347fcc598fe54d98d95a0825c08b8, type: 2}
+  - {fileID: 11400000, guid: c290f8073b028ee4eb622e5895a20c9f, type: 2}
+  - {fileID: 11400000, guid: 5aa420060370fea4383b492a6ee1c670, type: 2}
+  - {fileID: 11400000, guid: f38da92e66f87304cab322d15137f5f4, type: 2}
+  - {fileID: 11400000, guid: c6b9034b1238e11408a31187ef089904, type: 2}
+  - {fileID: 11400000, guid: c90f0364e2983e14c86210d3504add79, type: 2}
+  - {fileID: 11400000, guid: ab7df37f11bfdfb42952cd163c46b6c1, type: 2}
+  - {fileID: 11400000, guid: e5c1cc44c37e2e545bb0ad072b285746, type: 2}
+  - {fileID: 11400000, guid: 87c507003ca64494890bfd66729d96ef, type: 2}
+  - {fileID: 11400000, guid: e3b6e656ee2e7c14cb8a60431eb52b0d, type: 2}
+--- !u!114 &7462841824689843979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737219306822897608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ed773294d89e34cb32ca01dae76d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.DeckUI_Manager
+  deckManager: {fileID: 115877489867069762}
+  deckSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
