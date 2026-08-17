@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wizard
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Wizard
-  maxHealth: 1000
+  maxHealth: 6250
   takeDamageInterval: 0
-  moveSpeed: 3
+  moveSpeed: 1.5
   waypointRadius: 3
-  attackDamage: 10
+  attackDamage: 400
   attackInterval: 5

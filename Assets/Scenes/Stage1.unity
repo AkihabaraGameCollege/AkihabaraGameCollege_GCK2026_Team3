@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -335,7 +335,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -789,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -845,7 +845,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -1094,7 +1094,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -1150,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -1233,7 +1233,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -1289,7 +1289,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -1866,7 +1866,6 @@ Transform:
   - {fileID: 1006755071}
   - {fileID: 4782563810325592152}
   - {fileID: 848709002}
-  - {fileID: 1079281326}
   - {fileID: 243141228}
   - {fileID: 1739086549}
   - {fileID: 615864868}
@@ -1880,6 +1879,7 @@ Transform:
   - {fileID: 469681425}
   - {fileID: 1212957257}
   - {fileID: 1748375256}
+  - {fileID: 640502498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &461601635
@@ -2348,7 +2348,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -2404,7 +2404,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -2475,6 +2475,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3957f77d2d10c4b844d56194538a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.NoticeTextUI
+--- !u!1001 &640502497
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 461601634}
+    m_Modifications:
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -31.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616495917897650986, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: m_Name
+      value: DefenseTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812142891101689333, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+      propertyPath: hpFillImage
+      value: 
+      objectReference: {fileID: 1817430411}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+--- !u!4 &640502498 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+  m_PrefabInstance: {fileID: 640502497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &646844575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,7 +2971,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: UICamera
       value: 
@@ -2961,7 +3027,7 @@ PrefabInstance:
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: 'waypoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1079281326}
+      objectReference: {fileID: 0}
     - target: {fileID: 5627150228163828904, guid: 9fc62748577a5e5438607ab78e76c0a4, type: 3}
       propertyPath: Special_CardManagerClass
       value: 
@@ -4080,74 +4146,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046836156}
   m_CullTransparentMesh: 1
---- !u!1 &1079281322
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1079281326}
-  - component: {fileID: 1079281328}
-  - component: {fileID: 1079281323}
-  m_Layer: 0
-  m_Name: DefenseTree
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1079281323
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079281322}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.56032, y: 12.299434, z: 3.8257484}
-  m_Center: {x: 1.0589895, y: 6.0000796, z: 1.0590973}
---- !u!4 &1079281326
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079281322}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -31.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 461601634}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1079281328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079281322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39dc397820fe3a64bb0fa94dbb40a0f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KariPlayerHealth
-  maxHealth: 1000
-  hpFillImage: {fileID: 1817430411}
 --- !u!1 &1110253644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4774334542293887630, guid: e2c36016ea9916d4aa40288ea208e574, type: 3}
@@ -7162,7 +7160,7 @@ PrefabInstance:
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _treeHealth
       value: 
-      objectReference: {fileID: 1079281328}
+      objectReference: {fileID: 0}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _enemyManager
       value: 

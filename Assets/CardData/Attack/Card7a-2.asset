@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c82e817db6d614d46a8686c508645616, type: 3}
-  m_Name: Card7a
+  m_Name: Card7a-2
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.CardData
-  cardId: card_07a-1
+  cardId: card_07a-2
   cardName: "\u7A7A\u9593\u51CD\u7D50"
   cardType: 0
   effectType: 4
-  description: "\u6307\u5B9A\u3057\u305F\u6575\u304B\u3089\u5186\u5F62\u7BC4\u56F2\u5185\u306B\u653B\u6483\u3002\n\u76F8\u624B\u309210\u79D2\u9593\u884C\u52D5\u4E0D\u80FD\u306B\u3059\u308B\u3002\n\u3053\u306E\u30AB\u30FC\u30C9\u306F\u30C7\u30C3\u30AD\u306B1\u679A\u3057\u304B\u5165\u308C\u3089\u308C\u306A\u3044\u3002"
-  cost: 6
+  description: "\u6307\u5B9A\u3057\u305F\u6575\u304B\u3089\u5186\u5F62\u7BC4\u56F2\u5185\u306B\u653B\u6483\u3002\n\u76F8\u624B\u309210\u79D2\u9593\u884C\u52D5\u4E0D\u80FD\u306B\u3059\u308B\u3002"
+  cost: 4
   useDuration: 3
-  cardImage: {fileID: 1091727585, guid: 2a26762f48548944aa21c43891d11a32, type: 3}
-  cardDetail_Image: {fileID: -298357044, guid: 45b4018ad7b5dc845b9486efb64f6587, type: 3}
-  usedSE: {fileID: 8300000, guid: 1f5b52ba697dd0a44a3485a0627027cf, type: 3}
+  cardImage: {fileID: 140468988, guid: d62c9b306bca2514bb52d6dc732804cb, type: 3}
+  cardDetail_Image: {fileID: 1295232160, guid: 6ac87bf39e425f04d80274b580c7784f, type: 3}
+  usedSE: {fileID: 8300000, guid: 7af01efedbf96cf4195d899afc2a8776, type: 3}
   buffDuration: 10
   attackParams:
-    damage: 25
+    damage: 2500
     lineLength: 0
     lineWidth: 0
     areaRadius: 10

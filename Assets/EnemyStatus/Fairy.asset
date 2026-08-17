@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fairy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Fairy
-  maxHealth: 1000
+  maxHealth: 500
   takeDamageInterval: 0
   moveSpeed: 3
   waypointRadius: 3
-  attackDamage: 10
-  attackInterval: 5
+  attackDamage: 200
+  attackInterval: 6

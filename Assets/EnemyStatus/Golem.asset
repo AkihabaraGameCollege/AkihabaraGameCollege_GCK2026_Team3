@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Golem
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Golem
-  maxHealth: 1000
+  maxHealth: 15000
   takeDamageInterval: 0
-  moveSpeed: 2
+  moveSpeed: 1.5
   waypointRadius: 3
-  attackDamage: 30
+  attackDamage: 650
   attackInterval: 3.5

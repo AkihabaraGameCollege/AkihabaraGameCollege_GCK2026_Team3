@@ -305,7 +305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024b49ad9716f4545b9b4c974186378c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForestDraw.AudioSetting
-  audioMixer: {fileID: 0}
   bgmAudioSource: {fileID: 8569326688928269671}
   seAudioSource: {fileID: 6077341416951376988}
   bgsAudioSource: {fileID: 4236310234801907059}
@@ -332,8 +331,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88b0f15a9b9ad5549a3026c7de3de9a1, type: 3}
   - {fileID: 8300000, guid: a3d85873472251b46a9ee795b24d3c3f, type: 3}
   - {fileID: 8300000, guid: f2616aa234c3b064a93ca7d9281bb1ce, type: 3}
-  isOpening: 0
-  isFading: 0
 --- !u!1 &7638533859291844780
 GameObject:
   m_ObjectHideFlags: 0
