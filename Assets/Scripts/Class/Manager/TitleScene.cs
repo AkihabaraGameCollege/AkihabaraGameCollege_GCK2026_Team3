@@ -214,6 +214,10 @@ namespace ForestDraw
         /// 別シーンからタイトルへ遷移したかを判別する変数
         /// </summary>
         public static bool isExit = false;
+        /// <summary>
+        /// 各ステージのクリア判定を参照する変数
+        /// </summary>
+        public static bool[] IsStageClear = new bool[3];
 
         /// <summary>
         /// タイトルでBGMの何番を流すかのインデックスを参照する変数

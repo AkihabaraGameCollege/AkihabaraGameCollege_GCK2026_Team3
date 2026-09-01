@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 171094786}
   - component: {fileID: 171094788}
   m_Layer: 0
-  m_Name: SceneRootTitle
+  m_Name: SceneRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
