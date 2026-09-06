@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5033055250553210171}
   - component: {fileID: 7147072106464519390}
   m_Layer: 0
-  m_Name: Special_CardManager
+  m_Name: SpecialCardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,5 +55,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aed41e41d6b56664eb80138e70800489, type: 2}
   - {fileID: 11400000, guid: 26f112e56ac74b5479480d02e7f0345d, type: 2}
   _executeCardTargetTransform: {x: 0, y: 0, z: 0}
-  _awardPoint: 0.05
+  _awardPoint: 0.1
   UsedCardData: {fileID: 11400000, guid: 03220ccdf97b8c0459af6e4d43a82505, type: 2}

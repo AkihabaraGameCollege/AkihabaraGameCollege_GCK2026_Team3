@@ -1900,6 +1900,7 @@ MonoBehaviour:
   - {fileID: 1196865517}
   - {fileID: 197885150}
   - {fileID: 513184479}
+  _currentStageNumber: 1
   treePanel_UI: {fileID: 1110253644}
   tutorial_UI_Manager: {fileID: 1366003041}
   transitionUI_Manager: {fileID: 1398384137}
@@ -1911,7 +1912,6 @@ MonoBehaviour:
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   nextButton: {fileID: 37983467}
   tutorial_BgmIndex: 6
-  stageNumber: 1
   stageBgmIndex: 2
   stagePanel_Index: 0
   isTutorial: 0
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102b4cdfb6a27b04b817fbee0df4debf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountdownTimer
-  clearTime: 120
+  clearTime: 60
   timeText: {fileID: 1173550924}
 --- !u!95 &461601637
 Animator:
@@ -2541,6 +2541,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 223716227341977554, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
   m_PrefabInstance: {fileID: 640502497}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &640502500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7812142891101689333, guid: 9ccda9280fcf0db4da8e963c883113a7, type: 3}
+  m_PrefabInstance: {fileID: 640502497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39dc397820fe3a64bb0fa94dbb40a0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KariPlayerHealth
 --- !u!1 &646844575
 GameObject:
   m_ObjectHideFlags: 0
@@ -7111,7 +7122,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1043888961423674971, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: m_Name
-      value: Special_CardManager
+      value: SpecialCardManager
       objectReference: {fileID: 0}
     - target: {fileID: 5033055250553210171, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7160,7 +7171,7 @@ PrefabInstance:
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _treeHealth
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 640502500}
     - target: {fileID: 7147072106464519390, guid: 12edfea4a5d44674bb32ec3753bc017a, type: 3}
       propertyPath: _enemyManager
       value: 

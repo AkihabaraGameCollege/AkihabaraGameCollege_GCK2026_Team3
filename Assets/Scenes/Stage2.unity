@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102b4cdfb6a27b04b817fbee0df4debf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountdownTimer
-  clearTime: 120
+  clearTime: 60
   timeText: {fileID: 629689483}
 --- !u!114 &723263313
 MonoBehaviour:
@@ -1893,6 +1893,7 @@ MonoBehaviour:
   - {fileID: 29547449}
   - {fileID: 872708966}
   - {fileID: 1263212492}
+  _currentStageNumber: 2
   treePanel_UI: {fileID: 1083223402}
   tutorial_UI_Manager: {fileID: 0}
   transitionUI_Manager: {fileID: 1083223404}
@@ -1904,7 +1905,6 @@ MonoBehaviour:
   - {fileID: 820862920, guid: 401d508eead6dac4eb0e14b33e3cc382, type: 3}
   nextButton: {fileID: 0}
   tutorial_BgmIndex: 6
-  stageNumber: 2
   stageBgmIndex: 3
   stagePanel_Index: 1
   isTutorial: 0

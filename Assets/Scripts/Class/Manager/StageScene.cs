@@ -24,6 +24,13 @@ namespace ForestDraw
         /// </summary>
         [SerializeField]
         private GameObject[] playerUI = null;
+
+        /// <summary>
+        /// 今いるステージ番号を参照する変数
+        /// </summary>
+        [SerializeField,Tooltip("今いるステージ番号")]
+        private int _currentStageNumber = 1;
+
         /// <summary>
         /// ステージイントロの木の板UIを参照する変数
         /// </summary>
@@ -81,7 +88,11 @@ namespace ForestDraw
         /// <summary>
         /// 最初のステージ番号を参照する変数
         /// </summary>
-        private int stageNumberStart = 1;
+        private int _stageNumberStart = 1;
+        /// <summary>
+        /// 中間のステージ番号を参照する変数
+        /// </summary>
+        private int _stageNumberMiddle = 2;
         /// <summary>
         /// スタート時に引くカードの枚数の変数
         /// </summary>
@@ -90,10 +101,6 @@ namespace ForestDraw
         /// BGMのインデックスを参照する変数
         /// </summary>
         public int tutorial_BgmIndex = 6;
-        /// <summary>
-        /// 今いるステージ番号を参照する変数
-        /// </summary>
-        public int stageNumber = 1;
         /// <summary>
         /// BGMのインデックスを参照する変数
         /// </summary>
@@ -144,6 +151,10 @@ namespace ForestDraw
         /// 時を動かす値を参照する変数
         /// </summary>
         private float timeCanMoveValue = 1f;
+        /// <summary>
+        /// ステージクリア演出時間を参照する変数
+        /// </summary>
+        private float _stageClearAnimTime = 2f;
 
         /// <summary>
         /// チュートリアル中かどうかのフラグを参照する変数
@@ -216,7 +227,7 @@ namespace ForestDraw
 
             playerController.isCanPause = true;// ポーズ操作を許可する
 
-            Stage_Intro(stageNumber);// イントロ開始
+            Stage_Intro(_currentStageNumber);// イントロ開始
         }
 
         /// <summary>
@@ -228,7 +239,7 @@ namespace ForestDraw
             {
                 sceneState = SceneState.StageClear;
 
-                int number = stageNumber;// 今いるステージ番号を参照
+                int number = _currentStageNumber;// 今いるステージ番号を参照
 
                 StartCoroutine(StageClearCoroutine(number));// ステージクリア演出開始
             }
@@ -263,7 +274,7 @@ namespace ForestDraw
         private void Stage_Intro(int number)
         {
             // もし第一ステージなら
-            if (number == stageNumberStart)
+            if (number == _stageNumberStart)
             {
                 Time.timeScale = 0;
                 StartCoroutine(Tutorial_IntroCoroutine());// チュートリアル開始
@@ -312,7 +323,7 @@ namespace ForestDraw
             AudioSetting.Instance.PlayBGM(stageBgmIndex);
 
             // もしステージが第三ステージなら
-            if (stageNumber == stageNumberMax)
+            if (_currentStageNumber == stageNumberMax)
             {
                 AudioSetting.Instance.PlayBGS(fireSeIndex);// ステージのBGSを再生
             }
@@ -340,21 +351,41 @@ namespace ForestDraw
         /// <summary>
         /// ステージクリア演出を行うコルーチン
         /// </summary>
+        /// <param name="stageNumber">ステージ番号を参照する変数</param>
         /// <returns></returns>
-        public IEnumerator StageClearCoroutine(int number)
+        public IEnumerator StageClearCoroutine(int stageNumber)
         {
+            // ステージクリアUIを表示
             stageClearUI.SetActive(true);
-            animator.SetTrigger(stageClearTrigger);// ステージクリア演出
-            yield return new WaitForSeconds(2f);// 演出中は待機
+            // ステージクリア演出
+            animator.SetTrigger(stageClearTrigger);
+            // 演出中は待機
+            yield return new WaitForSeconds(_stageClearAnimTime);
 
                                                 // 最終ステージの場合
-            if (number == stageNumberMax)
+            if (stageNumber == stageNumberMax)
             {
+                // クリアシーンに遷移
                 UnityEngine.SceneManagement.SceneManager.LoadScene(clearSceneName);
             }
             else
             {
-                TitleScene.isExit = true;// 別シーンからタイトルへ行ったフラグをオン
+                // もし第一ステージの場合
+                if (_currentStageNumber == _stageNumberStart)
+                {
+                    // 第一ステージクリアフラグをオン
+                    TitleScene.IsStageClear[0] = true;
+                }
+                // もし第二ステージの場合
+                else if (_currentStageNumber == _stageNumberMiddle)
+                {
+                    // 第二ステージクリアフラグをオン
+                    TitleScene.IsStageClear[1] = true;
+                }
+
+                // 別シーンからタイトルへ行ったフラグをオン
+                TitleScene.isExit = true;
+                // タイトルシーンに遷移
                 UnityEngine.SceneManagement.SceneManager.LoadScene(titleSceneName);
             }
         }

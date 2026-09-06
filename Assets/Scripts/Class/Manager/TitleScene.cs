@@ -249,7 +249,7 @@ namespace ForestDraw
         /// </summary>
         private void Awake()
         {
-                Instance = this;
+            Instance = this;
 
             // コンポーネントの登録
             animator = GetComponent<Animator>();
@@ -264,8 +264,35 @@ namespace ForestDraw
             startButton.onClick.AddListener(DisplayStageSelect);// スタートボタンにステージセレクトへ行く関数を登録
             settingButton.onClick.AddListener(settingUI_Manager.DisplaySetting);// 設定画面表示のボタンに設定画面表示のコルーチンを登録
             stageButton1.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(0)));// 第一ステージへのボタンに第一ステージへの関数を登録
-            stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));// 第二ステージへのボタンに第二ステージへの関数を登録
-            stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));// 第三ステージへのボタンに第三ステージへの関数を登録
+
+            // もし第一ステージをクリアした場合
+            if (IsStageClear[0])
+            {
+                // 第二ステージへのボタンに第二ステージへの関数を登録
+                stageButton2.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(1)));
+            }
+            else
+            {
+                // 第二ステージへのボタンを押せないようにする
+                stageButton2.interactable = false;
+                // 第一ステージクリアのフラグをオフ
+                IsStageClear[0] = false;
+            }
+
+            // もし第二ステージをクリアした場合
+            if (IsStageClear[1])
+            {
+                // 第三ステージへのボタンに第三ステージへの関数を登録
+                stageButton3.onClick.AddListener(() => StartCoroutine(GoStageCoroutine(2)));
+            }
+            else
+            {
+                // 第三ステージへのボタンを押せないようにする
+                stageButton3.interactable = false;
+                // 第二ステージクリアのフラグをオフ
+                IsStageClear[1] = false;
+            }
+
             exitButton.onClick.AddListener(GameExit);// 第三ステージへのボタンに第三ステージへの関数を登録
             deckButton.onClick.AddListener(() => StartCoroutine(DisplayDeckCoroutine()));// デッキ表示のボタンにデッキ表示の関数を登録
         }

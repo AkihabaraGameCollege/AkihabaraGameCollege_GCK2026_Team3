@@ -15,11 +15,10 @@ MonoBehaviour:
   cardId: card_08s
   cardName: "\u6148\u60B2\u306E\u3057\u305A\u304F"
   cardType: 1
-  effectType: 6
+  effectType: 7
   description: "\u30B3\u30B9\u30C8\u3092\u652F\u6255\u3063\u3066\u30E9\u30A4\u30D5\u30921500\u56DE\u5FA9\u3059\u308B"
   cost: 0
   useDuration: 2
-  EffectDuration: 2
   cardImage: {fileID: 1583499004, guid: 5029885519ec2b04aaeeb09177866177, type: 3}
   cardDetail_Image: {fileID: -359536089, guid: 8de59e22407766a45ad27d3148dbb03d, type: 3}
   usedSE: {fileID: 8300000, guid: 324a161d0ffa4d448af3f76ef53c22b5, type: 3}
@@ -30,6 +29,7 @@ MonoBehaviour:
     lineWidth: 0
     areaRadius: 0
     areaRange: 0
+    stopDuration: 10
     attackEffect: {fileID: 0}
   recoverParams:
     healAmount: 1500
